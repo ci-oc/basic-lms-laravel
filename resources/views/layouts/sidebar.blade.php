@@ -49,7 +49,7 @@
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
                                     src="{{Auth::user()->avatar}}" alt="" class="img-responsive img-circle"/>&nbsp;<span
-                                    class="hidden-xs">{{ Auth::user()->name }}</span>&nbsp;<span
+                                    class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
@@ -118,12 +118,14 @@
 
                         </li>
                     @endif
+                    @if(Auth::user()->isStudent())
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Tables.html"><i
                                     class="fa fa-th-list fa-fw">
                                 <div class="icon-bg bg-blue"></div>
                             </i><span class="menu-title">Tables</span></a>
 
                     </li>
+                    @endif
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="DataGrid.html"><i
                                     class="fa fa-database fa-fw">
                                 <div class="icon-bg bg-red"></div>

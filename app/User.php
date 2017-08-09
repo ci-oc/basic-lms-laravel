@@ -54,7 +54,7 @@ class User extends Authenticatable
     public function isStudent()
     {
         foreach ($this->roles()->get() as $role) {
-            if ($role->name == 'student') {
+            if ($role->name == '') {
                 return true;
             }
         }

@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $user_role = $user->roles ? $user->roles->first()->name : 'No role';
         return view('home', compact('user_role'));
     }
 }

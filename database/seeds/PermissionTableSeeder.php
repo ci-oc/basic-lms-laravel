@@ -32,6 +32,36 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'Delete Role',
                 'description' => 'Delete Role'
             ],
+            [
+                'name' => 'create-course',
+                'display_name' => 'Create Course',
+                'description' => 'Access to create a new course'
+            ],
+            [
+                'name' => 'drop-course',
+                'display_name' => 'Drop Course',
+                'description' => 'Access to drop existing course'
+            ],
+            [
+                'name' => 'create-quiz',
+                'display_name' => 'Create Quiz',
+                'description' => 'Access to create a new quiz'
+            ],
+            [
+                'name' => 'join-course',
+                'display_name' => 'Join Course',
+                'description' => 'Access to join existing course'
+            ],
+            [
+                'name' => 'leave-course',
+                'display_name' => 'Leave Course',
+                'description' => 'Access to leave existing course'
+            ],
+            [
+                'name' => 'solve-quiz',
+                'display_name' => 'Solve Quiz',
+                'description' => 'Access to solve quiz for existing course'
+            ],
 
         ];
 

@@ -7,8 +7,7 @@
                     Dashboard</a></li>
             <li class="submenu">
                 <a href="#">
-                    <i class="glyphicon glyphicon-list"></i> Role
-                    <span class="caret pull-right"></span>
+                    <i class="glyphicon glyphicon-user"></i>User Management<span class="caret pull-right"></span>
                 </a>
                 <!-- Sub menu -->
                 <ul>
@@ -17,7 +16,7 @@
                 </ul>
                 <!-- Sub menu -->
                 <ul>
-                    <li class="sub-menu"><a href="{{route('role.index')}}"><i class="glyphicon glyphicon-home"></i>
+                    <li class="sub-menu"><a href="{{route('role.index')}}"><i class="glyphicon glyphicon-briefcase"></i>
                             Roles</a></li>
                 </ul>
             </li>

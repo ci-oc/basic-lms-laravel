@@ -25,4 +25,8 @@ return [
     ],
     'quiz' => 'Answer the following questions',
     'no_entries_in_table' => 'No entries in table',
+    'sidebar_quizzes' => 'Quizzes',
+    'sidebar_dashboard' => 'Dashboard',
+    'sidebar_courses' => 'Courses',
+    'sidebar_problems' => 'Problems',
 ];

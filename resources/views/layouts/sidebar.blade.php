@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@inject('request', 'Illuminate\Http\Request')
+        <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -43,9 +44,6 @@
                             class="text-uppercase mrm pull-left text-white">News:</span>
                     <ul id="news-update" class="ticker list-unstyled">
                         <li>Welcome to KAdmin - Responsive Multi-Style Admin Template</li>
-                        <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                            voluptatum deleniti atque.
-                        </li>
                     </ul>
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
@@ -89,60 +87,75 @@
                 <ul id="side-menu" class="nav">
 
                     <div class="clearfix"></div>
-                    <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                    <li class="{{ $request->segment(1) == 'dashboard' ? 'active' : '' }}"><a
+                                href="{{ route('home') }}"><i
+                                    class="fa fa-tachometer fa-fw">
                                 <div class="icon-bg bg-orange"></div>
-                            </i><span class="menu-title">Dashboard</span></a></li>
-                    <li><a href="Layout.html"><i class="fa fa-desktop fa-fw">
-                                <div class="icon-bg bg-pink"></div>
-                            </i><span class="menu-title">Layouts</span></a>
+                            </i><span class="menu-title">@lang('module.sidebar_dashboard')</span></a></li>
+                    @if(Auth::user()->isInstructor())
+                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Layout.html"><i
+                                        class=" fa-graduation-cap fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">Courses</span></a>
 
-                    </li>
-                    <li><a href="UIElements.html"><i class="fa fa-send-o fa-fw">
-                                <div class="icon-bg bg-green"></div>
-                            </i><span class="menu-title">UI Elements</span></a>
+                        </li>
+                        <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a href="UIElements.html"><i
+                                        class="fa fa-exclamation fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">@lang('module.sidebar_quizzes')</span></a>
 
-                    </li>
-                    <li><a href="Forms.html"><i class="fa fa-edit fa-fw">
-                                <div class="icon-bg bg-violet"></div>
-                            </i><span class="menu-title">Forms</span></a>
+                        </li>
+                        <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a href="Forms.html"><i
+                                        class="fa fa-code fa-fw">
+                                    <div class="icon-bg bg-violet"></div>
+                                </i><span class="menu-title">@lang('module.sidebar_problems')</span></a>
 
-                    </li>
-                    <li><a href="Tables.html"><i class="fa fa-th-list fa-fw">
-                                <div class="icon-bg bg-blue"></div>
-                            </i><span class="menu-title">Tables</span></a>
-
-                    </li>
-                    <li><a href="DataGrid.html"><i class="fa fa-database fa-fw">
-                                <div class="icon-bg bg-red"></div>
-                            </i><span class="menu-title">Data Grids</span></a>
-
-                    </li>
-                    <li><a href="Pages.html"><i class="fa fa-file-o fa-fw">
-                                <div class="icon-bg bg-yellow"></div>
-                            </i><span class="menu-title">Pages</span></a>
-
-                    </li>
-                    <li><a href="Extras.html"><i class="fa fa-gift fa-fw">
-                                <div class="icon-bg bg-grey"></div>
-                            </i><span class="menu-title">Extras</span></a>
-
-                    </li>
-                    <li><a href="Dropdown.html"><i class="fa fa-sitemap fa-fw">
-                                <div class="icon-bg bg-dark"></div>
-                            </i><span class="menu-title">Multi-Level Dropdown</span></a>
-
-                    </li>
-                    <li><a href="Email.html"><i class="fa fa-envelope-o">
-                                <div class="icon-bg bg-primary"></div>
-                            </i><span class="menu-title">Email</span></a>
-
-                    </li>
-                    <li><a href="Charts.html"><i class="fa fa-bar-chart-o fa-fw">
+                        </li>
+                    @endif
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
+                                    class="fa fa-bar-chart-o fa-fw">
                                 <div class="icon-bg bg-orange"></div>
                             </i><span class="menu-title">Charts</span></a>
 
                     </li>
-                    <li><a href="Animation.html"><i class="fa fa-slack fa-fw">
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Tables.html"><i
+                                    class="fa fa-th-list fa-fw">
+                                <div class="icon-bg bg-blue"></div>
+                            </i><span class="menu-title">Tables</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="DataGrid.html"><i
+                                    class="fa fa-database fa-fw">
+                                <div class="icon-bg bg-red"></div>
+                            </i><span class="menu-title">Data Grids</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Pages.html"><i
+                                    class="fa fa-file-o fa-fw">
+                                <div class="icon-bg bg-yellow"></div>
+                            </i><span class="menu-title">Pages</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Extras.html"><i
+                                    class="fa fa-gift fa-fw">
+                                <div class="icon-bg bg-grey"></div>
+                            </i><span class="menu-title">Extras</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Dropdown.html"><i
+                                    class="fa fa-sitemap fa-fw">
+                                <div class="icon-bg bg-dark"></div>
+                            </i><span class="menu-title">Multi-Level Dropdown</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Email.html"><i
+                                    class="fa fa-envelope-o">
+                                <div class="icon-bg bg-primary"></div>
+                            </i><span class="menu-title">Email</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Animation.html"><i
+                                    class="fa fa-slack fa-fw">
                                 <div class="icon-bg bg-green"></div>
                             </i><span class="menu-title">Animations</span></a></li>
                 </ul>
@@ -155,16 +168,17 @@
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
                     <div class="page-title">
-                        Dashboard
+                        {{ ucfirst($request->segment(1)) }}
                     </div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
                                 class="fa fa-angle-right"></i>&nbsp;&nbsp;
                     </li>
-                    <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;
+                    <li class="hidden"><a href="#">{{ ucfirst($request->segment(1)) }}</a>&nbsp;&nbsp;<i
+                                class="fa fa-angle-right"></i>&nbsp;&nbsp;
                     </li>
-                    <li class="active">Dashboard</li>
+                    <li class="active">{{ ucfirst($request->segment(1)) }}</li>
                 </ol>
                 <div class="clearfix">
                 </div>

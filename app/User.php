@@ -28,4 +28,48 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isSuperuser()
+    {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->name == 'superuser') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isInstructor()
+    {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->name == 'instructor') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isStudent()
+    {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->name == 'student') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isStandardUser()
+    {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->name == 'standarduser') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

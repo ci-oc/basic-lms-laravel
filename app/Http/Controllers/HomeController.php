@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -23,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        #$user = Auth::user();
-        #$user_role = $user->roles ? $user->roles->first()->name : 'No role';
-        return view('home');
+        $user = Auth::user();
+        $user_role = $user->roles ? $user->roles->first()->name : 'No role';
+        return view('home', compact('user_role'));
     }
 }

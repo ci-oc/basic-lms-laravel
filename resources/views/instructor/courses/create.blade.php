@@ -43,7 +43,13 @@
                     @endif
                 </div>
             </div>
+            {!! Form::label('desc', Lang::get('module.courses.fields.excel'), ['class' => 'control-label']) !!}
+            <button class="btn btn-green"><i
+                        class="fa fa-upload"></i>&nbsp;
+                Upload
+            </button>
         </div>
+
     </div>
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}

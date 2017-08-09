@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Course;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -15,7 +16,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('instructor.courses.index');
+        $courses = DB::table('courses')->get();
+        $colors = array('yellow', 'purple', 'green', 'white');
+        return view('instructor.courses.index', compact('courses', 'colors'));
     }
 
     /**
@@ -38,9 +41,10 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
-        if ($access_code_exists === null)
+        if ($access_code_exists === null) {
             Course::create($request->all());
-        else
+            return redirect()->route('courses.index');
+        } else
             return redirect()->route('courses.create')->withInput();
 
     }

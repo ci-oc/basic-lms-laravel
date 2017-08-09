@@ -58,6 +58,8 @@ return [
             'course' => 'Course Title',
             'access_code' => 'Access Code',
             'desc' => 'Description',
+            'excel' => 'Excel Sheet :'
         ],
     ],
+
 ];

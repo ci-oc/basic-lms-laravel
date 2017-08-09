@@ -10,10 +10,19 @@ use Illuminate\Support\Facades\DB;
 class CourseController extends Controller
 {
     /**
+     * CourseController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('role:instructor', ['only' => ['create']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $courses = DB::table('courses')->get();
@@ -28,7 +37,6 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
         return view('instructor.courses.create');
     }
 

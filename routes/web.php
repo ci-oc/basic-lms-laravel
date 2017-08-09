@@ -18,7 +18,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::group(['middleware' => 'auth'], function () {
+    Route::resource('quizzes', 'QuizController');
+    Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@profile']);
+    Route::resource('courses', 'CourseController');
     Route::resource('user', 'UserController');
     Route::resource('role', 'RoleController');
     Route::get('/admin', [
@@ -31,6 +35,3 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
-Route::resource('quizzes', 'QuizController');
-Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@profile']);
-Route::resource('courses', 'CourseController');

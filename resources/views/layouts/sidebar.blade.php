@@ -91,14 +91,14 @@
                                     class="fa fa-tachometer fa-fw">
                                 <div class="icon-bg bg-orange"></div>
                             </i><span class="menu-title">@lang('module.sidebar_dashboard')</span></a></li>
-                    @if(Auth::user()->isInstructor())
-                        <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
-                                    href="{{ route('courses.index') }}"><i
-                                        class="fa fa-graduation-cap" aria-hidden="true">
-                                    <div class="icon-bg bg-pink"></div>
-                                </i><span class="menu-title">Courses</span></a>
+                    <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
+                                href="{{ route('courses.index') }}"><i
+                                    class="fa fa-graduation-cap" aria-hidden="true">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">Courses</span></a>
 
-                        </li>
+                    </li>
+                    @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a href="UIElements.html"><i
                                         class="fa fa-exclamation fa-fw">
                                     <div class="icon-bg bg-green"></div>

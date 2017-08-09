@@ -1,6 +1,8 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Auth::user()->isInstructor())
     <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
+
     <a href="{{route('courses.create')}}" class="btn bg-primary create_btn">
         Add New
     </a>
@@ -35,4 +37,6 @@
             </div>
         </div>
     </div>
+    @else
+    @endif
 @endsection

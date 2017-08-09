@@ -33,7 +33,5 @@ Route::get('/dashboard', 'HomeController@index')->name('home');
 Route::get('/student', function () {
     return view('student.create');
 });
-Route::get('/quiz', function () {
-    return view('quiz.test');
-});
-Route::resource('tests', 'QuizController');
+Route::resource('quizzes', 'QuizController');
+Route::resource('courses', 'CourseController');

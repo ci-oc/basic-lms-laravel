@@ -52,7 +52,7 @@
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a href="{{ route('hey') }}"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span
                                             class="badge badge-danger">3</span></a></li>
@@ -93,7 +93,8 @@
                                 <div class="icon-bg bg-orange"></div>
                             </i><span class="menu-title">@lang('module.sidebar_dashboard')</span></a></li>
                     @if(Auth::user()->isInstructor())
-                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Layout.html"><i
+                        <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
+                                    href="{{ route('courses.index') }}"><i
                                         class=" fa-graduation-cap fa-fw">
                                     <div class="icon-bg bg-pink"></div>
                                 </i><span class="menu-title">Courses</span></a>
@@ -119,12 +120,12 @@
                         </li>
                     @endif
                     @if(Auth::user()->isStudent())
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Tables.html"><i
-                                    class="fa fa-th-list fa-fw">
-                                <div class="icon-bg bg-blue"></div>
-                            </i><span class="menu-title">Tables</span></a>
+                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Tables.html"><i
+                                        class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Tables</span></a>
 
-                    </li>
+                        </li>
                     @endif
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="DataGrid.html"><i
                                     class="fa fa-database fa-fw">
@@ -210,7 +211,6 @@
 </div>
 <!-- /#wrapper -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="{{asset('js/student/sidenav.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/bars/jquery-1.10.2.min.js')}}"></script>
 <script src="{{asset('js/bars/jquery-migrate-1.2.1.min.js')}}"></script>

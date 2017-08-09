@@ -1,0 +1,150 @@
+/*Divider style*/
+.divider-style {
+    margin-top: 70px;
+    position: relative;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.divider-style span {
+    padding: 0 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.divider-style:before {
+    content: "";
+    display: block;
+    border-top: solid 1px black;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+
+/*Table style*/
+
+.pricingTable {
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+    text-align: center;
+    transition: all 0.4s ease-in-out 0s;
+}
+
+.pricingTable-header {
+    padding: 25px 10px;
+    background-color: #fff;
+}
+
+.pricingTable .pricingTable-header h3 {
+    font-size: 21px;
+    letter-spacing: 2px;
+    color: #000;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.pricingTable-header span {
+    display: block;
+    font-size: 12px;
+}
+
+.pricing-plans {
+    padding: 25px 0;
+}
+
+.price-value {
+    font-size: 25px;
+    line-height: 35px;
+    color: #fff;
+    display: inline-block;
+    position: relative;
+}
+
+.price-value i {
+    position: absolute;
+    top: 3px;
+    font-size: 22px;
+}
+
+.price-value span {
+    font-size: 40px;
+    color: #fff;
+    margin-left: 17px;
+}
+
+.pricing-plans .month {
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    margin-top: 15px;
+    font-weight: 100;
+}
+
+.pricingContent ul {
+    padding: 0 15px;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.pricingContent ul li {
+    padding: 15px 0;
+    text-transform: capitalize;
+}
+
+.pricingContent ul li:nth-child(even) {
+    background-color: #f7f8f4;
+}
+
+.pricingTable .pricingTable-sign-up {
+    padding: 25px 0;
+    border-top: 1px solid #dbdbdb;
+}
+
+.btn-block {
+    width: 50%;
+    margin: 0 auto;
+    background: #6c6c6c;
+    border: 1px solid #6c6c6c;
+    padding: 10px 0;
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
+
+.pricingTable .btn-block:hover {
+    background: #d63030;
+    color: #fff;
+    border: 1px solid #d63030;
+}
+
+.pricingTable.purple .pricing-plans {
+    background-color: #b696e9;
+}
+
+.pricingTable.yellow .pricing-plans {
+    background-color: #e8ae42;
+}
+
+.pricingTable.green .pricing-plans {
+    background-color: #008b8b;
+}
+
+@media screen and (max-width: 990px) {
+    .pricingTable {
+        margin-bottom: 30px;
+    }
+}
+
+.create_btn {
+    display: inline-block;
+    box-shadow: 0 0 1px;
+}
+
+.create_btn:hover {
+    background-color: #3e77ab;
+    color: #fff;
+    box-shadow: 0 0 1px;
+}

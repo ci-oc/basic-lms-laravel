@@ -12,11 +12,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Styles -->
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet"
-          href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    <link type="text/css" rel="stylesheet" href="{{asset('fonts/opensans.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('fonts/oswald.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('css/bars/jquery-ui-1.10.4.custom.min.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('css/bars/font-awesome.min.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="{{asset('css/bars/bootstrap.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('css/bars/animate.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('css/bars/main.css')}}">
@@ -52,7 +51,7 @@
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="{{ route('hey') }}"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a href="{{ route('profile') }}"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span
                                             class="badge badge-danger">3</span></a></li>
@@ -95,7 +94,7 @@
                     @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
                                     href="{{ route('courses.index') }}"><i
-                                        class=" fa-graduation-cap fa-fw">
+                                        class="fa fa-graduation-cap" aria-hidden="true">
                                     <div class="icon-bg bg-pink"></div>
                                 </i><span class="menu-title">Courses</span></a>
 

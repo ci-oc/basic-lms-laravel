@@ -1,27 +1,13 @@
 @extends('layouts.sidebar')
 @section('content')
-    <div class="row mbl">
         <div class="col-lg-12">
-
-            <div class="col-md-12">
-                <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-lg-12">
-
-
             <div class="row">
-                <div class="col-md-12"><h2>Profile: John Doe</h2>
-
                     <div class="row mtl">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <div class="text-center mbl"><img
-                                            src="http://lorempixel.com/640/480/business/1/" alt=""
-                                            class="img-responsive"/></div>
+                                            src="{{Auth::user()->avatar}}" alt=""
+                                            class="img-responsive img-circle"/></div>
                                 <div class="text-center mbl"><a href="#" class="btn btn-green"><i
                                                 class="fa fa-upload"></i>&nbsp;
                                         Upload</a></div>
@@ -30,15 +16,11 @@
                                 <tbody>
                                 <tr>
                                     <td>User Name</td>
-                                    <td>John Doe</td>
+                                    <td>{{ ucfirst(Auth::user()->name) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
-                                    <td>name@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>Street 123, Avenue 45, Country</td>
+                                    <td>{{ Auth::user()->email }}</td>
                                 </tr>
                                 <tr>
                                     <td>Status</td>
@@ -46,7 +28,7 @@
                                 </tr>
                                 <tr>
                                     <td>Member Since</td>
-                                    <td> Jun 03, 2014</td>
+                                    <td>{{ ucfirst(Auth::user()->created_at) }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -67,19 +49,7 @@
                                             <div class="col-sm-9 controls">
                                                 <div class="row">
                                                     <div class="col-xs-9"><input type="email"
-                                                                                 placeholder="email@yourcompany.com"
-                                                                                 class="form-control"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group"><label
-                                                    class="col-sm-3 control-label">Username</label>
-
-                                            <div class="col-sm-9 controls">
-                                                <div class="row">
-                                                    <div class="col-xs-9"><input type="text"
-                                                                                 placeholder="username"
+                                                                                 placeholder="{{ Auth::user()->email }}"
                                                                                  class="form-control"/>
                                                     </div>
                                                 </div>
@@ -119,9 +89,5 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-
-    </div>
 @endsection

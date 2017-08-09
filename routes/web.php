@@ -30,8 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 });
 Route::get('/dashboard', 'HomeController@index')->name('home');
-Route::get('/student', function () {
-    return view('student.create');
-});
+
 Route::resource('quizzes', 'QuizController');
+Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@profile']);
 Route::resource('courses', 'CourseController');

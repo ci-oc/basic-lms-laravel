@@ -48,7 +48,7 @@
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
-                                    src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span
+                                    src="{{Auth::user()->avatar}}" alt="" class="img-responsive img-circle"/>&nbsp;<span
                                     class="hidden-xs">{{ Auth::user()->name }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
@@ -111,13 +111,13 @@
                                 </i><span class="menu-title">@lang('module.sidebar_problems')</span></a>
 
                         </li>
-                    @endif
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
-                                    class="fa fa-bar-chart-o fa-fw">
-                                <div class="icon-bg bg-orange"></div>
-                            </i><span class="menu-title">Charts</span></a>
+                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
+                                        class="fa fa-bar-chart-o fa-fw">
+                                    <div class="icon-bg bg-orange"></div>
+                                </i><span class="menu-title">Charts</span></a>
 
-                    </li>
+                        </li>
+                    @endif
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Tables.html"><i
                                     class="fa fa-th-list fa-fw">
                                 <div class="icon-bg bg-blue"></div>

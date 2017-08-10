@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Course;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -25,9 +26,8 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = DB::table('courses')->get();
-        $colors = array('yellow', 'purple', 'green', 'white');
-        return view('instructor.courses.index', compact('courses', 'colors'));
+        $courses = Course::all()->load('instructor');
+        return view('instructor.courses.index', compact('courses'));
     }
 
     /**
@@ -51,6 +51,7 @@ class CourseController extends Controller
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
         if ($access_code_exists === null) {
             Course::create($request->all());
+
             return redirect()->route('courses.index');
         } else
             return redirect()->route('courses.create')->withInput();

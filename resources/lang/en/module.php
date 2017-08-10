@@ -12,6 +12,7 @@ return [
     'view' => 'View',
     'update' => 'Update',
     'list' => 'List',
+    'description' => 'Description',
     'submit_quiz' => 'Submit answers',
     'results' => [
         'title' => 'My Results',
@@ -72,7 +73,7 @@ return [
             'assistant_professor' => 'Assistant Professor',
         ],
     ],
-    'results' => [ 
+    'results' => [
         'title' => 'My Results',
         'fields' => [
             'user' => 'User',
@@ -109,7 +110,7 @@ return [
                 'title' => 'Test Case: '
             ]
         ]
-        
+
 
     ]
 

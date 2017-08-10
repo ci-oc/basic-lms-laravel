@@ -58,7 +58,7 @@ return [
             'assistant_professor' => 'Assistant Professor',
         ],
     ],
-    'results' => [
+    'results' => [ 
         'title' => 'My Results',
         'fields' => [
             'user' => 'User',
@@ -76,6 +76,9 @@ return [
         'sidebar_problems' => 'Problems',
         'sidebar_questions' => 'MCQ Questions',
         'sidebar_results' => 'Results',
+    ],
+    'problems' => [
+        'problems-list' => 'Problems List',
     ]
 
 ];

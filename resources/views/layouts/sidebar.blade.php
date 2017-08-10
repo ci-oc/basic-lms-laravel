@@ -35,7 +35,7 @@
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span
+                <a id="logo" href="{{route('home')}}" class="navbar-brand"><span class="fa fa-rocket"></span><span
                             class="logo-text">FCI-H Module</span><span style="display: none"
                                                                        class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -52,24 +52,19 @@
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="{{ route('profile') }}"><i class="fa fa-user"></i>My Profile</a></li>
-                            <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span
-                                            class="badge badge-danger">3</span></a></li>
-                            <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span
-                                            class="badge badge-success">7</span></a></li>
                             <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
-                                            class="fa fa-key"></i>Log Out
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                        class="fa fa-key"></i>Log Out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                             </li>
+                            <br>
+                            <br>
                         </ul>
                     </li>
                 </ul>
@@ -90,7 +85,7 @@
                                 href="{{ route('home') }}"><i
                                     class="fa fa-tachometer fa-fw">
                                 <div class="icon-bg bg-orange"></div>
-                            </i><span class="menu-title">@lang('module.sidebar_dashboard')</span></a></li>
+                            </i><span class="menu-title">@lang('module.bars.sidebar_dashboard')</span></a></li>
                     <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
                                 href="{{ route('courses.index') }}"><i
                                     class="fa fa-graduation-cap" aria-hidden="true">
@@ -102,13 +97,13 @@
                         <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a href="UIElements.html"><i
                                         class="fa fa-exclamation fa-fw">
                                     <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">@lang('module.sidebar_quizzes')</span></a>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
                         </li>
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a href="Forms.html"><i
                                         class="fa fa-code fa-fw">
                                     <div class="icon-bg bg-violet"></div>
-                                </i><span class="menu-title">@lang('module.sidebar_problems')</span></a>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_problems')</span></a>
 
                         </li>
                         <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
@@ -119,10 +114,11 @@
                         </li>
                     @endif
                     @if(Auth::user()->isStudent())
-                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Tables.html"><i
+                        <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
+                                    href="{{route('results.index')}}"><i
                                         class="fa fa-th-list fa-fw">
                                     <div class="icon-bg bg-blue"></div>
-                                </i><span class="menu-title">Tables</span></a>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_results')</span></a>
 
                         </li>
                     @endif
@@ -174,7 +170,7 @@
                     </div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
+                    <li><i class="fa fa-home"></i>&nbsp;<a href="{{ route('home') }}">Home</a>&nbsp;&nbsp;<i
                                 class="fa fa-angle-right"></i>&nbsp;&nbsp;
                     </li>
                     <li class="hidden"><a href="#">{{ ucfirst($request->segment(1)) }}</a>&nbsp;&nbsp;<i

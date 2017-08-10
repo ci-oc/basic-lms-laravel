@@ -24,10 +24,6 @@ return [
         ],
     ],
     'no_entries_in_table' => 'No entries in table',
-    'sidebar_quizzes' => 'Quizzes',
-    'sidebar_dashboard' => 'Dashboard',
-    'sidebar_courses' => 'Courses',
-    'sidebar_problems' => 'Problems',
     'questions' => [
         'title' => 'Questions',
         'fields' => [
@@ -61,5 +57,23 @@ return [
             'excel' => 'Excel Sheet :'
         ],
     ],
+    'results' => [
+        'title' => 'My Results',
+        'fields' => [
+            'user' => 'User',
+            'question' => 'Question',
+            'correct' => 'Correct',
+            'date' => 'Date',
+            'result' => 'Score',
+            'view-result' =>'View result',
+        ],
+    ],
+    'bars' => [
+        'sidebar_quizzes' => 'Quizzes',
+        'sidebar_dashboard' => 'Dashboard',
+        'sidebar_courses' => 'Courses',
+        'sidebar_problems' => 'Problems',
+        'sidebar_results' => 'Results',
+    ]
 
 ];

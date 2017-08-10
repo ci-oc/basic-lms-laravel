@@ -22,6 +22,18 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('grade', Lang::get('module.questions.fields.grade'), ['class' => 'control-label']) !!}
+                    {!! Form::input('number','grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step' => '0.5']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('option2'))
+                        <p class="help-block">
+                            {{ $errors->first('option2') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('question_text', Lang::get('module.questions.fields.question-text'), ['class' => 'control-label']) !!}
                     {!! Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => '']) !!}
                     <p class="help-block"></p>

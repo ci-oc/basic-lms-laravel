@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('questions', 'QuestionController');
     Route::get('/admin', [
         'as' => 'admin.index',
-        'middleware' => ['role:superuser|standarduser'],
+        'middleware' => ['role:superuser|standard-user'],
         'uses' => function () {
             return view('admin.index');
         }

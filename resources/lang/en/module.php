@@ -34,6 +34,7 @@ return [
             'more-info-link' => 'More info link',
             'input-format' => 'Input Format',
             'output-format' => 'Output Format',
+            'grade' => 'Grade',
         ],
     ],
     'questions-options' => [

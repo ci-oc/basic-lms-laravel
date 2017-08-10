@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInstructorsCoursesTable extends Migration
+class CreateUserCourseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateInstructorsCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('instructors_courses', function (Blueprint $table) {
+        Schema::create('user_courses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id')->unsigned()->nullable();
-            $table->foreign('course_id', 'fk_256_course_course_id_course')->references('id')->on('courses');
-            $table->integer('instructor_id')->unsigned()->nullable();
-            $table->foreign('instructor_id', 'fk_256_instructor_instructor_id_instructor')->references('id')->on('users');
+            $table->foreign('course_id', 'fk_256_course_course_id_course')->references('id')->on('courses')->onDelete('cascade');;
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id', 'fk_256_user_course_id_user')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateInstructorsCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instructors_courses');
+        Schema::dropIfExists('user_course');
     }
 }

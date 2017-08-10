@@ -92,6 +92,24 @@ return [
     ],
     'problems' => [
         'problems-list' => 'Problems List',
+        'new_problem' => 'New Problem',
+        'fields' => [
+            'problem_desc' => 'Problem Description',
+            'problem_grade' => 'Problem Grade',
+            'input_format' => 'Input Format',
+            'output_format' => 'Output Format',
+            'test_cases' => 'Test Cases',
+            'code_snippet' => 'Code Snippet',
+            'more_info_link' => 'More Info Link',
+            'selected_quiz' => 'Select Quiz',
+            'testCases' => [
+                'input_testcase' => 'Input',
+                'output_testcase' => 'Output',
+                'title' => 'Test Case: '
+            ]
+        ]
+        
+
     ]
 
 ];

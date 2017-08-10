@@ -1,6 +1,10 @@
+<?php
+	$questions = array('question1','question1','question1');
+?>
+
 @extends('layouts.sidebar')
 @section('content')
-    <a href="{{route('problems.create')}}" class="btn bg-primary create_btn">
+    <a href="{{route('problems.create')}}" class="btn bg-primary create_btn {{ count($questions) > 0 ? 'datatable' : '' }} dt-select">
         Add New
     </a>
     <br>

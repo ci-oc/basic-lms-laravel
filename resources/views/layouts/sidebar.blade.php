@@ -108,7 +108,8 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_problems')</span></a>
 
                         </li>
-                        <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}"><a href="Charts.html"><i
+                        <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}"><a
+                                    href="{{route('questions.index')}}"><i
                                         class="fa fa-sitemap fa-fw">
                                     <div class="icon-bg bg-dark"></div>
                                 </i><span class="menu-title">@lang('module.bars.sidebar_questions')</span></a>

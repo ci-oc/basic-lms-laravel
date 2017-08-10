@@ -26,7 +26,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = Course::all()->load('instructor');
+        $courses = Course::all()->load('instructors');
         return view('instructor.courses.index', compact('courses'));
     }
 

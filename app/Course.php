@@ -9,8 +9,8 @@ class Course extends Model
     //
     protected $fillable = ['access_code', 'title', 'description'];
 
-    public function instructor()
+    public function instructors()
     {
-        return $this->belongsToMany('App\User', 'instructors_courses', 'instructor_id', 'course_id');
+        return $this->belongsToMany('App\User', 'instructors_courses', 'course_id', 'instructor_id');
     }
 }

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Course;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
+
 class CourseController extends Controller
 {
     /**
@@ -27,7 +27,9 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = Course::all()->load('instructors');
+        $user_id = Auth::id();
+        $courses = Course::with('instructors')->join('user_courses', 'course_id',
+            '=', 'user_courses.course_id')->where('user_id', '=', $user_id)->get();
         return view('instructor.courses.index', compact('courses'));
     }
 

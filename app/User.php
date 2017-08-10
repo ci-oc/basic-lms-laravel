@@ -72,9 +72,4 @@ class User extends Authenticatable
 
         return false;
     }
-
-    public function instructor_courses()
-    {
-        return $this->belongsToMany('\App\User', 'instructors_courses', 'instructor_id', 'course_id');
-    }
 }

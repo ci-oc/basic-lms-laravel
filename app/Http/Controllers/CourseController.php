@@ -48,9 +48,21 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'access_code' => 'required|min:5|',
+            'assistant_professor' => 'required|max:100|min:5|',
+            'title' => 'required|max:100|min:5|',
+            'description' => 'required|min:5|',
+            'file' => 'required|mimes:xlsx,odf,xls'
+        ]);
+        $courses = new Course(array(
+            'access_code' => $request->get('access_code'),
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+        ));
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
         if ($access_code_exists === null) {
-            Course::create($request->all());
+            Course::create($courses);
 
             return redirect()->route('courses.index');
         } else

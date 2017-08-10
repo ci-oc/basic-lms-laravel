@@ -25,6 +25,18 @@ return [
     ],
     'no_entries_in_table' => 'No entries in table',
     'questions' => [
+        'title' => 'Assign Questions',
+        'fields' => [
+            'quiz' => 'Quiz',
+            'question-text' => 'Question text',
+            'code-snippet' => 'Code snippet',
+            'answer-explanation' => 'Answer explanation',
+            'more-info-link' => 'More info link',
+            'input-format' => 'Input Format',
+            'output-format' => 'Output Format',
+        ],
+    ],
+    'questions-options' => [
         'title' => 'Questions',
         'fields' => [
             'quiz' => 'Quiz',
@@ -37,6 +49,7 @@ return [
         ],
     ],
     'quizzes' => [
+        'create-questions-title' => 'Quiz',
         'title' => 'New Quiz',
         'fields' => [
             'quiz' => 'Quiz Title',

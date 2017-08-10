@@ -4,16 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProblemController extends Controller
+class QuestionsOptionController extends Controller
 {
-    /**
-     * ProblemController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('role:instructor');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +13,7 @@ class ProblemController extends Controller
      */
     public function index()
     {
-        return view('problems.index');
+        //
     }
 
     /**

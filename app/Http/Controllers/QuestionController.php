@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use Illuminate\Http\Request;
-
+use App\Quiz;
 class QuestionController extends Controller
 {
+    /**
+     * QuestionController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('role:instructor');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +32,18 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $relations = [
+            'quizzes' => Quiz::get()->pluck('title', 'id')->prepend('Please select', ''),
+        ];
+
+        $correct_options = [
+            'option1' => 'Option #1',
+            'option2' => 'Option #2',
+            'option3' => 'Option #3',
+            'option4' => 'Option #4',
+            'option5' => 'Option #5'
+        ];
+        return view('questions.create', compact('correct_options') + $relations);
     }
 
     /**
@@ -34,7 +54,20 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $question = Question::create($request->all());
+
+        foreach ($request->input() as $key => $value) {
+            if (strpos($key, 'option') !== false && $value != '') {
+                $status = $request->input('correct') == $key ? 1 : 0;
+                QuestionsOption::create([
+                    'question_id' => $question->id,
+                    'option' => $value,
+                    'correct' => $status
+                ]);
+            }
+        }
+        return redirect()->route('questions.index');
+
     }
 
     /**

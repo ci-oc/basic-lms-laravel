@@ -101,10 +101,18 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
                         </li>
-                        <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a href="Forms.html"><i
+                        <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
+                                    href="{{route('problems.index')}}"><i
                                         class="fa fa-code fa-fw">
                                     <div class="icon-bg bg-violet"></div>
                                 </i><span class="menu-title">@lang('module.bars.sidebar_problems')</span></a>
+
+                        </li>
+                        <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}"><a
+                                    href="{{route('questions.index')}}"><i
+                                        class="fa fa-sitemap fa-fw">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title"></span>@lang('module.bars.sidebar_questions')</a>
 
                         </li>
                         <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
@@ -139,12 +147,6 @@
                                     class="fa fa-gift fa-fw">
                                 <div class="icon-bg bg-grey"></div>
                             </i><span class="menu-title">Extras</span></a>
-
-                    </li>
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Dropdown.html"><i
-                                    class="fa fa-sitemap fa-fw">
-                                <div class="icon-bg bg-dark"></div>
-                            </i><span class="menu-title">Multi-Level Dropdown</span></a>
 
                     </li>
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Email.html"><i

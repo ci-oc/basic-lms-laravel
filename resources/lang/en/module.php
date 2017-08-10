@@ -74,6 +74,7 @@ return [
         'sidebar_dashboard' => 'Dashboard',
         'sidebar_courses' => 'Courses',
         'sidebar_problems' => 'Problems',
+        'sidebar_questions' => 'MCQ Questions',
         'sidebar_results' => 'Results',
     ]
 

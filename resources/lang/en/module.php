@@ -54,7 +54,8 @@ return [
             'course' => 'Course Title',
             'access_code' => 'Access Code',
             'desc' => 'Description',
-            'excel' => 'Excel Sheet :'
+            'excel' => 'Excel Sheet :',
+            'assistant_professor' => 'Assistant Professor',
         ],
     ],
     'results' => [
@@ -65,7 +66,7 @@ return [
             'correct' => 'Correct',
             'date' => 'Date',
             'result' => 'Score',
-            'view-result' =>'View result',
+            'view-result' => 'View result',
         ],
     ],
     'bars' => [

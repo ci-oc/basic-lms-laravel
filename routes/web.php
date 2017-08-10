@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController');
     Route::resource('role', 'RoleController');
     Route::resource('results', 'ResultController');
+    Route::resource('problems', 'ProblemController');
+    Route::resource('questions', 'QuestionController');
     Route::get('/admin', [
         'as' => 'admin.index',
         'middleware' => ['role:superuser|standarduser'],

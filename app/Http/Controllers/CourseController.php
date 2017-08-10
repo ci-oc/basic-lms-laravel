@@ -7,7 +7,8 @@ use App\Course;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Redirect;
+use App\User;
 class CourseController extends Controller
 {
     /**
@@ -48,22 +49,17 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'access_code' => 'required|min:5|',
-            'assistant_professor' => 'required|max:100|min:5|',
-            'title' => 'required|max:100|min:5|',
-            'description' => 'required|min:5|',
-            'file' => 'required|mimes:xlsx,odf,xls'
-        ]);
-        $courses = new Course(array(
-            'access_code' => $request->get('access_code'),
-            'title' => $request->get('title'),
-            'description' => $request->get('description'),
-        ));
+//        $this->validate($request, [
+//            'access_code' => 'required|min:5|',
+//            'assistant_professor' => 'required|max:100|min:5|',
+//            'title' => 'required|max:100|min:5|',
+//            'description' => 'required|min:5|',
+//        ]);
+        $courses = $request->all();
+        $user = User::find(Auth::id());
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
         if ($access_code_exists === null) {
-            Course::create($courses);
-
+            Course::create($courses)->instructors()->save($user);
             return redirect()->route('courses.index');
         } else
             return redirect()->route('courses.create')->withInput();
@@ -112,6 +108,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
+        $course = Course::findOrFail($id);
+        $course->delete();
+        return Redirect::route('courses.index');
         //
     }
 }

@@ -65,11 +65,16 @@ class User extends Authenticatable
     public function isStandardUser()
     {
         foreach ($this->roles()->get() as $role) {
-            if ($role->name == 'standarduser') {
+            if ($role->name == 'standard-user') {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function instructor_courses()
+    {
+        return $this->belongsToMany('\App\User', 'instructors_courses', 'instructor_id', 'course_id');
     }
 }

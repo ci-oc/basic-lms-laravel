@@ -1,5 +1,7 @@
 @extends('layouts.sidebar')
 @section('content')
+    <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
+    </div>
     <h3 class="page-title">@lang('module.courses.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['courses.store']]) !!}
     <div class="panel panel-default">
@@ -12,8 +14,9 @@
                     {!! Form::label('access-code', Lang::get('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
                     {!! Form::text('access_code', old('access_code'), ['class' => 'form-control ', 'placeholder' => '']) !!}
                     @if($errors->has('access_code'))
-                        <p class="help-block alert-danger">
+                        <p class="help-block alert-danger" data-value="shake">
                             {{ $errors->first('access_code') }}
+                            <?php echo '<script type="text/javascript">shake();</script>'; ?>
                         </p>
                     @endif
                 </div>
@@ -29,17 +32,17 @@
                     @endif
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('assistant-professor', Lang::get('module.courses.fields.assistant_professor'), ['class' => 'control-label']) !!}
-                    {!! Form::text('assistant_professor', old('assistant_professor'), ['class' => 'form-control ', 'placeholder' => '']) !!}
-                    @if($errors->has('assistant_professor'))
-                        <p class="help-block alert-danger">
-                            {{ $errors->first('assistant_professor') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
+            {{--<div class="row">--}}
+                {{--<div class="col-xs-12 form-group">--}}
+                    {{--{!! Form::label('assistant-professor', Lang::get('module.courses.fields.assistant_professor'), ['class' => 'control-label']) !!}--}}
+                    {{--{!! Form::text('assistant_professor', old('assistant_professor'), ['class' => 'form-control ', 'placeholder' => '']) !!}--}}
+                    {{--@if($errors->has('assistant_professor'))--}}
+                        {{--<p class="help-block alert-danger">--}}
+                            {{--{{ $errors->first('assistant_professor') }}--}}
+                        {{--</p>--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('desc', Lang::get('module.courses.fields.desc'), ['class' => 'control-label']) !!}
@@ -62,6 +65,16 @@
         </div>
 
     </div>
-    {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' ,'data-value' => 'shake']) !!}
     {!! Form::close() !!}
+    <script>
+        function shake() {
+            $(document).ready(function () {
+                $.cookie('animations', 'bounce');
+                var ani = $(this).attr('data-value');
+                $("body").addClass("animated " + ani);
+                $.cookie('animations', ani);
+            });
+        }
+    </script>
 @endsection

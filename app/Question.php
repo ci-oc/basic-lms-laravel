@@ -12,7 +12,7 @@ class Question extends Model
 
     public function setQuizIdAttribute($input)
     {
-        $this->attributes['topic_id'] = $input ? $input : null;
+        $this->attributes['quiz_id'] = $input ? $input : null;
     }
 
     public function quiz()

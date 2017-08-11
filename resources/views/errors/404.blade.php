@@ -22,7 +22,7 @@
 
     .jumbotron {
         /* The image used */
-        background-image: url({{ URL::asset('images/background.jpg') }});
+        background-image: url({{ URL::asset('images/404.jpg') }});
 
         /* Full height */
         height: 100%;

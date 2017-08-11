@@ -52,8 +52,10 @@ return [
     ],
     'quizzes' => [
         'create-questions-title' => 'Quiz',
+        'course-title' => 'Select Course',
         'title' => 'New Quiz',
         'fields' => [
+            'full-mark' => "Full Mark",
             'quiz' => 'Quiz Title',
             'question-text' => 'Question text',
             'code-snippet' => 'Code snippet',
@@ -61,6 +63,9 @@ return [
             'more-info-link' => 'More info link',
             'input-format' => 'Input Format',
             'output-format' => 'Output Format',
+            'duration' => 'Duration',
+            'start-date' => 'Start Date',
+            'end-date' => 'End Date',
         ],
     ],
     'courses' => [

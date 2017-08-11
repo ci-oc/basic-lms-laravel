@@ -15,12 +15,8 @@
     <link href="{{ asset('css/Features-Clean.css') }}" rel="stylesheet">
     <link href="{{ asset('css/team-box.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
-<<<<<<< HEAD
-    <link href="{{ asset('css/fonts/ionicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fonts/font-awesome.min.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
-=======
->>>>>>> 4255f53f3fe1bbf85a2686ba107eccea135e471e
     <!-- Styles -->
     <style>
         html, body {

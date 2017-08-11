@@ -63,11 +63,18 @@ typedef struct
 /* result code translation table */
 const char* result_name[] =
 {
-    "PD", "OK", "RF", "ML", "OL", "TL", "RT", "AT", "IE", "BP", NULL,
+    "PD", /* pending */
+    "OK", /* okay */
+    "RF", /* restricted function */
+    "ML", /* memory limit exceeded */
+    "OL", /* output limit exceeded */
+    "TL", /* time limit exceeded */
+    "RT", /* runtime error */
+    "AT", /* abnormal termination */
+    "IE", /* internal error */
+    "BP", /* bad policy */
+    NULL,
 };
-
-/* initialize and apply local policy rules */
-void policy_setup(minisbox_t*);
 
 typedef enum
 {
@@ -90,14 +97,16 @@ int main(int argc, const char* argv[])
         fprintf(stderr, "sandbox initialization failed\n");
         return EX_DATAERR;
     }
-    policy_setup(&msb);
-    msb.sbox.task.ifd = STDIN_FILENO;  /* input to targeted program */
-    msb.sbox.task.ofd = STDOUT_FILENO; /* output from targeted program */
-    msb.sbox.task.efd = STDERR_FILENO; /* error from targeted program */
+    msb.sbox.task.ifd = fileno(stdin);  /* input to targeted program */
+    msb.sbox.task.ofd = fileno(stdout); /* output from targeted program */
+    msb.sbox.task.efd = fileno(stderr); /* error from targeted program */
     msb.sbox.task.quota[S_QUOTA_WALLCLOCK] = 30000; /* 30 sec */
     msb.sbox.task.quota[S_QUOTA_CPU] = 2000;        /*  2 sec */
     msb.sbox.task.quota[S_QUOTA_MEMORY] = 8388608;  /*  8 MB  */
     msb.sbox.task.quota[S_QUOTA_DISK] = 1048576;    /*  1 MB  */
+    /* initialize and apply local policy rules */
+    void policy_setup(minisbox_t*);
+    policy_setup(&msb);
     /* execute till end */
     if (!sandbox_check(&msb.sbox))
     {

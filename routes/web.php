@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('results', 'ResultController');
     Route::resource('problems', 'ProblemController');
     Route::resource('questions', 'QuestionController');
+    Route::post('questions/massDestroy', ['uses' => 'QuestionController@massDestroy', 'as' => 'questions.massDestroy']);
     Route::get('/admin', [
         'as' => 'admin.index',
         'middleware' => ['role:superuser|standard-user'],

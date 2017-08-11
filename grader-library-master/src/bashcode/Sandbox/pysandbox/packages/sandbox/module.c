@@ -515,8 +515,7 @@ SandboxPolicy_entry(const policy_t * ppolicy, const event_t * pevent,
     
     assert(ppolicy && pevent && paction);
     
-    PyGILState_STATE gstate;
-    gstate = PyGILState_Ensure();
+    PyGILState_STATE gstate = PyGILState_Ensure();
     
     SandboxPolicy * p = (SandboxPolicy *)ppolicy->data;
     if (!SandboxPolicy_Check((PyObject *)p))

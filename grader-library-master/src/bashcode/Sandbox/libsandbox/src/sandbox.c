@@ -34,11 +34,8 @@
 #include "internal.h" 
 #include "config.h"
 
-#include <errno.h>              /* ECHILD, EINVAL */
 #include <grp.h>                /* struct group, getgrgid() */
 #include <pwd.h>                /* struct passwd, getpwuid() */
-#include <pthread.h>            /* pthread_{create,join,sigmask,...}() */
-#include <signal.h>             /* kill(), SIG* */
 #include <stdlib.h>             /* EXIT_{SUCCESS,FAILURE} */
 #include <string.h>             /* str{cpy,cmp,str}(), mem{set,cpy}() */
 #include <sys/stat.h>           /* struct stat, stat(), fstat() */

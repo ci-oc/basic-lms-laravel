@@ -17,7 +17,7 @@ class Question extends Model
 
     public function quiz()
     {
-        return $this->belongsTo(Quiz::class, 'quiz_id')->withTrashed();
+        return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
     public function options()

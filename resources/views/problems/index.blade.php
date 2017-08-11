@@ -6,7 +6,7 @@
 
 @extends('layouts.sidebar')
 @section('content')
-    <a href="{{route('problems.create')}}" class="btn bg-primary create_btn {{ count($questions) > 0 ? 'datatable' : '' }} dt-select">
+    <a href="{{route('problems.create')}}" class="btn btn-success create_btn {{ count($questions) > 0 ? 'datatable' : '' }} dt-select">
         Add New
     </a>
     <br>

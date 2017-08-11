@@ -96,6 +96,7 @@ CODE_SIGFPE_INTDIV = load_data("sigfpe_intdiv.c")
 CODE_SIGSEGV_MAPERR = load_data("sigsegv_maperr.c")
 CODE_SIGSEGV_ACCERR = load_data("sigsegv_accerr.c")
 
+CODE_REBOOT = load_data("reboot.c")
 CODE_EXEC = load_data("exec.c")
 CODE_FORK = load_data("fork.c")
 CODE_VFORK = load_data("vfork.c")

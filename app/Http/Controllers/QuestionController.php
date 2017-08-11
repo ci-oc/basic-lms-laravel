@@ -6,6 +6,8 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Quiz;
 use App\QuestionsOption;
+use Illuminate\Support\Facades\Auth;
+
 class QuestionController extends Controller
 {
     /**
@@ -23,7 +25,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('questions.index');
+        $user_id = Auth::id();
+        $questions = Question::all();
+
+        return view('questions.index', compact('questions'));
     }
 
     /**
@@ -79,7 +84,13 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $relations = [
+            'quizzes' => \App\Quiz::get()->pluck('title', 'id')->prepend('Please select', ''),
+        ];
+
+        $question = Question::findOrFail($id);
+
+        return view('questions.show', compact('question') + $relations);
     }
 
     /**
@@ -113,6 +124,20 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $question->delete();
+
+        return redirect()->route('questions.index');
+    }
+
+    public function massDestroy(Request $request)
+    {
+        if ($request->input('ids')) {
+            $entries = Question::whereIn('id', $request->input('ids'))->get();
+
+            foreach ($entries as $entry) {
+                $entry->delete();
+            }
+        }
     }
 }

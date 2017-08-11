@@ -195,6 +195,7 @@ class TestMultiProcessing(unittest.TestCase):
         self.task.append(config.build("fork", config.CODE_FORK))
         self.task.append(config.build("vfork", config.CODE_VFORK))
         self.task.append(config.build("clone", config.CODE_PTHREAD, LDFLAGS="-pthread"))
+        self.task.append(config.build("reboot", config.CODE_REBOOT))
         for t in self.task:
             self.assertTrue(t is not None)
         pass
@@ -217,6 +218,14 @@ class TestMultiProcessing(unittest.TestCase):
 
     def test_clone(self):
         s = Sandbox(self.task[2])
+        s.policy = MinimalPolicy()
+        s.run()
+        self.assertEqual(s.status, Sandbox.S_STATUS_FIN)
+        self.assertEqual(s.result, Sandbox.S_RESULT_RF)
+        pass
+
+    def test_reboot(self):
+        s = Sandbox(self.task[3])
         s.policy = MinimalPolicy()
         s.run()
         self.assertEqual(s.status, Sandbox.S_STATUS_FIN)

@@ -82,7 +82,17 @@ class MiniSandbox(SandboxPolicy, Sandbox):
         11, 12, 16, 25, 63, 158, 219, 231, ]), )
     # result code translation table
     result_name = dict((getattr(Sandbox, 'S_RESULT_%s' % r), r) for r in
-        ('PD', 'OK', 'RF', 'RT', 'TL', 'ML', 'OL', 'AT', 'IE', 'BP'))
+        ('PD',  # pending
+         'OK',  # okay
+         'RF',  # restricted function
+         'RT',  # runtime error
+         'TL',  # time limit exceeded
+         'ML',  # memory limit exceeded
+         'OL',  # output limit exceeded
+         'AT',  # abnormal termination
+         'IE',  # internal error
+         'BP',  # bad policy
+         ))
 
     def __init__(self, *args, **kwds):
         # initialize table of system call rules

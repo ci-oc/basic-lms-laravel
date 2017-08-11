@@ -31,11 +31,11 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   #
 # POSSIBILITY OF SUCH DAMAGE.                                                  #
 ################################################################################
-"""The sandbox libraries (libsandbox & pysandbox) provide API's in C/C++ and Python
-for executing and profiling simple (single process) programs in a restricted
-environment, or sandbox. These API's can help developers to build automated
-profiling tools and watchdogs that capture and block the runtime behaviours of
-binary programs according to configurable / programmable policies."""
+"""The sandbox libraries (libsandbox & pysandbox) are an open-source suite
+of software components for C/C++ and Python developers to create automated
+profiling tools and watchdog programs. The API's are designed for executing
+and instrumenting simple (single process) tasks, featuring policy-based
+behavioral auditing, resource quota, and statistics collecting."""
 
 NAME = 'pysandbox'
 VERSION = "0.3.5"

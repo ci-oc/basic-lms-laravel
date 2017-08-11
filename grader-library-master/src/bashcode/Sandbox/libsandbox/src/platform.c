@@ -41,9 +41,6 @@
 #include <ctype.h>              /* toupper() */
 #include <fcntl.h>              /* open(), close(), O_RDONLY */
 #include <math.h>               /* modfl(), lrintl() */
-#include <pthread.h>            /* pthread_{create,join,...}() */
-#include <signal.h>             /* kill(), SIG* */
-#include <stdio.h>              /* read(), sscanf(), sprintf() */
 #include <stdlib.h>             /* malloc(), free() */
 #include <string.h>             /* memset(), strsep() */
 #include <sys/queue.h>          /* SLIST_*() */
@@ -51,6 +48,22 @@
 #include <sys/types.h>          /* off_t */
 #include <sys/wait.h>           /* waitpid(), WNOHANG */
 #include <unistd.h>             /* access(), lseek(), {R,F}_OK */
+
+#ifdef HAVE_LINUX_MAGIC_H
+#include <linux/magic.h>        /* PROC_SUPER_MAGIC */
+#else
+#ifndef PROC_SUPER_MAGIC
+#define PROC_SUPER_MAGIC 0x9fa0
+#endif /* PROC_SUPER_MAGIC */
+#endif /* HAVE_LINUX_MAGIC_H */
+
+#ifdef HAVE_SYS_MOUNT_H
+#include <sys/mount.h>
+#endif /* HAVE_SYS_MOUNT_H */
+
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>          /* statfs() */
+#endif /* HAVE_SYS_PARAM_H */
 
 #ifdef HAVE_PTRACE
 #ifdef HAVE_SYS_PTRACE_H
@@ -61,22 +74,6 @@
 #ifdef HAVE_SYS_VFS_H
 #include <sys/vfs.h>            /* statfs() */
 #endif /* HAVE_SYS_VFS_H */
-
-#ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>          /* statfs() */
-#endif /* HAVE_SYS_PARAM_H */
-
-#ifdef HAVE_SYS_MOUNT_H
-#include <sys/mount.h>
-#endif /* HAVE_SYS_MOUNT_H */
-
-#ifdef HAVE_LINUX_MAGIC_H
-#include <linux/magic.h>        /* PROC_SUPER_MAGIC */
-#else
-#ifndef PROC_SUPER_MAGIC
-#define PROC_SUPER_MAGIC 0x9fa0
-#endif /* PROC_SUPER_MAGIC */
-#endif /* HAVE_LINUX_MAGIC_H */
 
 #ifdef __cplusplus
 extern "C"
@@ -601,7 +598,6 @@ proc_dump(const proc_t * const pproc, const void * const addr,
     int fd = open(buffer, O_RDONLY);
     if (lseek(fd, (off_t)addr, SEEK_SET) < 0)
     {
-        extern int errno;
         WARN("lseek(%d, %p, SEEK_SET) failes, ERRNO %d", fd, addr, errno);
         FUNC_RET("%d", false);
     }
@@ -702,9 +698,8 @@ trace_kill(const proc_t * const pproc, int signo)
     
     if (signo == SIGKILL)
     {
-        /* Make a local copy of the proc stat buffer */
-        proc_t proc = {0};
-        memcpy(&proc, pproc, sizeof(proc_t));
+        /* Make a local copy of the process stat buffer */
+        proc_t proc = *pproc;
         if (!proc_probe(pid, PROBE_REGS | PROBE_OP, &proc))
         {
             WARN("failed to probe process: %d", pid);
@@ -712,10 +707,12 @@ trace_kill(const proc_t * const pproc, int signo)
         }
         
         /* Flush pending opcode with a sequence of NOP. */
-        unsigned long addr = proc.regs.NIP;
-        unsigned long nop = 0;
-        memset((void *)&nop, OP_NOP, sizeof(unsigned long));
-        __trace(T_OPTION_SETDATA, &proc, (void *)addr, (long *)&nop);
+        {
+            unsigned long nop = 0;
+            unsigned long addr = proc.regs.NIP;
+            memset((void *)&nop, OP_NOP, sizeof(unsigned long));
+            __trace(T_OPTION_SETDATA, &proc, (void *)addr, (long *)&nop);
+        }
         
         /* Replace the pending system call with SYS_pause */
         if (IS_SYSCALL(&proc))

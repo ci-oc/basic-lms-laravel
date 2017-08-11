@@ -1,3 +1,5 @@
+
+<!--Dummy -->
 <?php
 	$questions = array('question1','question1','question1');
 ?>

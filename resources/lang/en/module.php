@@ -53,6 +53,7 @@ return [
     'quizzes' => [
         'create-questions-title' => 'Quiz',
         'title' => 'New Quiz',
+        'quizzes-list' => 'Quizzes List',
         'fields' => [
             'quiz' => 'Quiz Title',
             'question-text' => 'Question text',

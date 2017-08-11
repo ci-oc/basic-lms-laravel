@@ -1,5 +1,0 @@
-.coverage
-*.pyc
-*.pyo
-*.exe
-massif.out.*

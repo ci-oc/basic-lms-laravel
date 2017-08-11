@@ -6,11 +6,8 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Quiz;
 use App\QuestionsOption;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Auth;
 
->>>>>>> 4255f53f3fe1bbf85a2686ba107eccea135e471e
 class QuestionController extends Controller
 {
     /**

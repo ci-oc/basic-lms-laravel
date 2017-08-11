@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fec408cbebd022facb8fbd8e67fdb252",
+    "content-hash": "3615ad18ff5cf0985696ab270dc3ab60",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1987,6 +1987,54 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "yusufs/grader",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yusufsyaifudin/grader-library.git",
+                "reference": "ddff9ba90ac9613f956e658f19e94354387d8d96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yusufsyaifudin/grader-library/zipball/ddff9ba90ac9613f956e658f19e94354387d8d96",
+                "reference": "ddff9ba90ac9613f956e658f19e94354387d8d96",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "symfony/filesystem": "2.5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Yusufs": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yusuf Syaifudin",
+                    "email": "yusuf.syaifudin@gmail.com",
+                    "homepage": "http://yusyaif.com/"
+                }
+            ],
+            "description": "Online judge",
+            "homepage": "https://github.com/yusufs/grader",
+            "keywords": [
+                "acm judge",
+                "grader",
+                "laravel judge",
+                "online judge",
+                "online judge php"
+            ],
+            "time": "2014-11-05T19:36:44+00:00"
         },
         {
             "name": "zizaco/entrust",

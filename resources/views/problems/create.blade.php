@@ -69,12 +69,10 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('test_cases',Lang::get('module.problems.fields.test_cases'), ['class' => 'control-label']) !!}
-                    @for($i=0; $i<3; $i++)
                         <table id="dataTable" class="table">
                             <tbody>
+                            @for($i=0; $i<3; $i++)
                             <tr>
-                                <p>
-                                <td><input type="checkbox" required="required" name="chk[]" checked="checked"/></td>
                                 <td>
                                     {!! Form::label('input_testcase',Lang::get('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
                                     {!! Form::textarea('input_testcase[]',old('input_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
@@ -83,24 +81,22 @@
                                     {!! Form::label('output_testcase',Lang::get('module.problems.fields.testCases.output_testcase'), ['class' => 'control-label']) !!}
                                     {!! Form::textarea('output_testcase[]',old('output_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
                                 </td>
-                                </p>
                             </tr>
+                            @endfor
                             </tbody>
                         </table>
-                    @endfor
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('testcase',Lang::get('module.problems.fields.testCases.title'), ['class' => 'control-label']) !!}
                     &nbsp;&nbsp;
-                    <button type="button" class="btn btn-success" id="add[]" onclick="addRow('dataTable')">Add</button>
+                    <input type="button" class="btn btn-success" id="addmorePOIbutton" value="Add"onclick="insRow()"/>
                     &nbsp;
-                    <button type="button" class="btn btn-success" id="remove[]" onclick="deleteRow('dataTable')">
-                        Remove
-                    </button>
+                    <input type="button" class="btn btn-success" id="delPOIbutton" value="Delete" onclick="deleteRow(this)"/>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('code_snippet',Lang::get('module.problems.fields.code_snippet'), ['class' => 'control-label']) !!}

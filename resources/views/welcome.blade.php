@@ -14,6 +14,7 @@
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fonts/ionicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fonts/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
     <!-- Styles -->
     <style>
         html, body {
@@ -48,7 +49,7 @@
 
         .links > a:hover {
             padding: 15px;
-            background-color: #56c6c6;
+            background-color:#ffeb41;
             -webkit-border-radius: 25px;
             -moz-border-radius: 25px;
             border-radius: 25px;
@@ -70,15 +71,12 @@
 
     <div class="content">
         <div class="jumbotron hero"
-             style="background-image:url({{ URL::asset('images/background.jpg') }});height:640px;">
+             style="background-color: #5bc2ce;height:640px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-md-push-7 phone-preview">
-                        <div class="iphone-mockup"></div>
-                    </div>
-                    <div class="col-md-8 col-md-pull-5 get-it">
-                        <h1>FCI-H Online Judge</h1>
-                        <p>Easy Communication between Instructors and Students</p>
+                    <div class="col-md-10 get-it">
+                        <h1 style="font-family:'Droid Sans', monospace; text-transform: uppercase; letter-spacing: 1px;">FCI-H Online Judge</h1>
+                        <h2>Easy Communication between Instructors and Students</h2>
                     </div>
                 </div>
             </div>

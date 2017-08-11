@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use Illuminate\Http\Request;
 use App\Quiz;
+use App\QuestionsOption;
 class QuestionController extends Controller
 {
     /**

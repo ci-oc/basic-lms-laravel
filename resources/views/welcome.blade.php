@@ -1,4 +1,4 @@
-        <!doctype html>
+<!doctype html>
 <html lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
@@ -7,13 +7,14 @@
 
     <title>Laravel</title>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="{{asset('fonts/opensans.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('fonts/oswald.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{asset('css/bars/bootstrap.min.css')}}">
     <link href="{{ asset('css/Features-Clean.css') }}" rel="stylesheet">
     <link href="{{ asset('css/team-box.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fonts/ionicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fonts/font-awesome.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <style>
         html, body {
@@ -61,7 +62,7 @@
     @if (Route::has('login'))
         <div class="top-right links">
             @if (Auth::check())
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/dashboard') }}">Home</a>
             @else
                 <a href="{{ url('/login') }}">Login</a>
             @endif
@@ -102,14 +103,17 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row icon-features">
-                            <div class="col-xs-4 icon-feature"><i class="fa fa-code"
-                                                                  style="width:60px;height:60px;font-size:60px;margin-bottom:5px;"></i>
+                            <div class="col-xs-4 icon-feature">
+                                <i class="fa fa-file-code-o"
+                                   style="width:60px;height:60px;font-size:60px;margin-bottom:5px;"></i>
                                 <p>Several progrramming languages</p>
                             </div>
-                            <div class="col-xs-4 icon-feature"><i class="glyphicon glyphicon-floppy-save"></i>
+                            <div class="col-xs-4 icon-feature"><i class="fa fa-floppy-o"
+                                                                  style="width:60px;height:60px;font-size:60px;margin-bottom:5px;"></i>
                                 <p>Memory complexity</p>
                             </div>
-                            <div class="col-xs-4 icon-feature"><i class="glyphicon glyphicon-hourglass"></i>
+                            <div class="col-xs-4 icon-feature"><i class="fa-clock-o"
+                                                                  style="width:60px;height:60px;font-size:60px;margin-bottom:5px;"></i>
                                 <p>Time complexity</p>
                             </div>
                         </div>

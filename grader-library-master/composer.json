@@ -1,0 +1,32 @@
+{
+  "name": "yusufs/grader",
+  "type": "library",
+  "description": "Online judge",
+  "keywords": [
+    "online judge",
+    "grader",
+    "acm judge",
+    "online judge php",
+    "laravel judge"
+    ],
+  "homepage": "https://github.com/yusufs/grader",
+  "license": "MIT",
+  "authors": [
+  {
+    "name": "Yusuf Syaifudin",
+    "email": "yusuf.syaifudin@gmail.com",
+    "homepage": "http://yusyaif.com/"
+ }
+ ],
+ "require": {
+    "php": ">=5.4.0"
+    },
+    "require-dev": {
+      "symfony/filesystem": "2.5.6"
+      },
+      "autoload": {
+        "psr-0": {
+          "Yusufs": "src/"
+       }
+    }
+ }

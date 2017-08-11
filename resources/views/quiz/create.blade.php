@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('title',Lang::get('module.quizzes.fields.quiz'),['class' => 'control-label']) !!}
-                    {!! Form::text('title', old('title'), ['class' => 'form-control ','placeholder' => 'Type Quiz Name']) !!}
+                    {!! Form::text('title', old('title'), ['class' => 'form-control ','placeholder' => '']) !!}
                     @if($errors->has('title'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('title') }}

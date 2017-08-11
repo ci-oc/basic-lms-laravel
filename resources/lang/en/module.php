@@ -11,7 +11,11 @@ return [
     'edit' => 'Edit',
     'view' => 'View',
     'update' => 'Update',
+    'addnew' => 'Add New',
+    'delete' => 'Delete',
     'list' => 'List',
+    'back_to_list' => 'Back to list',
+    'are_you_sure' => 'Are you sure?',
     'description' => 'Description',
     'submit_quiz' => 'Submit answers',
     'results' => [
@@ -106,14 +110,14 @@ return [
             'problem_grade' => 'Problem Grade',
             'input_format' => 'Input Format',
             'output_format' => 'Output Format',
-            'test_cases' => 'Test Cases',
+            'test_cases' => 'Test Cases  ( Please separate inputs by hitting enter, and same for output ):',
             'code_snippet' => 'Code Snippet',
             'more_info_link' => 'More Info Link',
             'selected_quiz' => 'Select Quiz',
             'testCases' => [
                 'input_testcase' => 'Input',
                 'output_testcase' => 'Output',
-                'title' => 'Test Case: '
+                'title' => 'Test Case'
             ]
         ]
 

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Quiz;
 class QuizController extends Controller
 {
     /**
@@ -23,7 +24,12 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quiz.create');
+        $user_id = Auth::id();
+        $relations = [
+            'courses' => \App\Course::with('instructors')->join('user_courses', 'course_id',
+                '=', 'user_courses.course_id')->where('user_id', '=', $user_id)->get()->pluck('title', 'id')->prepend('Please select', ''),
+        ];
+        return view('quiz.create', $relations);
     }
 
     /**
@@ -34,7 +40,8 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        print_r($request->all());
+        Quiz::create($request->all());
     }
 
     /**

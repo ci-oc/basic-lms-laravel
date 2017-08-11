@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('grade', Lang::get('module.questions.fields.grade'), ['class' => 'control-label']) !!}
-                    {!! Form::input('number','grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step' => '0.5']) !!}
+                    {!! Form::input('number','grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('option2'))
                         <p class="help-block">

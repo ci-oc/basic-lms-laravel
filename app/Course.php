@@ -13,4 +13,9 @@ class Course extends Model
     {
         return $this->belongsToMany('App\User', 'user_courses')->withTimestamps();
     }
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class, 'course_id')->withTrashed();
+    }
 }

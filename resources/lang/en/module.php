@@ -86,7 +86,7 @@ return [
             'access_code' => 'Access Code',
             'desc' => 'Description',
             'excel' => 'Excel Sheet :',
-            'assistant_professor' => 'Assistant Professor',
+            'assistant_professor' => 'Assistant Professor-Email ( Please separate by coma if they are many )',
         ],
     ],
     'results' => [
@@ -107,6 +107,7 @@ return [
         'sidebar_problems' => 'Problems',
         'sidebar_questions' => 'MCQ Questions',
         'sidebar_results' => 'Results',
+        'sidebar_new_users' => 'Request New Users'
     ],
     'problems' => [
         'problems-list' => 'Problems List',
@@ -127,7 +128,16 @@ return [
             ]
         ]
 
+    ],
+    'users' => [
+        'new-users' => 'Add new user form',
+        'new-users-excel' => 'Excel Sheet Registration',
+    ],
+    'placeholders' => [
+        'name' => 'Name',
+        'email' => 'E-mail',
+        'college-id' => 'College ID',
 
-    ]
+    ],
 
 ];

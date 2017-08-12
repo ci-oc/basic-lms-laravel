@@ -115,6 +115,14 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_questions')</span></a>
 
                         </li>
+
+                        <li class="{{ $request->segment(1) == 'users' ? 'active' : '' }}"><a
+                                    href="{{route('users.create')}}"><i
+                                        class="fa fa-users fa-fw">
+                                    <div class="icon-bg bg-orange"></div>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_new_users')</span></a>
+
+                        </li>
                         <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
                                         class="fa fa-bar-chart-o fa-fw">
                                     <div class="icon-bg bg-orange"></div>

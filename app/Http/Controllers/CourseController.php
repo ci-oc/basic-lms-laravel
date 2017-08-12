@@ -57,35 +57,6 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        $file = $this->generateFileName() . '.xlsx';
-        $request->file('file')->storeAs('images', $file);
-        $data = Excel::load('storage/app/images/' . $file)->get();
-        if (!empty($data) && $data->count()) {
-            foreach ($data as $key => $value) {
-                $insert[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
-            }
-            print_r($insert);
-        }
-        $failed_to_create = array();
-        foreach ($insert as $insertion) {
-            $non_encrypted_password = str_random(10);
-            $password = Hash::make($non_encrypted_password);
-            try {
-                User::create([
-                    'name' => $insertion['name'],
-                    'email' => $insertion['email'],
-                    'password' => $password,
-                    'college_id' => $insertion['id']
-                ]);
-
-            } catch (\Illuminate\Database\QueryException $e) {
-                $failed_to_create[] = [
-                    'name' => $insertion['name'],
-                    'email' => $insertion['email'],
-                    'college_id' => $insertion['id']
-                ];
-            }
-        }
         $courses = $request->all();
         $user = User::find(Auth::id());
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();

@@ -136,7 +136,7 @@ return [
     'placeholders' => [
         'name' => 'Name',
         'email' => 'E-mail',
-        'college-id' => 'College ID',
+        'college-id' => 'College-id',
 
     ],
 

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Traits\FileUploadTrait;
 
 class DefaultUserController extends Controller
 {
+    use FileUploadTrait;
+
     /**
      * DefaultUserController constructor.
      */
@@ -46,62 +47,54 @@ class DefaultUserController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->has('file')) {
-            $file = $this->generateFileName() . '.xlsx';
-            $path = 'storage/app/users_excel_sheets/';
-            $request->file('file')->storeAs('users_excel_sheets', $file);
-            $data = Excel::load($path . $file)->get();
-            if (!empty($data) && $data->count()) {
-                foreach ($data as $key => $value) {
-                    $data[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
-                }
-            }
-            $failed_to_create = array();
-            foreach ($data as $datum) {
-                $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
-                $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                try {
-                    User::create([
-                        'name' => $datum['name'],
-                        'email' => $datum['email'],
-                        'password' => $password,
-                        'college_id' => $datum['id']
-                    ]);
+        if ($request->has('file')) {
+            $data = $this->saveFiles($request);
+            if ($data !== 0) {
+                $failed_to_create = array();
+                foreach ($data as $datum) {
+                    $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
+                    $password = Hash::make($non_encrypted_password); //Encrypting this password.
+                    try {
+                        $user = new User();
+                        $user->create([
+                            'name' => $datum['name'],
+                            'email' => $datum['email'],
+                            'password' => $password,
+                            'college_id' => $datum['id']
+                        ]);
 
-                } catch (\Illuminate\Database\QueryException $e) {
-                    $failed_to_create[] = [
-                        'name' => $datum['name'],
-                        'email' => $datum['email'],
-                        'college_id' => $datum['id']
-                    ];
-                    return $failed_to_create;
+                    } catch (\Illuminate\Database\QueryException $e) {
+                        $failed_to_create[] = [
+                            'name' => $datum['name'],
+                            'email' => $datum['email'],
+                            'college_id' => $datum['id']
+                        ];
+                    }
                 }
+                return redirect('users/create')->with('data', $failed_to_create);
+            } else {
+                return redirect('users/create')->with('failed_saving_file');
             }
-            return redirect()->route('users.create');
         } else {
             $failed_to_create = array();
             try {
                 $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                 $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                User::create([
+                $user = new User();
+                $user->create([
                     'name' => $request->input('name'),
                     'email' => $request->input('email'),
                     'password' => $password,
                     'college_id' => $request->input('college_id'),
                 ]);
-                return redirect()->route('users.create');
             } catch (\Illuminate\Database\QueryException $e) {
                 $failed_to_create[] = [$request->all()];
-                return $failed_to_create;
             }
+            return redirect('users/create')->with('data', $failed_to_create);
+
         }
     }
 
-    public function generateFileName()
-    {
-        $time = Carbon::now();
-        return (string)$time->toDateTimeString();
-    }
 
     /**
      * Display the specified resource.
@@ -109,7 +102,8 @@ class DefaultUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -120,7 +114,8 @@ class DefaultUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -132,7 +127,8 @@ class DefaultUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -143,7 +139,8 @@ class DefaultUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }

@@ -3,7 +3,7 @@
     <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
     </div>
     <h3 class="page-title">@lang('module.courses.title')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['courses.store']]) !!}
+    {!! Form::open(['method' => 'POST', 'route' => ['courses.store'],'files'=> true, 'enctype' => 'multipart/form-data'])!!}
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.create')
@@ -33,15 +33,15 @@
                 </div>
             </div>
             {{--<div class="row">--}}
-                {{--<div class="col-xs-12 form-group">--}}
-                    {{--{!! Form::label('assistant-professor', Lang::get('module.courses.fields.assistant_professor'), ['class' => 'control-label']) !!}--}}
-                    {{--{!! Form::text('assistant_professor', old('assistant_professor'), ['class' => 'form-control ', 'placeholder' => '']) !!}--}}
-                    {{--@if($errors->has('assistant_professor'))--}}
-                        {{--<p class="help-block alert-danger">--}}
-                            {{--{{ $errors->first('assistant_professor') }}--}}
-                        {{--</p>--}}
-                    {{--@endif--}}
-                {{--</div>--}}
+            {{--<div class="col-xs-12 form-group">--}}
+            {{--{!! Form::label('assistant-professor', Lang::get('module.courses.fields.assistant_professor'), ['class' => 'control-label']) !!}--}}
+            {{--{!! Form::text('assistant_professor', old('assistant_professor'), ['class' => 'form-control ', 'placeholder' => '']) !!}--}}
+            {{--@if($errors->has('assistant_professor'))--}}
+            {{--<p class="help-block alert-danger">--}}
+            {{--{{ $errors->first('assistant_professor') }}--}}
+            {{--</p>--}}
+            {{--@endif--}}
+            {{--</div>--}}
             {{--</div>--}}
             <div class="row">
                 <div class="col-xs-12 form-group">
@@ -56,7 +56,7 @@
                 </div>
             </div>
             {!! Form::label('excel-sheet', Lang::get('module.courses.fields.excel'), ['class' => 'control-label']) !!}
-            {!! Form::file('file', null) !!}
+            {!! Form::file('file', null,['class' => 'close fileupload-exists']) !!}
             @if($errors->has('file'))
                 <p class="help-block alert-danger">
                     {{ $errors->first('file') }}
@@ -66,6 +66,7 @@
 
     </div>
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' ,'data-value' => 'shake']) !!}
+    {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
     {!! Form::close() !!}
     <script>
         function shake() {

@@ -23,11 +23,15 @@
                                     <div class="pricingContent">
                                         <ul>
                                             <li><strong>{{$course->description}}</strong></li>
-                                            @foreach ($course->quizzes as $quiz)
-                                                <li style="background-color:rgb(239,239,237);"><a
-                                                            href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
-                                                </li>
-                                            @endforeach
+                                            @if(count($course->quizzes) > 0)
+                                                @foreach ($course->quizzes as $quiz)
+                                                    <li style="background-color:rgb(239,239,237);"><a
+                                                                href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <li style="background-color:rgb(239,239,237);">@lang('module.courses.no-quizzes')</li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <div class="pricingTable-sign-up">
@@ -42,7 +46,7 @@
                 </div>
             </div>
         @else
-            <h1 class="display-1">No entries found.</h1>
+            <h1 class="display-1">@lang('module.no_entries_in_table')</h1>
         @endif
     @else
 

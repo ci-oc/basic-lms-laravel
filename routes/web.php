@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('quizzes', 'QuizController');
     Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@profile']);
     Route::resource('courses', 'CourseController');
+    Route::post('courses/importExcel', ['uses' => 'CourseController@importExcel', 'as' => 'courses.importExcel']);
     Route::resource('user', 'UserController');
     Route::resource('role', 'RoleController');
     Route::resource('results', 'ResultController');

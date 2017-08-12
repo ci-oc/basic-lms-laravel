@@ -15,6 +15,7 @@ return [
     'update' => 'Update',
     'addnew' => 'Add New',
     'delete' => 'Delete',
+    'reset' => 'Reset',
     'list' => 'List',
     'back_to_list' => 'Back to list',
     'are_you_sure' => 'Are you sure?',
@@ -33,6 +34,7 @@ return [
     'no_entries_in_table' => 'No entries in table',
     'questions' => [
         'title' => 'Assign Questions',
+        'question-list' => 'Questions List',
         'fields' => [
             'quiz' => 'Quiz',
             'question-text' => 'Question text',
@@ -77,6 +79,7 @@ return [
     ],
     'courses' => [
         'relation-title' => 'Course',
+        'no-quizzes' => 'No Quizzes Created',
         'title' => 'New Course',
         'fields' => [
             'course' => 'Course Title',

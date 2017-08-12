@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Permission;
+
 class PermissionTableSeeder extends Seeder
 {
     /**
@@ -48,6 +49,16 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Access to create a new quiz'
             ],
             [
+                'name' => 'edit-quiz',
+                'display_name' => 'Edit Quiz',
+                'description' => 'Access to edit quiz'
+            ],
+            [
+                'name' => 'edit-question',
+                'display_name' => 'Edit Question',
+                'description' => 'Access to edit quiz'
+            ],
+            [
                 'name' => 'join-course',
                 'display_name' => 'Join Course',
                 'description' => 'Access to join existing course'
@@ -62,6 +73,7 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'Solve Quiz',
                 'description' => 'Access to solve quiz for existing course'
             ],
+
 
         ];
 

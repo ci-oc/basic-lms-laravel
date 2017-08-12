@@ -1,11 +1,11 @@
 @extends('layouts.sidebar')
 @section('content')
+    <p>
     <a href="{{route('problems.create')}}"
        class="btn btn-success create_btn {{ count($problems) > 0 ? 'datatable' : '' }} dt-select">
         Add New
     </a>
-    <br>
-    <br>
+    </p>
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.problems.problems-list')

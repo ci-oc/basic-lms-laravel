@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Course;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class CourseController extends Controller
 {
@@ -47,14 +49,43 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    public function generateFileName()
+    {
+        $time = Carbon::now();
+        return (string)$time->toDateTimeString();
+    }
+
     public function store(Request $request)
     {
-//        $this->validate($request, [
-//            'access_code' => 'required|min:5|',
-//            'assistant_professor' => 'required|max:100|min:5|',
-//            'title' => 'required|max:100|min:5|',
-//            'description' => 'required|min:5|',
-//        ]);
+        $file = $this->generateFileName() . '.xlsx';
+        $request->file('file')->storeAs('images', $file);
+        $data = Excel::load('storage/app/images/' . $file)->get();
+        if (!empty($data) && $data->count()) {
+            foreach ($data as $key => $value) {
+                $insert[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
+            }
+            print_r($insert);
+        }
+        $failed_to_create = array();
+        foreach ($insert as $insertion) {
+            $non_encrypted_password = str_random(10);
+            $password = Hash::make($non_encrypted_password);
+            try {
+                User::create([
+                    'name' => $insertion['name'],
+                    'email' => $insertion['email'],
+                    'password' => $password,
+                    'college_id' => $insertion['id']
+                ]);
+
+            } catch (\Illuminate\Database\QueryException $e) {
+                $failed_to_create[] = [
+                    'name' => $insertion['name'],
+                    'email' => $insertion['email'],
+                    'college_id' => $insertion['id']
+                ];
+            }
+        }
         $courses = $request->all();
         $user = User::find(Auth::id());
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
@@ -63,7 +94,6 @@ class CourseController extends Controller
             return redirect()->route('courses.index');
         } else
             return redirect()->route('courses.create')->withInput();
-
     }
 
     /**

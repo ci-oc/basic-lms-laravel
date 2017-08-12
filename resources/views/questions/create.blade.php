@@ -14,7 +14,7 @@
                     {!! Form::label('quiz_id', Lang::get('module.quizzes.create-questions-title'), ['class' => 'control-label']) !!}
                     <select class="form-control" name="quiz_id">
                             @foreach($quizzes as $quiz)
-                                <option value="{{$quiz->id}}">{{$quiz->title}}</option>
+                                <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
                             @endforeach
                     </select>
                     @if($errors->has('quiz_id'))
@@ -161,5 +161,6 @@
     </div>
 
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
+    {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
     {!! Form::close() !!}
 @endsection

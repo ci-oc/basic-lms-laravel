@@ -124,6 +124,7 @@
             <br>
             <br>
             {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
+            {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
             {!! Form::close() !!}
         </div>
     </div>

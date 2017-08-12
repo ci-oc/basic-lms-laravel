@@ -35,7 +35,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('questions', $questions);
             $view->with('problems', $problems);
         });
-        Schema::defaultStringLength(191);
     }
 
     /**

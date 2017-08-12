@@ -14,7 +14,8 @@ class QuizController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   return view('quiz.index');
+    {
+        return view('quiz.index');
     }
 
     /**
@@ -24,8 +25,6 @@ class QuizController extends Controller
      */
     public function create()
     {
-        $user_id = Auth::id();
-
         return view('quiz.create');
     }
 
@@ -38,7 +37,7 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         Quiz::create($request->all());
-        route('quizzes.index');
+        return redirect()->route('quizzes.index');
     }
 
     /**

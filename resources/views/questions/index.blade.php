@@ -7,7 +7,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('module.list')
+            @lang('module.questions.question-list')
         </div>
 
         <div class="panel-body">

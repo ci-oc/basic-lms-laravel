@@ -22,7 +22,7 @@ class CreateQuizzesTable extends Migration
             $table->time('duration');
             $table->timestamp('start_date')->useCurrent();
             $table->timestamp('end_date')->useCurrent();
-            $table->float('full_mark')->default(0.0);
+            $table->float('full_mark')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

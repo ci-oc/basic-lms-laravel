@@ -29,8 +29,8 @@ class CourseController extends Controller
 
     public function index()
     {
-
-        return view('instructor.courses.index');
+        $colors = ['#4CAF50', '#2196F3', '#ff9800', '#f44336', '#e7e7e7'];
+        return view('instructor.courses.index', compact('colors'));
     }
 
     /**
@@ -49,12 +49,6 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function generateFileName()
-    {
-        $time = Carbon::now();
-        return (string)$time->toDateTimeString();
-    }
-
     public function store(Request $request)
     {
         $courses = $request->all();

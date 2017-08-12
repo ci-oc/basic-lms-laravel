@@ -22,9 +22,9 @@ class AppServiceProvider extends ServiceProvider
     {
 
         View::composer('*', function ($view) {
-            $all_courses = Course::all()->load('instructors');
+            $all_courses = Course::all()->load('users');
             $quizzes = Quiz::all()->load('questions');
-            $courses = User::filterByUser(Auth::id(), $all_courses, 'instructors');
+            $courses = User::filterByUser(Auth::id(), $all_courses, 'users');
             $courses_id = Course::retrieveId($courses);
             $quizzes = Quiz::filterByCourse($courses_id, $quizzes);
             $questions = Question::separateQuestionTypes($quizzes,'MCQ');

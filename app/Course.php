@@ -9,7 +9,7 @@ class Course extends Model
     //
     protected $fillable = ['access_code', 'title', 'description'];
 
-    public function instructors()
+    public function users()
     {
         return $this->belongsToMany('App\User', 'user_courses')
             ->withTimestamps();

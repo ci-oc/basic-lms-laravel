@@ -15,7 +15,8 @@
                         @foreach($courses as $course)
                             <div class="col-md-4 col-sm-4" style="margin-top: 10px;">
                                 <div class="pricingTable">
-                                    <div class="pricingTable-header" style="background-color:rgb(182,150,233);">
+                                    <div class="pricingTable-header"
+                                         style="background-color:{{$colors[random_int(0,3)]}};">
                                         <h3 style="color:rgb(255,254,254);">{{$course->title}}</h3><span
                                                 style=" color:rgb(55,55,55);font-size:14px;
                         ">{{$course->access_code}}</span>

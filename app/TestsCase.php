@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestsCase extends Model
 {
-    //
+    protected $fillable = ['question_id', 'input', 'output'];
 }

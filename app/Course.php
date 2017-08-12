@@ -17,6 +17,15 @@ class Course extends Model
 
     public function quizzes()
     {
-        return $this->hasMany(Quiz::class, 'course_id')->withTrashed();
+        return $this->hasMany(Quiz::class, 'course_id');
+    }
+
+    public static function retrieveId($data)
+    {
+        $courses_id = array();
+        for ($i = 0; $i < count($data); $i++) {
+            $courses_id[$i] = $data[$i]->id;
+        }
+        return $courses_id;
     }
 }

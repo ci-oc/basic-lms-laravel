@@ -20,6 +20,7 @@ class CreateUserProblemTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id', 'fk_256_user_problem_id_user')->references('id')->on('users')->onDelete('cascade');
             $table->text('user_code');
+            $table->decimal('plagiarism', 5, 2);
             $table->float('grade')->default(0.0);
             $table->timestamps();
         });

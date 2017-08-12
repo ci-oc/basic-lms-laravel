@@ -10,7 +10,11 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('selected_course',Lang::get('module.quizzes.course-title'), ['class' =>'control-label']) !!}
-                    {!! Form::select('course_id', $courses, old('course_id'), ['class' => 'form-control']) !!}
+                    <select class="form-control" name="course_id">
+                        @foreach($courses as $course)
+                            <option value="{{$course->id}}">{{$course->title}}</option>
+                        @endforeach
+                    </select>
                     @if($errors->has('selected_course'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('selected_course') }}

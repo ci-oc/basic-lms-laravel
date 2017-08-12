@@ -7,6 +7,8 @@
  */
 return [
     'create' => 'Create',
+    'created_at' => 'Created At',
+    'operations' => 'Operations',
     'save' => 'Save',
     'edit' => 'Edit',
     'view' => 'View',
@@ -74,6 +76,7 @@ return [
         ],
     ],
     'courses' => [
+        'relation-title' => 'Course',
         'title' => 'New Course',
         'fields' => [
             'course' => 'Course Title',

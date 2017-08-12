@@ -10,9 +10,10 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('selected_quiz',Lang::get('module.problems.fields.selected_quiz'), ['class' => 'control-label']) !!}
-                    <select class="form-control">
-                        <option>5ra</option>
-                        <option>nela</option>
+                    <select class="form-control" name="quiz_id">
+                        @foreach($quizzes as $quiz)
+                                <option value="{{$quiz->id}}">{{$quiz->title}}</option>
+                        @endforeach
                     </select>
                     @if($errors->has('problem_description'))
                         <p class="help-block alert-danger">
@@ -24,22 +25,22 @@
 
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('problem_description',Lang::get('module.problems.fields.problem_desc'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('problem_description', old('problem_description'), ['class' => 'form-control ', 'placeholder' => 'Type Problem Description','resize' => 'none']) !!}
-                    @if($errors->has('problem_description'))
+                    {!! Form::label('question_text',Lang::get('module.problems.fields.problem_desc'), ['class' => 'control-label']) !!}
+                    {!! Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => 'Type Problem Description','resize' => 'none']) !!}
+                    @if($errors->has('question_text'))
                         <p class="help-block alert-danger">
-                            {{ $errors->first('problem_description') }}
+                            {{ $errors->first('question_text') }}
                         </p>
                     @endif
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('problem_grade',Lang::get('module.problems.fields.problem_grade'), ['class' => 'control-label']) !!}
-                    {!! Form::number('problem_grade', old('problem_grade'), ['class' => 'form-control ', 'placeholder' => 'Type Problem Grade',]) !!}
-                    @if($errors->has('problem_grade'))
+                    {!! Form::label('grade',Lang::get('module.problems.fields.problem_grade'), ['class' => 'control-label']) !!}
+                    {!! Form::number('grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '',]) !!}
+                    @if($errors->has('grade'))
                         <p class="help-block alert-danger">
-                            {{ $errors->first('problem_grade') }}
+                            {{ $errors->first('grade') }}
                         </p>
                     @endif
                 </div>
@@ -69,9 +70,9 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('test_cases',Lang::get('module.problems.fields.test_cases'), ['class' => 'control-label']) !!}
-                        <table id="dataTable" class="table">
-                            <tbody>
-                            @for($i=0; $i<3; $i++)
+                    <table id="dataTable" class="table">
+                        <tbody>
+                        @for($i=0; $i<3; $i++)
                             <tr>
                                 <td>
                                     {!! Form::label('input_testcase',Lang::get('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
@@ -82,18 +83,19 @@
                                     {!! Form::textarea('output_testcase[]',old('output_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
                                 </td>
                             </tr>
-                            @endfor
-                            </tbody>
-                        </table>
+                        @endfor
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('testcase',Lang::get('module.problems.fields.testCases.title'), ['class' => 'control-label']) !!}
                     &nbsp;&nbsp;
-                    <input type="button" class="btn btn-success" id="addmorePOIbutton" value="Add"onclick="insRow()"/>
+                    <input type="button" class="btn btn-success" id="addmorePOIbutton" value="Add" onclick="insRow()"/>
                     &nbsp;
-                    <input type="button" class="btn btn-success" id="delPOIbutton" value="Delete" onclick="deleteRow(this)"/>
+                    <input type="button" class="btn btn-success" id="delPOIbutton" value="Delete"
+                           onclick="deleteRow(this)"/>
                 </div>
             </div>
             <br>

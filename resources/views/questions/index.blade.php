@@ -14,10 +14,10 @@
             <table class="table table-bordered table-striped {{ count($questions) > 0 ? 'datatable' : '' }} dt-select">
                 <thead>
                 <tr>
-                    <th style="text-align:center;"><input type="checkbox" id="select-all"/></th>
+                    <th>@lang('module.courses.relation-title')</th>
                     <th>@lang('module.questions.fields.quiz')</th>
                     <th>@lang('module.questions.fields.question-text')</th>
-                    <th>&nbsp;</th>
+                    <th>@lang('module.operations')</th>
                 </tr>
                 </thead>
 
@@ -25,7 +25,7 @@
                 @if (count($questions) > 0)
                     @foreach ($questions as $question)
                         <tr data-entry-id="{{ $question->id }}">
-                            <td></td>
+                            <td>{{ $question->quiz->course->title }}</td>
                             <td>{{ $question->quiz->title or '' }}</td>
                             <td>{!! $question->question_text !!}</td>
                             <td>
@@ -34,11 +34,11 @@
                                 <a href="{{ route('questions.edit',[$question->id]) }}"
                                    class="btn btn-xs btn-info">@lang('module.edit')</a>
                                 {!! Form::open(array(
-                                    'style' => 'display: inline-block;',
-                                    'method' => 'DELETE',
-                                    'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                    'route' => ['questions.destroy', $question->id])) !!}
-                                {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                'style' => 'display: inline-block;',
+                                'method' => 'DELETE',
+                                'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
+                                'route' => ['questions.destroy', $question->id])) !!}
+                                {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>

@@ -25,10 +25,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::id();
-        $questions = Question::all();
-
-        return view('questions.index', compact('questions'));
+        return view('questions.index');
     }
 
     /**
@@ -38,10 +35,6 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $relations = [
-            'quizzes' => Quiz::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
-
         $correct_options = [
             'option1' => 'Option #1',
             'option2' => 'Option #2',
@@ -49,7 +42,7 @@ class QuestionController extends Controller
             'option4' => 'Option #4',
             'option5' => 'Option #5'
         ];
-        return view('questions.create', compact('correct_options') + $relations);
+        return view('questions.create', compact('correct_options'));
     }
 
     /**
@@ -101,7 +94,9 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::findOrFail($id);
+        return view('questions.edit', compact('question'));
+
     }
 
     /**
@@ -113,7 +108,10 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $question->update($request->all());
+
+        return redirect()->route('questions.index');
     }
 
     /**

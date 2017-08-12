@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\TestsCase;
 use Illuminate\Http\Request;
+use App\Question;
 
 class ProblemController extends Controller
 {
@@ -21,7 +23,9 @@ class ProblemController extends Controller
      */
     public function index()
     {
-        return view('problems.index');
+        $all_questions = Question::all();
+        $questions = Question::separateQuestionTypes($all_questions, 'JUDGE');
+        return view('problems.index', compact('questions'));
     }
 
     /**
@@ -38,18 +42,28 @@ class ProblemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
+        $question = Question::create($request->all());
+        $input_test_cases = $request->input('input_testcase');
+        $output_test_cases = $request->input('output_testcase');
+        for ($i = 0; $i < count($input_test_cases); $i++) {
+            TestsCase::create([
+                'question_id' => $question->id,
+                'input' => $input_test_cases[$i],
+                'output' => $output_test_cases[$i],
+            ]);
+        }
+        return redirect()->route('problems.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +74,7 @@ class ProblemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,8 +85,8 @@ class ProblemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,7 +97,7 @@ class ProblemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

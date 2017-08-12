@@ -23,13 +23,11 @@
                                     <div class="pricingContent">
                                         <ul>
                                             <li><strong>{{$course->description}}</strong></li>
-                                            <li style="background-color:rgb(239,239,237);"><a href="index.html">quiz
-                                                    2</a>
-                                            </li>
-                                            <li><a href="index.html">quiz 3</a></li>
-                                            <li style="background-color:rgb(239,239,237);"><a href="index.html">quiz
-                                                    4</a>
-                                            </li>
+                                            @foreach ($course->quizzes as $quiz)
+                                                <li style="background-color:rgb(239,239,237);"><a
+                                                            href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="pricingTable-sign-up">

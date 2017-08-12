@@ -27,10 +27,8 @@ class CourseController extends Controller
 
     public function index()
     {
-        $user_id = Auth::id();
-        $all_courses = Course::all()->load('instructors');
-        $courses = User::filterByUser($user_id, $all_courses, 'instructors');
-        return view('instructor.courses.index', compact('courses'));
+
+        return view('instructor.courses.index');
     }
 
     /**

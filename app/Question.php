@@ -24,4 +24,29 @@ class Question extends Model
     {
         return $this->hasMany(QuestionsOption::class, 'question_id')->withTrashed();
     }
+
+    public function testcases()
+    {
+        return $this->hasMany(TestsCase::class, 'question_id')->withTrashed();
+    }
+
+    public static function separateQuestionTypes($quizzes, $type)
+    {
+        $type_questions = array();
+        for ($k = 0; $k < count($quizzes); $k++) {
+            for ($j = 0; $j < count($quizzes[$k]['questions']); $j++) {
+                if ($type == 'MCQ') {
+                    if ($quizzes[$k]['questions'][$j]['input_format'] == null) {
+                        $type_questions[] = $quizzes[$k]['questions'][$j];
+
+                    }
+                } else {
+                    if ($quizzes[$k]['questions'][$j]['input_format'] !== null) {
+                        $type_questions[] = $quizzes[$k]['questions'][$j];
+                    }
+                }
+            }
+        }
+        return $type_questions;
+    }
 }

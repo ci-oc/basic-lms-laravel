@@ -25,7 +25,7 @@ class DefaultUserController extends Controller
      */
     public function index()
     {
-
+        return redirect()->route('users.create');
     }
 
     /**

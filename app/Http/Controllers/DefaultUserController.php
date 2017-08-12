@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DefaultUserController extends Controller
 {
@@ -44,10 +46,11 @@ class DefaultUserController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->has('file')) {
+        if (!$request->has('file')) {
             $file = $this->generateFileName() . '.xlsx';
-            $request->file('file')->storeAs('images', $file);
-            $data = Excel::load('storage/app/images/' . $file)->get();
+            $path = 'storage/app/users_excel_sheets/';
+            $request->file('file')->storeAs('users_excel_sheets', $file);
+            $data = Excel::load($path . $file)->get();
             if (!empty($data) && $data->count()) {
                 foreach ($data as $key => $value) {
                     $data[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
@@ -66,13 +69,12 @@ class DefaultUserController extends Controller
                     ]);
 
                 } catch (\Illuminate\Database\QueryException $e) {
-//                    $failed_to_create[] = [
-//                        'name' => $datum['name'],
-//                        'email' => $datum['email'],
-//                        'college_id' => $datum['id']
-//                    ];
-//                    return $failed_to_create;
-                    return $e;
+                    $failed_to_create[] = [
+                        'name' => $datum['name'],
+                        'email' => $datum['email'],
+                        'college_id' => $datum['id']
+                    ];
+                    return $failed_to_create;
                 }
             }
             return redirect()->route('users.create');

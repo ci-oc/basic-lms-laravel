@@ -15,9 +15,10 @@ trait FileUploadTrait
             $file = $this->generateFileName() . '.xlsx';
             $path = 'storage/app/users_excel_sheets/';
             $request->file('file')->storeAs('users_excel_sheets', $file);
-            $data = Excel::load($path . $file)->get();
-            if (!empty($data) && $data->count()) {
-                foreach ($data as $key => $value) {
+            $excel_data = Excel::load($path . $file)->get();
+            $data = array();
+            if (!empty($excel_data) && $excel_data->count()) {
+                foreach ($excel_data as $key => $value) {
                     $data[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
                 }
             }

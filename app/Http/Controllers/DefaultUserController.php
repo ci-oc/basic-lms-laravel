@@ -36,7 +36,7 @@ class DefaultUserController extends Controller
      */
     public function create()
     {
-        return view('newuser');
+        return view('student.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class DefaultUserController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->has('file')) {
+        if ($request->hasFile('file')) {
             $data = $this->saveFiles($request);
             if ($data !== 0) {
                 $failed_to_create = array();
@@ -62,7 +62,6 @@ class DefaultUserController extends Controller
                             'password' => $password,
                             'college_id' => $datum['id']
                         ]);
-
                     } catch (\Illuminate\Database\QueryException $e) {
                         $failed_to_create[] = [
                             'name' => $datum['name'],
@@ -88,7 +87,7 @@ class DefaultUserController extends Controller
                     'college_id' => $request->input('college_id'),
                 ]);
             } catch (\Illuminate\Database\QueryException $e) {
-                $failed_to_create[] = [$request->all()];
+                $failed_to_create[] = $request->all();
             }
             return redirect('users/create')->with('data', $failed_to_create);
 

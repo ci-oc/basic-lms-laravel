@@ -110,7 +110,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('full_mark', Lang::get('module.quizzes.fields.full-mark'), ['class' => 'control-label']) !!}
-                    {!! Form::input('number','full_mark', old('grade'), ['required','class' => 'form-control ', 'placeholder' => '','step' => '0.5']) !!}
+                    {!! Form::input('number','full_mark', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step' => '0.5']) !!}
                     @if($errors->has('full_mark'))
                         <p class="help-block">
                             {{ $errors->first('full_mark') }}
@@ -123,6 +123,7 @@
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' , 'onmouseover' => 'assign_date()']) !!}
     {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
     {!! Form::close() !!}
+
 @endsection
 @section('javascript')
     <script type="text/javascript">
@@ -139,5 +140,17 @@
             document.getElementById('hidden_input_start').value = start_date_time;
             document.getElementById('hidden_input_end').value = end_date_time;
         }
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+
+        $('.timepicker').datetimepicker({
+
+            format: 'HH:mm:ss'
+
+        });
+
     </script>
 @endsection

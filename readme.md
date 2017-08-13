@@ -40,4 +40,4 @@ In case of receiving any of these two errors
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 ## Database Demo Data
 Please click the link below.
-- [Database Data Demo](https://drive.google.com/open?id=0B7tstgwobtR9dEs2bmpHRVZNbE0)
+- [Database Data Demo](https://drive.google.com/file/d/0B7tstgwobtR9dEs2bmpHRVZNbE0/view?usp=sharing)

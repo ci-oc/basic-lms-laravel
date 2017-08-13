@@ -18,3 +18,5 @@
 <script src="{{asset('js/bars/jquery.menu.js')}}"></script>
 <script src="{{asset('js/bars/responsive-tabs.js')}}"></script>
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>

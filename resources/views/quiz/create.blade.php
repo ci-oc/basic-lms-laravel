@@ -1,5 +1,7 @@
 @extends('layouts.sidebar')
 @section('content')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
     <h3 class="page-title">@lang('module.quizzes.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' =>['quizzes.store']]) !!}
     <div class="panel panel-default">
@@ -121,6 +123,8 @@
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' , 'onmouseover' => 'assign_date()']) !!}
     {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
     {!! Form::close() !!}
+@endsection
+@section('javascript')
     <script type="text/javascript">
         function assign_date() {
             var start_date = document.getElementById('start_date').value;
@@ -135,22 +139,5 @@
             document.getElementById('hidden_input_start').value = start_date_time;
             document.getElementById('hidden_input_end').value = end_date_time;
         }
-    </script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript">
-
-        $('.timepicker').datetimepicker({
-
-            format: 'HH:mm:ss'
-
-        });
-
     </script>
 @endsection

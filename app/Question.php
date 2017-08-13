@@ -30,19 +30,18 @@ class Question extends Model
         return $this->hasMany(TestsCase::class, 'question_id');
     }
 
-    public static function separateQuestionTypes($quizzes, $type)
+    public static function separateQuestionTypes($collections, $type)
     {
         $type_questions = array();
-        for ($k = 0; $k < count($quizzes); $k++) {
-            for ($j = 0; $j < count($quizzes[$k]['questions']); $j++) {
+        foreach ($collections as $collection) {
+            foreach ($collection as $question) {
                 if ($type == 'MCQ') {
-                    if ($quizzes[$k]['questions'][$j]['input_format'] == null) {
-                        $type_questions[] = $quizzes[$k]['questions'][$j];
-
+                    if ($question['input_format'] == null) {
+                        $type_questions[] = $question;
                     }
                 } else {
-                    if ($quizzes[$k]['questions'][$j]['input_format'] !== null) {
-                        $type_questions[] = $quizzes[$k]['questions'][$j];
+                    if ($question['input_format'] !== null) {
+                        $type_questions[] = $question;
                     }
                 }
             }

@@ -23,9 +23,7 @@ class ProblemController extends Controller
      */
     public function index()
     {
-        $all_questions = Question::all();
-        $questions = Question::separateQuestionTypes($all_questions, 'JUDGE');
-        return view('problems.index', compact('questions'));
+        return view('problems.index');
     }
 
     /**

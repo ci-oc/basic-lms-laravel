@@ -22,13 +22,21 @@ class AppServiceProvider extends ServiceProvider
     {
 
         View::composer('*', function ($view) {
-            $all_courses = Course::all()->load('users');
-            $quizzes = Quiz::all()->load('questions.options', 'questions.testcases');
-            $courses = User::filterByUser(Auth::id(), $all_courses, 'users');
-            $courses_id = Course::retrieveId($courses);
-            $quizzes = Quiz::filterByCourse($courses_id, $quizzes);
-            $questions = Question::separateQuestionTypes($quizzes, 'MCQ');
-            $problems = Question::separateQuestionTypes($quizzes, 'JUDGE');
+            $user = User::find(Auth::id())->load('courses.quizzes.questions.options', 'courses.quizzes.questions.testcases');
+            $courses = $user['courses'];
+            $quizzes = array();
+            foreach ($courses as $course) {
+                if ($course['quizzes']->first() !== null)
+                    foreach ($course['quizzes'] as $quiz)
+                        $quizzes[] = $quiz;
+            }
+            $all_type_questions = array();
+            foreach ($quizzes as $quiz) {
+                if ($quiz['questions'] != null)
+                    $all_type_questions[] = $quiz['questions'];
+            }
+            $questions = Question::separateQuestionTypes($all_type_questions, 'MCQ');
+            $problems = Question::separateQuestionTypes($all_type_questions, 'JUDGE');
             $view->with('auth', Auth::user());
             $view->with('courses', $courses);
             $view->with('quizzes', $quizzes);

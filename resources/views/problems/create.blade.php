@@ -12,7 +12,7 @@
                     {!! Form::label('selected_quiz',Lang::get('module.problems.fields.selected_quiz'), ['class' => 'control-label']) !!}
                     <select class="form-control" name="quiz_id">
                         @foreach($quizzes as $quiz)
-                                <option value="{{$quiz->id}}">{{$quiz->title}}</option>
+                                <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
                         @endforeach
                     </select>
                     @if($errors->has('problem_description'))

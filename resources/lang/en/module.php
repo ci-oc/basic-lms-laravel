@@ -33,6 +33,7 @@ return [
     ],
     'no_entries_in_table' => 'No entries in table',
     'questions' => [
+        'name' => 'Question',
         'title' => 'Assign Questions',
         'question-list' => 'Questions List',
         'fields' => [
@@ -56,6 +57,7 @@ return [
             'more-info-link' => 'More info link',
             'input-format' => 'Input Format',
             'output-format' => 'Output Format',
+            'grade' => 'Mark(s)'
         ],
     ],
     'quizzes' => [
@@ -63,6 +65,7 @@ return [
         'course-title' => 'Select Course',
         'title' => 'New Quiz',
         'quizzes-list' => 'Quizzes List',
+        'solve' => 'Solve',
         'fields' => [
             'full-mark' => "Full Mark",
             'quiz' => 'Quiz Title',
@@ -112,6 +115,9 @@ return [
     'problems' => [
         'problems-list' => 'Problems List',
         'new_problem' => 'New Problem',
+        'example-input' => 'Example Input',
+        'example-output' => 'Example Output',
+        'code' => 'Code',
         'fields' => [
             'problem_desc' => 'Problem Description',
             'problem_grade' => 'Problem Grade',

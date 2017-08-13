@@ -16,7 +16,7 @@
                     @if($errors->has('access_code'))
                         <p class="help-block alert-danger" data-value="shake">
                             {{ $errors->first('access_code') }}
-                            <?php echo '<script type="text/javascript">shake();</script>'; ?>
+
                         </p>
                     @endif
                 </div>
@@ -58,9 +58,11 @@
         </div>
 
     </div>
-    {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' ,'data-value' => 'shake']) !!}
-    {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
+    {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' ,'data-value' => 'shake', 'onclick' => 'shake()']) !!}
+    {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary']) }}
     {!! Form::close() !!}
+@endsection
+@section('javascript')
     <script>
         function shake() {
             $(document).ready(function () {

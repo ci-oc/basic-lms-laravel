@@ -13,14 +13,16 @@
     <h3 class="page-title">@lang('module.quizzes.solve')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
     <div class="panel panel-default">
-        <div class="panel-heading">
-            @lang('module.quizzes.title')
-        </div>
         <?php $i = 1;?>
         @if ( count($questions) > 0)
             @foreach($questions as $question)
                 @if(count($question) > 0)
                     @if($question->quiz_id == $id)
+                        @if ($i == 1)
+                                <div class="panel-heading">
+                                    {{$question->quiz->course->title}} - {{ $question->quiz->title }}
+                                </div>
+                        @endif
                         @if ($i > 1)
                             <hr/>
                         @endif
@@ -93,7 +95,7 @@
                                         <?php $count++;?>
                                     @endforeach
                                     {!! Form::label('user_code',Lang::get('module.problems.code'), ['class' => 'control-label']) !!}
-                                    {!! Form::textarea('user_code', old('user_code'), ['class' => 'form-control ','resize' => 'none','rows' => '6']) !!}
+                                    {!! Form::textarea('user_code', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;']) !!}
                                 </div>
                                 <div class="col-sm-4">
                                     <strong>{!! nl2br($problem->grade) !!} @lang('module.questions-options.fields.grade')</strong>

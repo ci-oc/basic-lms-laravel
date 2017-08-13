@@ -7,9 +7,7 @@ use App\Course;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -53,16 +51,13 @@ class CourseController extends Controller
     {
         $this->validate($request, [
             'access_code' => 'required|min:5|',
-            'assistant_professor' => 'required|',
             'title' => 'required|max:100|min:5|',
             'description' => 'required|min:5|',
-            'file' => 'required|mimes:xlsx,odf,xls'
         ]);
         $courses = $request->all();
-        $user = User::find(Auth::id());
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
         if ($access_code_exists === null) {
-            Course::create($courses)->instructors()->save($user);
+            Course::create($courses)->users()->attach(Auth::id());
             return redirect()->route('courses.index');
         } else
             return redirect()->route('courses.create')->withInput();

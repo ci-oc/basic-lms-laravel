@@ -136,7 +136,7 @@ return [
 
     ],
     'users' => [
-        'new-users' => 'Signle User Registration',
+        'new-users' => 'Single User Registration',
         'new-users-excel' => 'Excel Sheet Registration',
     ],
     'placeholders' => [

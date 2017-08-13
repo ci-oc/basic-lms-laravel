@@ -49,12 +49,17 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('duration',Lang::get('module.quizzes.fields.duration'), ['class' => 'control-label']) !!}
-                    {!! Form::text('duration', old('duration'), ['required','class' => 'timepicker form-control ','placeholder' => '','type' => 'text']) !!}
-                    @if($errors->has('duration'))
-                        <p class="help-block alert-danger">
-                            {{ $errors->first('duration') }}
-                        </p>
-                    @endif
+                    <div class='input-group time timepicker'>
+                        {!! Form::text('duration', old('duration'), ['required','class' => 'form-control ','placeholder' => '','type' => 'text']) !!}
+                        <span class="input-group-addon">
+           <i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                        </span>
+                        @if($errors->has('duration'))
+                            <p class="help-block alert-danger">
+                                {{ $errors->first('duration') }}
+                            </p>
+                        @endif
+                    </div>
                 </div>
             </div>
             {!! Form::label('start_date',Lang::get('module.quizzes.fields.start-date'), ['class' => 'control-label']) !!}
@@ -63,8 +68,8 @@
                     <div class='input-group date' id='datetimepicker3'>
                         {!! Form::input('text','start_date', old('start_date'), ['class' => 'form-control ', 'placeholder' => '','type' => 'text']) !!}
                         <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
+           <i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </span>
                     </div>
 
                     @if($errors->has('start_date'))
@@ -73,27 +78,20 @@
                         </p>
                     @endif
                 </div>
-                <br>
-                <br>
             </div>
             {!! Form::label('end_date',Lang::get('module.quizzes.fields.end-date'), ['class' => 'control-label']) !!}
             <div class="row">
-                <div class="col-xs-6 form-group">
-                    {!! Form::date('end_date', old('end_date'), ['required','class' => 'form-control ','id' => 'end_date']) !!}
+                <div class="col-xs-12 form-group">
+                    <div class='input-group date' id='datetimepicker4'>
+                        {!! Form::input('text','end_date', old('end_date'), ['class' => 'form-control ', 'placeholder' => '','type' => 'text']) !!}
+                        <span class="input-group-addon">
+            <i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </span>
+                    </div>
+
                     @if($errors->has('end_date'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('end_date') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('full_mark', Lang::get('module.quizzes.fields.full-mark'), ['class' => 'control-label']) !!}
-                    {!! Form::input('number','full_mark', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step' => '0.5']) !!}
-                    @if($errors->has('full_mark'))
-                        <p class="help-block">
-                            {{ $errors->first('full_mark') }}
                         </p>
                     @endif
                 </div>
@@ -119,9 +117,17 @@
 
     </script>
     <script type="text/javascript">
+        var dateToday = new Date();
         $(function () {
             $('#datetimepicker3').datetimepicker({
-                language: 'pt-BR'
+                format: 'YYYY-MM-DD HH:mm:ss',
+                minDate: dateToday
+            });
+        });
+        $(function () {
+            $('#datetimepicker4').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss',
+                minDate: dateToday
             });
         });
     </script>

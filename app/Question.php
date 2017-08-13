@@ -22,12 +22,12 @@ class Question extends Model
 
     public function options()
     {
-        return $this->hasMany(QuestionsOption::class, 'question_id')->withTrashed();
+        return $this->hasMany(QuestionsOption::class, 'question_id');
     }
 
     public function testcases()
     {
-        return $this->hasMany(TestsCase::class, 'question_id')->withTrashed();
+        return $this->hasMany(TestsCase::class, 'question_id');
     }
 
     public static function separateQuestionTypes($quizzes, $type)

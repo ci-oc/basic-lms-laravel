@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Quiz;
 
-class QuizController extends Controller
+class SolveQuizController extends Controller
 {
     /**
-     * QuizController constructor.
+     * SolveQuizController constructor.
      */
     public function __construct()
     {
-        $this->middleware('role:instructor', ['only' => ['show']]);
+        $this->middleware('role:student');
     }
 
     /**
@@ -23,7 +21,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('quiz.index');
+        //
     }
 
     /**
@@ -33,7 +31,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quiz.create');
+        //
     }
 
     /**
@@ -44,8 +42,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        Quiz::create($request->all());
-        return redirect()->route('quizzes.index');
+        //
     }
 
     /**
@@ -56,7 +53,7 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        return view('quiz.show', compact('id'));
+        //
     }
 
     /**

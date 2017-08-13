@@ -1,10 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
     <p>
-    <a href="{{route('problems.create')}}"
-       class="btn btn-success create_btn {{ count($problems) > 0 ? 'datatable' : '' }} dt-select">
-        Add New
-    </a>
+        <a href="{{route('problems.create')}}"
+           class="btn btn-success create_btn">
+            Add New
+        </a>
     </p>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="panel-body">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="{{ count($problems) > 0 ? 'datatable' : '' }}">
                 <thead>
                 <tr>
                     <th>@lang('module.courses.relation-title')</th>
@@ -54,4 +54,11 @@
             </table>
         </div>
     </div>
+@endsection
+@section('javascript')
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+        });
+    </script>
 @endsection

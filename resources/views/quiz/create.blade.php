@@ -1,7 +1,5 @@
 @extends('layouts.sidebar')
 @section('content')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
-          rel="stylesheet">
     <h3 class="page-title">@lang('module.quizzes.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' =>['quizzes.store']]) !!}
     <div class="panel panel-default">

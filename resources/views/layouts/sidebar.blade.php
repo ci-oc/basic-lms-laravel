@@ -208,5 +208,6 @@
 </div>
 @include('layouts.javascript')
 <!--CORE JAVASCRIPT-->
+@yield('javascript')
 </body>
 </html>

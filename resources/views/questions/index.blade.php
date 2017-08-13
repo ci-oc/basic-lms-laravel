@@ -11,7 +11,7 @@
         </div>
 
         <div class="panel-body">
-            <table class="table table-bordered table-striped {{ count($questions) > 0 ? 'datatable' : '' }} dt-select">
+            <table class="table table-bordered table-striped" id="{{ count($questions) > 0 ? 'datatable' : '' }}">
                 <thead>
                 <tr>
                     <th>@lang('module.courses.relation-title')</th>
@@ -57,5 +57,10 @@
 @section('javascript')
     <script>
         window.route_mass_crud_entries_destroy = '{{ route('questions.massDestroy') }}';
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+        });
     </script>
 @endsection

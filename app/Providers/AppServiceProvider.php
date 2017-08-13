@@ -23,11 +23,11 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('*', function ($view) {
             $all_courses = Course::all()->load('users');
-            $quizzes = Quiz::all()->load('questions');
+            $quizzes = Quiz::all()->load('questions.options', 'questions.testcases');
             $courses = User::filterByUser(Auth::id(), $all_courses, 'users');
             $courses_id = Course::retrieveId($courses);
             $quizzes = Quiz::filterByCourse($courses_id, $quizzes);
-            $questions = Question::separateQuestionTypes($quizzes,'MCQ');
+            $questions = Question::separateQuestionTypes($quizzes, 'MCQ');
             $problems = Question::separateQuestionTypes($quizzes, 'JUDGE');
             $view->with('auth', Auth::user());
             $view->with('courses', $courses);

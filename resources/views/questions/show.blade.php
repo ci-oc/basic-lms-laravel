@@ -22,7 +22,7 @@
                         </tr>
                         <tr>
                             <th>@lang('module.questions.fields.code-snippet')</th>
-                            <td>{!! $question->code_snippet !!}</td>
+                            <td><pre>{!! $question->code_snippet !!}</pre></td>
                         </tr>
                         <tr>
                             <th>@lang('module.questions.fields.answer-explanation')</th>

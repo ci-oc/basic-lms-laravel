@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('results', 'ResultController');
     Route::resource('problems', 'ProblemController');
     Route::resource('users', 'DefaultUserController');
+    Route::resource('solve', 'SolveQuizController');
     Route::resource('questions', 'QuestionController');
     Route::post('questions/massDestroy', ['uses' => 'QuestionController@massDestroy', 'as' => 'questions.massDestroy']);
     Route::get('/admin', [

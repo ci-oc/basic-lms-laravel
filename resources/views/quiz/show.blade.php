@@ -19,9 +19,9 @@
                 @if(count($question) > 0)
                     @if($question->quiz_id == $id)
                         @if ($i == 1)
-                                <div class="panel-heading">
-                                    {{$question->quiz->course->title}} - {{ $question->quiz->title }}
-                                </div>
+                            <div class="panel-heading">
+                                {{$question->quiz->course->title}} - {{ $question->quiz->title }}
+                            </div>
                         @endif
                         @if ($i > 1)
                             <hr/>
@@ -73,7 +73,7 @@
                                     @endif
                                     <input
                                             type="hidden"
-                                            name="questions[{{ $i }}]"
+                                            name="problems[{{ $i }}]"
                                             value="{{ $problem->id }}">
                                     <?php $count = 1?>
                                     <strong>@lang('module.problems.fields.input_format')

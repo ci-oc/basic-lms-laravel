@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UsersQuiz;
+use Illuminate\Support\Facades\Auth;
+use App\QuestionsOption;
+use App\UsersAnswer;
 
 class SolveQuizController extends Controller
 {
@@ -11,7 +15,6 @@ class SolveQuizController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:student');
     }
 
     /**
@@ -42,7 +45,31 @@ class SolveQuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result = 0;
+
+        $test = UsersQuiz::create([
+            'user_id' => Auth::id(),
+            'grade' => $result,
+        ]);
+
+        foreach ($request->input('questions', []) as $key => $question) {
+            $status = 0;
+
+            if ($request->input('answers.' . $question) != null
+                && QuestionsOption::find($request->input('answers.' . $question))->correct
+            ) {
+                $status = 1;
+                $result++;
+            }
+            UsersAnswer::create([
+                'user_id' => Auth::id(),
+                'question_id' => $question,
+                'option_id' => $request->input('answers.' . $question),
+                'correct' => $status,
+            ]);
+        }
+
+        $test->update(['grade' => $result]);
     }
 
     /**

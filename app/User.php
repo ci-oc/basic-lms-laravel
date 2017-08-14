@@ -73,20 +73,14 @@ class User extends Authenticatable
         return false;
     }
 
-    public static function filterByUser($id, $data, $filterByKeyword)
-    {
-        $return_data = array();
-        foreach ($data as $datum) {
-            foreach ($datum->$filterByKeyword as $user)
-                if ($user->id == $id)
-                    $return_data[] = $datum;
-        }
-        return $return_data;
-    }
-
     public function courses()
     {
-        return $this-> belongsToMany('App\Course','user_courses');
+        return $this->belongsToMany('App\Course', 'user_courses');
+    }
+
+    public function quizzes()
+    {
+        return $this->belongsToMany('App\UsersQuiz', 'user_quiz');
     }
 
 }

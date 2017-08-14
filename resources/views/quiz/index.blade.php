@@ -25,23 +25,24 @@
                 <tbody>
                 @if (count($quizzes) > 0)
                     @foreach ($quizzes as $quiz)
+                        <?php $available = strtotime($quiz->start_date) < time() && time() < strtotime($quiz->end_date) ? true : false ?>
                         <tr data-entry-id="{{ $quiz->id }}">
                             <td>{{ $quiz->title or '' }}</td>
                             <td>{!! $quiz->course->title !!}</td>
                             <td>{{ $quiz->created_at }}</td>
                             <td>
                                 <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                   class="btn btn-xs btn-primary {{ strtotime($quiz->start_date) < time() && time() < strtotime($quiz->end_date)? '' : 'disabled'}}">@lang('module.view')</a>
+                                   class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
                                 @if(Auth::user()->isInstructor())
-                                <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
-                                   class="btn btn-xs btn-info {{ strtotime($quiz->start_date) < time() && time() < strtotime($quiz->end_date)? '' : 'disabled'}}">@lang('module.edit')</a>
-                                {!! Form::open(array(
-                                'style' => 'display: inline-block;',
-                                'method' => 'DELETE',
-                                'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                'route' => ['quizzes.destroy', $quiz->id])) !!}
-                                {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                {!! Form::close() !!}
+                                    <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
+                                       class="btn btn-xs btn-info {{ $available ? '' : 'disabled'}}">@lang('module.edit')</a>
+                                    {!! Form::open(array(
+                                    'style' => 'display: inline-block;',
+                                    'method' => 'DELETE',
+                                    'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
+                                    'route' => ['quizzes.destroy', $quiz->id])) !!}
+                                    {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
                                 @endif
                             </td>
                         </tr>

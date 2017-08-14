@@ -110,7 +110,6 @@ class QuestionController extends Controller
     {
         $question = Question::findOrFail($id);
         $question->update($request->all());
-
         return redirect()->route('questions.index');
     }
 

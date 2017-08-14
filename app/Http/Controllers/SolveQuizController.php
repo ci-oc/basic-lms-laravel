@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\UsersProblemAnswer;
 use Illuminate\Http\Request;
 use App\UsersQuiz;
 use Illuminate\Support\Facades\Auth;
 use App\QuestionsOption;
 use App\UsersAnswer;
+use App\Question;
+use Mockery\Exception;
+use Yusufs\Grader;
 
 class SolveQuizController extends Controller
 {
@@ -46,29 +50,60 @@ class SolveQuizController extends Controller
     public function store(Request $request)
     {
         $result = 0;
-
         $test = UsersQuiz::create([
             'user_id' => Auth::id(),
+            'quiz_id' => $request->input('quiz_id'),
             'grade' => $result,
         ]);
+//
+//        foreach ($request->input('questions', []) as $key => $question) {
+//            $status = 0;
+//
+//            if ($request->input('answers.' . $question) != null
+//                && QuestionsOption::find($request->input('answers.' . $question))->correct
+//            ) {
+//                $status = 1;
+//                $result++;
+//            }
+//            UsersAnswer::create([
+//                'user_id' => Auth::id(),
+//                'question_id' => $question,
+//                'option_id' => $request->input('answers.' . $question),
+//                'correct' => $status,
+//            ]);
+//        }
 
-        foreach ($request->input('questions', []) as $key => $question) {
-            $status = 0;
-
-            if ($request->input('answers.' . $question) != null
-                && QuestionsOption::find($request->input('answers.' . $question))->correct
-            ) {
-                $status = 1;
-                $result++;
-            }
-            UsersAnswer::create([
+        $problems = array();
+        $grade = 0;
+        foreach ($request->input('problems', []) as $key => $problem) {
+            $problems[] = Question::find($problem)->load('testcases');
+            UsersProblemAnswer::create([
                 'user_id' => Auth::id(),
-                'question_id' => $question,
-                'option_id' => $request->input('answers.' . $question),
-                'correct' => $status,
+                'problem_id' => $problem,
+                'user_code' => $request->input('user_code.' . $problem),
+                'grade' => $grade,
             ]);
         }
+        foreach ($problems as $problem) {
+            $lang = $request->input('code_language.' . $problem->id);
+            try {
+                $user_code = Grader::saveScript($lang, $request->input('user_code.' . $problem->id));
+                if ($user_code['success'] == 1) {
+                    $user_code_filename = $user_code['detail']['filename'];
+                    $user_code_path = public_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
+                    $compilation_output = Grader::compile($user_code_filename);
+                    $compilation_status = $compilation_output['detail']['reason'];
+                    if ($compilation_status == 'compiled') {
+                        foreach ($problem->testcases as $testcase) {
 
+                        }
+                    }
+                    unlink($user_code_path);
+                }
+            } catch (Exception $e) {
+
+            }
+        }
         $test->update(['grade' => $result]);
     }
 

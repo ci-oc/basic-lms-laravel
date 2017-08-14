@@ -14,6 +14,7 @@
     {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
     <div class="panel panel-default">
         <?php $i = 1;?>
+        {{ Form::hidden('quiz_id', $id, array('id' => 'quiz_id')) }}
         @if ( count($questions) > 0)
             @foreach($questions as $question)
                 @if(count($question) > 0)
@@ -94,8 +95,14 @@
                                         <hr>
                                         <?php $count++;?>
                                     @endforeach
+                                    <select class="selectpicker" name="code_language[{{$problem->id}}]">
+                                        <option value="c">GNU GCC</option>
+                                        <option value="cpp">GNU G++</option>
+                                    </select>
+                                    <br>
+                                    <br>
                                     {!! Form::label('user_code',Lang::get('module.problems.code'), ['class' => 'control-label']) !!}
-                                    {!! Form::textarea('user_code', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;']) !!}
+                                    {!! Form::textarea('user_code['.$problem->id .']', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;']) !!}
                                 </div>
                                 <div class="col-sm-4">
                                     <strong>{!! nl2br($problem->grade) !!} @lang('module.questions-options.fields.grade')</strong>

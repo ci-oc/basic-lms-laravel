@@ -26,7 +26,7 @@
                 @if (count($quizzes) > 0)
                     @foreach ($quizzes as $quiz)
                         <?php $available = strtotime($quiz->start_date) < time() && time() < strtotime($quiz->end_date) ? true : false ?>
-                        <tr data-entry-id="{{ $quiz->id }}">
+                        <tr data-entry-id="{{ $quiz->id }}" style="{{ $available ? 'background-color: #d6f5d6 !important;' : '' }}">
                             <td>{{ $quiz->title or '' }}</td>
                             <td>{!! $quiz->course->title !!}</td>
                             <td>{{ $quiz->created_at }}</td>

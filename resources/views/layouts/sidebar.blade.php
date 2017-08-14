@@ -42,7 +42,7 @@
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="{{ route('profile') }}"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a href="{{ route('profile.index') }}"><i class="fa fa-user"></i>My Profile</a></li>
                             <li class="divider"></li>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -199,7 +199,7 @@
             <!--BEGIN FOOTER-->
             <div id="footer">
                 <div class="copyright">
-                    <a href="http://themifycloud.com">2017 © FCI-H Module</a></div>
+                    <a href="#">2017 © FCI-H Module</a></div>
             </div>
             <!--END FOOTER-->
         </div>

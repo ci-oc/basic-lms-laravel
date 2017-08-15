@@ -12,6 +12,7 @@
     <title>{{ ucfirst($request->segment(1)) }}</title>
     <!-- Styles -->
     @include('layouts.css')
+    @yield('css')
 </head>
 <body>
 <div>

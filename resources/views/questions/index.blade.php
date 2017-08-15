@@ -24,6 +24,7 @@
                 <tbody>
                 @if (count($questions) > 0)
                     @foreach ($questions as $question)
+                        <?php $available = strtotime($question->quiz->start_date) < time() && time() < strtotime($question->quiz->end_date) ? true : false ?>
                         <tr data-entry-id="{{ $question->id }}">
                             <td>{{ $question->quiz->course->title }}</td>
                             <td>{{ $question->quiz->title or '' }}</td>
@@ -32,14 +33,16 @@
                                 <a href="{{ route('questions.show',[$question->id]) }}"
                                    class="btn btn-xs btn-primary">@lang('module.view')</a>
                                 <a href="{{ route('questions.edit',[$question->id]) }}"
-                                   class="btn btn-xs btn-info">@lang('module.edit')</a>
-                                {!! Form::open(array(
-                                'style' => 'display: inline-block;',
-                                'method' => 'DELETE',
-                                'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                'route' => ['questions.destroy', $question->id])) !!}
-                                {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                {!! Form::close() !!}
+                                   class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
+                                @if(!$available)
+                                    {!! Form::open(array(
+                                    'style' => 'display: inline-block;',
+                                    'method' => 'DELETE',
+                                    'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
+                                    'route' => ['questions.destroy', $question->id])) !!}
+                                    {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                @endif
                             </td>
                         </tr>
                     @endforeach

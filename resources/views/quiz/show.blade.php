@@ -1,5 +1,6 @@
 @extends('layouts.sidebar')
 @section('content')
+    @section('css')
     <style>
         div.code_snippet {
             margin: 15px 0 5px 0;
@@ -10,6 +11,7 @@
             white-space: pre;
         }
     </style>
+    @endsection
     <h3 class="page-title">@lang('module.quizzes.solve')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
     <div class="panel panel-default">
@@ -115,7 +117,6 @@
             @endforeach
         @endif
     </div>
-
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' , 'onmouseover' => 'assign_date()']) !!}
     {!! Form::close() !!}
 @endsection

@@ -25,6 +25,7 @@
                 <tbody>
                 @if (count($problems) > 0)
                     @foreach ($problems as $problem)
+                        <?php $available = strtotime($problem->quiz->start_date) < time() && time() < strtotime($problem->quiz->end_date) ? true : false ?>
                         <tr data-entry-id="{{ $problem->id }}">
                             <td>{{ $problem->quiz->course->title }}</td>
                             <td>{{ $problem->quiz->title or '' }}</td>
@@ -32,16 +33,18 @@
                             <td>
 
                                 <a href="{{ route('questions.show',[$problem->id]) }}"
-                                   class="btn btn-xs btn-primary">@lang('module.view')</a>
+                                   class="btn btn-xs btn-primary {{ $available ? 'disabled' : ''}}">@lang('module.view')</a>
                                 <a href="{{ route('questions.edit',[$problem->id]) }}"
-                                   class="btn btn-xs btn-info">@lang('module.edit')</a>
-                                {!! Form::open(array(
-                                    'style' => 'display: inline-block;',
-                                    'method' => 'DELETE',
-                                    'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                    'route' => ['questions.destroy', $problem->id])) !!}
-                                {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                {!! Form::close() !!}
+                                   class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
+                                @if(!$available)
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
+                                        'route' => ['questions.destroy', $problem->id])) !!}
+                                    {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                @endif
                             </td>
                         </tr>
                     @endforeach

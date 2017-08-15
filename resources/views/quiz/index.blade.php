@@ -17,6 +17,8 @@
                 <tr>
                     <th>@lang('module.quizzes.fields.quiz')</th>
                     <th>@lang('module.courses.fields.course')</th>
+                    <th>@lang('module.quizzes.fields.start-date')</th>
+                    <th>@lang('module.quizzes.fields.end-date')</th>
                     <th>@lang('module.created_at')</th>
                     <th>@lang('module.operations')</th>
                 </tr>
@@ -29,6 +31,8 @@
                         <tr data-entry-id="{{ $quiz->id }}" style="{{ $available ? 'background-color: #d6f5d6 !important;' : '' }}">
                             <td>{{ $quiz->title or '' }}</td>
                             <td>{!! $quiz->course->title !!}</td>
+                            <td>{!! $quiz->start_date !!}</td>
+                            <td>{!! $quiz->end_date !!}</td>
                             <td>{{ $quiz->created_at }}</td>
                             <td>
                                 <a href="{{ route('quizzes.show',[$quiz->id]) }}"

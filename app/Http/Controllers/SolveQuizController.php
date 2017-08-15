@@ -89,7 +89,7 @@ class SolveQuizController extends Controller
         }
         foreach ($problems as $problem) {
             $lang = $request->input('code_language.' . $problem->id);
-            if ($problem->testcases > 0) {
+            if (count($problem->testcases) > 0) {
                 try {
                     $user_code = Grader::saveScript($lang, $request->input('user_code.' . $problem->id));
                     if ($user_code['success'] == 1) {

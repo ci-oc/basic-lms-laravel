@@ -17,4 +17,7 @@
 <script src="{{asset('js/bars/jquery.cookie.js')}}"></script>
 <script src="{{asset('js/bars/jquery.menu.js')}}"></script>
 <script src="{{asset('js/bars/responsive-tabs.js')}}"></script>
-<script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/dataTables.bootstrap4.js"></script>

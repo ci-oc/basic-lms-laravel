@@ -152,6 +152,16 @@ return [
     'success' => [
         'success-saving' => 'User(s) created successfully.'
     ],
-
+    'judge_options' => [
+        'title' => 'Judge Options to keep in mind while applying your test cases to scripts.',
+        'options' => [
+            'i' => 'Ignore case differences in file contents',
+            'E' => 'Ignore changes due to tab expansion',
+            'Z' => 'Ignore white space at line end',
+            'b' => 'Ignore changes in the amount of white space',
+            'B' => 'Ignore changes where lines are all blank',
+            'w' => 'Ignore all white space'
+        ]
+    ]
 
 ];

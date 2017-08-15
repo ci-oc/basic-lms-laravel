@@ -30,6 +30,11 @@ class Question extends Model
         return $this->hasMany(TestsCase::class, 'question_id');
     }
 
+    public function judge_options()
+    {
+        return $this->hasMany(ProblemJudgeOptions::class, 'problem_id');
+    }
+
     public static function separateQuestionTypes($collections, $type)
     {
         $type_questions = array();

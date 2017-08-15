@@ -121,8 +121,15 @@
                     @endif
                 </div>
             </div>
-            <br>
-            <br>
+            <div class="form-group text-left">
+                {!! Form::label('judge_options',Lang::get('module.judge_options.title'), ['class' => 'control-label']) !!}
+                <br>
+                @foreach($judge_options as $option)
+                    <input type="checkbox" name="judge_options[]"
+                           value="{{$option->id}}"> @lang('module.judge_options.options.' . $option->description)
+                    <br>
+                @endforeach
+            </div>
             {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
             {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
             {!! Form::close() !!}

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\JudgeOptions;
+use App\ProblemJudgeOptions;
 use App\TestsCase;
 use Illuminate\Http\Request;
 use App\Question;
@@ -33,8 +35,8 @@ class ProblemController extends Controller
      */
     public function create()
     {
-        //
-        return view('problems.create');
+        $judge_options = JudgeOptions::all();
+        return view('problems.create', compact('judge_options'));
     }
 
     /**
@@ -48,11 +50,18 @@ class ProblemController extends Controller
         $question = Question::create($request->all());
         $input_test_cases = $request->input('input_testcase');
         $output_test_cases = $request->input('output_testcase');
+        $judge_options = $request->input('judge_options');
         for ($i = 0; $i < count($input_test_cases); $i++) {
             TestsCase::create([
                 'question_id' => $question->id,
                 'input' => $input_test_cases[$i],
                 'output' => $output_test_cases[$i],
+            ]);
+        }
+        for ($i = 0; $i < count($judge_options); $i++) {
+            ProblemJudgeOptions::create([
+                'problem_id' => $question->id,
+                'judge_id' => $judge_options[$i],
             ]);
         }
         return redirect()->route('problems.index');

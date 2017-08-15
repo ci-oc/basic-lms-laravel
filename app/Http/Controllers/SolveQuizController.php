@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\FileUploadTrait;
 use App\UsersProblemAnswer;
 use Illuminate\Http\Request;
 use App\UsersQuiz;
@@ -14,6 +15,8 @@ use Yusufs\Grader;
 
 class SolveQuizController extends Controller
 {
+    use FileUploadTrait;
+
     /**
      * SolveQuizController constructor.
      */
@@ -86,22 +89,41 @@ class SolveQuizController extends Controller
         }
         foreach ($problems as $problem) {
             $lang = $request->input('code_language.' . $problem->id);
-            try {
-                $user_code = Grader::saveScript($lang, $request->input('user_code.' . $problem->id));
-                if ($user_code['success'] == 1) {
-                    $user_code_filename = $user_code['detail']['filename'];
-                    $user_code_path = public_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
-                    $compilation_output = Grader::compile($user_code_filename);
-                    $compilation_status = $compilation_output['detail']['reason'];
-                    if ($compilation_status == 'compiled') {
-                        foreach ($problem->testcases as $testcase) {
-
+            if ($problem->testcases > 0) {
+                try {
+                    $user_code = Grader::saveScript($lang, $request->input('user_code.' . $problem->id));
+                    if ($user_code['success'] == 1) {
+                        $storage_path = public_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR;
+                        $user_code_filename = $user_code['detail']['filename'];
+                        $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
+                        $compilation_output = Grader::compile($user_code_filename);
+                        $compilation_status = $compilation_output['detail']['reason'];
+                        if ($compilation_status == 'compiled') {
+                            foreach ($problem->testcases as $testcase) {
+                                $testcase_input = Grader::saveInput($testcase->input);
+                                $testcase_input_filename = $testcase_input['detail']['filename'];
+                                $testcase_input_path = $storage_path . 'input' . $testcase_input_filename;
+                                $testcase_correct_output = $this->saveOutput($storage_path, $testcase->output);
+                                if ($testcase_correct_output['success'] == 1 && $testcase_input['success'] == 1) {
+                                    $output_filename = $testcase_correct_output['detail']['filename'];
+                                    $output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $output_filename;
+                                    $run_output = Grader::run($user_code_filename, $testcase_input_filename, 1, 32000);
+                                    $run_output_status = $run_output['detail']['result'];
+                                    if ($run_output_status == 'OK') {
+                                        echo "OK";
+                                    } else {
+                                        echo $run_output_status;
+                                    }
+                                    unlink($testcase_input_path);
+                                    unlink($output_path);
+                                }
+                            }
                         }
+                        unlink($user_code_path);
                     }
-                    unlink($user_code_path);
-                }
-            } catch (Exception $e) {
+                } catch (Exception $e) {
 
+                }
             }
         }
         $test->update(['grade' => $result]);

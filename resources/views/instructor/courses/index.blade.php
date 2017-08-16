@@ -1,5 +1,16 @@
 @extends('layouts.sidebar')
 @section('content')
+
+@section('css')
+    <style>
+        .description{
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
+    </style>
+@endsection
     <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
     @if(Session::has('success'))
         <div class="alert alert-info">
@@ -29,7 +40,11 @@
                                 </div>
                                 <div class="pricingContent">
                                     <ul>
-                                        <li><strong>{{$course->description}}</strong></li>
+                                        <li class="description"><strong>{{$course->description}}</strong></li>
+                                        <br>
+                                        {{ Form::open(['method' => 'POST', 'route' => ['courses.index', $course->id]]) }}
+                                        {{ Form::submit('View Course', ['class' => 'btn btn-primary']) }}
+                                        {{ Form::close() }}
                                         @if(count($course->quizzes) > 0)
                                             @foreach ($course->quizzes as $quiz)
                                                 <li style="background-color:rgb(239,239,237);"><a

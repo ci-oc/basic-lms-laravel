@@ -72,7 +72,7 @@ class DefaultUserController extends Controller
                 }
                 return redirect('users/create')->with('data', $failed_to_create);
             } else {
-                return redirect('users/create')->with('failed_saving_file');
+                return redirect('users/create')->with('failed_saving_file','');
             }
         } else {
             $failed_to_create = array();

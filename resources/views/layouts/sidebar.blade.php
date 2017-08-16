@@ -132,7 +132,7 @@
                         </li>
                         <li class="{{ $request->segment(1) == 'enroll' ? 'active' : '' }}"><a
                                     href="{{ route('enroll.index') }}"><i
-                                        class="fa fa-graduation-cap" aria-hidden="true">
+                                        class="fa fa-plus" aria-hidden="true">
                                     <div class="icon-bg bg-pink"></div>
                                 </i><span class="menu-title">Register Course</span></a>
 

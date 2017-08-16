@@ -149,6 +149,7 @@ return [
     'errors' => [
         'error-saving' => 'There was an error saving your file, please try again.',
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
+        'error-access-code' => 'Invalid Access Code'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.'

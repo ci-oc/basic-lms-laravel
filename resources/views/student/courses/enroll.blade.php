@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('invalid_access_code'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-access-code')</p>
+        </div>
+    @endif
     <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
     @if( count($available_courses ) > 0)
         <div class="row" style="margin-bottom:10px;">
@@ -10,9 +15,7 @@
                             <div class="pricingTable">
                                 <div class="pricingTable-header"
                                      style="background-color:{{$colors[random_int(0,3)]}};">
-                                    <h3 style="color:rgb(255,254,254);">{{$course->title}}</h3><span
-                                            style=" color:rgb(55,55,55);font-size:14px;
-                        ">{{$course->access_code}}</span>
+                                    <h3 style="color:rgb(255,254,254);">{{$course->title}}</h3>
                                 </div>
                                 <div class="pricingContent">
                                     <ul>
@@ -24,12 +27,13 @@
                                             onclick="enroll({{$course->id}})">@lang('module.courses.enroll-course')</button>
                                     <div class="form-group" id="register{{$course->id}}" name="register"
                                          style="display:none;">
-                                        {{ Form::open(['method' => 'POST', 'route' => ['enroll.store', $course->id]]) }}
+                                        {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
                                         <br>
                                         <label for="usr">Access code:</label>
                                         <br>
                                         <br>
-                                        <input type="text" class="form-control" id="accessCode">
+                                        {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
+                                        <input type="text" class="form-control" id="accessCode" name="access_code">
                                         <br>
                                         {{ Form::submit('enroll', ['class' => 'btn btn-info']) }}
                                     </div>
@@ -50,7 +54,7 @@
 @section('javascript')
     <script>
         function enroll(id) {
-                $("#register" + id).toggle(500);
+            $("#register" + id).toggle(500);
         }
     </script>
 @endsection

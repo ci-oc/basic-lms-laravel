@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Course;
+use Illuminate\Support\Facades\Auth;
+
 class RegisterCourseController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class RegisterCourseController extends Controller
     {
         $available_courses = Course::all();
         $colors = ['#4CAF50', '#2196F3', '#ff9800', '#f44336', '#e7e7e7'];
-        return view('student.courses.enroll',compact('available_courses','colors'));
+        return view('student.courses.enroll', compact('available_courses', 'colors'));
     }
 
     /**
@@ -44,7 +46,15 @@ class RegisterCourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = Course::find($request->input('course_id'));
+        if ($request->input('access_code') == $course->access_code) {
+            $user = Auth::user();
+            $course = ['user_id' => $user->id,
+                'course_id' => $request->input('course_id')];
+            $user->courses()->attach($course);
+        } else {
+            return redirect()->back()->with('invalid_access_code','');
+        }
     }
 
     /**

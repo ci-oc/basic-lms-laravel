@@ -85,6 +85,13 @@
                             </i><span class="menu-title">Courses</span></a>
 
                     </li>
+                    <li class="{{ $request->segment(1) == 'enroll' ? 'active' : '' }}"><a
+                                href="{{ route('enroll.index') }}"><i
+                                    class="fa fa-graduation-cap" aria-hidden="true">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">Register Course</span></a>
+
+                    </li>
                     @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
                                     href="{{route('quizzes.index')}}"><i

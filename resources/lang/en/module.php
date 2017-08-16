@@ -152,7 +152,8 @@ return [
         'error-access-code' => 'Invalid Access Code'
     ],
     'success' => [
-        'success-saving' => 'User(s) created successfully.'
+        'success-saving' => 'User(s) created successfully.',
+        'success-course' => 'Course created successfully.',
     ],
     'judge_options' => [
         'title' => 'Judge Options to keep in mind while applying your test cases to scripts.',

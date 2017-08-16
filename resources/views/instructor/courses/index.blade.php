@@ -1,6 +1,11 @@
 @extends('layouts.sidebar')
 @section('content')
     <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
+    @if(Session::has('success'))
+        <div class="alert alert-info">
+            <p>@lang('module.success.success-course')</p>
+        </div>
+    @endif
     @if(Auth::user()->isInstructor())
 
         <a href="{{route('courses.create')}}" class="btn btn-success create_btn">

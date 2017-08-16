@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\UsersCourses;
 use Illuminate\Http\Request;
 use App\Course;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class RegisterCourseController extends Controller
 {
@@ -23,7 +25,10 @@ class RegisterCourseController extends Controller
      */
     public function index()
     {
-        $available_courses = Course::all();
+        $enrolled_courses = Course::select('id')->whereHas('users', function ($q) {
+            return $q->where('user_id', '=', Auth::id());
+        })->pluck('id')->toArray();
+        $available_courses = Course::all()->whereNotIn('id', $enrolled_courses);
         $colors = ['#4CAF50', '#2196F3', '#ff9800', '#f44336', '#e7e7e7'];
         return view('student.courses.enroll', compact('available_courses', 'colors'));
     }
@@ -48,12 +53,12 @@ class RegisterCourseController extends Controller
     {
         $course = Course::find($request->input('course_id'));
         if ($request->input('access_code') == $course->access_code) {
-            $user = Auth::user();
-            $course = ['user_id' => $user->id,
-                'course_id' => $request->input('course_id')];
-            $user->courses()->attach($course);
+            $user = Auth::id();
+            UsersCourses::create(['user_id' => $user,
+                'course_id' => $request->input('course_id')]);
+            return redirect()->route('courses.index');
         } else {
-            return redirect()->back()->with('invalid_access_code','');
+            return redirect()->back()->with('invalid_access_code', '');
         }
     }
 

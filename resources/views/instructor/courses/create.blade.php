@@ -1,5 +1,24 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('failed_instructors'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-create-user')</p>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>@lang('module.placeholders.email')</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach(Session::get('failed_instructors') as $user)
+                    <tr>
+                        <td>{{ $user }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
     <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
     </div>
     <h3 class="page-title">@lang('module.courses.title')</h3>

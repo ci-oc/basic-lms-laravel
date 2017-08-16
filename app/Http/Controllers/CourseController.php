@@ -57,8 +57,24 @@ class CourseController extends Controller
         $courses = $request->all();
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
         if ($access_code_exists === null) {
-            Course::create($courses)->users()->attach(Auth::id());
-            return redirect()->route('courses.index');
+            $instructors = explode(',', $request->input('assistant_professor'));
+            $user_id = Auth::id();
+            $failed_instructors = array();
+            $success_instructors = array();
+            $success_instructors[0] = $user_id;
+            foreach ($instructors as $instructor) {
+                $user = User::where('email', '=', $instructor)->pluck('id');
+                if (count($user) > 0 && $user[0] != $user_id) {
+                    $success_instructors[] = $user[0];
+                } else {
+                    $failed_instructors[] = $instructor;
+                }
+            }
+            Course::create($courses)->users()->attach($success_instructors);
+            if ($failed_instructors == null)
+                return redirect()->route('courses.index')->with('success', '');
+            else
+                return redirect()->back()->with('failed_instructors', $failed_instructors);
         } else
             return redirect()->route('courses.create')->withInput();
     }

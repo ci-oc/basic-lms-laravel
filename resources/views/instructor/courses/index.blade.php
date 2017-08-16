@@ -3,14 +3,11 @@
 
 @section('css')
     <style>
-        .pricingContent{
-            text-overflow: ellipsis;
-            width: 200px;
-            white-space: nowrap;
+        .description{
             overflow: hidden;
-
-            /* for good looks */
-            padding: 10px;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
         }
     </style>
 @endsection
@@ -38,7 +35,11 @@
                                 </div>
                                 <div class="pricingContent">
                                     <ul>
-                                        <li><strong>{{$course->description}}</strong></li>
+                                        <li class="description"><strong>{{$course->description}}</strong></li>
+                                        <br>
+                                        {{ Form::open(['method' => 'POST', 'route' => ['courses.index', $course->id]]) }}
+                                        {{ Form::submit('View Course', ['class' => 'btn btn-primary']) }}
+                                        {{ Form::close() }}
                                         @if(count($course->quizzes) > 0)
                                             @foreach ($course->quizzes as $quiz)
                                                 <li style="background-color:rgb(239,239,237);"><a

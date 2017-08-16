@@ -1,5 +1,19 @@
 @extends('layouts.sidebar')
 @section('content')
+
+@section('css')
+    <style>
+        .pricingContent{
+            text-overflow: ellipsis;
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+
+            /* for good looks */
+            padding: 10px;
+        }
+    </style>
+@endsection
     <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
     @if(Auth::user()->isInstructor())
 

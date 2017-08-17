@@ -16,7 +16,7 @@ class CourseController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:instructor', ['only' => ['create']]);
+        $this->middleware('role:instructor', ['only' => ['create', 'store', 'destroy']]);
     }
 
     /**
@@ -62,12 +62,14 @@ class CourseController extends Controller
             $failed_instructors = array();
             $success_instructors = array();
             $success_instructors[0] = $user_id;
-            foreach ($instructors as $instructor) {
-                $user = User::where('email', '=', $instructor)->pluck('id');
-                if (count($user) > 0 && $user[0] != $user_id) {
-                    $success_instructors[] = $user[0];
-                } else {
-                    $failed_instructors[] = $instructor;
+            if (!$instructors[0] == null) {
+                foreach ($instructors as $instructor) {
+                    $user = User::where('email', '=', $instructor)->pluck('id');
+                    if (count($user) > 0 && $user[0] != $user_id) {
+                        $success_instructors[] = $user[0];
+                    } else {
+                        $failed_instructors[] = $instructor;
+                    }
                 }
             }
             Course::create($courses)->users()->attach($success_instructors);

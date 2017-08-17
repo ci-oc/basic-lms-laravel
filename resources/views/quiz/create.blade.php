@@ -50,7 +50,7 @@
                 <div class="col-xs-12 form-group">
                     {!! Form::label('duration',Lang::get('module.quizzes.fields.duration'), ['class' => 'control-label']) !!}
                     <div class='input-group time timepicker'>
-                        {!! Form::text('duration', old('duration'), ['required','class' => 'form-control ','placeholder' => '','type' => 'text']) !!}
+                        {!! Form::text('duration', old('duration'), ['class' => 'form-control ','placeholder' => '','type' => 'text']) !!}
                         <span class="input-group-addon">
            <i class="fa fa-clock-o" aria-hidden="true"></i></span>
                         </span>

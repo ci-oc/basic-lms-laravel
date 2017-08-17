@@ -18,7 +18,7 @@ class CreateProblemJudgeOptionsTable extends Migration
             $table->integer('problem_id')->unsigned()->nullable();
             $table->foreign('problem_id', 'fk_256_problem_problem_id_judge_problem')->references('id')->on('questions')->onDelete('cascade');
             $table->integer('judge_id')->unsigned()->nullable();
-            $table->foreign('judge_id', 'fk_256_judge_judge_id_judge_problem')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('judge_id', 'fk_256_judge_judge_id_judge_problem')->references('id')->on('judge_options')->onDelete('cascade');
             $table->timestamps();
         });
     }

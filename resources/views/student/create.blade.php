@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <div class="input-icon">
                                 <i class="fa fa-id-card"></i>
-                                {!! Form::text('college_id', old('college_id'), ['reguired','class' => 'form-control ', 'placeholder' => Lang::get('module.placeholders.college-id')]) !!}
+                                {!! Form::text('college_id', old('college_id'), ['required','class' => 'form-control ', 'placeholder' => Lang::get('module.placeholders.college-id')]) !!}
                             </div>
                         </div>
                     </div>

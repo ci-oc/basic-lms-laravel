@@ -75,7 +75,7 @@ return [
             'more-info-link' => 'More info link',
             'input-format' => 'Input Format',
             'output-format' => 'Output Format',
-            'duration' => 'Duration',
+            'duration' => 'Duration [Optional]',
             'start-date' => 'Start Date',
             'end-date' => 'End Date',
         ],
@@ -90,7 +90,7 @@ return [
             'access_code' => 'Access Code',
             'desc' => 'Description',
             'excel' => 'Excel Sheet :',
-            'assistant_professor' => 'Assistant Professor-Email ( Please separate by coma if they are many )',
+            'assistant_professor' => 'Assistant Professor-Email ( Please separate by coma if they are many ) [Optional]',
         ],
     ],
     'results' => [

@@ -18,8 +18,8 @@ class CreateQuizzesTable extends Migration
             $table->integer('course_id')->unsigned()->nullable();
             $table->foreign('course_id', 'fk_256_course_course_id_quiz')->references('id')->on('courses');
             $table->string('title');
-            $table->string('description');
-            $table->time('duration');
+            $table->text('description');
+            $table->time('duration')->nullable();
             $table->timestamp('start_date')->useCurrent();
             $table->timestamp('end_date')->useCurrent();
             $table->float('full_mark')->nullable();

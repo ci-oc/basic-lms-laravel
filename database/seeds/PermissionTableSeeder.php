@@ -54,11 +54,6 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Access to edit quiz'
             ],
             [
-                'name' => 'edit-question',
-                'display_name' => 'Edit Question',
-                'description' => 'Access to edit quiz'
-            ],
-            [
                 'name' => 'join-course',
                 'display_name' => 'Join Course',
                 'description' => 'Access to join existing course'

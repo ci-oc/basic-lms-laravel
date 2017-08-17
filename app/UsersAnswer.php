@@ -16,6 +16,6 @@ class UsersAnswer extends Model
 
     public function user()
     {
-        return $this->belongsToMany('App\User', 'user_question');
+        return $this->belongsTo('App\User', 'user_question');
     }
 }

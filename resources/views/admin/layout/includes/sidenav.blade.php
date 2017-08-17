@@ -19,6 +19,10 @@
                     <li class="sub-menu"><a href="{{route('role.index')}}"><i class="glyphicon glyphicon-briefcase"></i>
                             Roles</a></li>
                 </ul>
+                <ul>
+                    <li class="sub-menu"><a href="{{route('register')}}"><i class="glyphicon glyphicon-briefcase"></i>
+                            Add Instructor</a></li>
+                </ul>
             </li>
 
         </ul>

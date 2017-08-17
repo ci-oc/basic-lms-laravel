@@ -85,7 +85,6 @@
                             </i><span class="menu-title">Courses</span></a>
 
                     </li>
-                    @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
                                     href="{{route('quizzes.index')}}"><i
                                         class="fa fa-exclamation fa-fw">
@@ -93,6 +92,7 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
                         </li>
+                    @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
                                     href="{{route('problems.index')}}"><i
                                         class="fa fa-code fa-fw">

@@ -1,0 +1,369 @@
+h1 {
+  color:#FFF;
+  text-transform:uppercase;
+  margin:0;
+  margin-bottom:25px;
+  font-size:66px;
+}
+
+p {
+  color:#FFF;
+  font-family:Lato, sans-serif;
+  font-weight:100;
+  max-width:1024px;
+  margin:0 auto;
+}
+
+@media (max-width:767px) {
+  h1 {
+    font-size:30px;
+  }
+}
+
+@media (max-width:767px) {
+  p {
+    font-size:14px;
+    margin:0px 25px;
+  }
+}
+
+.header-cell .fa.fa-truck {
+  margin-right:15px;
+}
+
+.top-header-container {
+  display:table;
+  width:100%;
+  height:600px;
+  background-color:rgba(0,0,0,0.5);
+}
+
+.header-cell {
+  display:table-cell;
+  width:100%;
+  height:100%;
+  vertical-align:middle;
+}
+
+.container-fluid.main-header-text {
+  padding:0;
+  margin:0;
+  min-height:600px;
+  display:block;
+  position:relative;
+  background-size:cover;
+  background-position:center center;
+  text-align:center;
+}
+
+.nav-main-wrapper {
+  text-align:center;
+  box-shadow:none;
+  border:none;
+  border-radius:0;
+  margin-bottom:0;
+  background:rgba(0,0,0,0.85);
+  display:block;
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+.nav-main-wrapper .navbar-brand {
+  color:#FFF;
+  box-shadow:none;
+  text-transform:uppercase;
+  font-size:16px;
+}
+
+.nav-main-wrapper .navbar-brand:hover {
+  color:#FFF;
+  box-shadow:none;
+  opacity:0.8;
+}
+
+.nav-main-wrapper ul {
+  float:none;
+}
+
+.nav-main-wrapper li {
+  float:none;
+  display:inline-block;
+}
+
+.nav-main-wrapper .navbar-nav > li > a {
+  text-shadow:none;
+  background:none;
+  text-transform:uppercase;
+  font-size:12px;
+  color:#9c9c9c;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover, .nav-main-wrapper .navbar-nav > .active > a, .nav-main-wrapper .navbar-nav > .open > a, .nav-main-wrapper .navbar-nav > .open > a:hover, .nav-main-wrapper .navbar-nav > .active > a:hover {
+  color:#fff;
+  background-color:transparent;
+  background-image:none;
+  box-shadow:none;
+}
+
+.nav-main-wrapper .navbar-nav > .active > a:after, .nav-main-wrapper .navbar-nav > .open > a:after {
+  opacity:1;
+  bottom:10px;
+}
+
+.nav-main-wrapper li a:hover, .nav-main-wrapper li a:active, .nav-main-wrapper li.active, .nav-main-wrapper li a:focus {
+  background-color:transparent;
+  background-image:none;
+  -webkit-transition:all 320ms ease;
+  -moz-transition:all 320ms ease;
+  -ms-transition:all 320ms ease;
+  -o-transition:all 320ms ease;
+  transition:all 320ms ease;
+}
+
+.nav-main-wrapper li a:after {
+  content:'';
+  position:absolute;
+  display:block;
+  left:15px;
+  right:15px;
+  bottom:0px;
+  height:2px;
+  background:#FFF;
+  opacity:0;
+}
+
+.nav-main-wrapper .navbar-toggle {
+  border:none;
+  color:#FFF;
+}
+
+.nav-main-wrapper .navbar-toggle .icon-bar {
+  opacity:1;
+  background-color:#FFF;
+}
+
+.nav-main-wrapper .navbar-toggle:hover .icon-bar {
+  opacity:0.8;
+}
+
+.nav-main-wrapper .navbar-toggle:focus, .nav-main-wrapper .navbar-toggle:hover {
+  background-color:transparent;
+}
+
+@media (max-width:767px) {
+  .nav-main-wrapper li a:after {
+    opacity:0;
+    display:none;
+  }
+}
+
+@media (max-width:767px) {
+  .nav-main-wrapper li {
+    float:none;
+    display:block;
+    text-align:left;
+  }
+}
+
+/*Featuers*/
+.team-clean {
+  color:#313437;
+  background-color:#fff;
+}
+
+.team-clean p {
+  color:#7d8285;
+}
+
+.team-clean h2 {
+  font-weight:bold;
+  margin-bottom:40px;
+  padding-top:40px;
+  color:inherit;
+}
+
+@media (max-width:767px) {
+  .team-clean h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+
+.team-clean .intro {
+  font-size:16px;
+  max-width:500px;
+  margin:0 auto;
+}
+
+.team-clean .intro p {
+  margin-bottom:0;
+}
+
+.team-clean .people {
+  padding-bottom:40px;
+}
+
+.team-clean .item {
+  text-align:center;
+  padding-top:50px;
+}
+
+.team-clean .item .name {
+  font-weight:bold;
+  margin-top:28px;
+  margin-bottom:8px;
+  color:inherit;
+}
+
+.team-clean .item .title {
+  text-transform:uppercase;
+  font-weight:bold;
+  color:#d0d0d0;
+  letter-spacing:2px;
+  font-size:13px;
+}
+
+.team-clean .item .description {
+  font-size:15px;
+  margin-top:15px;
+  margin-bottom:20px;
+}
+
+.team-clean .item img {
+  max-width:160px;
+}
+
+/*Team*/
+.team-grid {
+  color:#313437;
+  background-color:#fff;
+}
+
+.team-grid p {
+  color:#7d8285;
+}
+
+.team-grid h2 {
+  font-weight:bold;
+  margin-bottom:40px;
+  padding-top:40px;
+  color:inherit;
+}
+
+@media (max-width:767px) {
+  .team-grid h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+
+.team-grid .intro {
+  font-size:16px;
+  max-width:500px;
+  margin:0 auto;
+}
+
+.team-grid .intro p {
+  margin-bottom:0;
+}
+
+.team-grid .people {
+  padding:50px 0;
+}
+
+.team-grid .item {
+  margin-bottom:30px;
+}
+
+.team-grid .item .box {
+  text-align:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  height:280px;
+  position:relative;
+  overflow:hidden;
+}
+
+.team-grid .item .cover {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(255,255,255,0.55);
+  transition:opacity 0.15s ease-in;
+  opacity:0;
+  padding-top:80px;
+  color:#fff;
+  text-shadow:1px 1px 1px rgba(0,0,0,0.15);
+}
+
+.team-grid .item:hover .cover {
+  opacity:1;
+}
+
+.team-grid .item .name {
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.team-grid .item .title {
+  text-transform:uppercase;
+  font-weight:bold;
+  color:#fff;
+  letter-spacing:2px;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.team-grid .social {
+  font-size:18px;
+}
+
+.team-grid .social a {
+  color:inherit;
+  margin:0 10px;
+  display:inline-block;
+  opacity:0.7;
+}
+
+.team-grid .social a:hover {
+  opacity:1;
+}
+
+/*Footer*/
+.site-footer h5 {
+  color:inherit;
+  font-size:20px;
+}
+
+.site-footer .social-icons a:hover {
+  opacity:1;
+}
+
+.site-footer .social-icons a {
+  display:inline-block;
+  width:32px;
+  border:none;
+  font-size:20px;
+  border-radius:50%;
+  margin:4px;
+  color:#fff;
+  text-align:center;
+  background-color:#798FA5;
+  height:32px;
+  opacity:0.8;
+  line-height:32px;
+}
+
+@media (min-width:768px) {
+  .site-footer .social-icons {
+    text-align:right;
+  }
+}
+

@@ -13,7 +13,7 @@ class QuizController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:instructor', ['only' => ['show']]);
+        $this->middleware('role:instructor', ['only' => ['create','store']]);
     }
 
     /**

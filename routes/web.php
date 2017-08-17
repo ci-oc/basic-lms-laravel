@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('questions/massDestroy', ['uses' => 'QuestionController@massDestroy', 'as' => 'questions.massDestroy']);
     Route::get('/admin', [
         'as' => 'admin.index',
-
+        'middleware' => ['role:superuser|standard-user'],
         'uses' => function () {
             return view('admin.index');
         }

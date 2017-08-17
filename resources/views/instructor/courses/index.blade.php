@@ -42,13 +42,11 @@
                                     <ul>
                                         <li class="description"><strong>{{$course->description}}</strong></li>
                                         <br>
-                                        {{ Form::open(['method' => 'POST', 'route' => ['courses.index', $course->id]]) }}
-                                        {{ Form::submit('View Course', ['class' => 'btn btn-primary']) }}
-                                        {{ Form::close() }}
+                                        <a href="{{ route('courses.show',[$course->id]) }}"
+                                           class="btn btn-info">@lang('module.view')</a>
                                         @if(count($course->quizzes) > 0)
                                             @foreach ($course->quizzes as $quiz)
-                                                <li style="background-color:rgb(239,239,237);"><a
-                                                            href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
+                                                <li style="background-color:rgb(239,239,237);"><a href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
                                                 </li>
                                             @endforeach
                                         @else

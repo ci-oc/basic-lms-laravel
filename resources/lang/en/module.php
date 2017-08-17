@@ -84,8 +84,10 @@ return [
         'relation-title' => 'Course',
         'no-quizzes' => 'No Quizzes Created',
         'title' => 'New Course',
+        'view-course' => 'View Course',
         'enroll-course' => 'Enroll',
         'fields' => [
+            'created_at' => 'Created at',
             'course' => 'Course Title',
             'access_code' => 'Access Code',
             'desc' => 'Description',

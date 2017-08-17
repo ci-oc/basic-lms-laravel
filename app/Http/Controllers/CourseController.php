@@ -87,7 +87,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('instructor.courses.view',compact('id'));
     }
 
     /**
@@ -98,7 +98,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('instructor.courses.edit',compact('id'));
     }
 
     /**

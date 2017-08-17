@@ -20,7 +20,8 @@
     "symfony/filesystem": "^3.3",
     "symfony/finder": "^3.3",
     "yusufs/grader": "1.0",
-    "zizaco/entrust": "5.2.x-dev"
+    "zizaco/entrust": "5.2.x-dev",
+    "aws/aws-sdk-php": "2.*"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.4",

@@ -48,6 +48,11 @@ class ProblemController extends Controller
     public function store(Request $request)
     {
         $question = Question::create($request->all());
+        $quiz = Quiz::find($request->input('quiz_id'));
+        $quiz_fullmark = $quiz->full_mark;
+        $question_grade = $request->input('grade');
+        $quiz_fullmark += $question_grade;
+        $quiz->update(['full_mark' => $quiz_fullmark]);
         $input_test_cases = $request->input('input_testcase');
         $output_test_cases = $request->input('output_testcase');
         $judge_options = $request->input('judge_options');

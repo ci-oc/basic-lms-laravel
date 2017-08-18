@@ -1,41 +1,52 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
+@section('css')
+    <style>
+        .test-option-true {
+            background-color: #4CAF50 !important;
+            color: white;
+        }
 
+        .test-option-true-mini {
+            color: #4CAF50 !important;
+        }
+
+        .test-option-false {
+            background-color: #f44336 !important;
+            color: white;
+        }
+
+        .test-option-false-mini {
+            color: #f44336 !important;
+        }
+    </style>
+@endsection
 @section('content')
     <h3 class="page-title">@lang('module.results.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('module.view-result')
+            @lang('module.results.fields.view-result')
         </div>
 
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered table-striped">
-                        @foreach($questions as $question)
-                            @if(count($question) > 0)
-                                @if($question->quiz_id == $id)
-                                    @if(Auth::user()->isAdmin())
-                                        <tr>
-                                            <th>@lang('module.results.fields.user')</th>
-                                            <td>{{ $question->quiz->title or '' }} ({{ $test->user->email or '' }})</td>
-                                        </tr>
-                                    @endif
-                                    <tr>
-                                        <th>@lang('quickadmin.results.fields.date')</th>
-                                        <td>{{ $test->created_at or '' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>@lang('quickadmin.results.fields.result')</th>
-                                        <td>{{ $test->result }}/10</td>
-                                    </tr>
-                                @endif
-                            @endif
-                        @endforeach
-
+                        <tr>
+                            <th>@lang('module.results.fields.user')</th>
+                            <td>{{ $quiz_result->user->name or '' }} ({{ $quiz_result->user->email or '' }})</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('module.results.fields.date')</th>
+                            <td>{{ $quiz_result->created_at or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('module.results.fields.result')</th>
+                            <td>{{ $quiz_result->grade }} / {{$quiz_result->quiz->full_mark}}</td>
+                        </tr>
                     </table>
                     <?php $i = 1 ?>
-                    @foreach($results as $result)
+                    @foreach($questions_results as $result)
                         <table class="table table-bordered table-striped">
                             <tr class="test-option{{ $result->correct ? '-true' : '-false' }}">
                                 <th style="width: 10%">Question #{{ $i }}</th>
@@ -81,11 +92,6 @@
                     @endforeach
                 </div>
             </div>
-
-            <p>&nbsp;</p>
-
-            <a href="{{ route('tests.index') }}" class="btn btn-default">Take another quiz</a>
-            <a href="{{ route('results.index') }}" class="btn btn-default">See all my results</a>
         </div>
     </div>
 @stop

@@ -54,7 +54,11 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $question = Question::create($request->all());
-
+        $quiz = Quiz::find($request->input('quiz_id'));
+        $quiz_fullmark = $quiz->full_mark;
+        $question_grade = $request->input('grade');
+        $quiz_fullmark += $question_grade;
+        $quiz->update(['full_mark' => $quiz_fullmark]);
         foreach ($request->input() as $key => $value) {
             if (strpos($key, 'option') !== false && $value != '') {
                 $status = $request->input('correct') == $key ? 1 : 0;

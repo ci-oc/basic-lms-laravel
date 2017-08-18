@@ -9,8 +9,12 @@ class UsersQuiz extends Model
     public $table = 'user_quiz';
     protected $fillable = ['quiz_id', 'user_id', 'grade'];
 
-    public function users()
+    public function user()
     {
-        $this->belongsToMany('App\User', 'user_quiz', 'user_id', 'quiz_id');
+        return $this->belongsTo('App\User',  'user_id');
+    }
+    public function quiz()
+    {
+        return $this->belongsTo('App\Quiz',  'quiz_id');
     }
 }

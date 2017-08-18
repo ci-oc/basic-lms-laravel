@@ -53,26 +53,31 @@ class SolveQuizController extends Controller
     public function store(Request $request)
     {
         $result = 0;
+        $test_id = $request->input('quiz_id');
         $test = UsersQuiz::create([
             'user_id' => Auth::id(),
-            'quiz_id' => $request->input('quiz_id'),
+            'quiz_id' => $test_id,
             'grade' => $result,
         ]);
 
         foreach ($request->input('questions', []) as $key => $question) {
             $status = 0;
-
+            $question_grade = 0;
             if ($request->input('answers.' . $question) != null
                 && QuestionsOption::find($request->input('answers.' . $question))->correct
             ) {
                 $status = 1;
-                $result++;
+                $result += floatval($request->input('question_grades.' . $key));
+                $question_grade += floatval($request->input('question_grades.' . $key));
             }
+
             UsersAnswer::create([
                 'user_id' => Auth::id(),
+                'quiz_id' => $test_id,
                 'question_id' => $question,
                 'option_id' => $request->input('answers.' . $question),
                 'correct' => $status,
+                'grade' => $question_grade
             ]);
         }
 //

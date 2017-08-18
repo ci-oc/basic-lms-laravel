@@ -97,7 +97,8 @@ return [
     ],
     'results' => [
         'title' => 'My Results',
-        'fields' => [
+        'table-result' => 'Result',
+         'fields' => [
             'user' => 'User',
             'question' => 'Question',
             'correct' => 'Correct',

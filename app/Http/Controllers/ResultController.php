@@ -16,8 +16,10 @@ class ResultController extends Controller
      */
     public function index()
     {
-        //
-        return view('results.index');
+        $results = UsersQuiz::with('user', 'quiz')->whereHas('user', function ($q) {
+            return $q->where('user_id', '=', Auth::id());
+        })->get();
+        return view('results.index', compact('results'));
     }
 
     /**
@@ -49,12 +51,12 @@ class ResultController extends Controller
      */
     public function show($id)
     {
+        $quiz_result = UsersQuiz::find($id)->load('user', 'quiz');
         $questions_results = UsersAnswer::where([
             ['user_id', '=', Auth::id()],
-            ['quiz_id', '=', $id]
+            ['quiz_id', '=', $quiz_result->quiz_id]
         ])->get();
-        dd($questions_results);
-        return view('results.show');
+        return view('results.show', compact('quiz_result', 'questions_results'));
     }
 
     /**

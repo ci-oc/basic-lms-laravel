@@ -59,7 +59,7 @@ class QuizController extends Controller
     public function show($id)
     {
         $grade = UsersQuiz::where('user_id', '=', Auth::id())->where('quiz_id', '=', $id)->pluck('grade')->toArray();
-        if (floatval($grade[0]) == 0.00) {
+        if (floatval($grade) == null) {
             return view('quiz.show', compact('id'));
         }
         return redirect()->back()->with('done_already','');

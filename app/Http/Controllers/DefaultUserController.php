@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\DB;
+use App\Role;
 
 class DefaultUserController extends Controller
 {
@@ -51,6 +52,7 @@ class DefaultUserController extends Controller
         $this->validate($request, [
             'file' => 'required|mimes:xls,xlsx,odf',
         ]);
+        $role = Role::where('name', '=', 'student')->pluck('id')->first(); //student
         if ($request->hasFile('file')) {
             $data = $this->saveFiles($request);
             if ($data !== 0) {
@@ -60,7 +62,6 @@ class DefaultUserController extends Controller
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
                     try {
                         $user = new User();
-                        $role = 4; //student
                         $user_id = $user->create([
                             'name' => $datum['name'],
                             'email' => $datum['email'],
@@ -79,24 +80,6 @@ class DefaultUserController extends Controller
             } else {
                 return redirect('users/create')->with('failed_saving_file', '');
             }
-        } else {
-            $failed_to_create = array();
-            try {
-                $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
-                $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                $user = new User();
-                $role = 4; //student
-                $user_id = $user->create([
-                    'name' => $request->input('name'),
-                    'email' => $request->input('email'),
-                    'password' => $password,
-                    'college_id' => $request->input('college_id'),
-                ])->attachRole($role);
-            } catch (\Illuminate\Database\QueryException $e) {
-                $failed_to_create[] = $request->all();
-            }
-            return redirect('users/create')->with('data', $failed_to_create);
-
         }
     }
 
@@ -147,5 +130,26 @@ class DefaultUserController extends Controller
     function destroy($id)
     {
         //
+    }
+
+    public function store_single(Request $request)
+    {
+        $role = Role::where('name', '=', 'student')->pluck('id')->first(); //student
+        $failed_to_create = array();
+        try {
+            $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
+            $password = Hash::make($non_encrypted_password); //Encrypting this password.
+            $user = new User();
+            $user_id = $user->create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $password,
+                'college_id' => $request->input('college_id'),
+            ])->attachRole($role);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $failed_to_create[] = $request->all();
+        }
+        return redirect('users/create')->with('data', $failed_to_create);
+
     }
 }

@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('enroll', 'RegisterCourseController');
     Route::resource('problems', 'ProblemController');
     Route::resource('users', 'DefaultUserController');
+    Route::post('users/store_single', ['uses' => 'DefaultUserController@store_single', 'as' => 'users.store_single']);
     Route::resource('solve', 'SolveQuizController');
     Route::resource('questions', 'QuestionController');
     Route::post('questions/massDestroy', ['uses' => 'QuestionController@massDestroy', 'as' => 'questions.massDestroy']);

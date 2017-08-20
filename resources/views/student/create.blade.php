@@ -39,14 +39,14 @@
             @lang('module.users.new-users')
         </div>
         <div class="panel-body pan">
-            {!! Form::open(['method' => 'POST', 'route' => ['users.store']])!!}
+            {!! Form::open(['method' => 'POST', 'route' => ['users.store_single']])!!}
             <div class="form-body pal">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="input-icon">
                                 <i class="fa fa-user"></i>
-                                {!! Form::text('name', old('name'), ['required','class' => 'form-control ', 'placeholder' => Lang::get('module.placeholders.name')]) !!}
+                                {!! Form::text('name', old('name'), ['required','class' => 'form-control ', 'placeholder' => trans('module.placeholders.name')]) !!}
                             </div>
 
                         </div>
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <div class="input-icon">
                                 <i class="fa fa-envelope"></i>
-                                {!! Form::text('email', null,  ['required','class'=>'form-control','placeholder'=> Lang::get('module.placeholders.email')]) !!}
+                                {!! Form::text('email', null,  ['required','class'=>'form-control','placeholder'=> trans('module.placeholders.email')]) !!}
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('excel-sheet', Lang::get('module.courses.fields.excel'), ['class' => 'control-label']) !!}
+                            {!! Form::label('excel-sheet', trans('module.courses.fields.excel'), ['class' => 'control-label']) !!}
                             {!! Form::file('file', null,['required','class' => 'close fileupload-exists']) !!}
                             @if($errors->has('file'))
                                 <p class="help-block alert-danger">

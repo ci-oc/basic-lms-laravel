@@ -5,12 +5,14 @@
             <p>@lang('module.errors.error-quiz-made-before')</p>
         </div>
     @endif
-    <p>
-        <a href="{{route('quizzes.create')}}"
-           class="btn btn-success create_btn">
-            Add New
-        </a>
-    </p>
+    @if(!Auth::user()->isStudent())
+        <p>
+            <a href="{{route('quizzes.create')}}"
+               class="btn btn-success create_btn">
+                @lang('module.addnew')
+            </a>
+        </p>
+    @endif
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.quizzes.quizzes-list')

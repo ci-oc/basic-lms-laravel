@@ -7,11 +7,11 @@
                     Dashboard</a></li>
             <li class="submenu">
                 <a href="#">
-                    <i class="glyphicon glyphicon-user"></i>User Management<span class="caret pull-right"></span>
+                    <i class="fa fa-users"></i>User Management<span class="caret pull-right"></span>
                 </a>
                 <!-- Sub menu -->
                 <ul>
-                    <li class="sub-menu"><a href="{{route('user.index')}}"><i class="glyphicon glyphicon-home"></i>
+                    <li class="sub-menu"><a href="{{route('user.index')}}"><i class="fa fa-user"></i>
                             Users</a></li>
                 </ul>
                 <!-- Sub menu -->
@@ -20,7 +20,7 @@
                             Roles</a></li>
                 </ul>
                 <ul>
-                    <li class="sub-menu"><a href="{{route('register')}}"><i class="glyphicon glyphicon-briefcase"></i>
+                    <li class="sub-menu"><a href="{{route('register')}}"><i class="fa fa-address-book" aria-hidden="true"></i>
                             Add Instructor</a></li>
                 </ul>
             </li>

@@ -19,7 +19,6 @@
                     <th>@lang('module.operations')</th>
                 </tr>
                 </thead>
-
                 <tbody>
                 @if (count($results) > 0)
                     @foreach ($results as $result)
@@ -48,7 +47,9 @@
 @section('javascript')
     <script>
         $(document).ready(function () {
-            $('#datatable').DataTable();
+            $('#datatable').DataTable({
+                responsive: true
+            });
         });
     </script>
 @endsection

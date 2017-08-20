@@ -7,11 +7,11 @@
             </div>
         </div>
     @endif
+    @include('stat_cols')
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.list')
         </div>
-
         <div class="panel-body">
             <table class="table table-bordered table-striped datatable dataTable" id="datatable">
                 <thead>
@@ -51,7 +51,17 @@
 @section('javascript')
     <script>
         $(document).ready(function () {
-            $('#datatable').DataTable();
+            $('#datatable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                responsive: true
+            });
         });
+
     </script>
 @endsection

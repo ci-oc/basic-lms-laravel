@@ -88,7 +88,7 @@ return [
     'results' => [
         'title' => 'My Submissions',
         'table-result' => 'Result',
-         'fields' => [
+        'fields' => [
             'user' => 'User',
             'question' => 'Question',
             'correct' => 'Correct',
@@ -167,6 +167,13 @@ return [
     ],
     'submissions' => [
         'title' => 'Submissions',
+        'stat' => [
+            'cols' => [
+                '90' => 'More than 90%',
+                '50' => 'More than 50%',
+                '50_' => 'Less than 50%'
+            ]
+        ]
     ]
 
 ];

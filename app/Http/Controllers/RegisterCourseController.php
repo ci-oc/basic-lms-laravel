@@ -28,7 +28,7 @@ class RegisterCourseController extends Controller
         $enrolled_courses = Course::select('id')->whereHas('users', function ($q) {
             return $q->where('user_id', '=', Auth::id());
         })->pluck('id')->toArray();
-        $available_courses = Course::all()->whereNotIn('id', $enrolled_courses);
+        $available_courses = Course::all()->load('users')->whereNotIn('id', $enrolled_courses);
         $colors = ['#4CAF50', '#2196F3', '#ff9800', '#f44336', '#e7e7e7'];
         return view('student.courses.enroll', compact('available_courses', 'colors'));
     }

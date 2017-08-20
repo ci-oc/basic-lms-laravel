@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UsersCourses;
 use Illuminate\Http\Request;
 use App\Course;
 use Illuminate\Support\Facades\Input;
@@ -16,7 +17,7 @@ class CourseController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:create-course', ['only' => ['create','store']]);
+        $this->middleware('permission:create-course', ['only' => ['create', 'store']]);
         $this->middleware('permission:drop-course', ['only' => ['destroy']]);
     }
 
@@ -90,7 +91,13 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        return view('instructor.courses.view',compact('id'));
+        $relation = UsersCourses::all()->load('user')->where('course_id', '=', $id);
+        $assistant_professors = array();
+        foreach ($relation as $relation_user) {
+            if ($relation_user->user->college_id == null)
+                $assistant_professors[] = $relation_user->user;
+        }
+        return view('instructor.courses.view', compact('id', 'assistant_professors'));
     }
 
     /**
@@ -101,7 +108,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        return view('instructor.courses.edit',compact('id'));
+        return view('instructor.courses.edit', compact('id'));
     }
 
     /**

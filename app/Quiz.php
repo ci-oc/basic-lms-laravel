@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Quiz extends Model
 {
@@ -23,4 +24,16 @@ class Quiz extends Model
         return $this->hasMany(UsersQuiz::class, 'quiz_id');
     }
 
+    public static function isAvailable($start, $end)
+    {
+        date_default_timezone_set('Africa/Cairo');
+        $QzStart = date("Y-m-d H:i:s", strtotime($start));
+        $QzEnd = date("Y-m-d H:i:s", strtotime($end));
+        $Now = Carbon::now();
+        $available = false;
+        if ($QzStart < $Now && $Now < $QzEnd) {
+            $available = true;
+        }
+        return $available;
+    }
 }

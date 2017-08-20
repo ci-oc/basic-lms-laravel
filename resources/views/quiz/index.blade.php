@@ -1,3 +1,4 @@
+@inject('request','App\Quiz')
 @extends('layouts.sidebar')
 @section('content')
     @if(Session::has('done_already'))
@@ -35,20 +36,7 @@
                 @if (count($quizzes) > 0)
                     @foreach ($quizzes as $quiz)
                         <?php
-                        date_default_timezone_set('Africa/Cairo');
-
-
-                        $QzStart = date("Y-m-d H:i a", strtotime($quiz->start_date));
-                        $QzEnd = date("Y-m-d H:i a", strtotime($quiz->end_date));
-
-                        $Now = date('Y-m-d H:i a');
-                        $Now = date("Y-m-d H:i a", strtotime($Now));
-
-                        $available = false;
-                        if ($QzStart < $Now && $Now < $QzEnd) {
-                            $available = true;
-                        }
-
+                        $available = $request->isAvailable($quiz->start_date, $quiz->end_date);
                         ?>
                         <tr data-entry-id="{{ $quiz->id }}" class="{{ $available ? 'success' : '' }}">
                             <td>{{ $quiz->title or '' }}</td>

@@ -64,7 +64,7 @@
         </nav>
     </div>
     <!--END TOPBAR-->
-    <div id="wrapper">
+    <div id="wrapper" >
         <!--BEGIN SIDEBAR MENU-->
         <nav id="sidebar" role="navigation" data-step="2"
              data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"

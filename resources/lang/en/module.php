@@ -82,7 +82,8 @@ return [
             'access_code' => 'Access Code',
             'desc' => 'Description',
             'excel' => 'Excel Sheet :',
-            'assistant_professor' => 'Assistant Professor-Email ( Please separate by coma if they are many ) [Optional]',
+            'assistant_professor' => 'Assistant Professor(s)-Email ( Please separate by coma if they are many ) [Optional]',
+            'assistant_professor_title' => 'Assistant Professor(s) [Including You]'
         ],
     ],
     'results' => [
@@ -133,6 +134,7 @@ return [
     'users' => [
         'new-users' => 'Single User Registration',
         'new-users-excel' => 'Excel Sheet Registration',
+        'registered-users' => 'Registered Users',
     ],
     'placeholders' => [
         'name' => 'Name',
@@ -174,6 +176,9 @@ return [
                 '50_' => 'Less than 50%'
             ]
         ]
+    ],
+    'instructor' => [
+        'title' => 'Instructor'
     ]
 
 ];

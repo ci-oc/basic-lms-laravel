@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('done_already'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-quiz-made-before')</p>
+        </div>
+    @endif
     <p>
         <a href="{{route('quizzes.create')}}"
            class="btn btn-success create_btn">
@@ -27,8 +32,23 @@
                 <tbody>
                 @if (count($quizzes) > 0)
                     @foreach ($quizzes as $quiz)
-                        <?php $available = strtotime($quiz->start_date) < time() && time() < strtotime($quiz->end_date) ? true : false ?>
-                        <tr data-entry-id="{{ $quiz->id }}" style="{{ $available ? 'background-color: #d6f5d6 !important;' : '' }}">
+                        <?php
+                        date_default_timezone_set('Africa/Cairo');
+
+
+                        $QzStart = date("Y-m-d H:i a", strtotime($quiz->start_date));
+                        $QzEnd = date("Y-m-d H:i a", strtotime($quiz->end_date));
+
+                        $Now = date('Y-m-d H:i a');
+                        $Now = date("Y-m-d H:i a", strtotime($Now));
+
+                        $available = false;
+                        if ($QzStart < $Now && $Now < $QzEnd) {
+                            $available = true;
+                        }
+
+                        ?>
+                        <tr data-entry-id="{{ $quiz->id }}" class="{{ $available ? 'success' : '' }}">
                             <td>{{ $quiz->title or '' }}</td>
                             <td>{!! $quiz->course->title !!}</td>
                             <td>{!! $quiz->start_date !!}</td>
@@ -39,7 +59,7 @@
                                    class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
                                 @if(Auth::user()->isInstructor())
                                     <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
-                                       class="btn btn-xs btn-info {{ $available ? '' : 'disabled'}}">@lang('module.edit')</a>
+                                       class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
                                     {!! Form::open(array(
                                     'style' => 'display: inline-block;',
                                     'method' => 'DELETE',

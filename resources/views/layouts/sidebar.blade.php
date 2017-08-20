@@ -85,13 +85,13 @@
                             </i><span class="menu-title">Courses</span></a>
 
                     </li>
-                        <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
-                                    href="{{route('quizzes.index')}}"><i
-                                        class="fa fa-exclamation fa-fw">
-                                    <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
+                    <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
+                                href="{{route('quizzes.index')}}"><i
+                                    class="fa fa-exclamation fa-fw">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
-                        </li>
+                    </li>
                     @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
                                     href="{{route('problems.index')}}"><i
@@ -138,10 +138,10 @@
 
                         </li>
                     @endif
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="DataGrid.html"><i
+                    <li class="{{ $request->segment(1) == 'submissions' ? 'active' : '' }}"><a href="{{ route('submissions.index') }}"><i
                                     class="fa fa-database fa-fw">
                                 <div class="icon-bg bg-red"></div>
-                            </i><span class="menu-title">Data Grids</span></a>
+                            </i><span class="menu-title">@lang('module.bars.sidebar_submissions')</span></a>
 
                     </li>
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Pages.html"><i

@@ -39,6 +39,11 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Access to create a new course'
             ],
             [
+                'name' => 'edit-course',
+                'display_name' => 'Edit Course',
+                'description' => 'Access to edit an existing course'
+            ],
+            [
                 'name' => 'drop-course',
                 'display_name' => 'Drop Course',
                 'description' => 'Access to drop existing course'

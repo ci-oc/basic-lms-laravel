@@ -23,6 +23,7 @@ trait FileUploadTrait
                     $data[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
                 }
             }
+
             return $data;
         } catch (Exception $e) {
             return 0;

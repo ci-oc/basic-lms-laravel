@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('grade',Lang::get('module.problems.fields.problem_grade'), ['class' => 'control-label']) !!}
-                    {!! Form::number('grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '',]) !!}
+                    {!! Form::number('grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '', 'step' => '0.5']) !!}
                     @if($errors->has('grade'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('grade') }}

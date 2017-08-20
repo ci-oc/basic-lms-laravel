@@ -12,7 +12,12 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"/>
     <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
 </head>
 <body>
@@ -73,5 +78,9 @@
     });
 </script>
 @yield('js')
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/dataTables.bootstrap4.js"></script>
 </body>
 </html>

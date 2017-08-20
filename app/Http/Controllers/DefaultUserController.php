@@ -48,6 +48,9 @@ class DefaultUserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'file' => 'required|mimes:xls,xlsx,odf',
+        ]);
         if ($request->hasFile('file')) {
             $data = $this->saveFiles($request);
             if ($data !== 0) {
@@ -57,14 +60,13 @@ class DefaultUserController extends Controller
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
                     try {
                         $user = new User();
+                        $role = 4; //student
                         $user_id = $user->create([
                             'name' => $datum['name'],
                             'email' => $datum['email'],
                             'password' => $password,
                             'college_id' => $datum['id']
-                        ])->id;
-                        $role = 4; //student
-                        $user->attachRole($role);
+                        ])->attachRole($role);
                     } catch (\Illuminate\Database\QueryException $e) {
                         $failed_to_create[] = [
                             'name' => $datum['name'],
@@ -105,8 +107,7 @@ class DefaultUserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show($id)
+    public function show($id)
     {
         //
     }

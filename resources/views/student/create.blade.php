@@ -91,7 +91,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('excel-sheet', Lang::get('module.courses.fields.excel'), ['class' => 'control-label']) !!}
-                            {!! Form::file('file', null,['class' => 'close fileupload-exists']) !!}
+                            {!! Form::file('file', null,['required','class' => 'close fileupload-exists']) !!}
                             @if($errors->has('file'))
                                 <p class="help-block alert-danger">
                                     {{ $errors->first('file') }}
@@ -100,6 +100,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
                 {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
             </div>
             {!! Form::close() !!}

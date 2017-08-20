@@ -1,4 +1,14 @@
 @extends('layouts.sidebar')
+@section('css')
+    <style>
+        .description{
+            overflow: hidden;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+        }
+    </style>
+@endsection
 @section('content')
     @if(Session::has('invalid_access_code'))
         <div class="alert alert-danger">
@@ -19,9 +29,10 @@
                                 </div>
                                 <div class="pricingContent">
                                     <ul>
-                                        <li><strong>{{$course->description}}</strong></li>
+                                        <li class="description"><strong>{{$course->description}}</strong></li>
                                     </ul>
                                 </div>
+                                <br>
                                 <div class="pricingTable-sign-up">
                                     <button class="btn btn-danger" id="enroll{{$course->id}}"
                                             onclick="enroll({{$course->id}})">@lang('module.courses.enroll-course')</button>
@@ -35,7 +46,7 @@
                                         {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
                                         <input type="text" class="form-control" id="accessCode" name="access_code">
                                         <br>
-                                        {{ Form::submit('enroll', ['class' => 'btn btn-info']) }}
+                                        {{ Form::submit(Lang::get('module.save'), ['class' => 'btn btn-info']) }}
                                     </div>
                                     {!! Form::close() !!}
                                 </div>

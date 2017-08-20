@@ -4,7 +4,7 @@
     <a class="btn btn-success" href="{{route('role.create')}}">Create Role</a>
     <br>
     <br>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="datatable">
         <thead>
         <tr>
             <th>Name</th>
@@ -43,4 +43,12 @@
         </tbody>
     </table>
 
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+        });
+    </script>
 @endsection

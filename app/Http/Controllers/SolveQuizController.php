@@ -80,7 +80,7 @@ class SolveQuizController extends Controller
                 'grade' => $question_grade
             ]);
         }
-//
+
 //        $problems = array();
 //        $grade = 0;
 //        foreach ($request->input('problems', []) as $key => $problem) {
@@ -114,6 +114,7 @@ class SolveQuizController extends Controller
 //                                    $output_filename = $testcase_correct_output['detail']['filename'];
 //                                    $output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $output_filename;
 //                                    $run_output = Grader::run($user_code_filename, $testcase_input_filename, 1, 32000);
+//                                    dd($run_output);
 //                                    $run_output_status = $run_output['detail']['result'];
 //                                    if ($run_output_status == 'OK') {
 //                                        echo "OK";

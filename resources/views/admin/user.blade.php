@@ -2,7 +2,7 @@
 @section('content')
     <h3>Users</h3>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" id="datatable">
         <thead>
         <tr>
             <th>Name</th>
@@ -68,7 +68,13 @@
         @endforelse
         </tbody>
     </table>
-
-
-
 @endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable();
+        });
+    </script>
+@endsection
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UsersQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Quiz;
@@ -13,7 +14,8 @@ class QuizController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:instructor', ['only' => ['create','store']]);
+        $this->middleware('permission:create-quiz', ['only' => ['create']]);
+        $this->middleware('permission:edit-quiz', ['only' => ['edit']]);
     }
 
     /**
@@ -56,7 +58,11 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        return view('quiz.show', compact('id'));
+        $grade = UsersQuiz::where('user_id', '=', Auth::id())->where('quiz_id', '=', $id)->pluck('grade')->toArray();
+        if (floatval($grade[0]) == 0.00) {
+            return view('quiz.show', compact('id'));
+        }
+        return redirect()->back()->with('done_already','');
     }
 
     /**

@@ -12,7 +12,7 @@
     </style>
 @endsection
 @section('content')
-{{--END TIME THEME--}}
+    {{--END TIME THEME--}}
 <h3 class="page-title">@lang('module.quizzes.solve')</h3>
 {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
 <div class="panel panel-default">

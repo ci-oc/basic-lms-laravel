@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('courses', 'CourseController');
     Route::post('courses/importExcel', ['uses' => 'CourseController@importExcel', 'as' => 'courses.importExcel']);
     Route::resource('user', 'UserController');
+    Route::resource('submissions', 'SubmissionsController');
     Route::resource('role', 'RoleController');
     Route::resource('results', 'ResultController');
     Route::resource('enroll', 'RegisterCourseController');

@@ -21,16 +21,6 @@ return [
     'are_you_sure' => 'Are you sure?',
     'description' => 'Description',
     'submit_quiz' => 'Submit answers',
-    'results' => [
-        'title' => 'My Results',
-        'fields' => [
-            'user' => 'User',
-            'question' => 'Question',
-            'correct' => 'Correct',
-            'date' => 'Date',
-            'result' => 'Score',
-        ],
-    ],
     'no_entries_in_table' => 'No entries in table',
     'questions' => [
         'name' => 'Question',
@@ -96,7 +86,7 @@ return [
         ],
     ],
     'results' => [
-        'title' => 'My Results',
+        'title' => 'My Submissions',
         'table-result' => 'Result',
          'fields' => [
             'user' => 'User',
@@ -114,7 +104,8 @@ return [
         'sidebar_problems' => 'Problems',
         'sidebar_questions' => 'MCQ Questions',
         'sidebar_results' => 'Results',
-        'sidebar_new_users' => 'Request New Users'
+        'sidebar_new_users' => 'Request New Users',
+        'sidebar_submissions' => 'Submissions',
     ],
     'problems' => [
         'problems-list' => 'Problems List',
@@ -152,7 +143,8 @@ return [
     'errors' => [
         'error-saving' => 'There was an error saving your file, please try again.',
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
-        'error-access-code' => 'Invalid Access Code'
+        'error-access-code' => 'Invalid Access Code',
+        'error-quiz-made-before' => 'You have done this quiz before!'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',
@@ -168,6 +160,13 @@ return [
             'B' => 'Ignore changes where lines are all blank',
             'w' => 'Ignore all white space'
         ]
+    ],
+    'profiles' => [
+        'account-setting' => 'Account Settings',
+        'user_name' => 'Name',
+    ],
+    'submissions' => [
+        'title' => 'Submissions',
     ]
 
 ];

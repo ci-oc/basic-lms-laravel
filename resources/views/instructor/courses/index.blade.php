@@ -1,9 +1,7 @@
 @extends('layouts.sidebar')
-@section('content')
-
 @section('css')
     <style>
-        .description{
+        .description {
             overflow: hidden;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -11,6 +9,8 @@
         }
     </style>
 @endsection
+@section('content')
+
     <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
     @if(Session::has('success'))
         <div class="alert alert-info">
@@ -46,7 +46,8 @@
                                            class="btn btn-info">@lang('module.view')</a>
                                         @if(count($course->quizzes) > 0)
                                             @foreach ($course->quizzes as $quiz)
-                                                <li style="background-color:rgb(239,239,237);"><a href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
+                                                <li style="background-color:rgb(239,239,237);"><a
+                                                            href="{{route('quizzes.show',$quiz->id)}}">{{$quiz->title}}</a>
                                                 </li>
                                             @endforeach
                                         @else

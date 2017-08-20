@@ -19,7 +19,7 @@ class CreateUserQuizTable extends Migration
             $table->foreign('quiz_id', 'fk_256_quiz_quiz_id_quiz')->references('id')->on('quizzes')->onDelete('cascade');;
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id', 'fk_256_user_quiz_id_user')->references('id')->on('users')->onDelete('cascade');;
-            $table->float('grade')->default(0.0);
+            $table->float('grade')->default(null);
             $table->timestamps();
         });
     }

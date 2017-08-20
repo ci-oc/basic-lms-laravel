@@ -2,21 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\UsersAnswer;
 use App\UsersQuiz;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ResultController extends Controller
+class SubmissionsController extends Controller
 {
-    /**
-     * ResultController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('permission:solve-quiz',['only' => 'index','show']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,10 +14,8 @@ class ResultController extends Controller
      */
     public function index()
     {
-        $results = UsersQuiz::with('user', 'quiz')->whereHas('user', function ($q) {
-            return $q->where('user_id', '=', Auth::id());
-        })->get();
-        return view('results.index', compact('results'));
+        $submissions = UsersQuiz::all()->load('user','quiz');
+        return view('submissions.index', compact('submissions'));
     }
 
     /**
@@ -59,12 +47,7 @@ class ResultController extends Controller
      */
     public function show($id)
     {
-        $quiz_result = UsersQuiz::find($id)->load('user', 'quiz');
-        $questions_results = UsersAnswer::where([
-            ['user_id', '=', Auth::id()],
-            ['quiz_id', '=', $quiz_result->quiz_id]
-        ])->get();
-        return view('results.show', compact('quiz_result', 'questions_results'));
+        //
     }
 
     /**

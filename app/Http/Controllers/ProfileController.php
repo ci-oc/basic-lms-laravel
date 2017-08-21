@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileController extends Controller
 {
@@ -13,7 +15,15 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('user_profile');
+        $user = Auth::user();
+        if (Auth::user()->cf_handle != null) {
+            $url_user = 'http://codeforces.com/api/user.status?handle=' . Auth::user()->cf_handle . '&from=1';
+            $curl_user = curl_init($url_user);
+            curl_setopt($curl_user, CURLOPT_RETURNTRANSFER, $url_user);
+            $user_status = json_decode(curl_exec($curl_user));
+            @curl_close($curl_user);
+        }
+        return view('user_profile', compact('user', 'user_status'));
     }
 
     /**
@@ -34,10 +44,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            Image::make($request->file('image'))->save(public_path('images/avatar/' . Auth()->email . ' _profile'));
 
-        }
     }
 
     /**
@@ -69,9 +76,29 @@ class ProfileController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $user = Auth::user();
+        if ($request->input('cf_handle') != null) {
+            $user->cf_handle = $request->input('cf_handle');
+            $user->save();
+        }
+        if ($request->has('password')) {
+            $this->validate($request, [
+                'old' => 'required',
+                'password' => 'required|min:6|confirmed',
+            ]);
+            $hashedPassword = $user->password;
+            if (Hash::check($request->old, $hashedPassword)) {  //if the old password is correct:
+                //Change the password
+                $user->fill(['password' => Hash::make($request->password)])->save();
+                $request->session()->flash('success', 'Your password has been changed.');
+                return back();
+            }
+            $request->session()->flash('failure', 'Your password has not been changed. It may be your old password is not correct');
+        }
+        return back();
     }
 
     /**
@@ -83,5 +110,21 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function update_image(Request $request)
+    {
+        $this->validate($request, [
+            'avatar' => 'required|mimes:jpg,jpeg,png',
+        ]);
+        $user = Auth::user();
+        $avatar = $request->file('avatar');
+        $file_name = time() . '_' . Auth::id() . '.' . $avatar->getClientOriginalExtension();
+        Image::make($avatar)->resize(250, 250)->save(public_path('/images/avatar/' . $file_name));
+        $user->avatar = 'images/avatar/' . $file_name;
+        $user->save();
+
+        return back();
+
     }
 }

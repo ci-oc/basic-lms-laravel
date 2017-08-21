@@ -25,7 +25,8 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return view('quiz.index');
+        $solved_quizzes = UsersQuiz::with('quiz')->where('user_id', '=', Auth::id())->get();
+        return view('quiz.index', compact('solved_quizzes'));
     }
 
     /**
@@ -62,7 +63,7 @@ class QuizController extends Controller
         if (floatval($grade) == null) {
             return view('quiz.show', compact('id'));
         }
-        return redirect()->back()->with('done_already','');
+        return redirect()->back()->with('done_already', '');
     }
 
     /**

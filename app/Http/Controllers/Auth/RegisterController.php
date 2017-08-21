@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use App\Role;
 class RegisterController extends Controller
 {
     /*
@@ -36,7 +36,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:superuser');
+
     }
 
     /**
@@ -62,10 +62,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $role = Role::where('name', '=', 'instructor')->pluck('id')->first(); //student
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+        ])->attachRole($role);
     }
 }

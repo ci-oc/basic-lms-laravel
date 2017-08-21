@@ -15,6 +15,7 @@ return [
     'update' => 'Update',
     'addnew' => 'Add New',
     'delete' => 'Delete',
+    'change' => 'Update',
     'reset' => 'Reset',
     'list' => 'List',
     'back_to_list' => 'Back to list',
@@ -57,6 +58,7 @@ return [
         'quizzes-list' => 'Quizzes List',
         'solve' => 'Solve',
         'fields' => [
+            'done' => 'DONE',
             'full-mark' => "Full Mark",
             'quiz' => 'Quiz Title',
             'question-text' => 'Question text',
@@ -160,12 +162,26 @@ return [
             'Z' => 'Ignore white space at line end',
             'b' => 'Ignore changes in the amount of white space',
             'B' => 'Ignore changes where lines are all blank',
-            'w' => 'Ignore all white space'
+            'w' => 'Ignore all white space',
+            'SJ' => 'Sharp Judging'
         ]
     ],
     'profiles' => [
-        'account-setting' => 'Account Settings',
-        'user_name' => 'Name',
+        'name' => 'Name',
+        'email' => 'E-mail Address',
+        'college_id' => 'College ID',
+        'old_password' => 'Old Password',
+        'new_password' => 'New Password',
+        'confirm_new_password' => 'Confirm New Password',
+        'password' => 'Password',
+        'confirm_password' => 'Confirm Password',
+        'status' => 'Status',
+        'member_since' => 'Member Since',
+        'edit_profile' => 'Edit Profile',
+        'account_setting' => 'Account Setting',
+        'active' => 'Active',
+        'code_forces_handle' => 'CodeForces Handle',
+        'code_forces_rating' => 'CodeForces Rating',
     ],
     'submissions' => [
         'title' => 'Submissions',
@@ -179,6 +195,12 @@ return [
     ],
     'instructor' => [
         'title' => 'Instructor'
+    ],
+    'codeforces' => [
+        'solved-count' => 'Solved Count',
+        'problem-title' => 'Title',
+        'diff' => 'Difficulty',
+        'status' => 'Status'
     ]
 
 ];

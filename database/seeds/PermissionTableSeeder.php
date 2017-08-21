@@ -61,17 +61,17 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'join-course',
                 'display_name' => 'Join Course',
-                'description' => 'Access to join existing course'
+                'description' => 'Access to join existing course.'
             ],
             [
-                'name' => 'leave-course',
-                'display_name' => 'Leave Course',
-                'description' => 'Access to leave existing course'
+                'name' => 'add-news',
+                'display_name' => 'Add News',
+                'description' => 'Privilege to add news to users.'
             ],
             [
                 'name' => 'solve-quiz',
                 'display_name' => 'Solve Quiz',
-                'description' => 'Access to solve quiz for existing course'
+                'description' => 'Access to solve quiz for existing course.'
             ],
 
 

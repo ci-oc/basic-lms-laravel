@@ -47,6 +47,15 @@
                             <td>
                                 <a href="{{ route('quizzes.show',[$quiz->id]) }}"
                                    class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
+                                @if(count($solved_quizzes) > 0)
+                                    @foreach($solved_quizzes as $solved_quiz)
+                                        @if($solved_quiz->quiz->id == $quiz->id)
+                                            @if(floatval($solved_quiz->grade) != null)
+                                                <span class="label label-success">@lang('module.quizzes.fields.done')</span>
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                @endif
                                 @if(Auth::user()->isInstructor())
                                     <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
                                        class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>

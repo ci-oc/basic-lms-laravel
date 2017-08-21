@@ -29,6 +29,9 @@ class JudgeOptionsSeeder extends Seeder
             [
                 'description' => 'E'
             ],
+            [
+                'description' => 'SJ'
+            ],
         ];
         foreach ($judge_options as $key => $value) {
             JudgeOptions::create($value);

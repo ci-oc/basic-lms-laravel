@@ -32,11 +32,13 @@
                                 <button class="btn btn-xs btn-danger" id="enroll{{$course->id}}"
                                         onclick="enroll({{$course->id}})">@lang('module.courses.enroll-course')</button>
                                 <div id="register{{$course->id}}" style="display:none;">
-                                    {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
-                                    {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
-                                    {!! Form::input('text','access_code', old('access_code'), ['required', 'placeholder' => trans('module.courses.fields.access_code')]) !!}
-                                    {{ Form::submit(Lang::get('module.save'), ['class' => 'btn-xs btn btn-info']) }}
-                                    {!! Form::close() !!}
+                                    <div class="form-group">
+                                        {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
+                                        {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
+                                        {!! Form::input('text','access_code', old('access_code'), ['required', 'placeholder' => trans('module.courses.fields.access_code')]) !!}
+                                        {{ Form::submit(Lang::get('module.save'), ['class' => 'btn-xs btn btn-info']) }}
+                                        {!! Form::close() !!}
+                                    </div>
                                 </div>
                             </td>
 
@@ -63,7 +65,7 @@
     </script>
     <script>
         function enroll(id) {
-            $("#register" + id).toggle(500);
+            $("#register" + id).toggle(200);
         }
     </script>
 @endsection

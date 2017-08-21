@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('avatar')->default('/images/avatar/default_avatar.png');
             $table->string('college_id')->nullable();
+            $table->string('cf_handle')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -72,7 +72,6 @@
                     {!! Form::label('test_cases',Lang::get('module.problems.fields.test_cases'), ['class' => 'control-label']) !!}
                     <table id="dataTable" class="table">
                         <tbody>
-                        @for($i=0; $i<3; $i++)
                             <tr>
                                 <td>
                                     {!! Form::label('input_testcase',Lang::get('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
@@ -83,7 +82,6 @@
                                     {!! Form::textarea('output_testcase[]',old('output_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
                                 </td>
                             </tr>
-                        @endfor
                         </tbody>
                     </table>
                 </div>
@@ -98,6 +96,7 @@
                            onclick="deleteRow(this)"/>
                 </div>
             </div>
+            <p class="help-block alert-danger" id="error"></p>
             <br>
             <div class="row">
                 <div class="col-xs-12 form-group">
@@ -135,5 +134,7 @@
             {!! Form::close() !!}
         </div>
     </div>
+@endsection
+@section('javascript')
     <script type="text/javascript" src="{{ asset('js/problem_js/script.js')}}"></script>
 @endsection

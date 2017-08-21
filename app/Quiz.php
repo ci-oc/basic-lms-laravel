@@ -36,4 +36,13 @@ class Quiz extends Model
         }
         return $available;
     }
+
+    public static function hasFinished($end)
+    {
+        date_default_timezone_set('Africa/Cairo');
+        $QzEnd = date("Y-m-d H:i:s", strtotime($end));
+        $Now = Carbon::now();
+        return $Now < $QzEnd ? true : false;
+
+    }
 }

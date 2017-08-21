@@ -7,6 +7,12 @@
   ],
   "license": "MIT",
   "type": "project",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/andrewnagyeb/grader-library"
+    }
+  ],
   "require": {
     "php": ">=5.6.4",
     "aws/aws-sdk-php-laravel": "~2.0",
@@ -19,7 +25,7 @@
     "maatwebsite/excel": "~2.1.0",
     "symfony/filesystem": "^3.3",
     "symfony/finder": "^3.3",
-    "yusufs/grader": "1.0",
+    "yusufs/grader": "dev-master",
     "zizaco/entrust": "5.2.x-dev",
     "aws/aws-sdk-php": "2.*"
   },

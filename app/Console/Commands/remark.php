@@ -13,7 +13,7 @@ class remark extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'remark';
 
     /**
      * The console command description.

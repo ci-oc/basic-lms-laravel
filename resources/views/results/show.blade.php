@@ -18,6 +18,14 @@
         .test-option-false-mini {
             color: #f44336 !important;
         }
+        div.code_snippet {
+            margin: 15px 0 5px 0;
+            padding: 7px;
+            font-family: "Courier New";
+            border: 1px dashed #CCC;
+            background-color: #F7F7F7;
+            white-space: pre;
+        }
     </style>
 @endsection
 @section('content')
@@ -84,6 +92,71 @@
                                         Read more:
                                         <a href="{{ $result->question->more_info_link }}"
                                            target="_blank">{{ $result->question->more_info_link }}</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                        <?php $i++ ?>
+                    @endforeach
+                    @foreach($problems_results as $result)
+                        <table class="table table-bordered table-striped">
+                            <tr class="test-option{{ $result->problem->grade == $result->grade ? '-true' : '-false' }}">
+                                <th style="width: 10%">Question #{{ $i }}</th>
+                                <th>{{ $result->problem->question_text or '' }}</th>
+                            </tr>
+                            @if ($result->problem->code_snippet != '')
+                                <tr>
+                                    <td>Code snippet</td>
+                                    <td>
+                                        <div class="code_snippet">{!! $result->problem->code_snippet !!}</div>
+                                    </td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td>Test Cases</td>
+                                <td>
+                                    <div class="col-xs-12 form-group">
+                                        <div class="col-sm-8">
+                                            <table class="table table-bordered">
+                                                @foreach($testcases_results as $testcase)
+                                                    @if($testcase->problem_id == $result->problem_id)
+                                                        <tr>
+                                                            <th>Input</th>
+                                                            <td> <div class="code_snippet">{{$testcase->testcase->input}}</div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Code</th>
+                                                            <td>
+                                                                <div class="code_snippet">{!! $result->user_code  !!}</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Output</th>
+                                                            <td>
+                                                                Expected {{ $testcase->testcase->output }}, found {{$testcase->output}}. Judge
+                                                                <span class="label label-sm label-{{ $testcase->correct == 1 ? 'success' : 'danger' }}">{{ $testcase->correct == 1 ? 'Accepted' : 'Wrong Answer' }}</span>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Answer Explanation</td>
+                                <td>
+                                    {!! $result->problem->answer_explanation  !!}
+                                    @if ($result->problem->more_info_link != '')
+                                        <br>
+                                        <br>
+                                        Read more:
+                                        <a href="{{ $result->problem->more_info_link }}"
+                                           target="_blank">{{ $result->problem->more_info_link }}</a>
                                     @endif
                                 </td>
                             </tr>

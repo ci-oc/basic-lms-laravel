@@ -7,7 +7,7 @@ use App\ProblemJudgeOptions;
 use App\TestsCase;
 use Illuminate\Http\Request;
 use App\Question;
-
+use App\Quiz;
 class ProblemController extends Controller
 {
     /**

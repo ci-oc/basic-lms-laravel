@@ -30,9 +30,12 @@ class Question extends Model
         return $this->hasMany(TestsCase::class, 'question_id');
     }
 
+
     public function judge_options()
     {
-        return $this->hasMany(ProblemJudgeOptions::class, 'problem_id');
+        return $this->
+        belongsToMany('App\JudgeOptions', 'problem_judge_options', 'judge_id', 'problem_id')
+            ->withTimestamps();
     }
 
     public static function separateQuestionTypes($collections, $type)

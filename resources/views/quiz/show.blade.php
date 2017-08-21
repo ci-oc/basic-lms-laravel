@@ -66,7 +66,7 @@
                                 <strong>{!! nl2br($question->grade) !!} @lang('module.questions-options.fields.grade')</strong>
                                 <input
                                         type="hidden"
-                                        name="question_grades[{{ $i }}]"
+                                        name="question_grades[{{ $question->id }}]"
                                         value="{{ $question->grade }}">
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                                 <strong>{!! nl2br($problem->grade) !!} @lang('module.questions-options.fields.grade')</strong>
                                 <input
                                         type="hidden"
-                                        name="problem_grades[{{ $i }}]"
+                                        name="problem_grades[{{ $problem->id }}]"
                                         value="{{ $problem->grade }}">
                             </div>
                         </div>

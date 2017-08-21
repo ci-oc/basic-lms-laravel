@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\UsersAnswer;
+use App\UsersProblemAnswer;
 use App\UsersQuiz;
+use App\UsersTestCaseAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,7 @@ class ResultController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:solve-quiz',['only' => 'index','show']);
+        $this->middleware('permission:solve-quiz', ['only' => 'index', 'show']);
     }
 
     /**
@@ -64,7 +66,16 @@ class ResultController extends Controller
             ['user_id', '=', Auth::id()],
             ['quiz_id', '=', $quiz_result->quiz_id]
         ])->get();
-        return view('results.show', compact('quiz_result', 'questions_results'));
+        $problems_results = UsersProblemAnswer::where([
+            ['user_id', '=', Auth::id()],
+            ['quiz_id', '=', $quiz_result->quiz_id]
+        ])->get();
+        $problems_id = array();
+        foreach ($problems_results as $result) {
+            $problems_id[] = $result->problem_id;
+        }
+        $testcases_results = UsersTestCaseAnswer::where('user_id', '=', Auth::id())->whereIn('problem_id', $problems_id)->get();
+        return view('results.show', compact('quiz_result', 'questions_results', 'problems_results','testcases_results'));
     }
 
     /**

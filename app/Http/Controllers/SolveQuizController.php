@@ -87,6 +87,9 @@ class SolveQuizController extends Controller
             $problems[] = Question::find($problem)->load('testcases');
         }
         foreach ($problems as $problem) {
+            $compile_status = '';
+            $run_status = '';
+            $time_consumed = '';
             $problem_grade = 0;
             $lang = $request->input('code_language.' . $problem->id);
             $sharp_judge = false;
@@ -101,7 +104,9 @@ class SolveQuizController extends Controller
                         $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
                         $compilation_output = Grader::compile($user_code_filename);
                         $compilation_status = $compilation_output['detail']['reason'];
+                        $time_consumed = $compilation_output['detail']['time'] . $compilation_output['detail']['time_unit'];
                         if ($compilation_status == 'compiled') {
+                            $compile_status = "Compiled Successfully";
                             foreach ($problem->testcases as $testcase) {
                                 $correct_bool = 0;
                                 $judge_options = '-';
@@ -137,10 +142,34 @@ class SolveQuizController extends Controller
                                             'testcase_id' => $testcase->id,
                                             'output' => $this->readFile($code_output_path),
                                             'correct' => $correct_bool,
+                                            'cpu_usage' => $run_output['detail']['cpu'] . $run_output['detail']['cpu_unit'],
+                                            'vsize' => $run_output['detail']['vsize'] . $run_output['detail']['vsize_unit'],
+                                            'rss' => $run_output['detail']['rss'] . $run_output['detail']['rss_unit'],
                                         ]);
+                                    } else {
+                                        if ($run_output_status == 'RF')
+                                            $run_status = 'Restricted Function';
+                                        elseif ($run_output_status == 'ML')
+                                            $run_status = 'Memory Limit Exceed';
+                                        elseif ($run_output_status == 'OL')
+                                            $run_status = 'Output Limit Exceed';
+                                        elseif ($run_output_status == 'TL')
+                                            $run_status = 'Time Limit Exceed';
+                                        elseif ($run_output_status == 'RT')
+                                            $run_status = 'Runtime Error';
+                                        elseif ($run_output_status == 'AT')
+                                            $run_status = 'Abnormal Termination';
+                                        elseif ($run_output_status == 'IE')
+                                            $run_status = 'Internal Error';
+                                        elseif ($run_output_status == 'BP')
+                                            $run_status = 'Bad Policy';
+
+                                        break;
                                     }
                                 }
                             }
+                        } else {
+                            $compile_status = 'Compile Error';
                         }
                     }
                 } catch (Exception $e) {
@@ -158,10 +187,12 @@ class SolveQuizController extends Controller
                 'quiz_id' => $test_id,
                 'problem_id' => $problem->id,
                 'user_code' => $request->input('user_code.' . $problem->id),
+                'time_consumed' => $time_consumed,
+                'compile_status' => $compile_status,
+                'run_status' => $run_status,
                 'grade' => $problem_grade,
             ]);
             $result += $problem_grade;
-            $problem_grade = 0;
         }
         $test->update(['grade' => $result]);
         return redirect()->route('results.show', [$test->id]);

@@ -74,8 +74,10 @@
                                 </div>
                                 <div class="col-md-9">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#tab-edit" data-toggle="tab">Edit Profile</a></li>
-                                        <li><a href="#tab-messages" data-toggle="tab">CodeForces Problems</a></li>
+                                        <li class="active"><a href="#tab-edit" data-toggle="tab">Edit Profile</a>
+                                        @if($user_status != null)
+                                            <li><a href="#tab-messages" data-toggle="tab">CodeForces Problems</a></li>
+                                        @endif
                                     </ul>
                                     <div id="generalTabContent" class="tab-content">
                                         <div id="tab-edit" class="tab-pane fade in active">
@@ -133,42 +135,44 @@
                                             {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
                                             {!! Form::close() !!}
                                         </div>
-                                        <div id="tab-messages" class="tab-pane fade in">
-                                            @if($user_status->status != "FAILED")
-                                                <div class="list-group">
-                                                    <div class="form-group"><p>Submissions
-                                                            Count: {{$user_solved_count_problems = count($user_status->result)}}</p>
-                                                    </div>
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>@lang('module.codeforces.problem-title')</th>
-                                                            <th>@lang('module.codeforces.diff')</th>
-                                                            <th>@lang('module.codeforces.status')</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
+                                        @if($user_status != null)
+                                            <div id="tab-messages" class="tab-pane fade in">
+                                                @if($user_status->status != "FAILED")
+                                                    <div class="list-group">
+                                                        <div class="form-group"><p>Submissions
+                                                                Count: {{$user_solved_count_problems = count($user_status->result)}}</p>
+                                                        </div>
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>@lang('module.codeforces.problem-title')</th>
+                                                                <th>@lang('module.codeforces.diff')</th>
+                                                                <th>@lang('module.codeforces.status')</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
 
-                                                        @for ($j = 0; $j < $user_solved_count_problems;$j++)
-                                                            @if ($user_status->result[$j]->verdict == "OK")
-                                                                <tr>
-                                                                    <td>{{ $j+1 }}</td>
-                                                                    <td>{{$user_status->result[$j]->problem->name}}</td>
-                                                                    <td>{{$user_status->result[$j]->problem->index}}</td>
-                                                                    <td>
-                                                                        <span class="label label-sm label-success">Approved</span>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        @endfor
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            @else
-                                                <p>{{$user_status->comment}}</p>
-                                            @endif
-                                        </div>
+                                                            @for ($j = 0; $j < $user_solved_count_problems;$j++)
+                                                                @if ($user_status->result[$j]->verdict == "OK")
+                                                                    <tr>
+                                                                        <td>{{ $j+1 }}</td>
+                                                                        <td>{{$user_status->result[$j]->problem->name}}</td>
+                                                                        <td>{{$user_status->result[$j]->problem->index}}</td>
+                                                                        <td>
+                                                                            <span class="label label-sm label-success">Approved</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endfor
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                @else
+                                                    <p>{{$user_status->comment}}</p>
+                                                @endif
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

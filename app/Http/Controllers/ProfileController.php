@@ -16,6 +16,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $user_status = null;
         if (Auth::user()->cf_handle != null) {
             $url_user = 'http://codeforces.com/api/user.status?handle=' . Auth::user()->cf_handle . '&from=1';
             $curl_user = curl_init($url_user);

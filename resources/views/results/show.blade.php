@@ -18,6 +18,7 @@
         .test-option-false-mini {
             color: #f44336 !important;
         }
+
         div.code_snippet {
             margin: 15px 0 5px 0;
             padding: 7px;
@@ -83,6 +84,12 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Grade</td>
+                                <td>
+                                    {{ $result->grade }} / {{ $result->question->grade }}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Answer Explanation</td>
                                 <td>
                                     {!! $result->question->answer_explanation  !!}
@@ -99,7 +106,7 @@
                         <?php $i++ ?>
                     @endforeach
                     @foreach($problems_results as $result)
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="datatable">
                             <tr class="test-option{{ $result->problem->grade == $result->grade ? '-true' : '-false' }}">
                                 <th style="width: 10%">Question #{{ $i }}</th>
                                 <th>{{ $result->problem->question_text or '' }}</th>
@@ -113,38 +120,82 @@
                                 </tr>
                             @endif
                             <tr>
-                                <td>Test Cases</td>
+                                <td>Compile Status</td>
                                 <td>
-                                    <div class="col-xs-12 form-group">
-                                        <div class="col-sm-8">
-                                            <table class="table table-bordered">
-                                                @foreach($testcases_results as $testcase)
-                                                    @if($testcase->problem_id == $result->problem_id)
-                                                        <tr>
-                                                            <th>Input</th>
-                                                            <td> <div class="code_snippet">{{$testcase->testcase->input}}</div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Code</th>
-                                                            <td>
-                                                                <div class="code_snippet">{!! $result->user_code  !!}</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Output</th>
-                                                            <td>
-                                                                Expected {{ $testcase->testcase->output }}, found {{$testcase->output}}. Judge
-                                                                <span class="label label-sm label-{{ $testcase->correct == 1 ? 'success' : 'danger' }}">{{ $testcase->correct == 1 ? 'Accepted' : 'Wrong Answer' }}</span>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
-                                                @endforeach
-                                            </table>
-                                        </div>
-                                        <div class="col-sm-4">
+                                    <span class="label label-sm label-{{ $result->compile_status == 'Compiled Successfully' ? 'success' : 'danger' }}">{{ $result->compile_status }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Run Status</td>
+                                <td>
+                                    <span class="label label-sm label-{{ $result->run_status == 'OK' ? 'success' : 'danger' }}">{{ $result->run_status }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Runtime</td>
+                                <td>
+                                    {{ $result->time_consumed }}
+                                </td>
+                            </tr>
+                            @if(count($testcases_results) > 0)
+                                <tr>
+                                    <td>Test Cases</td>
+                                    <td>
+                                        <table class="table table-bordered" id="datatable">
+                                            <tr>
+                                                <th>Code</th>
+                                                <td>
+                                                    <div class="code_snippet"><code>{!! $result->user_code !!}</code></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        @foreach($testcases_results as $testcase)
+                                            <table class="table table-bordered" id="datatable">
+                                                <?php $i = 1;?>
+                                                @if($testcase->problem_id == $result->problem_id)
+                                                    <tr>
+                                                        <th>Input</th>
+                                                        <td>
+                                                            <div class="code_snippet">{{$testcase->testcase->input}}</div>
+                                                        </td>
+                                                    </tr>
 
-                                        </div>
-                                    </div>
+                                                    <tr>
+                                                        <th>Output</th>
+                                                        <td>
+                                                            Expected <code>"{{ $testcase->testcase->output }}"</code>,
+                                                            found <code>"{{$testcase->output}}"</code>. Judge
+                                                            <span class="label label-sm label-{{ $testcase->correct == 1 ? 'success' : 'danger' }}">{{ $testcase->correct == 1 ? 'Accepted' : 'Wrong Answer' }}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>CPU Usage</th>
+                                                        <td>
+                                                            {{ $testcase->cpu_usage }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Memory Virtual Size</th>
+                                                        <td>
+                                                            {{ $testcase->vsize }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>RSS</th>
+                                                        <td>
+                                                            {{ $testcase->rss}}
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            </table>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td>Grade</td>
+                                <td>
+                                    {{ $result->grade }} / {{ $result->problem->grade }}
                                 </td>
                             </tr>
                             <tr>
@@ -167,4 +218,13 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
+@section('javascript')
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+@endsection

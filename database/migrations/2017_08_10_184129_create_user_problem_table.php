@@ -18,10 +18,13 @@ class CreateUserProblemTable extends Migration
             $table->integer('quiz_id')->unsigned()->nullable();
             $table->foreign('quiz_id', 'fk_256_solve_quiz_id_problem')->references('id')->on('quizzes');
             $table->integer('problem_id')->unsigned()->nullable();
-            $table->foreign('problem_id', 'fk_256_problem_problem_id_problem')->references('id')->on('questions')->onDelete('cascade');;
+            $table->foreign('problem_id', 'fk_256_problem_problem_id_problem')->references('id')->on('questions')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id', 'fk_256_user_problem_id_user')->references('id')->on('users')->onDelete('cascade');
             $table->text('user_code');
+            $table->string('time_consumed');
+            $table->string('compile_status');
+            $table->string('run_status');
             $table->decimal('plagiarism', 5, 2)->nullable();
             $table->float('grade')->default(0.0);
             $table->timestamps();

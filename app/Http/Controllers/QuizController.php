@@ -16,6 +16,7 @@ class QuizController extends Controller
     {
         $this->middleware('permission:create-quiz', ['only' => ['create']]);
         $this->middleware('permission:edit-quiz', ['only' => ['edit']]);
+        $this->middleware('permission:show-quiz-statistics', ['only' => ['chart']]);
     }
 
     /**
@@ -97,6 +98,18 @@ class QuizController extends Controller
      */
     public function destroy($id)
     {
-        //
+    }
+
+    public function chart($id)
+    {
+        $solved_quiz = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', $id)->get();
+        if ($solved_quiz->first() != null) {
+            $chart_data[] = ['Name', 'Grade'];
+            foreach ($solved_quiz as $quiz) {
+                $chart_data[] = [$quiz->user->name, $quiz->grade];
+            }
+            return view('quiz.chart')->with('chart_data', json_encode($chart_data));
+        } else
+            return redirect()->back()->with('none-solved', '');
     }
 }

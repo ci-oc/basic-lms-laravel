@@ -6,7 +6,12 @@
             <p>@lang('module.errors.error-quiz-made-before')</p>
         </div>
     @endif
-    @if(!Auth::user()->isStudent())
+    @if(Session::has('none-solved'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-none-solved')</p>
+        </div>
+    @endif
+    @if(Auth::user()->can('create-quiz'))
         <p>
             <a href="{{route('quizzes.create')}}"
                class="btn btn-success create_btn">
@@ -45,27 +50,35 @@
                             <td>{!! $quiz->end_date !!}</td>
                             <td>{{ $quiz->created_at }}</td>
                             <td>
-                                <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                   class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
-                                @if(count($solved_quizzes) > 0)
-                                    @foreach($solved_quizzes as $solved_quiz)
-                                        @if($solved_quiz->quiz->id == $quiz->id)
-                                            @if(floatval($solved_quiz->grade) != null)
-                                                <span class="label label-success">@lang('module.quizzes.fields.done')</span>
-                                            @endif
+                                @if(Auth::user()->can('solve-quiz'))
+                                    @if(Auth::user()->isStudent())
+                                        @if(count($solved_quizzes) > 0)
+                                            @foreach($solved_quizzes as $solved_quiz)
+                                                @if($solved_quiz->quiz->id == $quiz->id)
+                                                    @if(floatval($solved_quiz->grade) != null)
+                                                        <span class="label label-success">@lang('module.quizzes.fields.done')</span>
+                                                    @else
+                                                        <a href="{{ route('quizzes.show',[$quiz->id]) }}"
+                                                           class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <a href="{{ route('quizzes.show',[$quiz->id]) }}"
+                                               class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
                                         @endif
-                                    @endforeach
+                                    @else
+                                        <a href="{{ route('quizzes.show',[$quiz->id]) }}"
+                                           class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
+                                    @endif
                                 @endif
-                                @if(Auth::user()->isInstructor())
+                                @if(Auth::user()->can('edit-quiz'))
                                     <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
                                        class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
-                                    {!! Form::open(array(
-                                    'style' => 'display: inline-block;',
-                                    'method' => 'DELETE',
-                                    'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                    'route' => ['quizzes.destroy', $quiz->id])) !!}
-                                    {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
+                                @endif
+                                @if(Auth::user()->can('show-quiz-statistics'))
+                                    <a href="{{ route('quizzes.chart',[$quiz->id]) }}"
+                                       class="btn btn-xs btn-dark {{ $available ? '' : 'disabled'}}">@lang('module.stat')</a>
                                 @endif
                             </td>
                         </tr>

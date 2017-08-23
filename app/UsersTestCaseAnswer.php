@@ -10,9 +10,9 @@ class UsersTestCaseAnswer extends Model
     public $table = 'user_testcase';
     protected $fillable = ['user_id', 'quiz_id', 'problem_id', 'testcase_id', 'correct', 'output', 'cpu_usage', 'vsize', 'rss'];
 
-    public function question()
+    public function problem()
     {
-        return $this->belongsTo('App\Question', 'problem_id');
+        return $this->belongsTo('App\UsersProblemAnswer', 'problem_id');
     }
 
     public function user()
@@ -24,8 +24,9 @@ class UsersTestCaseAnswer extends Model
     {
         return $this->belongsTo('App\TestsCase', 'testcase_id');
     }
+
     public function quiz()
     {
-        return $this->belongsTo('App\User', 'quiz_id');
+        return $this->belongsTo('App\Quiz', 'quiz_id');
     }
 }

@@ -59,6 +59,16 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Access to edit quiz'
             ],
             [
+                'name' => 'add-students',
+                'display_name' => 'Add Students',
+                'description' => 'Privilege to add new students.'
+            ],
+            [
+                'name' => 'show-quiz-statistics',
+                'display_name' => 'Show Quiz Statistics',
+                'description' => 'Privilege to show statistics of a specific quiz.'
+            ],
+            [
                 'name' => 'join-course',
                 'display_name' => 'Join Course',
                 'description' => 'Access to join existing course.'
@@ -66,7 +76,7 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'add-news',
                 'display_name' => 'Add News',
-                'description' => 'Privilege to add news to users.'
+                'description' => 'Privilege to post news'
             ],
             [
                 'name' => 'solve-quiz',

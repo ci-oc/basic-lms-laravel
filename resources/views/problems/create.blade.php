@@ -72,16 +72,16 @@
                     {!! Form::label('test_cases',Lang::get('module.problems.fields.test_cases'), ['class' => 'control-label']) !!}
                     <table id="dataTable" class="table">
                         <tbody>
-                            <tr>
-                                <td>
-                                    {!! Form::label('input_testcase',Lang::get('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
-                                    {!! Form::textarea('input_testcase[]',old('input_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
-                                </td>
-                                <td>
-                                    {!! Form::label('output_testcase',Lang::get('module.problems.fields.testCases.output_testcase'), ['class' => 'control-label']) !!}
-                                    {!! Form::textarea('output_testcase[]',old('output_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                {!! Form::label('input_testcase',Lang::get('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
+                                {!! Form::textarea('input_testcase[]',old('input_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
+                            </td>
+                            <td>
+                                {!! Form::label('output_testcase',Lang::get('module.problems.fields.testCases.output_testcase'), ['class' => 'control-label']) !!}
+                                {!! Form::textarea('output_testcase[]',old('output_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -96,8 +96,30 @@
                            onclick="deleteRow(this)"/>
                 </div>
             </div>
-            <p class="help-block alert-danger" id="error"></p>
-            <br>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('time_limit',trans('module.problems.fields.time_limit'), ['class' => 'control-label']) !!}
+                    <strong>@lang('module.problems.fields.time_limit_note')</strong>
+                    {!! Form::number('time_limit', old('time_limit'), ['class' => 'form-control ', 'placeholder' => '', 'min' => '0', 'max' => '60','step' => '0.01']) !!}
+                    @if($errors->has('time_limit'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('time_limit') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('mem_limit',trans('module.problems.fields.mem_limit'), ['class' => 'control-label']) !!}
+                    <strong>@lang('module.problems.fields.mem_limit_note')</strong>
+                    {!! Form::number('mem_limit', old('grade'), ['class' => 'form-control ', 'placeholder' => '', 'min' => '0', 'max' => '30720']) !!}
+                    @if($errors->has('mem_limit'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('mem_limit') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('code_snippet',Lang::get('module.problems.fields.code_snippet'), ['class' => 'control-label']) !!}

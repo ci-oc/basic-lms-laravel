@@ -1,10 +1,11 @@
 @extends('layouts.sidebar')
 
 @section('content')
-    <p>
-        <a href="{{ route('questions.create') }}" class="btn btn-success">@lang('module.addnew')</a>
-    </p>
-
+    @if(Auth::user()->can('create-quiz'))
+        <p>
+            <a href="{{ route('questions.create') }}" class="btn btn-success">@lang('module.addnew')</a>
+        </p>
+    @endif
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.questions.question-list')
@@ -32,8 +33,10 @@
                             <td>
                                 <a href="{{ route('questions.show',[$question->id]) }}"
                                    class="btn btn-xs btn-primary">@lang('module.view')</a>
-                                <a href="{{ route('questions.edit',[$question->id]) }}"
-                                   class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
+                                @if(Auth::user()->can('edit-quiz'))
+                                    <a href="{{ route('questions.edit',[$question->id]) }}"
+                                       class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
+                                @endif
                                 @if(!$available)
                                     {!! Form::open(array(
                                     'style' => 'display: inline-block;',

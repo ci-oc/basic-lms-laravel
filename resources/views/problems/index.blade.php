@@ -1,11 +1,13 @@
 @extends('layouts.sidebar')
 @section('content')
-    <p>
-        <a href="{{route('problems.create')}}"
-           class="btn btn-success create_btn">
-            Add New
-        </a>
-    </p>
+    @if(Auth::user()->can('create-quiz'))
+        <p>
+            <a href="{{route('problems.create')}}"
+               class="btn btn-success create_btn">
+                Add New
+            </a>
+        </p>
+    @endif
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.problems.problems-list')

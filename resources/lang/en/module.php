@@ -12,6 +12,7 @@ return [
     'save' => 'Save',
     'edit' => 'Edit',
     'view' => 'View',
+    'stat' => 'Statistics',
     'update' => 'Update',
     'addnew' => 'Add New',
     'delete' => 'Delete',
@@ -125,6 +126,10 @@ return [
             'code_snippet' => 'Code Snippet',
             'more_info_link' => 'More Info Link',
             'selected_quiz' => 'Select Quiz',
+            'time_limit' => 'Time Limit (in seconds)',
+            'mem_limit' => 'Memory Limit (in kiloBytes)',
+            'time_limit_note' => 'Note that maximum time limit is 60 seconds',
+            'mem_limit_note' => 'Note that maximum memory limit is 30 MB',
             'testCases' => [
                 'input_testcase' => 'Input',
                 'output_testcase' => 'Output',
@@ -148,7 +153,8 @@ return [
         'error-saving' => 'There was an error saving your file, please try again.',
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
         'error-access-code' => 'Invalid Access Code',
-        'error-quiz-made-before' => 'You have done this quiz before!'
+        'error-quiz-made-before' => 'You have done this quiz before!',
+        'error-none-solved' => 'No one has solved this quiz yet.'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

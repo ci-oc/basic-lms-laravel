@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
+    Route::get('quizzes/chart/{id}', [
+        'as' => 'quizzes.chart',
+        'uses' => 'QuizController@chart']);
     Route::resource('quizzes', 'QuizController');
     Route::resource('profile', 'ProfileController');
     Route::post('profile/update_image', ['uses' => 'ProfileController@update_image', 'as' => 'profile.update_image']);

@@ -88,6 +88,7 @@ class SolveQuizController extends Controller
         }
         foreach ($problems as $problem) {
             $compile_status = '';
+            $err_reason = '';
             $run_status = '';
             $time_consumed = '';
             $problem_grade = 0;
@@ -95,6 +96,17 @@ class SolveQuizController extends Controller
             $sharp_judge = false;
             $correct = 0;
             $testcase_grade = 0;
+            $solved_problem = UsersProblemAnswer::create([
+                'user_id' => Auth::id(),
+                'quiz_id' => $test_id,
+                'problem_id' => $problem->id,
+                'user_code' => $request->input('user_code.' . $problem->id),
+                'time_consumed' => $time_consumed,
+                'compile_status' => $compile_status,
+                'compile_err_reason' => $err_reason,
+                'run_status' => $run_status,
+                'grade' => $problem_grade,
+            ]);
             if (count($problem->testcases) > 0) {
                 try {
                     $user_code = Grader::saveScript($lang, $request->input('user_code.' . $problem->id));
@@ -127,9 +139,10 @@ class SolveQuizController extends Controller
                                 if ($testcase_correct_output['success'] == 1 && $testcase_input['success'] == 1) {
                                     $output_filename = $testcase_correct_output['detail']['filename'];
                                     $output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $output_filename;
-                                    $run_output = Grader::run($user_code_filename, $testcase_input_filename, 1, 32000);
+                                    $run_output = Grader::run($user_code_filename, $testcase_input_filename, $problem->time_limit, $problem->mem_limit);
                                     $run_output_status = $run_output['detail']['result'];
                                     if ($run_output_status == 'OK') {
+                                        $run_status = $run_output_status;
                                         $code_output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $run_output['detail']['filename'];
                                         $comparing_output = Grader::compareFiles($output_path, $code_output_path, $judge_options);
                                         if ($comparing_output['judge']['output_file_similarity'] == true) {
@@ -138,7 +151,8 @@ class SolveQuizController extends Controller
                                         }
                                         UsersTestCaseAnswer::create([
                                             'user_id' => Auth::id(),
-                                            'problem_id' => $problem->id,
+                                            'quiz_id' => $test_id,
+                                            'problem_id' => $solved_problem->id,
                                             'testcase_id' => $testcase->id,
                                             'output' => $this->readFile($code_output_path),
                                             'correct' => $correct_bool,
@@ -163,12 +177,12 @@ class SolveQuizController extends Controller
                                             $run_status = 'Internal Error';
                                         elseif ($run_output_status == 'BP')
                                             $run_status = 'Bad Policy';
-
                                         break;
                                     }
                                 }
                             }
                         } else {
+                            $err_reason = str_replace('storage/scripts/' . $user_code_filename, ' Code ', $compilation_output['message']);
                             $compile_status = 'Compile Error';
                         }
                     }
@@ -182,13 +196,10 @@ class SolveQuizController extends Controller
             } else {
                 $problem_grade += floatval($correct * $testcase_grade);
             }
-            UsersProblemAnswer::create([
-                'user_id' => Auth::id(),
-                'quiz_id' => $test_id,
-                'problem_id' => $problem->id,
-                'user_code' => $request->input('user_code.' . $problem->id),
+            $solved_problem->update([
                 'time_consumed' => $time_consumed,
                 'compile_status' => $compile_status,
+                'compile_err_reason' => $err_reason,
                 'run_status' => $run_status,
                 'grade' => $problem_grade,
             ]);

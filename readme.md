@@ -26,4 +26,8 @@ In case of receiving this error
 MIT Creative Common License [MIT license](http://opensource.org/licenses/MIT).
 ## Database Demo Data
 Please click the link below.
-- [Database Data Demo](https://drive.google.com/open?id=0B7tstgwobtR9ZWdNMEplYkZhZkE)
+- [Database Data Demo](https://drive.google.com/open?id=0B7tstgwobtR9ZDZpQW9YMkw4SkU)
+
+## Accounts
+Please go to your DBMS and view users table. First two records are the superusers accounts, next 20 are instructors. the 20 after them are students. 
+- Default password: "secret" (without quotes)

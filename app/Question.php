@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     protected $fillable = ['quiz_id', 'question_text', 'code_snippet', 'answer_explanation',
-        'more_info_link', 'input_format', 'output_format', 'grade'];
+        'more_info_link', 'input_format', 'output_format', 'grade', 'mem_limit', 'time_limit'];
 
     public function setQuizIdAttribute($input)
     {
@@ -33,7 +33,7 @@ class Question extends Model
     public function judge_options()
     {
         return $this->
-        belongsToMany('App\JudgeOptions', 'problem_judge_options', 'judge_id', 'problem_id')
+        belongsToMany('App\JudgeOptions', 'problem_judge_options', 'problem_id', 'judge_id')
             ->withTimestamps();
     }
 

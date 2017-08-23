@@ -101,23 +101,29 @@
                                                 <div class="col-sm-9 controls">
                                                     <div class="row">
                                                         <div class="col-xs-4"><input type="password" name="old"
-                                                                                     placeholder="password"
+                                                                                     id="password"
+                                                                                     placeholder="Current Password"
                                                                                      class="form-control"/></div>
                                                     </div>
+                                                    @if ($errors->has('old'))
+                                                        <span class="help-block"><strong>{{ $errors->first('old') }}</strong></span>
+                                                    @endif
                                                 </div>
+
                                             </div>
-                                            @if ($errors->has('old'))
-                                                <span class="help-block"><strong>{{ $errors->first('old') }}</strong></span>
-                                            @endif
                                             <div class="form-group"><label
                                                         class="col-sm-3 control-label">@lang('module.profiles.new_password')</label>
 
                                                 <div class="col-sm-9 controls">
                                                     <div class="row">
-                                                        <div class="col-xs-4"><input type="password"
-                                                                                     placeholder="password"
+                                                        <div class="col-xs-4"><input type="password" id="password"
+                                                                                     name="password"
+                                                                                     placeholder="@lang('module.profiles.new_password')"
                                                                                      class="form-control"/></div>
                                                     </div>
+                                                    @if ($errors->has('password'))
+                                                        <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="form-group"><label
@@ -126,9 +132,14 @@
                                                 <div class="col-sm-9 controls">
                                                     <div class="row">
                                                         <div class="col-xs-4"><input type="password"
-                                                                                     placeholder="password"
+                                                                                     id="password"
+                                                                                     name="confirm_password"
+                                                                                     placeholder="@lang('module.profiles.confirm_new_password')"
                                                                                      class="form-control"/></div>
                                                     </div>
+                                                    @if ($errors->has('password'))
+                                                        <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <hr/>

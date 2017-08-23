@@ -122,7 +122,7 @@
                                     <br>
                                     <br>
                                     {!! Form::label('user_code',Lang::get('module.problems.code'), ['class' => 'control-label']) !!}
-                                    {!! Form::textarea('user_code['.$problem->id .']', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;']) !!}
+                                    {{ Form::textarea('user_code['.$problem->id .']', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;']) }}
                                 </div>
                                 <div class="col-sm-4">
                                     <strong>{!! nl2br($problem->grade) !!} @lang('module.questions-options.fields.grade')</strong>
@@ -130,13 +130,12 @@
                                             type="hidden"
                                             name="problem_grades[{{ $problem->id }}]"
                                             value="{{ $problem->grade }}">
-                                    <br>
-                                    <ul>
-                                        Judging Options:
+                                    <div class="form-group">
+                                        <p>Judging Options:</p>
                                         @foreach($problem->judge_options as $judge_option)
-                                            <li style="text-decoration: underline"> @lang('module.judge_options.options.' . $judge_option->description)</li>
+                                            <li class="alert alert-info"> @lang('module.judge_options.options.' . $judge_option->description)</li>
                                         @endforeach
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                             <?php $i++; ?>

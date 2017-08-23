@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -81,14 +82,15 @@ class ProfileController extends Controller
     {
         //
         $user = Auth::user();
-        if ($request->input('cf_handle') != null) {
+        if ($request->has('cf_handle')) {
             $user->cf_handle = $request->input('cf_handle');
             $user->save();
         }
         if ($request->has('password')) {
             $this->validate($request, [
-                'old' => 'required',
+                'old' => 'required|min:6',
                 'password' => 'required|min:6|confirmed',
+                'confirm_password   ' => 'required|min:6'
             ]);
             $hashedPassword = $user->password;
             if (Hash::check($request->old, $hashedPassword)) {  //if the old password is correct:

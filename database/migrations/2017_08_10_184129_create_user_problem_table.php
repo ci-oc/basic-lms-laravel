@@ -24,6 +24,7 @@ class CreateUserProblemTable extends Migration
             $table->text('user_code');
             $table->string('time_consumed');
             $table->string('compile_status');
+            $table->text('compile_err_reason')->nullable();
             $table->string('run_status');
             $table->decimal('plagiarism', 5, 2)->nullable();
             $table->float('grade')->default(0.0);

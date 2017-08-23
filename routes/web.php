@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile/update_image', ['uses' => 'ProfileController@update_image', 'as' => 'profile.update_image']);
     Route::post('profile/update', ['uses' => 'ProfileController@update', 'as' => 'profile.update']);
     Route::resource('courses', 'CourseController');
+    Route::post('course/update', ['uses' => 'CourseController@update', 'as' => 'courses.update']);
     Route::post('courses/importExcel', ['uses' => 'CourseController@importExcel', 'as' => 'courses.importExcel']);
     Route::resource('user', 'UserController');
     Route::resource('submissions', 'SubmissionsController');

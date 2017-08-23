@@ -159,6 +159,7 @@ return [
     'success' => [
         'success-saving' => 'User(s) created successfully.',
         'success-course' => 'Course created successfully.',
+        'success-updating' => 'Course edited successfully.'
     ],
     'judge_options' => [
         'title' => 'Judge Options to keep in mind while applying your test cases to scripts.',

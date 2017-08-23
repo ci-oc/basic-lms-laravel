@@ -7,7 +7,8 @@
                     @if($course->id == $id)
                         <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
                         </div>
-                        {!! Form::open(['method' => 'POST', 'route' => ['courses.store'], 'enctype' => 'multipart/form-data'])!!}
+                        {!! Form::open(['method' => 'POST', 'route' => ['courses.update'], 'enctype' => 'multipart/form-data'])!!}
+                        <input type = "hidden" name = "id" value = "{{$id}}">
                         <h3 class="page-title">@lang('module.courses.view-course')</h3>
                         <div class="panel panel-default">
                             <div class="panel-heading">

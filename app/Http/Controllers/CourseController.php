@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\In;
 
 class CourseController extends Controller
 {
@@ -118,9 +119,16 @@ class CourseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $course_id = Input::get('id');
+        $course = Course::findOrFail($course_id);
+        $input = $request->all();
+        $instructors = explode(',', $request->input('assistant_professor'));
+        if($course->fill($input)->save()){
+            $request->session()->flash('alert-success','success.success-updating');
+            return redirect()->route('courses.show',compact('course_id'));
+        }
     }
 
     /**

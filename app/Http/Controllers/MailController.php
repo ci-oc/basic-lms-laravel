@@ -8,10 +8,28 @@ use App\Mail\MailTrap;
 
 class MailController extends Controller
 {
-    public function index(){
-        Mail::to('minamofreh35@gmail.com')->send(new Mailtrap());
+    public static function index(){
+        if(Mail::send('student.mail', array(), function($message)
+        {
+            $message->to('mail@domain.net');
+            $message->subject('Welcome to Laravel');
+            $message->from('sender@domain.net');
+        })) return true;
     }
-    public function view(){
+    public function StudentView(){ // for testing view
         return view('student.mail');
+    }
+
+    public function instructorView(){ // for testing view
+        return view('instructor.PDFmail');
+    }
+    public function AttachmentMail($email,$filePath){
+        if(Mail::send('student.mail', array(), function($message)
+        {
+            $message->to('mail@domain.net');
+            $message->subject('Welcome to Laravel');
+            $message->from('sender@domain.net'); // will be cahanged when hosted
+            $message->attachData('background.jpg','photo.jpg');
+        })) return true;
     }
 }

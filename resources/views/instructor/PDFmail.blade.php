@@ -8,164 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="noindex, nofollow">
     <title>Premier Agent Direct</title>
-    <style type="text/css">
-
-        * {
-            font-family: 'Open Sans', Helvetica, Arial, Verdana, sans-serif;
-            font-size: 14px;
-        }
-
-        a {
-            color: #333333;
-        }
-
-        body {
-            padding: 0;
-            margin: 0;
-            text-align: left !important;
-            font-size: 14px;
-            font-family: 'Open Sans', Helvetica, Arial, Verdana, sans-serif !important;
-
-        @media screen {
-            @font-face {
-                font-family: 'Open Sans';
-                font-style: normal;
-                font-weight: 400;
-                src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
-            }
-        }
-
-        }
-
-        body, table, td, a {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
-
-        table, td {
-            mso-table-lspace: 0pt;
-            mso-table-rspace: 0pt;
-        }
-
-        img {
-            border: 0;
-            height: auto;
-            line-height: 100%;
-            outline: none;
-            text-decoration: none;
-            -ms-interpolation-mode: bicubic;
-        }
-
-        table {
-            border-collapse: collapse !important;
-        }
-
-        body {
-            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-            height: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-        }
-
-        div[style*="margin: 16px 0;"] {
-            margin: 0 !important;
-        }
-
-        a[x-apple-data-detectors] {
-            color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-        }
-
-        .fireworks > .before, .fireworks > .after {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
-            -moz-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-            -webkit-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-            -o-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-            -ms-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-            animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-        }
-
-        .fireworks > .after {
-            -moz-animation-delay: 1.25s, 1.25s, 1.25s;
-            -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
-            -o-animation-delay: 1.25s, 1.25s, 1.25s;
-            -ms-animation-delay: 1.25s, 1.25s, 1.25s;
-            animation-delay: 1.25s, 1.25s, 1.25s;
-            -moz-animation-duration: 1.25s, 1.25s, 6.25s;
-            -webkit-animation-duration: 1.25s, 1.25s, 6.25s;
-            -o-animation-duration: 1.25s, 1.25s, 6.25s;
-            -ms-animation-duration: 1.25s, 1.25s, 6.25s;
-            animation-duration: 1.25s, 1.25s, 6.25s;
-        }
-
-        @-webkit-keyframes bang {
-            to {
-                box-shadow: -244px -313.66667px #0074E4, -132px -303.66667px #03ED86, -204px 80.33333px #05AE69, -178px -177.66667px #1A5098, 34px 51.33333px #0F8D68, -196px -214.66667px #55A4FF, 109px -134.66667px #9DFCB2, 34px -268.66667px #C6E0F9, 50px -164.66667px #0F8D68, -189px -14.66667px #0074E4, -213px 24.33333px #1A5098, 53px 57.33333px #05AE69, -238px -181.66667px #0074E4, 235px -182.66667px #1A5098, 107px -44.66667px #05AE69, -164px -155.66667px #0F8D68, -179px -318.66667px #0F8D68, 186px -211.66667px #1A5098, -139px -15.66667px #9DFCB2, -247px -374.66667px #55A4FF, -194px -45.66667px #05AE69, 73px 26.33333px #1A5098, 117px -165.66667px #05AE69, -91px -382.66667px #0074E4, 109px -250.66667px #03705B, 53px -179.66667px #1A5098, -232px -354.66667px #0074E4, 119px -251.66667px #05AE69, -106px -114.66667px #0F8D68, 96px -88.66667px #1A5098, -65px -100.66667px #03ED86, -213px 23.33333px #03ED86, 113px -319.66667px #0F8D68, -20px -156.66667px #05AE69, 58px -193.66667px #0F8D68, 5px -192.66667px #05AE69, 112px -214.66667px #0074E4, 37px -231.66667px #1A5098, 186px -198.66667px #05AE69, -65px -211.66667px #0F8D68, 187px -240.66667px #0F8D68, 220px -149.66667px #03ED86, 65px -84.66667px #1A5098, -46px 2.33333px #0F8D68, 67px -180.66667px #05AE69, -91px -367.66667px #0F8D68, 128px 24.33333px #0074E4, -153px -236.66667px #05AE69, -115px -405.66667px #0074E4, 93px 5.33333px #1A5098, -169px -106.66667px #0074E4;
-            }
-        }
-
-        @keyframes bang {
-            to {
-                box-shadow: -244px -313.66667px #0074E4, -132px -303.66667px #03ED86, -204px 80.33333px #05AE69, -178px -177.66667px #1A5098, 34px 51.33333px #0F8D68, -196px -214.66667px #55A4FF, 109px -134.66667px #9DFCB2, 34px -268.66667px #C6E0F9, 50px -164.66667px #0F8D68, -189px -14.66667px #0074E4, -213px 24.33333px #1A5098, 53px 57.33333px #05AE69, -238px -181.66667px #0074E4, 235px -182.66667px #1A5098, 107px -44.66667px #05AE69, -164px -155.66667px #0F8D68, -179px -318.66667px #0F8D68, 186px -211.66667px #1A5098, -139px -15.66667px #9DFCB2, -247px -374.66667px #55A4FF, -194px -45.66667px #05AE69, 73px 26.33333px #1A5098, 117px -165.66667px #05AE69, -91px -382.66667px #0074E4, 109px -250.66667px #03705B, 53px -179.66667px #1A5098, -232px -354.66667px #0074E4, 119px -251.66667px #05AE69, -106px -114.66667px #0F8D68, 96px -88.66667px #1A5098, -65px -100.66667px #03ED86, -213px 23.33333px #03ED86, 113px -319.66667px #0F8D68, -20px -156.66667px #05AE69, 58px -193.66667px #0F8D68, 5px -192.66667px #05AE69, 112px -214.66667px #0074E4, 37px -231.66667px #1A5098, 186px -198.66667px #05AE69, -65px -211.66667px #0F8D68, 187px -240.66667px #0F8D68, 220px -149.66667px #03ED86, 65px -84.66667px #1A5098, -46px 2.33333px #0F8D68, 67px -180.66667px #05AE69, -91px -367.66667px #0F8D68, 128px 24.33333px #0074E4, -153px -236.66667px #05AE69, -115px -405.66667px #0074E4, 93px 5.33333px #1A5098, -169px -106.66667px #0074E4;
-            }
-        }
-
-        @-webkit-keyframes gravity {
-            to {
-                transform: translateY(200px);
-                -moz-transform: translateY(200px);
-                -webkit-transform: translateY(200px);
-                -o-transform: translateY(200px);
-                -ms-transform: translateY(200px);
-                opacity: 0;
-            }
-        }
-
-        @keyframes gravity {
-            to {
-                transform: translateY(200px);
-                -moz-transform: translateY(200px);
-                -webkit-transform: translateY(200px);
-                -o-transform: translateY(200px);
-                -ms-transform: translateY(200px);
-                opacity: 0;
-            }
-        }
-
-        @keyframes position {
-            0%, 19.9% {
-                margin-top: 10%;
-                margin-left: 40%;
-            }
-            20%, 39.9% {
-                margin-top: 40%;
-                margin-left: 30%;
-            }
-            40%, 59.9% {
-                margin-top: 20%;
-                margin-left: 70%;
-            }
-            60%, 79.9% {
-                margin-top: 30%;
-                margin-left: 20%;
-            }
-            80%, 99.9% {
-                margin-top: 30%;
-                margin-left: 80%;
-            }
-        }
-
-        /* Responsive Styles */
-    </style>
     <!--[if mso]>
     <style type="text/css">
         .body-text {
@@ -255,7 +97,7 @@
                                                         style="padding: 0px 40px 25px; background-color: #1C3C66;"
                                                         class="padlr20 padb20">
                                                         <div class="mktEditable" id="emailHeadline2"><span
-                                                                    style="color: #ffffff; font-family: Open Sans, Helvetica, Arial, sans-serif; text-align: center !important; font-size: 25px; line-height: 31px; font-weight: 300;">your has been registred successfully!</span>
+                                                                    style="color: #ffffff; font-family: Open Sans, Helvetica, Arial, sans-serif; text-align: center !important; font-size: 25px; line-height: 31px; font-weight: 300;">your Quiz has been remarked !</span>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -289,34 +131,8 @@
                                                                     class="block padb20 padlr20">
                                                                     <div class="mktEditable"
                                                                          id="belowimg-body-copy"><span
-                                                                                style="font-size: 16px; line-height: 23px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #333333; font-weight: 300;">your password<br>
-                                                            <tr>
-                                                                <td align="center"><!-- CTA -->
-                                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <table border="0" cellpadding="0"
-                                                                                       cellspacing="0" width="100%">
-                                                                                    <tbody>
-                                                                                    <tr>
-                                                                                        <td width="100%"
-                                                                                            class="width260 aligncenter"
-                                                                                            align="center"
-                                                                                            style="padding: 0;">
-                                                                                            <a class="cta"
-                                                                                               href="http://www.google.com"
-                                                                                               style="font-family: sans-serif; background-color: #05AE69; color: #ffffff; display: inline-block; font-size: 16px; font-weight: 500; line-height: 18px; text-align: center; text-decoration: none; width: auto; -webkit-text-size-adjust: none; border: 15px solid #05AE69; border-left: 25px solid #05AE69; border-right: 25px solid #05AE69; border-radius: 2px !important;">FCIH-MODULE is waiting for you.</a></td>
-                                                                                    </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!-- CTA --></td>
-                                                            </tr>
-                                                            </tbody>
+                                                                                style="font-size: 16px; line-height: 23px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #333333; font-weight: 300;">Grades is attached in the mail,<br>
+                                                                            <h1>Thank you</h1>
                                                         </table>
                                                     </td>
                                                 </tr>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\DB;
 use App\Role;
+use App\Http\Controllers\MailController;
 
 class DefaultUserController extends Controller
 {
@@ -60,6 +61,9 @@ class DefaultUserController extends Controller
                 foreach ($data as $datum) {
                     $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
+                    if(MailController::index()){
+                        // counting users sent mail while loading with ajax.
+                    }
                     try {
                         $user = new User();
                         $user_id = $user->create([
@@ -68,12 +72,14 @@ class DefaultUserController extends Controller
                             'password' => $password,
                             'college_id' => $datum['id']
                         ])->attachRole($role);
+
                     } catch (\Illuminate\Database\QueryException $e) {
                         $failed_to_create[] = [
                             'name' => $datum['name'],
                             'email' => $datum['email'],
                             'college_id' => $datum['id']
                         ];
+
                     }
                 }
                 return redirect('users/create')->with('data', $failed_to_create);

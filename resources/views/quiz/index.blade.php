@@ -50,28 +50,9 @@
                             <td>{!! $quiz->end_date !!}</td>
                             <td>{{ $quiz->created_at }}</td>
                             <td>
-                                @if(Auth::user()->can('solve-quiz'))
-                                    @if(Auth::user()->isStudent())
-                                        @if(count($solved_quizzes) > 0)
-                                            @foreach($solved_quizzes as $solved_quiz)
-                                                @if($solved_quiz->quiz->id == $quiz->id)
-                                                    @if(floatval($solved_quiz->grade) != null)
-                                                        <span class="label label-success">@lang('module.quizzes.fields.done')</span>
-                                                    @else
-                                                        <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                                           class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                               class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
-                                        @endif
-                                    @else
-                                        <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                           class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
-                                    @endif
-                                @endif
+
+                                <a href="{{ route('quizzes.show',[$quiz->id]) }}"
+                                   class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
                                 @if(Auth::user()->can('edit-quiz'))
                                     <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
                                        class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>

@@ -60,7 +60,6 @@ class SolveQuizController extends Controller
             'quiz_id' => $test_id,
             'grade' => $result,
         ]);
-
         foreach ($request->input('questions', []) as $key => $question) {
             $status = 0;
             $question_grade = 0;
@@ -71,7 +70,6 @@ class SolveQuizController extends Controller
                 $result += floatval($request->input('question_grades.' . $question));
                 $question_grade += floatval($request->input('question_grades.' . $question));
             }
-
             UsersAnswer::create([
                 'user_id' => Auth::id(),
                 'quiz_id' => $test_id,
@@ -81,7 +79,6 @@ class SolveQuizController extends Controller
                 'grade' => $question_grade
             ]);
         }
-
         $problems = array();
         foreach ($request->input('problems', []) as $key => $problem) {
             $problems[] = Question::find($problem)->load('testcases');
@@ -187,7 +184,6 @@ class SolveQuizController extends Controller
                         }
                     }
                 } catch (Exception $e) {
-
                 }
             }
             if ($sharp_judge) {

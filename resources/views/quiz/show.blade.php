@@ -18,6 +18,7 @@
     <div class="panel panel-default">
         <?php $i = 1;?>
         {{ Form::hidden('quiz_id', $id, array('id' => 'quiz_id')) }}
+        {{ Form::hidden('solve_many', $solve_many, array('id' => 'solve_many')) }}
         @if ( count($questions) > 0)
             <?php ?>
             @foreach($questions as $question)

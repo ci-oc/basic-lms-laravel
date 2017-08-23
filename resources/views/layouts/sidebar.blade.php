@@ -64,7 +64,7 @@
         </nav>
     </div>
     <!--END TOPBAR-->
-    <div id="wrapper" >
+    <div id="wrapper">
         <!--BEGIN SIDEBAR MENU-->
         <nav id="sidebar" role="navigation" data-step="2"
              data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
@@ -92,7 +92,7 @@
                             </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
                     </li>
-                    @if(Auth::user()->isInstructor())
+                    @if(Auth::user()->can('create-quiz'))
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
                                     href="{{route('problems.index')}}"><i
                                         class="fa fa-code fa-fw">
@@ -107,7 +107,8 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_questions')</span></a>
 
                         </li>
-
+                    @endif
+                    @if(Auth::user()->can('add-students'))
                         <li class="{{ $request->segment(1) == 'users' ? 'active' : '' }}"><a
                                     href="{{route('users.create')}}"><i
                                         class="fa fa-users fa-fw">
@@ -115,13 +116,13 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_new_users')</span></a>
 
                         </li>
-                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
-                                        class="fa fa-bar-chart-o fa-fw">
-                                    <div class="icon-bg bg-orange"></div>
-                                </i><span class="menu-title">Charts</span></a>
-
-                        </li>
                     @endif
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
+                                    class="fa fa-bar-chart-o fa-fw">
+                                <div class="icon-bg bg-orange"></div>
+                            </i><span class="menu-title">Charts</span></a>
+
+                    </li>
                     @if(Auth::user()->isStudent())
                         <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
                                     href="{{route('results.index')}}"><i
@@ -138,7 +139,8 @@
 
                         </li>
                     @endif
-                    <li class="{{ $request->segment(1) == 'submissions' ? 'active' : '' }}"><a href="{{ route('submissions.index') }}"><i
+                    <li class="{{ $request->segment(1) == 'submissions' ? 'active' : '' }}"><a
+                                href="{{ route('submissions.index') }}"><i
                                     class="fa fa-database fa-fw">
                                 <div class="icon-bg bg-red"></div>
                             </i><span class="menu-title">@lang('module.bars.sidebar_submissions')</span></a>

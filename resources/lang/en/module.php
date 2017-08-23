@@ -169,7 +169,10 @@ return [
             'b' => 'Ignore changes in the amount of white space',
             'B' => 'Ignore changes where lines are all blank',
             'w' => 'Ignore all white space',
-            'SJ' => 'Sharp Judging'
+            'SJ' => 'Sharp Judging',
+        ],
+        'quiz-options' => [
+            'solve_many' => 'Students can solve this quiz more than once.'
         ]
     ],
     'profiles' => [

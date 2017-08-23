@@ -11,7 +11,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('selected_course',Lang::get('module.quizzes.course-title'), ['class' =>'control-label']) !!}
+                    {!! Form::label('selected_course',trans('module.quizzes.course-title'), ['class' =>'control-label']) !!}
                     <select class="form-control" name="course_id" required>
                         @foreach($courses as $course)
                             <option value="{{$course->id}}">{{$course->title}}</option>
@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('title',Lang::get('module.quizzes.fields.quiz'),['class' => 'control-label']) !!}
+                    {!! Form::label('title',trans('module.quizzes.fields.quiz'),['class' => 'control-label']) !!}
                     {!! Form::text('title', old('title'), ['required','class' => 'form-control ','placeholder' => '']) !!}
                     @if($errors->has('title'))
                         <p class="help-block alert-danger">
@@ -44,6 +44,12 @@
                             {{ $errors->first('description') }}
                         </p>
                     @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {{ Form::checkbox('solve_many',1,null, ['class' => 'field','id' => 'solve_many']) }}
+                    {!! Form::label('solve_many',trans('module.judge_options.quiz-options.solve_many'), ['class' => 'control-label']) !!}
                 </div>
             </div>
             <div class="row">

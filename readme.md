@@ -30,4 +30,4 @@ Please click the link below.
 
 ## Accounts
 Please go to your DBMS and view users table. First two records are the superusers accounts, next 20 are instructors. the 20 after them are students. 
-- Default password: "secret" (without quotes)
+- Default password: "secret" (without quotes)   

@@ -122,7 +122,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('code_snippet',Lang::get('module.problems.fields.code_snippet'), ['class' => 'control-label']) !!}
+                    {!! Form::label('code_snippet',trans('module.problems.fields.code_snippet'), ['class' => 'control-label']) !!}
                     {!! Form::textarea('code_snippet', old('code_snippet'), ['class' => 'form-control ','resize' => 'none','rows' => '6']) !!}
                     @if($errors->has('output_format'))
                         <p class="help-block alert-danger">
@@ -133,7 +133,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('more_info_link',Lang::get('module.problems.fields.more_info_link'), ['class' => 'control-label']) !!}
+                    {!! Form::label('more_info_link',trans('module.problems.fields.more_info_link'), ['class' => 'control-label']) !!}
                     {!! Form::url('more_info_link', old('more_info_link'), ['class' => 'form-control ','placeholder' => 'Type an URL']) !!}
                     @if($errors->has('output_format'))
                         <p class="help-block alert-danger">
@@ -143,7 +143,7 @@
                 </div>
             </div>
             <div class="form-group text-left">
-                {!! Form::label('judge_options',Lang::get('module.judge_options.title'), ['class' => 'control-label']) !!}
+                {!! Form::label('judge_options',trans('module.judge_options.title'), ['class' => 'control-label']) !!}
                 <br>
                 @foreach($judge_options as $option)
                     <input type="checkbox" name="judge_options[]"

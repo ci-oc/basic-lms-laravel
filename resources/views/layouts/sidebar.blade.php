@@ -123,7 +123,7 @@
                             </i><span class="menu-title">Charts</span></a>
 
                     </li>
-                    @if(Auth::user()->isStudent())
+                    @if(Auth::user()->can('join-course'))
                         <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
                                     href="{{route('results.index')}}"><i
                                         class="fa fa-th-list fa-fw">

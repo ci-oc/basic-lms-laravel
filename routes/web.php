@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('send','MailController@view'); // just for testing mail view , will be deleted
+Route::get('sendMail','MailController@index'); // just for testing sendig mail , will be deleted
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('quizzes/chart/{id}', [

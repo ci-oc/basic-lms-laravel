@@ -1,16 +1,4 @@
 <!DOCTYPE html>
-
-<div class="top-right links">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-                <a href="{{ url('/dashboard') }}">Home</a>
-            @else
-                <a href="{{ url('/login') }}">Login</a>
-            @endif
-        </div>
-    @endif
-</div>
 <style>
 
     * {
@@ -349,16 +337,16 @@
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
+                                   required autofocus>
 
                             @if ($errors->has('email'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                    <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                             @endif
                         </div>
                     </div>
-                    <br>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -372,29 +360,24 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    Remember Me
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Login
-                            </button>
-
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                Forgot Your Password?
-                            </a>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
+                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                        Forgot Your Password?
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        Login
+                    </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -430,9 +413,11 @@
                     <li role="presentation">
                         @if (Route::has('login'))
                             @if (Auth::check())
-                                <a  style="color:#0EBCF3;" href="{{ url('/dashboard') }}">Home</a>
+                                <a style="color:#0EBCF3;" href="{{ url('/dashboard') }}">Dashboard</a>
                             @else
-                                <button style="color:#0EBCF3; background-color:inherit; border:none;" type="button" data-toggle="modal" data-target="#myModal">Login</button>
+                                <button style="color:#0EBCF3; background-color:inherit; border:none;" type="button"
+                                        data-toggle="modal" data-target="#myModal">Login
+                                </button>
                             @endif
                         @endif
                     </li>

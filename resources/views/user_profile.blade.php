@@ -168,7 +168,9 @@
                                                                 @if ($user_status->result[$j]->verdict == "OK")
                                                                     <tr>
                                                                         <td>{{ $j+1 }}</td>
-                                                                        <td>{{$user_status->result[$j]->problem->name}}</td>
+                                                                        <td>
+                                                                            <a class="btn btn-link" href="http://codeforces.com/problemset/problem/{{$user_status->result[$j]->problem->contestId}}/{{$user_status->result[$j]->problem->index}}">{{$user_status->result[$j]->problem->name}}</a>
+                                                                        </td>
                                                                         <td>{{$user_status->result[$j]->problem->index}}</td>
                                                                         <td>
                                                                             <span class="label label-sm label-success">Approved</span>

@@ -11,7 +11,8 @@
         </div>
 
         <div class="panel-body">
-            <table class="table table-bordered table-striped" id="{{ count($courses) > 0 ? 'datatable' : '' }}">
+            <table class="table table-bordered table-striped"
+                   id="{{ count($available_courses) > 0 ? 'datatable' : '' }}">
                 <thead>
                 <tr>
                     <th>@lang('module.courses.relation-title')</th>
@@ -31,14 +32,12 @@
                             <td>
                                 <button class="btn btn-xs btn-danger" id="enroll{{$course->id}}"
                                         onclick="enroll({{$course->id}})">@lang('module.courses.enroll-course')</button>
-                                <div id="register{{$course->id}}" style="display:none;">
-                                    <div class="form-group">
-                                        {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
-                                        {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
-                                        {!! Form::input('text','access_code', old('access_code'), ['required', 'placeholder' => trans('module.courses.fields.access_code')]) !!}
-                                        {{ Form::submit(Lang::get('module.save'), ['class' => 'btn-xs btn btn-info']) }}
-                                        {!! Form::close() !!}
-                                    </div>
+                                <div class="form-group" id="register{{$course->id}}" style="display:none;">
+                                    {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
+                                    {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
+                                    {!! Form::input('text','access_code', old('access_code'), ['class' => 'form-control','required', 'placeholder' => trans('module.courses.fields.access_code')]) !!}
+                                    {{ Form::submit(Lang::get('module.save'), ['class' => 'btn-xs btn btn-info']) }}
+                                    {!! Form::close() !!}
                                 </div>
                             </td>
 

@@ -19,7 +19,7 @@ class DefaultUserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:instructor');
+        $this->middleware('permission:add-students', ['only' => 'create', 'store', 'store_single']);
     }
 
     /**
@@ -61,7 +61,7 @@ class DefaultUserController extends Controller
                 foreach ($data as $datum) {
                     $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                    if(MailController::index()){
+                    if (MailController::index()) {
                         // counting users sent mail while loading with ajax.
                     }
                     try {

@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -92,7 +91,7 @@
                             </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
                     </li>
-                    @if(Auth::user()->can('create-quiz'))
+                    @if(Auth::user()->isInstructor())
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
                                     href="{{route('problems.index')}}"><i
                                         class="fa fa-code fa-fw">
@@ -123,7 +122,7 @@
                             </i><span class="menu-title">Charts</span></a>
 
                     </li>
-                    @if(Auth::user()->can('join-course'))
+                    @if(Auth::user()->isStudent())
                         <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
                                     href="{{route('results.index')}}"><i
                                         class="fa fa-th-list fa-fw">

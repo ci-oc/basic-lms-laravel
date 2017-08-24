@@ -37,7 +37,10 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quiz.create');
+        if (count(Auth::user()->courses) > 0)
+            return view('quiz.create');
+        else
+            return redirect()->back()->with('courses_0', '');
     }
 
     /**

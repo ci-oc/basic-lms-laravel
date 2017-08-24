@@ -6,6 +6,11 @@
             <p>@lang('module.errors.error-quiz-made-before')</p>
         </div>
     @endif
+    @if(Session::has('courses_0'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-0-courses')</p>
+        </div>
+    @endif
     @if(Session::has('none-solved'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-none-solved')</p>
@@ -14,7 +19,7 @@
     @if(Auth::user()->can('create-quiz'))
         <p>
             <a href="{{route('quizzes.create')}}"
-               class="btn btn-success create_btn">
+               class="btn btn-success create_btn {{ count($courses) > 0 ? '' : 'disabled' }}">
                 @lang('module.addnew')
             </a>
         </p>

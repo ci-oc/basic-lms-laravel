@@ -27,7 +27,7 @@
                             <td>{{ $result->quiz->title }}</td>
                             <td>{{ $result->created_at or '' }}</td>
                             <td>{{$result->quiz->full_mark}}</td>
-                            <td>{{ $result->grade }}</td>
+                            <td>{{ $result->grade or 'Pending'}}</td>
                             <td>
                                 <a href="{{ route('results.show',[$result->id]) }}"
                                    class="btn btn-xs btn-primary">@lang('module.view')</a>

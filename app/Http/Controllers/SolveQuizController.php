@@ -23,6 +23,7 @@ class SolveQuizController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('permission:solve-quiz', ['only' => 'store']);
     }
 
     /**
@@ -53,12 +54,16 @@ class SolveQuizController extends Controller
      */
     public function store(Request $request)
     {
+
         $result = 0;
         $test_id = $request->input('quiz_id');
-        $test = UsersQuiz::create([
+        $test = UsersQuiz::updateOrCreate([
             'user_id' => Auth::id(),
             'quiz_id' => $test_id,
-            'grade' => $result,
+        ], [
+            'user_id' => Auth::id(),
+            'quiz_id' => $test_id,
+            'grade' => $result
         ]);
         foreach ($request->input('questions', []) as $key => $question) {
             $status = 0;
@@ -70,14 +75,20 @@ class SolveQuizController extends Controller
                 $result += floatval($request->input('question_grades.' . $question));
                 $question_grade += floatval($request->input('question_grades.' . $question));
             }
-            UsersAnswer::create([
+            UsersAnswer::updateOrCreate([
                 'user_id' => Auth::id(),
                 'quiz_id' => $test_id,
                 'question_id' => $question,
-                'option_id' => $request->input('answers.' . $question),
-                'correct' => $status,
-                'grade' => $question_grade
-            ]);
+            ],
+                [
+                    'user_id' => Auth::id(),
+                    'quiz_id' => $test_id,
+                    'question_id' => $question,
+                    'option_id' => $request->input('answers.' . $question),
+                    'correct' => $status,
+                    'grade' => $question_grade
+                ]
+            );
         }
         $problems = array();
         foreach ($request->input('problems', []) as $key => $problem) {
@@ -93,17 +104,20 @@ class SolveQuizController extends Controller
             $sharp_judge = false;
             $correct = 0;
             $testcase_grade = 0;
-            $solved_problem = UsersProblemAnswer::create([
+            $solved_problem = UsersProblemAnswer::updateOrCreate([
                 'user_id' => Auth::id(),
                 'quiz_id' => $test_id,
                 'problem_id' => $problem->id,
-                'user_code' => $request->input('user_code.' . $problem->id),
-                'time_consumed' => $time_consumed,
-                'compile_status' => $compile_status,
-                'compile_err_reason' => $err_reason,
-                'run_status' => $run_status,
-                'grade' => $problem_grade,
-            ]);
+            ],
+                [
+                    'user_code' => $request->input('user_code.' . $problem->id),
+                    'time_consumed' => $time_consumed,
+                    'compile_status' => $compile_status,
+                    'compile_err_reason' => $err_reason,
+                    'run_status' => $run_status,
+                    'grade' => $problem_grade,
+                ]
+            );
             if (count($problem->testcases) > 0) {
                 try {
                     $user_code = Grader::saveScript($lang, $request->input('user_code.' . $problem->id));
@@ -146,17 +160,20 @@ class SolveQuizController extends Controller
                                             $correct++;
                                             $correct_bool = 1;
                                         }
-                                        UsersTestCaseAnswer::create([
+                                        UsersTestCaseAnswer::updateOrCreate([
                                             'user_id' => Auth::id(),
                                             'quiz_id' => $test_id,
                                             'problem_id' => $solved_problem->id,
                                             'testcase_id' => $testcase->id,
-                                            'output' => $this->readFile($code_output_path),
-                                            'correct' => $correct_bool,
-                                            'cpu_usage' => $run_output['detail']['cpu'] . $run_output['detail']['cpu_unit'],
-                                            'vsize' => $run_output['detail']['vsize'] . $run_output['detail']['vsize_unit'],
-                                            'rss' => $run_output['detail']['rss'] . $run_output['detail']['rss_unit'],
-                                        ]);
+                                        ],
+                                            [
+                                                'output' => $this->readFile($code_output_path),
+                                                'correct' => $correct_bool,
+                                                'cpu_usage' => $run_output['detail']['cpu'] . $run_output['detail']['cpu_unit'],
+                                                'vsize' => $run_output['detail']['vsize'] . $run_output['detail']['vsize_unit'],
+                                                'rss' => $run_output['detail']['rss'] . $run_output['detail']['rss_unit'],
+                                            ]
+                                        );
                                     } else {
                                         if ($run_output_status == 'RF')
                                             $run_status = 'Restricted Function';

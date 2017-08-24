@@ -154,7 +154,8 @@ return [
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
         'error-access-code' => 'Invalid Access Code',
         'error-quiz-made-before' => 'You have done this quiz before!',
-        'error-none-solved' => 'No one has solved this quiz yet.'
+        'error-none-solved' => 'No one has solved this quiz yet.',
+        'error-0-courses' => 'You have to create a course first.'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

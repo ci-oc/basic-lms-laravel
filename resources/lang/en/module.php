@@ -153,9 +153,11 @@ return [
         'error-saving' => 'There was an error saving your file, please try again.',
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
         'error-access-code' => 'Invalid Access Code',
-        'error-quiz-made-before' => 'You have done this quiz before!',
+        'error-quiz-made-before' => 'Solve many option is turned off for this quiz.',
         'error-none-solved' => 'No one has solved this quiz yet.',
-        'error-0-courses' => 'You have to create a course first.'
+        'error-0-courses' => 'You have to create a course first.',
+        'error-0-questions' => 'You have assign questions to this quiz first.',
+        'error-quiz-pending' => 'Quiz is still being remarked.'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',
@@ -200,7 +202,8 @@ return [
             'cols' => [
                 '90' => 'More than 90%',
                 '50' => 'More than 50%',
-                '50_' => 'Less than 50%'
+                '50_' => 'Less than 50%',
+                'pending' => "Pending",
             ]
         ]
     ],

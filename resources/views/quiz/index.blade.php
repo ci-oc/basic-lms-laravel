@@ -6,6 +6,11 @@
             <p>@lang('module.errors.error-quiz-made-before')</p>
         </div>
     @endif
+    @if(Session::has('0_questions'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-0-questions')</p>
+        </div>
+    @endif
     @if(Session::has('courses_0'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-0-courses')</p>

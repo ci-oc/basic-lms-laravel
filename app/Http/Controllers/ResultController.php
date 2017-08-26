@@ -62,16 +62,20 @@ class ResultController extends Controller
     public function show($id)
     {
         $quiz_result = UsersQuiz::find($id)->load('user', 'quiz');
-        $questions_results = UsersAnswer::where([
-            ['user_id', '=', Auth::id()],
-            ['quiz_id', '=', $quiz_result->quiz_id]
-        ])->get();
-        $problems_results = UsersProblemAnswer::where([
-            ['user_id', '=', Auth::id()],
-            ['quiz_id', '=', $quiz_result->quiz_id]
-        ])->get();
-        $problems_results->load('solvedTestCases');
-        return view('results.show', compact('quiz_result', 'questions_results', 'problems_results'));
+        if ($quiz_result->grade != -1) {
+            $questions_results = UsersAnswer::where([
+                ['user_id', '=', Auth::id()],
+                ['quiz_id', '=', $quiz_result->quiz_id]
+            ])->get();
+            $problems_results = UsersProblemAnswer::where([
+                ['user_id', '=', Auth::id()],
+                ['quiz_id', '=', $quiz_result->quiz_id]
+            ])->get();
+            $problems_results->load('solvedTestCases');
+            return view('results.show', compact('quiz_result', 'questions_results', 'problems_results'));
+        } else {
+            return redirect()->back()->with('pending','');
+        }
     }
 
     /**

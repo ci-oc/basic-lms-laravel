@@ -65,9 +65,13 @@ class QuizController extends Controller
     {
         $quiz = Quiz::find($id);
         $solve_many = $quiz->solve_many;
-        $grade = UsersQuiz::where('user_id', '=', Auth::id())->where('quiz_id', '=', $id)->pluck('grade')->toArray();
-        if (floatval($grade) == null || $solve_many) {
-            return view('quiz.show', compact('id', 'solve_many'));
+        $grade = UsersQuiz::where([['user_id', '=', Auth::id()],
+            ['quiz_id', '=', $id]])->pluck('grade')->toArray();
+        if ($grade == null || $solve_many) {
+            if (count($quiz->questions) > 0)
+                return view('quiz.show', compact('id', 'solve_many'));
+            else
+                return redirect()->back()->with('0_questions', '');
         }
         return redirect()->back()->with('done_already', '');
     }

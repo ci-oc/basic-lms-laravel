@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/store_single')->uses('DefaultUserController@store_single')->name('users.store_single');
     Route::resource('solve', 'SolveQuizController');
     Route::resource('questions', 'QuestionController');
+    Route::resource('news', 'NewsController');
     Route::post('questions/massDestroy')->uses('QuestionController@massDestroy')->name('questions.massDestroy');
     Route::get('/admin', function () {
         return view('admin.index');

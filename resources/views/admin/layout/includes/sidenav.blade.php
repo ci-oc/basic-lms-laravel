@@ -20,8 +20,13 @@
                             Roles</a></li>
                 </ul>
                 <ul>
-                    <li class="sub-menu"><a href="{{route('register')}}"><i class="fa fa-address-book" aria-hidden="true"></i>
+                    <li class="sub-menu"><a href="{{route('register')}}"><i class="fa fa-address-book"
+                                                                            aria-hidden="true"></i>
                             Add Instructor</a></li>
+                </ul>
+                <ul>
+                    <li class="sub-menu"><a href="{{route('news.index')}}"><i class="fa fa-newspaper-o"
+                                                                            aria-hidden="true"></i> Add News</a></li>
                 </ul>
             </li>
 

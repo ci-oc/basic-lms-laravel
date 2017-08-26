@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\News;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('*', function ($view) {
             if (Auth::check()) {
+                $news = News::all();
                 $user = User::find(Auth::id())->load('courses.quizzes.questions.options', 'courses.quizzes.questions.testcases', 'courses.quizzes.questions.judge_options');
                 $courses = $user['courses'];
                 $quizzes = array();
@@ -43,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('quizzes', $quizzes);
                 $view->with('questions', $questions);
                 $view->with('problems', $problems);
+                $view->with('all_news', $news);
             }
         });
     }

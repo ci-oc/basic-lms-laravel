@@ -33,7 +33,12 @@
                 <div class="news-update-box hidden-xs"><span
                             class="text-uppercase mrm pull-left text-white">News:</span>
                     <ul id="news-update" class="ticker list-unstyled">
-                        <li>Welcome to KAdmin - Responsive Multi-Style Admin Template</li>
+                        <marquee direction="left" scrollamount="5" behavior="scroll" onmouseover="this.stop()"
+                                 onmouseout="this.start()">
+                            @foreach($all_news as $news)
+                                <a href="" class="hvr-float">{{$news->news}}</a> <<i class="fa fa-newspaper-o" aria-hidden="true"></i>>
+                            @endforeach
+                        </marquee>
                     </ul>
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">

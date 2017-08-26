@@ -107,3 +107,27 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#form-overview').on('submit', function() {
+                setInterval(function(){
+                    $.getJSON('/progress', function(data) {
+                        $('#progress').html(data[0]);
+                    });
+                }, 1000);
+
+                $.post(
+                    $(this).prop('action'),
+                    {"_token": $(this).find('input[name=_token]').val()},
+                    function() {
+                        window.location.href = 'success';
+                    },
+                    'json'
+                );
+
+                return false;
+            });
+        });
+    </script>
+@stop

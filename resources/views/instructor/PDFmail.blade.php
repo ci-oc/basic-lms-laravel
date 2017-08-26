@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="noindex, nofollow">
-    <title>Premier Agent Direct</title>
+    <title>Mail</title>
     <!--[if mso]>
     <style type="text/css">
         .body-text {
@@ -127,11 +127,13 @@
                                                             <tbody>
                                                             <tr>
                                                                 <br>
+                                                                <p><h1>Hi,</h1>this an automated response from FCIH-Module!
+                                                                </p><p>Grades is attached.</p>
                                                                 <td style="padding-bottom: 30px;" align="center"
                                                                     class="block padb20 padlr20">
                                                                     <div class="mktEditable"
                                                                          id="belowimg-body-copy"><span
-                                                                                style="font-size: 16px; line-height: 23px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #333333; font-weight: 300;">Grades is attached in the mail,<br>
+                                                                                style="font-size: 16px; line-height: 23px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #333333; font-weight: 300;">,<br>
                                                                             <h1>Thank you</h1>
                                                         </table>
                                                     </td>

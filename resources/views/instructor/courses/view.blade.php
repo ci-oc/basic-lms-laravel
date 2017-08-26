@@ -9,19 +9,20 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <h3 style="color: #3C3C3C;">@lang('module.courses.fields.course'):</h3>
+                            <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.course'):</h5>
                             {{$course->title}}
                             <hr>
-                            <h3 style="color: #3C3C3C;">@lang('module.courses.fields.access_code'):</h3>
+                            <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.access_code')
+                                :</h5>
                             {{$course->access_code}}
                             <hr>
-                            <h3 style="color: #3C3C3C;">@lang('module.courses.fields.desc'):</h3>
+                            <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.desc'):</h5>
                             {{$course->description}}
                             <hr>
-                            <h3 style="color: #3C3C3C;">@lang('module.courses.fields.created_at'):</h3>
+                            <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.created_at'):</h5>
                             {{$course->created_at}}
                             <hr>
-                            <h3 style="color: #3C3C3C;">@lang('module.courses.fields.assistant_professor_title')</h3>
+                            <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.assistant_professor_title')</h5>
                             <ul>
                                 @foreach($assistant_professors as $professor)
                                     <li style="font-weight: bold;">{{ $professor->name }}</li>

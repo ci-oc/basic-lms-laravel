@@ -9,6 +9,7 @@ use App\Http\Controllers\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\Http\Controllers\MailController;
+use function Sodium\compare;
 
 class DefaultUserController extends Controller
 {
@@ -61,9 +62,9 @@ class DefaultUserController extends Controller
                 foreach ($data as $datum) {
                     $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                    if (MailController::index()) {
-                        // counting users sent mail while loading with ajax.
-                    }
+                    //if (MailController::index()) {
+                    // counting users sent mail while loading with ajax.
+                    //}
                     try {
                         $user = new User();
                         $user_id = $user->create([
@@ -72,14 +73,12 @@ class DefaultUserController extends Controller
                             'password' => $password,
                             'college_id' => $datum['id']
                         ])->attachRole($role);
-
                     } catch (\Illuminate\Database\QueryException $e) {
                         $failed_to_create[] = [
                             'name' => $datum['name'],
                             'email' => $datum['email'],
                             'college_id' => $datum['id']
                         ];
-
                     }
                 }
                 return redirect('users/create')->with('data', $failed_to_create);
@@ -89,73 +88,73 @@ class DefaultUserController extends Controller
         }
     }
 
+/**
+ * Display the specified resource.
+ *
+ * @param  int $id
+ * @return \Illuminate\Http\Response
+ */
+public
+function show($id)
+{
+    //
+}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+/**
+ * Show the form for editing the specified resource.
+ *
+ * @param  int $id
+ * @return \Illuminate\Http\Response
+ */
+public
+function edit($id)
+{
+    //
+}
+
+/**
+ * Update the specified resource in storage.
+ *
+ * @param  \Illuminate\Http\Request $request
+ * @param  int $id
+ * @return \Illuminate\Http\Response
+ */
+public
+function update(Request $request, $id)
+{
+    //
+}
+
+/**
+ * Remove the specified resource from storage.
+ *
+ * @param  int $id
+ * @return \Illuminate\Http\Response
+ */
+public
+function destroy($id)
+{
+    //
+}
+
+public
+function store_single(Request $request)
+{
+    $role = Role::where('name', '=', 'student')->pluck('id')->first(); //student
+    $failed_to_create = array();
+    try {
+        $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
+        $password = Hash::make($non_encrypted_password); //Encrypting this password.
+        $user = new User();
+        $user_id = $user->create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $password,
+            'college_id' => $request->input('college_id'),
+        ])->attachRole($role);
+    } catch (\Illuminate\Database\QueryException $e) {
+        $failed_to_create[] = $request->all();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function destroy($id)
-    {
-        //
-    }
-
-    public function store_single(Request $request)
-    {
-        $role = Role::where('name', '=', 'student')->pluck('id')->first(); //student
-        $failed_to_create = array();
-        try {
-            $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
-            $password = Hash::make($non_encrypted_password); //Encrypting this password.
-            $user = new User();
-            $user_id = $user->create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => $password,
-                'college_id' => $request->input('college_id'),
-            ])->attachRole($role);
-        } catch (\Illuminate\Database\QueryException $e) {
-            $failed_to_create[] = $request->all();
-        }
-        return redirect('users/create')->with('data', $failed_to_create);
-
-    }
+    return redirect('users/create')->with('data', $failed_to_create);
+}
 }

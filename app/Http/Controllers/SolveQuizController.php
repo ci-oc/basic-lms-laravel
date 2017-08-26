@@ -60,7 +60,7 @@ class SolveQuizController extends Controller
             'quiz_id' => $test_id,
             'grade' => $result
         ]);
-        $this->dispatch(new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()));
+        $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
         return redirect()->route('results.index');
     }
 

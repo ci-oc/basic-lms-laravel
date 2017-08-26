@@ -290,7 +290,7 @@
                                                                     class="block padb20 padlr20">
                                                                     <div class="mktEditable"
                                                                          id="belowimg-body-copy"><span
-                                                                                style="font-size: 16px; line-height: 23px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #333333; font-weight: 300;">your password<br>
+                                                                                style="font-size: 16px; line-height: 23px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #333333; font-weight: 300;">Password : {{ $password }}<br>
                                                             <tr>
                                                                 <td align="center"><!-- CTA -->
                                                                     <table border="0" cellpadding="0" cellspacing="0">

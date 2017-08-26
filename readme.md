@@ -14,6 +14,28 @@ We would like to extend our thanks to the following APIs and their developers.
     - Forked and developed by andrewnagyeb [andrewnagyeb/grader-library](https://github.com/andrewnagyeb/grader-library) [Please check readme file.]
 - **[Time and Date](https://www.timeanddate.com/)**
 
+
+## Installation ( Make sure you run it on *nix operating system)
+- **`git clone https://github.com/andrewnagyeb/module`**
+- **`cd module`**
+- **`composer update`**
+- **`composer dump-autoload`**
+- **`php artisan key:generate`**
+- **`php artisan config:cache`**
+
+In order to host it on local area network, run the following command:
+- **`ifconfig | grep inet`**
+then copy your IP. 
+- **`php artisan serve --host=IP --port=8000`**
+
+To host it on local machine:
+- **`php artisan serve`**
+
+And run the following command in order to run Online Judge Queue and Mails Queue
+- **`php artisan queue:listen --queue=remark,emails`** 
+
+To activate plagiarism detection using *MOSS* run:
+- **`php artisan remark`** 
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within FCI-H-LMS, please send an e-mail to fcih-lms@fcih.com. All security vulnerabilities will be promptly addressed.

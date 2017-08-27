@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class AnnouncementsController extends Controller
 {
     /**
@@ -21,7 +22,7 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        //
+        return view('announcements.index');
     }
 
     /**
@@ -42,7 +43,11 @@ class AnnouncementsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array();
+        $data['user_id'] = Auth::id();
+        $data['course_id'] = $request->input('course_id');
+        $data['announcement'] = $request->input('announcement');
+        Announcement::create($data);
     }
 
     /**

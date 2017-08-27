@@ -224,5 +224,9 @@ return [
         'news-text' => 'News Text',
         'news' => 'News',
         'current-news' => 'Current News'
+    ],
+    'announcements' => [
+        'add-announcement' => 'ADD new announcement',
+        'content' => 'Announcement Content'
     ]
 ];

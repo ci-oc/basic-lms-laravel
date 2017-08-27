@@ -60,9 +60,10 @@
                             <td>{!! $quiz->end_date !!}</td>
                             <td>{{ $quiz->created_at }}</td>
                             <td>
-
-                                <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                   class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
+                                @if(Auth::user()->can('solve-quiz'))
+                                    <a href="{{ route('quizzes.show',[$quiz->id]) }}"
+                                       class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
+                                @endif
                                 @if(Auth::user()->can('edit-quiz'))
                                     <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
                                        class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>

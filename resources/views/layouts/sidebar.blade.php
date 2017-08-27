@@ -82,6 +82,13 @@
                                     class="fa fa-tachometer fa-fw">
                                 <div class="icon-bg bg-orange"></div>
                             </i><span class="menu-title">@lang('module.bars.sidebar_dashboard')</span></a></li>
+                    <li class="{{ $request->segment(1) == 'announcements' ? 'active' : '' }}"><a
+                                href="{{route('announcements.index')}}"><i
+                                    class="fa fa-bullhorn">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">@lang('module.bars.sidebar_announcements')</span></a>
+
+                    </li>
                     <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
                                 href="{{ route('courses.index') }}"><i
                                     class="fa fa-graduation-cap" aria-hidden="true">
@@ -96,7 +103,7 @@
                             </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
                     </li>
-                    @if(Auth::user()->isInstructor())
+                    @if(Auth::user()->can('create-quiz'))
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
                                     href="{{route('problems.index')}}"><i
                                         class="fa fa-code fa-fw">

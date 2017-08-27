@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('question_text',Lang::get('module.problems.fields.problem_desc'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => 'Type Problem Description','resize' => 'none']) !!}
+                    {{ Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => 'Type Problem Description','resize' => 'none']) }}
                     @if($errors->has('question_text'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('question_text') }}

@@ -22,7 +22,9 @@ class CreateUserProblemTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id', 'fk_256_user_problem_id_user')->references('id')->on('users')->onDelete('cascade');
             $table->text('user_code');
+            $table->text('user_code_path')->nullable();
             $table->string('time_consumed');
+            $table->string('code_language');
             $table->string('compile_status');
             $table->text('compile_err_reason')->nullable();
             $table->string('run_status');

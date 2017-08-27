@@ -83,7 +83,11 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'Solve Quiz',
                 'description' => 'Access to solve quiz for existing course.'
             ],
-
+            [
+                'name' => 'add-announcement',
+                'display_name' => 'Add Announcement',
+                'description' => 'Privilege to add announcements to students'
+            ],
 
         ];
 

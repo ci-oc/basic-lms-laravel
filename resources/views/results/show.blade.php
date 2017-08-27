@@ -154,7 +154,12 @@
                                     </div>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <th>Language</th>
+                                <td>
+                                    {{ strtoupper($result->code_language)}}
+                                </td>
+                            </tr>
                             @if($result->run_status == 'OK')
                                 <tr>
                                     <td>Test Cases</td>

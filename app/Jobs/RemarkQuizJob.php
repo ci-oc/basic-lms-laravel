@@ -84,6 +84,7 @@ class RemarkQuizJob implements ShouldQueue
                 $problems[] = Question::find($problem)->load('testcases');
             }
             foreach ($problems as $problem) {
+                $user_code_path = '';
                 $compile_status = '';
                 $err_reason = '';
                 $run_status = '';
@@ -104,17 +105,18 @@ class RemarkQuizJob implements ShouldQueue
                         'compile_status' => $compile_status,
                         'compile_err_reason' => $err_reason,
                         'run_status' => $run_status,
+                        'code_language' => $lang,
                         'grade' => $problem_grade,
                     ]
                 );
                 if (count($problem->testcases) > 0) {
                     try {
-                        $user_code = Grader::saveScript($lang, $request['user_code'][$problem->id]);
+                        $user_code = Grader::saveScript($lang, $request['user_code'][$problem->id], null, $test_id, $problem->id);
                         if ($user_code['success'] == 1) {
                             $storage_path = storage_path() . DIRECTORY_SEPARATOR;
                             $user_code_filename = $user_code['detail']['filename'];
                             $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
-                            $compilation_output = Grader::compile($user_code_filename);
+                            $compilation_output = Grader::compile($user_code_filename, $test_id, $problem->id);
                             $compilation_status = $compilation_output['detail']['reason'];
                             $time_consumed = $compilation_output['detail']['time'] . $compilation_output['detail']['time_unit'];
                             if ($compilation_status == 'compiled') {
@@ -185,7 +187,7 @@ class RemarkQuizJob implements ShouldQueue
                                     }
                                 }
                             } else {
-                                $err_reason = str_replace('storage/scripts/' . $user_code_filename, ' Code ', $compilation_output['message']);
+                                $err_reason = str_replace('storage/scripts/' . $test_id . DIRECTORY_SEPARATOR . $problem->id . DIRECTORY_SEPARATOR . $user_code_filename, ' Code ', $compilation_output['message']);
                                 $compile_status = 'Compile Error';
                             }
                         }
@@ -204,6 +206,7 @@ class RemarkQuizJob implements ShouldQueue
                     'compile_err_reason' => $err_reason,
                     'run_status' => $run_status,
                     'grade' => $problem_grade,
+                    'user_code_path' => $user_code_path
                 ]);
                 $result += $problem_grade;
             }

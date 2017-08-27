@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('solve', 'SolveQuizController');
     Route::resource('questions', 'QuestionController');
     Route::resource('news', 'NewsController');
+    Route::resource('announcements', 'AnnouncementsController');
     Route::post('questions/massDestroy')->uses('QuestionController@massDestroy')->name('questions.massDestroy');
     Route::get('/admin', function () {
         return view('admin.index');

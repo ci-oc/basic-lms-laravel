@@ -110,12 +110,14 @@ return [
         'sidebar_results' => 'Results',
         'sidebar_new_users' => 'Request New Users',
         'sidebar_submissions' => 'Submissions',
+        'sidebar_announcements' => 'Announcements'
     ],
     'problems' => [
         'problems-list' => 'Problems List',
         'new_problem' => 'New Problem',
         'example-input' => 'Example Input',
         'example-output' => 'Example Output',
+        'lang' => 'Language',
         'code' => 'Code',
         'fields' => [
             'problem_desc' => 'Problem Description',

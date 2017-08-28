@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\UsersCourses;
 class AnnouncementsController extends Controller
 {
     /**
@@ -21,7 +23,10 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::all();
+        $relation = UsersCourses::all()->load('user')->where('user_id','=',Auth::id());
+        $announcement_writer = 'hello';//$relation[0]['user']->name;
+        return view('announcements.index',compact('announcements','announcement_writer'));
     }
 
     /**
@@ -42,7 +47,12 @@ class AnnouncementsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = array();
+        $data['user_id'] = Auth::id();
+        $data['course_id'] = $request->input('course_id');
+        $data['announcement'] = $request->input('announcement');
+        Announcement::create($data);
+        return redirect()->back()->with('success','');
     }
 
     /**
@@ -87,6 +97,7 @@ class AnnouncementsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Announcement::destroy($id);
+        return redirect()->back()->with('delete','');
     }
 }

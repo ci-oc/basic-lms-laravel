@@ -86,7 +86,8 @@ return [
             'desc' => 'Description',
             'excel' => 'Excel Sheet :',
             'assistant_professor' => 'Assistant Professor(s)-Email ( Please separate by coma if they are many ) [Optional]',
-            'assistant_professor_title' => 'Assistant Professor(s) [Including You]'
+            'assistant_professor_title' => 'Assistant Professor(s) [Including You]',
+            'no_courses' => 'Sorry you don\'t have courses yet, please create your courses firstly!'
         ],
     ],
     'results' => [
@@ -229,5 +230,12 @@ return [
         'news-text' => 'News Text',
         'news' => 'News',
         'current-news' => 'Current News'
+    ],
+    'announcements' => [
+        'add-announcement' => 'ADD new announcement',
+        'content' => 'Announcement Content',
+        'no_announcements_yet' => 'No announcements yet',
+        'success' => 'Announcement added successfully',
+        'deleted' => 'Announcement deleted successfully'
     ]
 ];

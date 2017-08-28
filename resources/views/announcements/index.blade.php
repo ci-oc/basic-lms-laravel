@@ -67,19 +67,23 @@
         <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
     @endif
     @foreach($announcements as $announcement_data)
-        <div class="announcement">
-            <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
-                <p class="text-facebook">{{ $announcement_data->announcement }}</p>
-                <small><cite>{{  Auth::id() == $announcement_data->user_id ? 'You'  : $announcement_writer}}</cite>
-                </small>
-            </blockquote>
-            @if(Auth::id() == $announcement_data->user_id)
-                {{ Form::open(['method' => 'DELETE', 'route' => ['announcements.destroy', $announcement_data->id]]) }}
-                {{ Form::submit('DELETE', ['class' => 'btn btn-danger']) }}
-                {{ Form::close() }}
-            @endif
-        </div>
-        <hr style="border: 2px solid #0EBCF3;">
+        @if(count($announcement_data) > 0)
+        @foreach($announcement_data as $announcement)
+            <div class="announcement">
+                <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
+                    <p class="text-facebook">{{ $announcement->announcement }}</p>
+                    <small><cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>
+                    </small>
+                </blockquote>
+                @if(Auth::id() == $announcement->user_id)
+                    {{ Form::open(['method' => 'DELETE', 'route' => ['announcements.destroy', $announcement->id]]) }}
+                    {{ Form::submit('DELETE', ['class' => 'btn btn-danger']) }}
+                    {{ Form::close() }}
+                @endif
+            </div>
+            <hr style="border: 2px solid #0EBCF3;">
+        @endforeach
+        @endif
     @endforeach
 @endsection
 

@@ -23,10 +23,10 @@ class AnnouncementsController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::all();
-        $relation = UsersCourses::all()->load('user')->where('user_id','=',Auth::id());
-        $announcement_writer = 'hello';//$relation[0]['user']->name;
-        return view('announcements.index',compact('announcements','announcement_writer'));
+//        $announcements = Announcement::all();
+//        $relation = UsersCourses::all()->load('user')->where('user_id','=',Auth::id());
+//        $announcement_writer = 'hello';//$relation[0]['user']->name;
+        return view('announcements.index');
     }
 
     /**

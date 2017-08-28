@@ -25,10 +25,17 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             if (Auth::check()) {
                 $news = News::all();
-                $user = User::find(Auth::id())->load('courses.quizzes.questions.options', 'courses.quizzes.questions.testcases', 'courses.quizzes.questions.judge_options','courses.quizzes.questions.coding_languages');
+                $user = User::find(Auth::id())
+                    ->load('courses.quizzes.questions.options',
+                        'courses.quizzes.questions.testcases',
+                        'courses.quizzes.questions.judge_options'
+                        , 'courses.quizzes.questions.coding_languages',
+                        'courses.announcements.user');
+                $announcements = array();
                 $courses = $user['courses'];
                 $quizzes = array();
                 foreach ($courses as $course) {
+                    $announcements[] = $course->announcements;
                     if ($course['quizzes']->first() !== null)
                         foreach ($course['quizzes'] as $quiz)
                             $quizzes[] = $quiz;
@@ -46,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('questions', $questions);
                 $view->with('problems', $problems);
                 $view->with('all_news', $news);
+                $view->with('announcements', $announcements);
             }
         });
     }

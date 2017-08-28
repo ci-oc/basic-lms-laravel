@@ -102,6 +102,7 @@ return [
         ],
     ],
     'bars' => [
+        'top-bar-no-news' => 'No News added yet.',
         'sidebar_quizzes' => 'Quizzes',
         'sidebar_dashboard' => 'Dashboard',
         'sidebar_courses' => 'Courses',
@@ -156,6 +157,7 @@ return [
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
         'error-access-code' => 'Invalid Access Code',
         'error-quiz-made-before' => 'Solve many option is turned off for this quiz.',
+        'error-quiz-not-available' => 'Quiz did not start yet',
         'error-none-solved' => 'No one has solved this quiz yet.',
         'error-0-courses' => 'You have to create a course first.',
         'error-0-questions' => 'You have assign questions to this quiz first.',
@@ -182,6 +184,9 @@ return [
         'quiz-options' => [
             'solve_many' => 'Students can solve this quiz more than once.'
         ]
+    ],
+    'coding_languages' => [
+      'title' => 'Coding Languages'
     ],
     'profiles' => [
         'name' => 'Name',

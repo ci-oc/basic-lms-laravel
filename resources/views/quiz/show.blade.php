@@ -117,8 +117,9 @@
                                         <?php $count++;?>
                                     @endforeach
                                     <select class="selectpicker" name="code_language[{{$problem->id}}]">
-                                        <option value="c">GNU GCC</option>
-                                        <option value="cpp">GNU G++</option>
+                                        @foreach($problem->coding_languages as $lang)
+                                            <option value="{{$lang->compile_name}}">{{ $lang->name }}</option>
+                                            @endforeach
                                     </select>
                                     <br>
                                     <br>

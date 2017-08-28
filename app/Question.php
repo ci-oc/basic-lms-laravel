@@ -36,6 +36,12 @@ class Question extends Model
         belongsToMany('App\JudgeOptions', 'problem_judge_options', 'problem_id', 'judge_id')
             ->withTimestamps();
     }
+    public function coding_languages()
+    {
+        return $this->
+        belongsToMany('App\codingLanguages', 'problem_coding_languages', 'problem_id', 'language_id')
+            ->withTimestamps();
+    }
 
     public static function separateQuestionTypes($collections, $type)
     {

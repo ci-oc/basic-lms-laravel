@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\codingLanguages;
 use App\JudgeOptions;
 use App\ProblemJudgeOptions;
 use App\TestsCase;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Quiz;
+
 class ProblemController extends Controller
 {
     /**
@@ -36,7 +38,8 @@ class ProblemController extends Controller
     public function create()
     {
         $judge_options = JudgeOptions::all();
-        return view('problems.create', compact('judge_options'));
+        $coding_languages = codingLanguages::all();
+        return view('problems.create', compact('judge_options', 'coding_languages'));
     }
 
     /**
@@ -47,7 +50,9 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
+        $coding_languages = $request->input('coding_languages');
         $question = Question::create($request->all());
+        $question->coding_languages()->attach($coding_languages);
         $quiz = Quiz::find($request->input('quiz_id'));
         $quiz_fullmark = $quiz->full_mark;
         $question_grade = $request->input('grade');

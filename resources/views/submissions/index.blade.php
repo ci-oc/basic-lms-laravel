@@ -22,7 +22,6 @@
                     <th>@lang('module.results.fields.date')</th>
                     <th>@lang('module.quizzes.fields.full-mark')</th>
                     <th>@lang('module.results.table-result')</th>
-                    <th>@lang('module.problems.lang')</th>
                 </tr>
                 </thead>
 
@@ -37,7 +36,6 @@
                             <td>{{ $result->created_at or '' }}</td>
                             <td>{{$result->quiz->full_mark}}</td>
                             <td>{{ $result->grade == -1 ? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
-                            <td>{{ $result->code_language}}</td>
                         </tr>
                     @endforeach
                 @else

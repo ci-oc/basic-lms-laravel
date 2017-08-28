@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\JudgeOptions;
+
 class JudgeOptionsSeeder extends Seeder
 {
     /**

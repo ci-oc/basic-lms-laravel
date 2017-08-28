@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             if (Auth::check()) {
                 $news = News::all();
-                $user = User::find(Auth::id())->load('courses.quizzes.questions.options', 'courses.quizzes.questions.testcases', 'courses.quizzes.questions.judge_options');
+                $user = User::find(Auth::id())->load('courses.quizzes.questions.options', 'courses.quizzes.questions.testcases', 'courses.quizzes.questions.judge_options','courses.quizzes.questions.coding_languages');
                 $courses = $user['courses'];
                 $quizzes = array();
                 foreach ($courses as $course) {

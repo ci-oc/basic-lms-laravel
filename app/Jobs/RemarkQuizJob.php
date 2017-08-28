@@ -81,7 +81,7 @@ class RemarkQuizJob implements ShouldQueue
         if (array_key_exists('problems', $request)) {
             $problems = array();
             foreach ($request['problems'] as $key => $problem) {
-                $problems[] = Question::find($problem)->load('testcases');
+                $problems[] = Question::find($problem)->load('testcases', 'coding_languages');
             }
             foreach ($problems as $problem) {
                 $user_code_path = '';
@@ -90,7 +90,15 @@ class RemarkQuizJob implements ShouldQueue
                 $run_status = '';
                 $time_consumed = '';
                 $problem_grade = 0;
+                $available_coding_languages = $problem->coding_languages;
+                $available_coding_languages_compile_name = array();
+                foreach ($available_coding_languages as $available_lang) {
+                    $available_coding_languages_compile_name[] = $available_lang->compile_name;
+                }
                 $lang = $request['code_language'][$problem->id];
+                if (!in_array($lang, $available_coding_languages_compile_name)) {
+                    $lang = $available_coding_languages_compile_name[array_rand($available_coding_languages_compile_name)];
+                }
                 $sharp_judge = false;
                 $correct = 0;
                 $testcase_grade = 0;

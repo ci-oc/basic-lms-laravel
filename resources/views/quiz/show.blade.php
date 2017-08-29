@@ -19,6 +19,7 @@
         </div>
     @endif
     {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
+    {{ csrf_field() }}
     <div class="panel panel-default">
         {{ Form::hidden('quiz_id', $id, array('id' => 'quiz_id')) }}
         <div class="panel-heading">

@@ -2,7 +2,7 @@
 @section('content')
     <h3 class="page-title">@lang('module.questions.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['questions.store']]) !!}
-
+    {{ csrf_field() }}
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.create')

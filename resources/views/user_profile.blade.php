@@ -36,6 +36,7 @@
                                                     alt="Profile Photo"/></div>
                                         <div class="text-center mbl">
                                             {!! Form::open(['method' => 'POST', 'route' => ['profile.update_image'] ,'enctype' => 'multipart/form-data' , 'class' => 'form-horizontal']) !!}
+                                            {{ csrf_field() }}
                                             <label class="btn btn-green">
                                                 @lang('module.change') <input type="file" onchange="this.form.submit()"
                                                                               name="avatar" hidden><i

@@ -20,7 +20,7 @@ use App\Http\Controllers\Traits\FileUploadTrait;
 class RemarkQuizJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, FileUploadTrait;
-    protected $tries = 1;
+    public $tries = 1;
     protected $request;
     protected $test;
     protected $quiz_id;
@@ -56,10 +56,10 @@ class RemarkQuizJob implements ShouldQueue
                 $status = 0;
                 $question_grade = 0;
                 if ($request['answers'][$question] != null
-                    && QuestionsOption::find($request['answers'][$question])->correct
+                    && QuestionsOption::findorFail($request['answers'][$question])->correct
                 ) {
                     $status = 1;
-                    $question_grade += floatval(Question::find($question)->grade);
+                    $question_grade += floatval(Question::findorFail($question)->grade);
                     $result += $question_grade;
                 }
                 UsersAnswer::updateOrCreate([
@@ -227,6 +227,11 @@ class RemarkQuizJob implements ShouldQueue
 
     public function failed(Exception $exception)
     {
-        echo $exception;
+        $result = 0;
+        $test_id = $this->quiz_id;
+        $test = $this->test;
+        $test->update(['grade' => $result]);
+        $test->problems
+
     }
 }

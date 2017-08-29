@@ -20,6 +20,10 @@ class UsersProblemAnswer extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function quiz()
+    {
+        return $this->belongsTo('App\UsersQuiz', 'quiz_id');
+    }
     public function solvedTestCases()
     {
         return $this->hasMany('App\UsersTestCaseAnswer', 'problem_id');

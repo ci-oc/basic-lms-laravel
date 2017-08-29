@@ -9,7 +9,7 @@ use App\UsersTestCaseAnswer;
 use Illuminate\Http\Request;
 use App\UsersQuiz;
 use Illuminate\Support\Facades\Auth;
-
+use App\Quiz;
 class SolveQuizController extends Controller
 {
     use FileUploadTrait;
@@ -52,16 +52,18 @@ class SolveQuizController extends Controller
     {
         $result = -1;
         $test_id = $request->input('quiz_id');
-        $test = UsersQuiz::updateOrCreate([
-            'user_id' => Auth::id(),
-            'quiz_id' => $test_id,
-        ], [
-            'user_id' => Auth::id(),
-            'quiz_id' => $test_id,
-            'grade' => $result
-        ]);
-        $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
-        return redirect()->route('results.index');
+        if (Quiz::findorFail($test_id)) {
+            $test = UsersQuiz::updateOrCreate([
+                'user_id' => Auth::id(),
+                'quiz_id' => $test_id,
+            ], [
+                'user_id' => Auth::id(),
+                'quiz_id' => $test_id,
+                'grade' => $result
+            ]);
+            $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
+            return redirect()->route('results.index');
+        }
     }
 
     /**

@@ -21,7 +21,6 @@
     {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
     <div class="panel panel-default">
         {{ Form::hidden('quiz_id', $id, array('id' => 'quiz_id')) }}
-        {{ Form::hidden('solve_many', $solve_many, array('id' => 'solve_many')) }}
         <div class="panel-heading">
             {{$quiz->course->title}} - {{ $quiz->title }}
         </div>

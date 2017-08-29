@@ -61,7 +61,7 @@ class ResultController extends Controller
      */
     public function show($id)
     {
-        $quiz_result = UsersQuiz::find($id)->load('user', 'quiz');
+        $quiz_result = UsersQuiz::findorFail($id)->load('user', 'quiz');
         if ($quiz_result->grade != -1) {
             $questions_results = UsersAnswer::where([
                 ['user_id', '=', Auth::id()],

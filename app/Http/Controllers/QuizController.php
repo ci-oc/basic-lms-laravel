@@ -63,7 +63,7 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        $quiz = Quiz::find($id)->load('questions');
+        $quiz = Quiz::findorFail($id)->load('questions');
         if(!Quiz::hasFinished($quiz->end_date) && Quiz::isAvailable($quiz->start_date,$quiz->end_date)) {
             $all_type_questions[] = $quiz->questions;
             $quiz_questions =  Question::separateQuestionTypes($all_type_questions, 'MCQ');

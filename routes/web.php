@@ -47,5 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin', function () {
         return view('admin.index');
     })->middleware('role:superuser|standard-user')->name('admin.index');
+    Route::get('/noScript', function () {
+        return view('noscript');
+    })->name('noScript');
 });
 

@@ -6,7 +6,7 @@ use App\UsersQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Quiz;
-
+use App\Question;
 class QuizController extends Controller
 {
     /**
@@ -63,14 +63,17 @@ class QuizController extends Controller
      */
     public function show($id)
     {
-        $quiz = Quiz::find($id);
-        if(Quiz::hasFinished($quiz->end_date)) {
+        $quiz = Quiz::find($id)->load('questions');
+        if(!Quiz::hasFinished($quiz->end_date) && Quiz::isAvailable($quiz->start_date,$quiz->end_date)) {
+            $all_type_questions[] = $quiz->questions;
+            $quiz_questions =  Question::separateQuestionTypes($all_type_questions, 'MCQ');
+            $quiz_problems = Question::separateQuestionTypes($all_type_questions,'JUDGE');
             $solve_many = $quiz->solve_many;
             $grade = UsersQuiz::where([['user_id', '=', Auth::id()],
                 ['quiz_id', '=', $id]])->pluck('grade')->toArray();
             if ($grade == null || $solve_many) {
                 if (count($quiz->questions) > 0)
-                    return view('quiz.show', compact('id', 'solve_many'));
+                    return view('quiz.show', compact('id', 'solve_many','quiz_questions','quiz_problems','quiz'));
                 else
                     return redirect()->back()->with('0_questions', '');
             }

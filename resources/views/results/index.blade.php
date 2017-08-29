@@ -7,6 +7,7 @@
     @endif
     <h3 class="page-title">@lang('module.results.title')</h3>
 
+    @include('stat_cols')
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.list')

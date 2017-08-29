@@ -2,6 +2,10 @@
         <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+
+    <noscript>
+        <META HTTP-EQUIV="Refresh" CONTENT="0;URL={{route('noScript')}}">
+    </noscript>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,7 +15,21 @@
     <title>{{ ucfirst($request->segment(1)) }}</title>
     <!-- Styles -->
     @include('layouts.css')
+    {{--Data tables CSS--}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
+    {{-------------------}}
+    {{--DateTime Picker --}}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css"/>
+    {{------------}}
     @yield('css')
+
 </head>
 <body>
 <div>

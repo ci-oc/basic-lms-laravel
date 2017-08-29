@@ -11,14 +11,3 @@
 <link type="text/css" rel="stylesheet" href="{{asset('css/bars/jquery.news-ticker.css')}}">
 <link rel="stylesheet"
       href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-{{--Data tables CSS--}}
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"/>
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
-{{-------------------}}
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css"/>
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css"/>

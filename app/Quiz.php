@@ -42,7 +42,7 @@ class Quiz extends Model
         date_default_timezone_set('Africa/Cairo');
         $QzEnd = date("Y-m-d H:i:s", strtotime($end));
         $Now = Carbon::now();
-        return $Now < $QzEnd ? true : false;
+        return $Now < $QzEnd ? false : true;
 
     }
 }

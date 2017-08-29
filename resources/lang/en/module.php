@@ -158,7 +158,7 @@ return [
         'error-create-user' => 'There was a trouble saving this\these user(s), please make sure of already existing account(s)',
         'error-access-code' => 'Invalid Access Code',
         'error-quiz-made-before' => 'Solve many option is turned off for this quiz.',
-        'error-quiz-not-available' => 'Quiz did not start yet',
+        'error-quiz-not-available' => 'Quiz is not available at the moment',
         'error-none-solved' => 'No one has solved this quiz yet.',
         'error-0-courses' => 'You have to create a course first.',
         'error-0-questions' => 'You have assign questions to this quiz first.',

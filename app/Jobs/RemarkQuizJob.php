@@ -59,8 +59,8 @@ class RemarkQuizJob implements ShouldQueue
                     && QuestionsOption::find($request['answers'][$question])->correct
                 ) {
                     $status = 1;
-                    $result += floatval($request['question_grades'][$question]);
-                    $question_grade += floatval($request['question_grades'][$question]);
+                    $question_grade += floatval(Question::find($question)->grade);
+                    $result += $question_grade;
                 }
                 UsersAnswer::updateOrCreate([
                     'user_id' => $user_id,
@@ -89,13 +89,16 @@ class RemarkQuizJob implements ShouldQueue
                 $err_reason = '';
                 $run_status = '';
                 $time_consumed = '';
+                $lang = '';
                 $problem_grade = 0;
                 $available_coding_languages = $problem->coding_languages;
                 $available_coding_languages_compile_name = array();
                 foreach ($available_coding_languages as $available_lang) {
                     $available_coding_languages_compile_name[] = $available_lang->compile_name;
                 }
-                $lang = $request['code_language'][$problem->id];
+                if (array_key_exists('code_language', $request)) {
+                    $lang = $request['code_language'][$problem->id];
+                }
                 if (!in_array($lang, $available_coding_languages_compile_name)) {
                     $lang = $available_coding_languages_compile_name[array_rand($available_coding_languages_compile_name)];
                 }

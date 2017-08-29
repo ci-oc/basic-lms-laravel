@@ -67,7 +67,7 @@
                             <td>
                                 @if(Auth::user()->can('solve-quiz'))
                                     <a href="{{ route('quizzes.show',[$quiz->id]) }}"
-                                       class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.view')</a>
+                                       class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.quizzes.solve')</a>
                                 @endif
                                 @if(Auth::user()->can('edit-quiz'))
                                     <a href="{{ route('quizzes.edit',[$quiz->id]) }}"

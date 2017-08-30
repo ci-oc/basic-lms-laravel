@@ -54,6 +54,11 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Access to create a new quiz'
             ],
             [
+                'name' => 'delete-quiz',
+                'display_name' => 'Create Quiz',
+                'description' => 'Access to create a new quiz'
+            ],
+            [
                 'name' => 'edit-quiz',
                 'display_name' => 'Edit Quiz',
                 'description' => 'Access to edit quiz'

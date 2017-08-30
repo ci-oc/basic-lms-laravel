@@ -82,7 +82,7 @@
                                             'style' => 'display: inline-block;',
                                             'method' => 'DELETE',
                                             'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                            'route' => ['quiz.destroy', $quiz->id])) !!}
+                                            'route' => ['quizzes.destroy', $quiz->id])) !!}
                                     {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 @endif

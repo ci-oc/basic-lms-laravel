@@ -36,7 +36,7 @@
 
                                 <a href="{{ route('questions.show',[$problem->id]) }}"
                                    class="btn btn-xs btn-primary {{ $available ? 'disabled' : ''}}">@lang('module.view')</a>
-                                <a href="{{ route('questions.edit',[$problem->id]) }}"
+                                <a href="{{ route('problems.edit',[$problem->id]) }}"
                                    class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
                                 @if(!$available)
                                     {!! Form::open(array(

@@ -16,9 +16,9 @@ class CreateProblemCodingLanguagesTable extends Migration
         Schema::create('problem_coding_languages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('problem_id')->unsigned()->nullable();
-            $table->foreign('problem_id', 'fk_256_problem_problem_id_coding_languages')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('problem_id', 'fk_256_problem_problem_id_coding_languages')->references('id')->on('questions');
             $table->integer('language_id')->unsigned()->nullable();
-            $table->foreign('language_id', 'fk_256_language_language_id_judge_problem')->references('id')->on('coding_languages')->onDelete('cascade');
+            $table->foreign('language_id', 'fk_256_language_language_id_judge_problem')->references('id')->on('coding_languages');
             $table->timestamps();
         });
     }

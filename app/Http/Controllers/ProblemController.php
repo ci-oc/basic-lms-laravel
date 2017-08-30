@@ -61,17 +61,12 @@ class ProblemController extends Controller
         $input_test_cases = $request->input('input_testcase');
         $output_test_cases = $request->input('output_testcase');
         $judge_options = $request->input('judge_options');
+        $question->judge_options()->attach($judge_options);
         for ($i = 0; $i < count($input_test_cases); $i++) {
             TestsCase::create([
                 'question_id' => $question->id,
                 'input' => $input_test_cases[$i],
                 'output' => $output_test_cases[$i],
-            ]);
-        }
-        for ($i = 0; $i < count($judge_options); $i++) {
-            ProblemJudgeOptions::create([
-                'problem_id' => $question->id,
-                'judge_id' => $judge_options[$i],
             ]);
         }
         return redirect()->route('problems.index');
@@ -96,7 +91,14 @@ class ProblemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $problem = Question::find($id);
+        $judge_options = JudgeOptions::all();
+        $coding_languages = codingLanguages::all();
+        $problem_judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
+        $problem_coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
+        return view('problems.edit', compact('problem', 'id',
+            'judge_options', 'coding_languages',
+            'problem_judge_options', 'problem_coding_languages'));
     }
 
     /**
@@ -106,9 +108,50 @@ class ProblemController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'question_text' => 'required',
+            'grade' => 'required|min:1|',
+
+        ]);
+
+        if ($problem = Question::find($id)) {
+            $updates = $request->all();
+            $problem->fill($updates)->save();
+
+            //Updating testcases
+            $testcases = TestsCase::where('question_id', '=', $id)->get();
+            foreach ($testcases as $cases) {
+                $cases->delete();
+            }
+            $input_test_cases = $request->input('input_testcase');
+            $output_test_cases = $request->input('output_testcase');
+            for ($i = 0; $i < count($input_test_cases); $i++) {
+                TestsCase::create([
+                    'question_id' => $id,
+                    'input' => $input_test_cases[$i],
+                    'output' => $output_test_cases[$i],
+                ]);
+            }
+            //Updating judge options
+            $judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
+            $request_judge_options = $request->input('judge_options');
+            $problem->judge_options()->detach($judge_options);
+            $problem->judge_options()->attach($request_judge_options);
+            //Updating coding languages
+            $coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
+            $request_coding_languages = $request->input('coding_languages');
+            $problem->coding_languages()->detach($coding_languages);
+            $problem->coding_languages()->attach($request_coding_languages);
+            $request->session()->flash('success', 'problem has been edited successfully');
+            return redirect()->back();
+        } else {
+            $request->session()->flash('failure', 'Error occurred while updating problem information');
+            return redirect()->back();
+        }
+
     }
 
     /**

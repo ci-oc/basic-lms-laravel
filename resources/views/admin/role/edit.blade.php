@@ -25,12 +25,6 @@
     		<input type="checkbox" {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]" value="{{$permission->id}}" > {{$permission->name}} <br>
             @endforeach
     	</div>
-
-
-
-
-
-
     	<button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

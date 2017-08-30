@@ -64,7 +64,7 @@
     <br>
     <br>
     @if(count($announcements) == 0)
-        <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
+         <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
     @endif
     @foreach($announcements as $announcement_data)
         @if(count($announcement_data) > 0)

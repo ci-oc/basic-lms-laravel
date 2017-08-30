@@ -5,6 +5,26 @@
             <p>@lang('module.errors.error-saving')</p>
         </div>
     @endif
+
+
+    @if(Session::has('name_field_failed'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-name-field')</p>
+        </div>
+    @endif
+
+    @if(Session::has('email_field_failed'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-email-field')</p>
+        </div>
+    @endif
+
+    @if(Session::has('id_field_failed'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-id-field')</p>
+        </div>
+    @endif
+
     @if(Session::has('data'))
         @if((Session::get('data')) == null)
             <div class="alert alert-info">

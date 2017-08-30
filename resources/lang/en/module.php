@@ -162,7 +162,10 @@ return [
         'error-none-solved' => 'No one has solved this quiz yet.',
         'error-0-courses' => 'You have to create a course first.',
         'error-0-questions' => 'You have assign questions to this quiz first.',
-        'error-quiz-pending' => 'Quiz is still being remarked.'
+        'error-quiz-pending' => 'Quiz is still being remarked.',
+        'error-name-field' => 'please change students names column name in excel file to "name"',
+        'error-email-field' => 'please change emails column name in excel file to "email"',
+        'error-id-field' => 'please change IDs column name in excel file to "id"'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

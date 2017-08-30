@@ -12,7 +12,7 @@ class UserController extends Controller
 
     function __construct()
     {
-
+        $this->middleware('role:superuser|standard-user');
     }
 
     /**

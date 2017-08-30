@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     function __construct()
     {
-
+        $this->middleware('role:superuser|standard-user');
     }
     public function index()
     {

@@ -60,10 +60,17 @@ class DefaultUserController extends Controller
             $data = $this->saveFiles($request);
             if ($data !== 0) {
                 $failed_to_create = array();
+                if ($data[0]['name'] == null) {
+                    return redirect('users/create')->with('name_field_failed', '');
+                } else if ($data[0]['email'] == null) {
+                    return redirect('users/create')->with('email_field_failed', '');
+                } else if ($data[0]['id'] == null) {
+                    return redirect('users/create')->with('id_field_failed', '');
+                }
                 foreach ($data as $datum) {
                     $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                    $this->dispatch((new SendEmailsJob($non_encrypted_password))->onQueue('emails'));
+                    // $this->dispatch((new SendEmailsJob($non_encrypted_password))->onQueue('emails'));
                     try {
                         $user = new User();
                         $user_id = $user->create([

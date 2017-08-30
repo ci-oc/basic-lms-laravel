@@ -231,7 +231,5 @@ class RemarkQuizJob implements ShouldQueue
         $test_id = $this->quiz_id;
         $test = $this->test;
         $test->update(['grade' => $result]);
-        $test->problems
-
     }
 }

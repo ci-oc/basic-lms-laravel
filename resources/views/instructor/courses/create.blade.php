@@ -19,6 +19,16 @@
             </table>
         </div>
     @endif
+    @if(Session::has('error-access-code'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-access-code')</p>
+        </div>
+        @endif
+    @if(Session::has('error-course-title'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-course-title')</p>
+        </div>
+    @endif
     <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
     </div>
     <h3 class="page-title">@lang('module.courses.title')</h3>

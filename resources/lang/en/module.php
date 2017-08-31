@@ -165,7 +165,9 @@ return [
         'error-quiz-pending' => 'Quiz is still being remarked.',
         'error-name-field' => 'please change students names column name in excel file to "name"',
         'error-email-field' => 'please change emails column name in excel file to "email"',
-        'error-id-field' => 'please change IDs column name in excel file to "id"'
+        'error-id-field' => 'please change IDs column name in excel file to "id"',
+        'error-access-code' => 'sorry this access code is reserved, please choose another one',
+        'error-course-title' => 'sorry this title is reserved, please choose another one',
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

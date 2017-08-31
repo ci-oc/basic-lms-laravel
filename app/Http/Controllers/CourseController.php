@@ -59,29 +59,34 @@ class CourseController extends Controller
         ]);
         $courses = $request->all();
         $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
+        $course_title_exists = Course::where('title','=',input::get('title'))->first();
         if ($access_code_exists === null) {
-            $instructors = explode(',', $request->input('assistant_professor'));
-            $user_id = Auth::id();
-            $failed_instructors = array();
-            $success_instructors = array();
-            $success_instructors[0] = $user_id;
-            if (!$instructors[0] == null) {
-                foreach ($instructors as $instructor) {
-                    $user = User::where('email', '=', $instructor)->pluck('id');
-                    if (count($user) > 0 && $user[0] != $user_id) {
-                        $success_instructors[] = $user[0];
-                    } else {
-                        $failed_instructors[] = $instructor;
+            if($course_title_exists == null) {
+                $instructors = explode(',', $request->input('assistant_professor'));
+                $user_id = Auth::id();
+                $failed_instructors = array();
+                $success_instructors = array();
+                $success_instructors[0] = $user_id;
+                if (!$instructors[0] == null) {
+                    foreach ($instructors as $instructor) {
+                        $user = User::where('email', '=', $instructor)->pluck('id');
+                        if (count($user) > 0 && $user[0] != $user_id) {
+                            $success_instructors[] = $user[0];
+                        } else {
+                            $failed_instructors[] = $instructor;
+                        }
                     }
                 }
+                Course::create($courses)->users()->attach($success_instructors);
+                if ($failed_instructors == null)
+                    return redirect()->route('courses.index')->with('success', '');
+                else
+                    return redirect()->back()->with('failed_instructors', $failed_instructors);
+            }else{
+                return redirect()->back()->with('error-course-title','')->withInput();
             }
-            Course::create($courses)->users()->attach($success_instructors);
-            if ($failed_instructors == null)
-                return redirect()->route('courses.index')->with('success', '');
-            else
-                return redirect()->back()->with('failed_instructors', $failed_instructors);
         } else
-            return redirect()->route('courses.create')->withInput();
+            return redirect()->back()->with('error-access-code','')->withInput();
     }
 
     /**
@@ -121,6 +126,11 @@ class CourseController extends Controller
      */
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'access_code' => 'required|min:5|',
+            'title' => 'required|max:100|min:5|',
+            'description' => 'required|min:5|',
+        ]);
         $course_id = Input::get('id');
         $course = Course::findOrFail($course_id);
         $input = $request->all();

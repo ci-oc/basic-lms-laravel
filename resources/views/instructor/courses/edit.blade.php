@@ -1,5 +1,15 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('update-success'))
+        <div class="alert alert-success">
+        <p>@lang('module.success.success-updating')</p>
+        </div>
+        @endif
+    @if(Session::has('update-fail'))
+        <div class="alert alert-warning">
+            <p>@lang('module.success.update-failed')</p>
+        </div>
+    @endif
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-12">
             <div class="row">
@@ -18,7 +28,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 form-group">
                                             {!! Form::label('access-code', Lang::get('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
-                                            {!! Form::text('access_code', old('access_code'), ['class' => 'form-control ', 'placeholder' =>  $course->access_code]) !!}
+                                            {!! Form::text('access_code', old('access_code'),['class' => 'form-control ', 'placeholder' =>  $course->access_code]) !!}
                                             @if($errors->has('access_code'))
                                                 <p class="help-block alert-danger" data-value="shake">
                                                     {{ $errors->first('access_code') }}

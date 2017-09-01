@@ -174,7 +174,8 @@ return [
         'success-course' => 'Course created successfully.',
         'success-updating' => 'Course edited successfully.',
         'news-created' => 'News added successfully',
-        'news-deleted' => 'News deleted successfully'
+        'news-deleted' => 'News deleted successfully',
+        'update-failed' => 'You entered nothing to update !'
     ],
     'judge_options' => [
         'title' => 'Judge Options to keep in mind while applying your test cases to scripts.',

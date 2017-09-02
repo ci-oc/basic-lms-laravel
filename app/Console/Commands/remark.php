@@ -45,7 +45,7 @@ class remark extends Command
         $quizzes = Quiz::all()->load('questions');
         foreach ($quizzes as $quiz) {
             $all_type_questions[] = $quiz->questions;
-            $problems = Question::separateQuestionTypes($quiz['questions'], 'JUDGE');
+            $problems = Question::separateQuestionTypes($all_type_questions, 'JUDGE');
             if (Quiz::hasFinished($quiz->end_date)) {
                 if (count($quiz->problems) > 0) {
                     foreach ($problems as $problem) {

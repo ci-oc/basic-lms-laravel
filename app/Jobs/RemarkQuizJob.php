@@ -122,12 +122,13 @@ class RemarkQuizJob implements ShouldQueue
                 );
                 if (count($problem->testcases) > 0) {
                     try {
-                        $user_code = Grader::saveScript($lang, $request['user_code'][$problem->id], null, $test_id, $problem->id);
+                        $storage_path = storage_path() . DIRECTORY_SEPARATOR;
+                        $grader = new Grader($storage_path); 
+                        $user_code = $grader->saveScript($lang, $request['user_code'][$problem->id], null, $test_id, $problem->id);
                         if ($user_code['success'] == 1) {
-                            $storage_path = storage_path() . DIRECTORY_SEPARATOR;
                             $user_code_filename = $user_code['detail']['filename'];
                             $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
-                            $compilation_output = Grader::compile($user_code_filename, $test_id, $problem->id);
+                            $compilation_output = $grader->compile($user_code_filename, $test_id, $problem->id);
                             $compilation_status = $compilation_output['detail']['reason'];
                             $time_consumed = $compilation_output['detail']['time'] . $compilation_output['detail']['time_unit'];
                             if ($compilation_status == 'compiled') {
@@ -145,19 +146,19 @@ class RemarkQuizJob implements ShouldQueue
                                     if (!$sharp_judge) {
                                         $testcase_grade = floatval($problem->grade) / count($problem->testcases);
                                     }
-                                    $testcase_input = Grader::saveInput($testcase->input);
+                                    $testcase_input = $grader->saveInput($testcase->input);
                                     $testcase_input_filename = $testcase_input['detail']['filename'];
                                     $testcase_input_path = $storage_path . 'input' . DIRECTORY_SEPARATOR . $testcase_input_filename;
-                                    $testcase_correct_output = Grader::saveOutput($storage_path, $testcase->output);
+                                    $testcase_correct_output = $grader->saveOutput($storage_path, $testcase->output);
                                     if ($testcase_correct_output['success'] == 1 && $testcase_input['success'] == 1) {
                                         $output_filename = $testcase_correct_output['detail']['filename'];
                                         $output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $output_filename;
-                                        $run_output = Grader::run($user_code_filename, $testcase_input_filename, $problem->time_limit, $problem->mem_limit);
+                                        $run_output = $grader->run($user_code_filename, $testcase_input_filename, $problem->time_limit, $problem->mem_limit);
                                         $run_output_status = $run_output['detail']['result'];
                                         if ($run_output_status == 'OK') {
                                             $run_status = $run_output_status;
                                             $code_output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $run_output['detail']['filename'];
-                                            $comparing_output = Grader::compareFiles($output_path, $code_output_path, $judge_options);
+                                            $comparing_output = $grader->compareFiles($output_path, $code_output_path, $judge_options);
                                             if ($comparing_output['judge'] != false) {
                                                 if ($comparing_output['judge']['output_file_similarity'] == true) {
                                                     $correct++;

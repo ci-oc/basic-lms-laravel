@@ -158,24 +158,26 @@ class RemarkQuizJob implements ShouldQueue
                                             $run_status = $run_output_status;
                                             $code_output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $run_output['detail']['filename'];
                                             $comparing_output = Grader::compareFiles($output_path, $code_output_path, $judge_options);
-                                            if ($comparing_output['judge']['output_file_similarity'] == true) {
-                                                $correct++;
-                                                $correct_bool = 1;
+                                            if ($comparing_output['judge'] != false) {
+                                                if ($comparing_output['judge']['output_file_similarity'] == true) {
+                                                    $correct++;
+                                                    $correct_bool = 1;
+                                                }
+                                                UsersTestCaseAnswer::updateOrCreate([
+                                                    'user_id' => $user_id,
+                                                    'quiz_id' => $test_id,
+                                                    'problem_id' => $solved_problem->id,
+                                                    'testcase_id' => $testcase->id,
+                                                ],
+                                                    [
+                                                        'output' => $this->readFile($code_output_path),
+                                                        'correct' => $correct_bool,
+                                                        'cpu_usage' => $run_output['detail']['cpu'] . $run_output['detail']['cpu_unit'],
+                                                        'vsize' => $run_output['detail']['vsize'] . $run_output['detail']['vsize_unit'],
+                                                        'rss' => $run_output['detail']['rss'] . $run_output['detail']['rss_unit'],
+                                                    ]
+                                                );
                                             }
-                                            UsersTestCaseAnswer::updateOrCreate([
-                                                'user_id' => $user_id,
-                                                'quiz_id' => $test_id,
-                                                'problem_id' => $solved_problem->id,
-                                                'testcase_id' => $testcase->id,
-                                            ],
-                                                [
-                                                    'output' => $this->readFile($code_output_path),
-                                                    'correct' => $correct_bool,
-                                                    'cpu_usage' => $run_output['detail']['cpu'] . $run_output['detail']['cpu_unit'],
-                                                    'vsize' => $run_output['detail']['vsize'] . $run_output['detail']['vsize_unit'],
-                                                    'rss' => $run_output['detail']['rss'] . $run_output['detail']['rss_unit'],
-                                                ]
-                                            );
                                         } else {
                                             if ($run_output_status == 'RF')
                                                 $run_status = 'Restricted Function';

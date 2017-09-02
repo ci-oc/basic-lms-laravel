@@ -42,9 +42,9 @@ class remark extends Command
     public function handle()
     {
         $langs = array('c', 'cpp');
-        $quiz = new Quiz();
         $quizzes = Quiz::all()->load('questions');
         foreach ($quizzes as $quiz) {
+            $all_type_questions[] = $quiz->questions;
             $problems = Question::separateQuestionTypes($quiz['questions'], 'JUDGE');
             if (Quiz::hasFinished($quiz->end_date)) {
                 if (count($quiz->problems) > 0) {

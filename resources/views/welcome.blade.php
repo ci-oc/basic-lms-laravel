@@ -265,8 +265,6 @@
         <li><span>Courses</span></li>
     </ul>
 </div>
-
-
 <html lang="{{ app()->getLocale() }}">
 
 <head>
@@ -339,12 +337,6 @@
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
                                    required autofocus>
-
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -352,12 +344,6 @@
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control" name="password" required>
-
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
                         </div>
                     </div>
                     <div class="form-group">
@@ -415,13 +401,13 @@
                             @if (Auth::check())
                                 <a style="color:#0EBCF3;" href="{{ url('/dashboard') }}">Dashboard</a>
                             @else
-                                <button style="color:#0EBCF3; background-color:inherit; border:none;" type="button"
+                                <button onclick="$('#myModsal').modal({'backdrop': 'static'});" style="color:#0EBCF3; background-color:inherit; border:none;" type="button"
                                         data-toggle="modal" data-target="#myModal">Login
                                 </button>
                             @endif
                         @endif
                     </li>
-                </ul>
+                    </ul>
             </div>
         </div>
     </nav>
@@ -524,6 +510,7 @@
         </div>
     </div>
 </footer>
+<script src="{{asset('welcome/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('welcome/js/jquery.min.js')}}"></script>
 <script src="{{asset('welcome/bootstrap/bootstrap.min.js')}}"></script>
 <script type="text/javascript">
@@ -540,6 +527,7 @@
             }
         })
     })
+    $("#myModal").modal({"backdrop": "static"});
 </script>
 </body>
 

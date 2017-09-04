@@ -168,6 +168,8 @@ return [
         'error-id-field' => 'please change IDs column name in excel file to "id"',
         'error-access-code' => 'sorry this access code is reserved, please choose another one',
         'error-course-title' => 'sorry this title is reserved, please choose another one',
+        'error-grade-problem' => 'please enter grade greater than zero',
+        'error-full-mark-problem' => 'please enter fullMark greater than zero'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

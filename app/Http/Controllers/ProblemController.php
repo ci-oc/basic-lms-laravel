@@ -9,6 +9,8 @@ use App\TestsCase;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Quiz;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class ProblemController extends Controller
 {
@@ -50,6 +52,10 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->input('grade') == null || $request->input('grade') <= 0) {
+            return \redirect()->back()->withInput()->with('grade-failed', '');
+        }
         $coding_languages = $request->input('coding_languages');
         $question = Question::create($request->all());
         $question->coding_languages()->attach($coding_languages);

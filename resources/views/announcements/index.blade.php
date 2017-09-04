@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             {!! Form::label('title',trans('module.announcements.content'),['class' => 'control-label']) !!}
-                            {!! Form::text('announcement', old('announcement'), ['required','class' => 'form-control ','placeholder' => '']) !!}
+                            {!! Form::textarea('announcement', old('announcement'), ['required','class' => 'form-control ','placeholder' => '']) !!}
                             @if($errors->has('announcement'))
                                 <p class="help-block alert-danger">
                                     {{ $errors->first('announcement') }}

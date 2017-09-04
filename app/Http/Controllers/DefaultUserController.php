@@ -143,7 +143,6 @@ class DefaultUserController extends Controller
     {
         $role = Role::where('name', '=', 'student')->pluck('id')->first(); //student
         $failed_to_create = array();
-        if($request->input('college_id'))
         try {
             $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
             $password = Hash::make($non_encrypted_password); //Encrypting this password.

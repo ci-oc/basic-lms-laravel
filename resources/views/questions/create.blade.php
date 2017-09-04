@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('grade-failed'))
+   <div class="alert alert-danger">
+       <p>@lang('module.errors.grade-MCQ-failed')</p>
+   </div>
+    @endif
     <h3 class="page-title">@lang('module.questions.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['questions.store']]) !!}
     {{ csrf_field() }}
@@ -13,9 +18,9 @@
                 <div class="col-xs-12 form-group">
                     {!! Form::label('quiz_id', Lang::get('module.quizzes.create-questions-title'), ['class' => 'control-label']) !!}
                     <select class="form-control" name="quiz_id">
-                            @foreach($quizzes as $quiz)
-                                <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
-                            @endforeach
+                        @foreach($quizzes as $quiz)
+                            <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
+                        @endforeach
                     </select>
                     @if($errors->has('quiz_id'))
                         <p class="help-block">

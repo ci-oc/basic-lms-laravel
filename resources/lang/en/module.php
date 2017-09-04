@@ -169,7 +169,8 @@ return [
         'error-access-code' => 'sorry this access code is reserved, please choose another one',
         'error-course-title' => 'sorry this title is reserved, please choose another one',
         'error-grade-problem' => 'please enter grade greater than zero',
-        'error-full-mark-problem' => 'please enter fullMark greater than zero'
+        'error-full-mark-problem' => 'please enter fullMark greater than zero',
+        'grade-MCQ-failed' => 'please enter grade greater than zero'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

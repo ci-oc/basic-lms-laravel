@@ -53,6 +53,9 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->input('grade') == null || $request->input('grade') <= 0){
+            return \redirect()->back()->with('grade-failed','')->withInput();
+        }
         $question = Question::create($request->all());
         $quiz = Quiz::find($request->input('quiz_id'));
         $quiz_fullmark = $quiz->full_mark;

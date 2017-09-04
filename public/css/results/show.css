@@ -1,0 +1,31 @@
+.test-option-true {
+    background-color: #4CAF50 !important;
+    color: white;
+}
+
+.test-option-true-mini {
+    color: #4CAF50 !important;
+}
+
+.test-option-false {
+    background-color: #f44336 !important;
+    color: white;
+}
+
+.test-option-false-mini {
+    color: #f44336 !important;
+}
+
+div.code_snippet {
+    margin: 15px 0 5px 0;
+    padding: 7px;
+    font-family: "Courier New";
+    border: 1px dashed #CCC;
+    background-color: #F7F7F7;
+    white-space: pre;
+}
+pre {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}

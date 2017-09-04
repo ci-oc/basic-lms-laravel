@@ -1,33 +1,7 @@
 @extends('layouts.sidebar')
 @section('css')
-    <style>
-        .test-option-true {
-            background-color: #4CAF50 !important;
-            color: white;
-        }
-
-        .test-option-true-mini {
-            color: #4CAF50 !important;
-        }
-
-        .test-option-false {
-            background-color: #f44336 !important;
-            color: white;
-        }
-
-        .test-option-false-mini {
-            color: #f44336 !important;
-        }
-
-        div.code_snippet {
-            margin: 15px 0 5px 0;
-            padding: 7px;
-            font-family: "Courier New";
-            border: 1px dashed #CCC;
-            background-color: #F7F7F7;
-            white-space: pre;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/highlight_styles/default.css')}}">
+    <link rel="stylesheet" href="{{asset('css/results/show.css')}}">
 @endsection
 @section('content')
     <h3 class="page-title">@lang('module.results.title')</h3>
@@ -43,7 +17,9 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th>@lang('module.results.fields.user')</th>
-                            <td><strong>{{ $quiz_result->user->name or '' }}</strong> ({{ $quiz_result->user->email or '' }})</td>
+                            <td><strong>{{ $quiz_result->user->name or '' }}</strong>
+                                ({{ $quiz_result->user->email or '' }})
+                            </td>
                         </tr>
                         <tr>
                             <th>@lang('module.results.fields.date')</th>
@@ -108,7 +84,7 @@
                             <?php $i++ ?>
                         @endforeach
                         @foreach($problems_results as $result)
-                            <table class="table table-bordered table-striped" id="datatable">
+                            <table class="table table-bordered table-striped">
                                 <tr class="test-option{{ $result->problem->grade == $result->grade ? '-true' : '-false' }}">
                                     <th style="width: 10%">Question #{{ $i }}</th>
                                     <th>{{ $result->problem->question_text or '' }}</th>
@@ -117,7 +93,7 @@
                                     <tr>
                                         <td>Code snippet</td>
                                         <td>
-                                            <div class="code_snippet">{{ $result->problem->code_snippet }}</div>
+                                            <pre><code class="">{{ $result->problem->code_snippet }}</code></pre>
                                         </td>
                                     </tr>
                                 @endif
@@ -152,8 +128,8 @@
                                 <tr>
                                     <th>Code</th>
                                     <td>
-                                        <div class="code_snippet"><code>{{ $result->user_code }}</code>
-                                        </div>
+                                        <pre><code>{{ $result->user_code }}</code>
+                                        </pre>
                                     </td>
                                 </tr>
                                 <tr>
@@ -236,11 +212,6 @@
     </div>
 @endsection
 @section('javascript')
-    <script>
-        $(document).ready(function () {
-            $('#datatable').DataTable({
-                responsive: true
-            });
-        });
-    </script>
+    <script src="{{asset('js/highlight_editor/highlight.pack.js')}}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 @endsection

@@ -43,7 +43,7 @@
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th>@lang('module.results.fields.user')</th>
-                            <td>{{ $quiz_result->user->name or '' }} ({{ $quiz_result->user->email or '' }})</td>
+                            <td><strong>{{ $quiz_result->user->name or '' }}</strong> ({{ $quiz_result->user->email or '' }})</td>
                         </tr>
                         <tr>
                             <th>@lang('module.results.fields.date')</th>

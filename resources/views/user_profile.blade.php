@@ -168,7 +168,7 @@
                                                             @for ($j = 0; $j < $user_solved_count_problems;$j++)
                                                                 @if ($user_status->result[$j]->verdict == "OK")
                                                                     <tr>
-                                                                        <td>{{ $j+1 }}</td>
+                                                                        <td><a class="btn btn-link" href="http://codeforces.com/problemset/problem/{{$user_status->result[$j]->problem->contestId}}/{{$user_status->result[$j]->problem->index}}">{{$user_status->result[$j]->problem->contestId}}{{$user_status->result[$j]->problem->index}}</a></td>
                                                                         <td>
                                                                             <a class="btn btn-link" href="http://codeforces.com/problemset/problem/{{$user_status->result[$j]->problem->contestId}}/{{$user_status->result[$j]->problem->index}}">{{$user_status->result[$j]->problem->name}}</a>
                                                                         </td>

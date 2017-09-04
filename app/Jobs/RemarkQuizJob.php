@@ -127,7 +127,7 @@ class RemarkQuizJob implements ShouldQueue
                         $user_code = $grader->saveScript($lang, $request['user_code'][$problem->id], null, $test_id, $problem->id);
                         if ($user_code['success'] == 1) {
                             $user_code_filename = $user_code['detail']['filename'];
-                            $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $user_code_filename;
+                            $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $test_id . DIRECTORY_SEPARATOR . $problem->id . $user_code_filename;
                             $compilation_output = $grader->compile($user_code_filename, $test_id, $problem->id);
                             $compilation_status = $compilation_output['detail']['reason'];
                             $time_consumed = $compilation_output['detail']['time'] . $compilation_output['detail']['time_unit'];
@@ -201,11 +201,14 @@ class RemarkQuizJob implements ShouldQueue
                                     }
                                 }
                             } else {
+                                //COMPILATION DID NOT SUCCESS
+                                //REPLACING SCRIPT PATH WITH THE NAME " CODE " in order to hide its place in file structure.
                                 $err_reason = str_replace('storage/scripts/' . $test_id . DIRECTORY_SEPARATOR . $problem->id . DIRECTORY_SEPARATOR . $user_code_filename, ' Code ', $compilation_output['message']);
                                 $compile_status = 'Compile Error';
                             }
                         }
                     } catch (Exception $e) {
+
                     }
                 }
                 if ($sharp_judge) {

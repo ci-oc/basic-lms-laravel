@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('failed-quiz-time-gap'))
+    <div class="alert alert-warning">
+        <p>@lang('module.errors.error-quiz-time-gap')</p>
+    </div>
+    @endif
     @if(Session::has('failed-quiz-time'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-quiz-duration')</p>

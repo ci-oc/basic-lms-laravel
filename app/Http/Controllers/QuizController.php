@@ -69,7 +69,6 @@ class QuizController extends Controller
                 $date_error_count += 1;
             }
         }
-        echo $date_error_count;
         if($date_error_count == 3){ // data = data then check for time
             $start_time_explode = explode(' ', $request->input('start_date'));
             $end_time_explode = explode(' ', $request->input('end_date'));
@@ -82,12 +81,15 @@ class QuizController extends Controller
                     $time_error_count += 1;
                 }
             }
+            if((($end_time[2] - $start_time[2]) <= 5) && ($time_error_count !=3 )){
+                return redirect()->back()->with('failed-quiz-time-gap','')->withInput();
+            }
         }
         if($time_error_count == 3){
             return redirect()->back()->with('failed-quiz-time','')->withInput();
+        }else{
+            return redirect()->route('quizzes.index')->with('success-creation','');
         }
-
-        //return redirect()->route('quizzes.index');
     }
 
     /**

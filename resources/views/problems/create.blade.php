@@ -1,5 +1,15 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('grade-failed'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-grade-problem')</p>
+        </div>
+    @endif
+    @if(Session::has('full-mark-failed'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-full-mark-problem')</p>
+        </div>
+    @endif
     <h3 class="page-title">@lang('module.problems.new_problem')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['problems.store']]) !!}
     {{ csrf_field() }}

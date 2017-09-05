@@ -13,9 +13,17 @@
 @endsection
 @section('content')
     <?php $i = 1;?>
-    @if($quiz->duration != null)
-        <div class="text-center h1 alert alert-danger">
-            <storng>{{ $quiz->duration }}</storng>
+    @if($return_duration != null)
+        <div class="row">
+            <div class="col-xs-12 form-group">
+                <div class="col-sm-8">
+                    <iframe src="http://free.timeanddate.com/countdown/i5vpnmoi/n53/cf12/cm0/cu4/ct0/cs1/ca0/co1/cr0/ss0/cac000/cpc000/pct/tcf1d8e7/fs100/szw448/szh189/tac000/tpc000/iso{{$return_duration}}"
+                            allowTransparency="true" frameborder="0" width="128" height="36"></iframe>
+                </div>
+                <div class="col-sm-4 text-red">
+                    @lang('module.quizzes.caution')
+                </div>
+            </div>
         </div>
     @endif
     {!! Form::open(['method' => 'POST', 'route' => ['solve.store']]) !!}
@@ -34,7 +42,10 @@
                                                                      aria-hidden="true"></i></a>
                 <div class="content-theme-setting">
                     <div class="form-group">
-                        <strong>{{ $quiz->duration }}</strong>
+                        <strong>
+                            <iframe src="http://free.timeanddate.com/countdown/i5vpnmoi/n53/cf12/cm0/cu4/ct0/cs1/ca0/co1/cr0/ss0/cac000/cpc000/pct/tcf1d8e7/fs100/szw448/szh189/tac000/tpc000/iso{{$return_duration}}"
+                                    allowTransparency="true" frameborder="0" width="128" height="36"></iframe>
+                        </strong>
                     </div>
                 </div>
             </div>

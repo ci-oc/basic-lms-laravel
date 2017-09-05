@@ -35,7 +35,7 @@
                             <td>{{ $result->quiz->title }}</td>
                             <td>{{ $result->created_at or '' }}</td>
                             <td>{{$result->quiz->full_mark}}</td>
-                            <td>{{ $result->grade == -1 ? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
+                            <td>{{ $result->processing_status == "PD"? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
                         </tr>
                     @endforeach
                 @else

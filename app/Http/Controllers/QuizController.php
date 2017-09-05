@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Quiz;
 use App\Question;
 use App\UsersProblemAnswer;
+use Carbon\Carbon;
 
 class QuizController extends Controller
 {
@@ -75,9 +76,26 @@ class QuizController extends Controller
             $grade = UsersQuiz::where([['user_id', '=', Auth::id()],
                 ['quiz_id', '=', $id]])->pluck('grade')->toArray();
             if ($grade == null || $solve_many) {
-                if (count($quiz->questions) > 0)
-                    return view('quiz.show', compact('id', 'solve_many', 'quiz_questions', 'quiz_problems', 'quiz'));
-                else
+                if (count($quiz->questions) > 0) {
+                    $result = 0;
+                    $solved_quiz = UsersQuiz::updateOrCreate([
+                        'user_id' => Auth::id(),
+                        'quiz_id' => $id,
+                    ], [
+                        'user_id' => Auth::id(),
+                        'quiz_id' => $id,
+                        'grade' => $result,
+                        'processing_status' => 'PD',
+                        'updated_at' => Carbon::now()
+                    ]);
+                    $return_duration = null;
+                    if ($quiz->duration != null) {
+                        $duration = Quiz::calculateDuration($quiz->duration, $solved_quiz->updated_at);
+                        $duration_modified = explode(' ', $duration);
+                        $return_duration = $duration_modified[0] . 'T' . $duration_modified[1];
+                    }
+                    return view('quiz.show', compact('id', 'solve_many', 'quiz_questions', 'quiz_problems', 'quiz', 'return_duration'));
+                } else
                     return redirect()->back()->with('0_questions', '');
             }
             return redirect()->back()->with('done_already', '');

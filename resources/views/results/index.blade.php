@@ -5,6 +5,11 @@
             <p>@lang('module.errors.error-quiz-pending')</p>
         </div>
     @endif
+    @if(Session::has('failed'))
+        <div class="alert alert-danger">
+            <p>{{ Session::get('failed') }}</p>
+        </div>
+    @endif
     <h3 class="page-title">@lang('module.results.title')</h3>
 
     @include('stat_cols')
@@ -28,16 +33,16 @@
                 <tbody>
                 @if (count($results) > 0)
                     @foreach ($results as $result)
-                        <tr class="{{ $result->grade == -1 ? 'info' : ($result->grade >= ((9/10)*$result->quiz->full_mark) ? 'success' : (
+                        <tr class="{{ $result->processing_status == "PD" ? 'info' : ($result->grade >= ((9/10)*$result->quiz->full_mark) ? 'success' : (
                         $result->grade >= ((5/10)*$result->quiz->full_mark) ? 'warning' : 'danger')) }}">
                             <td>{{ $result->quiz->course->title }}</td>
                             <td>{{ $result->quiz->title }}</td>
                             <td>{{ $result->created_at or '' }}</td>
                             <td>{{$result->quiz->full_mark}}</td>
-                            <td>{{ $result->grade == -1 ? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
+                            <td>{{ $result->processing_status == "PD" ? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
                             <td>
                                 <a href="{{ route('results.show',[$result->id]) }}"
-                                   class="btn btn-xs btn-primary {{ $result->grade == -1 ? 'disabled' : '' }}">@lang('module.view')</a>
+                                   class="btn btn-xs btn-primary {{ $result->processing_status == "PD" ? 'disabled' : '' }}">@lang('module.view')</a>
                             </td>
                         </tr>
                     @endforeach

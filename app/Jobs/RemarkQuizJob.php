@@ -228,7 +228,8 @@ class RemarkQuizJob implements ShouldQueue
                 $result += $problem_grade;
             }
         }
-        $test->update(['grade' => $result]);
+        $test->update(['grade' => $result,
+            'processing_status' => 'OK']);
     }
 
     public function failed(Exception $exception)
@@ -236,6 +237,7 @@ class RemarkQuizJob implements ShouldQueue
         $result = 0;
         $test_id = $this->quiz_id;
         $test = $this->test;
-        $test->update(['grade' => $result]);
+        $test->update(['grade' => $result,
+            'processing_status' => 'OK']);
     }
 }

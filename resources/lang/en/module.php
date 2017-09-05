@@ -56,6 +56,7 @@ return [
         'create-questions-title' => 'Quiz',
         'course-title' => 'Select Course',
         'title' => 'New Quiz',
+        'caution' => 'Please note that after the time on the left finishes no answers will be accepted when you submit.',
         'quizzes-list' => 'Quizzes List',
         'solve' => 'Solve',
         'fields' => [
@@ -147,7 +148,7 @@ return [
         'new-users' => 'Single User Registration',
         'new-users-excel' => 'Excel Sheet Registration',
         'registered-users' => 'Registered Users',
-        'instructors' => 'Instructors'
+        'instructors' => 'Instructor(s)'
     ],
     'placeholders' => [
         'name' => 'Name',
@@ -163,7 +164,7 @@ return [
         'error-quiz-not-available' => 'Quiz is not available at the moment',
         'error-none-solved' => 'No one has solved this quiz yet.',
         'error-0-courses' => 'You have to create a course first.',
-        'error-0-questions' => 'You have assign questions to this quiz first.',
+        'error-0-questions' => 'No questions have been assigned to this quiz yet.',
         'error-quiz-pending' => 'Quiz is still being remarked.',
         'error-name-field' => 'please change students names column name in excel file to "name"',
         'error-email-field' => 'please change emails column name in excel file to "email"',
@@ -173,7 +174,8 @@ return [
         'error-grade-problem' => 'please enter grade greater than zero',
         'error-full-mark-problem' => 'please enter fullMark greater than zero',
         'grade-MCQ-failed' => 'please enter grade greater than zero',
-        'error-login' => 'These credentials do not match our records, please check your email or password and try again.'
+        'error-login' => 'These credentials do not match our records, please check your email or password and try again.',
+        'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already."
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

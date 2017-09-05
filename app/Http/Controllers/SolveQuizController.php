@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\UsersQuiz;
 use Illuminate\Support\Facades\Auth;
 use App\Quiz;
+
 class SolveQuizController extends Controller
 {
     use FileUploadTrait;
@@ -50,20 +51,21 @@ class SolveQuizController extends Controller
      */
     public function store(Request $request)
     {
-        $result = -1;
         $test_id = $request->input('quiz_id');
-        if (Quiz::findorFail($test_id)) {
-            $test = UsersQuiz::updateOrCreate([
-                'user_id' => Auth::id(),
-                'quiz_id' => $test_id,
-            ], [
-                'user_id' => Auth::id(),
-                'quiz_id' => $test_id,
-                'grade' => $result
-            ]);
+        $quiz = Quiz::findorFail($test_id);
+        $test = UsersQuiz::where([
+            ['user_id', '=', Auth::id()],
+            ['quiz_id', '=', $test_id,]
+        ])->get()->first();
+        $duration = Quiz::calculateDuration($quiz->duration, $test->updated_at);
+        $duration_finished = Quiz::hasFinished($duration);
+        if (!$duration_finished) {
             $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
             return redirect()->route('results.index');
+        } else {
+            return redirect()->route('results.index')->with('failed',trans('module.errors.error-duration-finished'));
         }
+
     }
 
     /**

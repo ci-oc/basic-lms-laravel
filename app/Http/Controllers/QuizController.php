@@ -55,7 +55,6 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        // Quiz::create($request->all());
         $time_error_count = 0;
         $date_error_count = 0;
         $start_date_explode = explode(' ', $request->input('start_date'));
@@ -88,6 +87,7 @@ class QuizController extends Controller
         if($time_error_count == 3){
             return redirect()->back()->with('failed-quiz-time','')->withInput();
         }else{
+            Quiz::create($request->all());
             return redirect()->route('quizzes.index')->with('success-creation','');
         }
     }

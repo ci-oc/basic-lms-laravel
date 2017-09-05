@@ -24,8 +24,8 @@ class CreateQuestionsTable extends Migration
             $table->string('input_format')->nullable();
             $table->string('output_format')->nullable();
             $table->float('grade');
-            $table->float('time_limit');
-            $table->integer('mem_limit');
+            $table->float('time_limit')->nullable();;
+            $table->integer('mem_limit')->nullable();;
             $table->softDeletes();
             $table->timestamps();
         });

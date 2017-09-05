@@ -34,6 +34,31 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Delete Role'
             ],
             [
+                'name' => 'update-administration-url',
+                'display_name' => 'Update Administration URL',
+                'description' => 'Privilege to generate a new URL to access administration panel'
+            ],
+            [
+                'name' => 'security-questions-read',
+                'display_name' => 'Display Security Questions Listing',
+                'description' => 'See only Listing Of Security Questions'
+            ],
+            [
+                'name' => 'security-questions-create',
+                'display_name' => 'Create Security Question',
+                'description' => 'Create New Security Question'
+            ],
+            [
+                'name' => 'security-questions-edit',
+                'display_name' => 'Edit Role',
+                'description' => 'Edit Security Question'
+            ],
+            [
+                'name' => 'security-questions-delete',
+                'display_name' => 'Delete Security Question',
+                'description' => 'Delete Security Question'
+            ],
+            [
                 'name' => 'create-course',
                 'display_name' => 'Create Course',
                 'description' => 'Access to create a new course'
@@ -72,6 +97,11 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'show-quiz-statistics',
                 'display_name' => 'Show Quiz Statistics',
                 'description' => 'Privilege to show statistics of a specific quiz.'
+            ],
+            [
+                'name' => 'show-quiz-results',
+                'display_name' => 'Show Quiz Results',
+                'description' => 'Privilege to show results of a specific quiz.'
             ],
             [
                 'name' => 'join-course',

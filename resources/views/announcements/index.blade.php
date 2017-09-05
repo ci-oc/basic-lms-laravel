@@ -10,8 +10,8 @@
             <p>@lang('module.announcements.deleted')</p>
         </div>
     @endif
-    @if(Auth::user()->isInstructor())
-        <button class="btn btn-xs btn-success" id="add"
+    @if(Auth::user()->can('add-announcement'))
+        <button class="btn btn-success" id="add"
                 name="add">@lang('module.announcements.add-announcement')</button>
         <br>
         <br>
@@ -61,28 +61,26 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    @if(count($announcements) == 0)
-         <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
-    @endif
     @foreach($announcements as $announcement_data)
         @if(count($announcement_data) > 0)
-        @foreach($announcement_data as $announcement)
-            <div class="announcement">
-                <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
-                    <p class="text-facebook">{{ $announcement->announcement }}</p>
-                    <small><cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>
-                    </small>
-                </blockquote>
-                @if(Auth::id() == $announcement->user_id)
-                    {{ Form::open(['method' => 'DELETE', 'route' => ['announcements.destroy', $announcement->id]]) }}
-                    {{ Form::submit('DELETE', ['class' => 'btn btn-danger']) }}
-                    {{ Form::close() }}
-                @endif
-            </div>
-            <hr style="border: 2px solid #0EBCF3;">
-        @endforeach
+            @foreach($announcement_data as $announcement)
+                <div class="announcement">
+                    <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
+                        <p class="text-facebook">{{ $announcement->announcement }}</p>
+                        <small>
+                            <cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>
+                        </small>
+                    </blockquote>
+                    @if(Auth::id() == $announcement->user_id)
+                        {{ Form::open(['method' => 'DELETE', 'route' => ['announcements.destroy', $announcement->id]]) }}
+                        {{ Form::submit('DELETE', ['class' => 'btn btn-danger']) }}
+                        {{ Form::close() }}
+                    @endif
+                </div>
+                <hr>
+            @endforeach
+        @else
+            <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
         @endif
     @endforeach
 @endsection

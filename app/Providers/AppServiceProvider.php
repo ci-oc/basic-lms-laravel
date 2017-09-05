@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         View::composer('*', function ($view) {
+
             if (Auth::check()) {
                 $news = News::all();
                 $user = User::find(Auth::id())
@@ -54,6 +55,10 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('problems', $problems);
                 $view->with('all_news', $news);
                 $view->with('announcements', $announcements);
+                if (Auth::user()->isSuperuser()) {
+                    $url = \App\Url::pluck('url')->first();
+                    $view->with('valid_url', $url);
+                }
             }
         });
     }

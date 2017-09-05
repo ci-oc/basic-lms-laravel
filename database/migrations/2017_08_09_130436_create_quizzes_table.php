@@ -24,6 +24,7 @@ class CreateQuizzesTable extends Migration
             $table->timestamp('end_date')->useCurrent();
             $table->float('full_mark')->nullable();
             $table->tinyInteger('solve_many')->nullable()->default(0);
+            $table->tinyInteger('activate_plagiarism')->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

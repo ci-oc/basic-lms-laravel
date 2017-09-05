@@ -46,7 +46,7 @@ class remark extends Command
         foreach ($quizzes as $quiz) {
             $all_type_questions[] = $quiz->questions;
             $problems = Question::separateQuestionTypes($all_type_questions, 'JUDGE');
-            if (Quiz::hasFinished($quiz->end_date)) {
+            if (Quiz::hasFinished($quiz->end_date) && $quiz->activate_plagiarism) {
                 if (count($problems) > 0) {
                     foreach ($problems as $problem) {
                         $langs = $problem->coding_languages()->pluck('compile_name');

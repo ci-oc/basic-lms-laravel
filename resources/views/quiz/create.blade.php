@@ -37,7 +37,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('description',Lang::get('module.description'), ['class' => 'control-label']) !!}
+                    {!! Form::label('description',trans('module.description'), ['class' => 'control-label']) !!}
                     {!! Form::textarea('description', old('description'), ['required','class' => 'form-control ','resize' => 'none','rows' => '6']) !!}
                     @if($errors->has('description'))
                         <p class="help-block alert-danger">
@@ -50,11 +50,14 @@
                 <div class="col-xs-12 form-group">
                     {{ Form::checkbox('solve_many',1,null, ['class' => 'field','id' => 'solve_many']) }}
                     {!! Form::label('solve_many',trans('module.judge_options.quiz-options.solve_many'), ['class' => 'control-label']) !!}
+                    <br>
+                    {{ Form::checkbox('activate_plagiarism',1,null, ['class' => 'field','id' => 'activate_plagiarism']) }}
+                    {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('duration',Lang::get('module.quizzes.fields.duration'), ['class' => 'control-label']) !!}
+                    {!! Form::label('duration',trans('module.quizzes.fields.duration'), ['class' => 'control-label']) !!}
                     <div class='input-group time timepicker'>
                         {!! Form::text('duration', old('duration'), ['class' => 'form-control ','placeholder' => '','type' => 'text']) !!}
                         <span class="input-group-addon">

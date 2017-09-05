@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Quiz;
 use App\Question;
+use App\UsersProblemAnswer;
 
 class QuizController extends Controller
 {
@@ -147,11 +148,45 @@ class QuizController extends Controller
         $solved_quiz = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', $id)->get();
         if ($solved_quiz->first() != null) {
             $chart_data[] = ['Name', 'Grade'];
+            $full_mark_count = 0;
+            $failed_count = 0;
             foreach ($solved_quiz as $quiz) {
                 $chart_data[] = [$quiz->user->name, $quiz->grade];
+                //for count of full mark
+                if ($quiz->grade == $quiz->quiz->full_mark)
+                    $full_mark_count++;
+
+                //for count of failed
+                if ($quiz->grade < (($quiz->quiz->full_mark) / 2))
+                    $failed_count++;
             }
-            return view('quiz.chart')->with('chart_data', json_encode($chart_data));
+            $problems = Question::where([['quiz_id', '=', $id],
+                ['input_format', '!=', null]])->get();
+            $problem_return = new Question();
+            $Percentage = 100;
+            foreach ($problems as $problem) {
+                $sum_of_students_grades = UsersProblemAnswer::where('problem_id', '=', $problem->id)->sum('grade');
+                $count_of_students = UsersProblemAnswer::where('problem_id', '=', $problem->id)->count();
+                $Grade = (($sum_of_students_grades) / ($problem->grade * $count_of_students)) * 100;
+                if ($Grade <= $Percentage) {
+                    $Percentage = $Grade;
+                    $problem_return = $problem;
+                }
+            }
+            return view('quiz.chart')
+                ->with('chart_data', json_encode($chart_data))
+                ->with('minimum_problem', $problem_return)
+                ->with('minimum_problem_percentage', $Percentage)
+                ->with('full_mark_count', $full_mark_count)
+                ->with('failed_count', $failed_count);
         } else
             return redirect()->back()->with('none-solved', '');
+    }
+
+    public function results($id)
+    {
+        $submissions = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', $id)->get();
+        return view('quiz.submissions.index', compact('submissions'));
+
     }
 }

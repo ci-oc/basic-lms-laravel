@@ -154,7 +154,7 @@
                                                         <div class="form-group"><p>Submissions
                                                                 Count: {{$user_solved_count_problems = count($user_status->result)}}</p>
                                                         </div>
-                                                        <table class="table table-hover">
+                                                        <table class="table table-hover" id="datatable">
                                                             <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -198,4 +198,13 @@
         </div>
     </div>
     <!--END CONTENT-->
+@endsection
+@section('javascript')
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
 @endsection

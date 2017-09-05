@@ -24,6 +24,7 @@ Route::get('sendMail', 'MailController@index'); // just for testing sendig mail 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('quizzes/chart/{id}')->uses('QuizController@chart')->name('quizzes.chart');
+    Route::get('quizzes/results/{id}')->uses('QuizController@results')->name('quizzes.results');
     Route::resource('quizzes', 'QuizController');
     Route::resource('profile', 'ProfileController');
     Route::post('profile/update_image')->uses('ProfileController@update_image')->name('profile.update_image');
@@ -33,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('courses/importExcel')->uses('CourseController@importExcel')->name('courses.importExcel');
     Route::resource('user', 'UserController');
     Route::resource('submissions', 'SubmissionsController');
-    Route::resource('role', 'RoleController');
+    Route::resource('role','RoleController');
     Route::resource('results', 'ResultController');
     Route::resource('enroll', 'RegisterCourseController');
     Route::resource('problems', 'ProblemController');
@@ -44,8 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('news', 'NewsController');
     Route::resource('announcements', 'AnnouncementsController');
     Route::post('questions/massDestroy')->uses('QuestionController@massDestroy')->name('questions.massDestroy');
-    Route::get('/admin', function () {
-        return view('admin.index');
+    Route::get('/{url}', function ($url) {
+        $valid_url = \App\Url::pluck('url')->first();
+        if ($valid_url == $url)
+            return view('admin.index',compact('valid_url'));
+        else
+            abort(404);
     })->middleware('role:superuser|standard-user')->name('admin.index');
     Route::get('/noScript', function () {
         return view('noscript');

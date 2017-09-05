@@ -53,40 +53,32 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'access_code' => 'required|min:5|',
+            'access_code' => 'required|min:5|unique:courses',
             'title' => 'required|max:100|min:5|',
             'description' => 'required|min:5|',
         ]);
         $courses = $request->all();
-        $access_code_exists = Course::where('access_code', '=', Input::get('access_code'))->first();
-        $course_title_exists = Course::where('title', '=', input::get('title'))->first();
-        if ($access_code_exists === null) {
-            if ($course_title_exists == null) {
-                $instructors = explode(',', $request->input('assistant_professor'));
-                $user_id = Auth::id();
-                $failed_instructors = array();
-                $success_instructors = array();
-                $success_instructors[0] = $user_id;
-                if (!$instructors[0] == null) {
-                    foreach ($instructors as $instructor) {
-                        $user = User::where('email', '=', $instructor)->pluck('id');
-                        if (count($user) > 0 && $user[0] != $user_id) {
-                            $success_instructors[] = $user[0];
-                        } else {
-                            $failed_instructors[] = $instructor;
-                        }
-                    }
+        $instructors = explode(',', $request->input('assistant_professor'));
+        $user_id = Auth::id();
+        $failed_instructors = array();
+        $success_instructors = array();
+        $success_instructors[0] = $user_id;
+        if (!$instructors[0] == null) {
+            foreach ($instructors as $instructor) {
+                $user = User::where('email', '=', $instructor)->pluck('id');
+                if (count($user) > 0 && $user[0] != $user_id) {
+                    $success_instructors[] = $user[0];
+                } else {
+                    $failed_instructors[] = $instructor;
                 }
-                Course::create($courses)->users()->attach($success_instructors);
-                if ($failed_instructors == null)
-                    return redirect()->route('courses.index')->with('success', '');
-                else
-                    return redirect()->back()->with('failed_instructors', $failed_instructors);
-            } else {
-                return redirect()->back()->with('error-course-title', '')->withInput();
             }
-        } else
-            return redirect()->back()->with('error-access-code', '')->withInput();
+        }
+        Course::create($courses)->users()->attach($success_instructors);
+        if ($failed_instructors == null)
+            return redirect()->route('courses.index')->with('success', '');
+        else
+            return redirect()->back()->with('failed_instructors', $failed_instructors);
+
     }
 
     /**
@@ -138,10 +130,20 @@ class CourseController extends Controller
         if ($request->input('title') != null) {
             $course->title = $request->input('title');
         }
+        if ($request->input('assistant_professor') != null) {
+
+            foreach ($instructors as $instructor) {
+                $user = User::where('email', '=', $instructor)->pluck('id')->first();
+                if (!$course->users->contains($user))
+                    $course->users()->attach($user);
+                // your code MR Andrew...
+            }
+
+        }
         if ($request->input('description') != null) {
             $course->description = $request->input('description');
         }
-        if ($request->input('access_code') == null && $request->input('title') == null && $request->input('description') == null) {
+        if ($request->input('access_code') == null && $request->input('title') == null && $request->input('description') == null && $request->input('assistant_professor') == null) {
             return \redirect()->back()->with('update-fail', '');
         } else if ($course->save()) {
             return \redirect()->back()->with('update-success', '');

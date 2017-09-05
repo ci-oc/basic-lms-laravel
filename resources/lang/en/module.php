@@ -121,6 +121,7 @@ return [
         'example-output' => 'Example Output',
         'lang' => 'Language',
         'code' => 'Code',
+        'solving_percentage' => 'Solving Percentage',
         'fields' => [
             'problem_desc' => 'Problem Description',
             'problem_grade' => 'Problem Grade',
@@ -146,6 +147,7 @@ return [
         'new-users' => 'Single User Registration',
         'new-users-excel' => 'Excel Sheet Registration',
         'registered-users' => 'Registered Users',
+        'instructors' => 'Instructors'
     ],
     'placeholders' => [
         'name' => 'Name',
@@ -177,6 +179,12 @@ return [
         'news-deleted' => 'News deleted successfully',
         'update-failed' => 'You entered nothing to update !'
     ],
+    'charts' => [
+        'statistics' => 'Statistics',
+        'got_full_mark' => '# of students who got full mark.',
+        'not_passed' => '# of students who did not pass (under 50%).',
+        'least_solved' => 'Least solved problem.',
+    ],
     'judge_options' => [
         'title' => 'Judge Options to keep in mind while applying your test cases to scripts.',
         'options' => [
@@ -189,11 +197,12 @@ return [
             'SJ' => 'Sharp Judging',
         ],
         'quiz-options' => [
-            'solve_many' => 'Students can solve this quiz more than once.'
+            'solve_many' => 'Students can solve this quiz more than once.',
+            'activate_plagiarism' => 'Activate MOSS plagiarism detection.'
         ]
     ],
     'coding_languages' => [
-      'title' => 'Coding Languages'
+        'title' => 'Coding Languages'
     ],
     'profiles' => [
         'name' => 'Name',
@@ -238,7 +247,7 @@ return [
         'current-news' => 'Current News'
     ],
     'announcements' => [
-        'add-announcement' => 'ADD new announcement',
+        'add-announcement' => 'Add New Announcement',
         'content' => 'Announcement Content',
         'no_announcements_yet' => 'No announcements yet',
         'success' => 'Announcement added successfully',

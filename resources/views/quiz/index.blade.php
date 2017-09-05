@@ -77,6 +77,10 @@
                                     <a href="{{ route('quizzes.chart',[$quiz->id]) }}"
                                        class="btn btn-xs btn-dark {{ $available ? '' : 'disabled'}}">@lang('module.stat')</a>
                                 @endif
+                                @if(Auth::user()->can('show-quiz-results'))
+                                    <a href="{{ route('quizzes.results',[$quiz->id]) }}"
+                                       class="btn btn-xs btn-warning">@lang('module.submissions.title')</a>
+                                @endif
                                 @if(Auth::user()->can('delete-quiz'))
                                     {!! Form::open(array(
                                             'style' => 'display: inline-block;',

@@ -4,8 +4,6 @@
     <link rel="stylesheet" href="{{asset('css/results/show.css')}}">
 @endsection
 @section('content')
-    <h3 class="page-title">@lang('module.results.title')</h3>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.results.fields.view-result')

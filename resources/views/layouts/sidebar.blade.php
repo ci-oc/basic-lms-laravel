@@ -166,6 +166,8 @@
                                 </i><span class="menu-title">@lang('module.bars.sidebar_results')</span></a>
 
                         </li>
+                    @endif
+                    @if(Auth::user()->can('join-course'))
                         <li class="{{ $request->segment(1) == 'enroll' ? 'active' : '' }}"><a
                                     href="{{ route('enroll.index') }}"><i
                                         class="fa fa-plus" aria-hidden="true">

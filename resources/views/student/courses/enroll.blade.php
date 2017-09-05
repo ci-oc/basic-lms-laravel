@@ -17,6 +17,7 @@
                 <tr>
                     <th>@lang('module.courses.relation-title')</th>
                     <th>@lang('module.users.registered-users')</th>
+                    <th>@lang('module.users.instructors')</th>
                     <th>@lang('module.created_at')</th>
                     <th>@lang('module.operations')</th>
                 </tr>
@@ -28,6 +29,12 @@
                         <tr data-entry-id="{{ $course->id }}">
                             <td>{{ $course->title }}</td>
                             <td>{{ count($course->users) }}</td>
+                            <td>
+                                @foreach($course->users as $user)
+                                    {{$user->name}}
+                                    <br>
+                                @endforeach
+                            </td>
                             <td>{!! $course->created_at !!}</td>
                             <td>
                                 <button class="btn btn-xs btn-danger" id="enroll{{$course->id}}"

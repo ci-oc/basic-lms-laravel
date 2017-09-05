@@ -62,14 +62,14 @@ class ResultController extends Controller
     public function show($id)
     {
         $quiz_result = UsersQuiz::findorFail($id)->load('user', 'quiz');
-        if ($quiz_result->user->id == Auth::id()) {
+        if ($quiz_result->user->id == Auth::id() or Auth::user()->can('show-quiz-results')) {
             if ($quiz_result->grade != -1) {
                 $questions_results = UsersAnswer::where([
-                    ['user_id', '=', Auth::id()],
+                    ['user_id', '=', $quiz_result->user->id],
                     ['quiz_id', '=', $quiz_result->quiz_id]
                 ])->get();
                 $problems_results = UsersProblemAnswer::where([
-                    ['user_id', '=', Auth::id()],
+                    ['user_id', '=', $quiz_result->user->id],
                     ['quiz_id', '=', $quiz_result->quiz_id]
                 ])->get();
                 $problems_results->load('solvedTestCases');

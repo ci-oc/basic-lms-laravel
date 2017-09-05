@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('failed-quiz-time'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-quiz-duration')</p>
+        </div>
+    @endif
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet">
     <h3 class="page-title">@lang('module.quizzes.title')</h3>

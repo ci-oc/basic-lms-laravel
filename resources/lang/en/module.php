@@ -175,7 +175,8 @@ return [
         'error-full-mark-problem' => 'please enter fullMark greater than zero',
         'grade-MCQ-failed' => 'please enter grade greater than zero',
         'error-login' => 'These credentials do not match our records, please check your email or password and try again.',
-        'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already."
+        'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already.",
+        'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

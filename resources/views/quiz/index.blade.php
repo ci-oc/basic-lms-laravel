@@ -1,6 +1,11 @@
 @inject('request','App\Quiz')
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('success-creation'))
+    <div class="alert alert-success">
+        <p>@lang('module.success.quiz-created-successfully')</p>
+    </div>
+    @endif
     @if(Session::has('done_already'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-quiz-made-before')</p>

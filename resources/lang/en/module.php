@@ -182,7 +182,9 @@ return [
         'error-full-mark-problem' => 'please enter fullMark greater than zero',
         'grade-MCQ-failed' => 'please enter grade greater than zero',
         'error-login' => 'These credentials do not match our records, please check your email or password and try again.',
-        'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already."
+        'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already.",
+        'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!',
+        'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 5 minutes.'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',
@@ -190,7 +192,8 @@ return [
         'success-updating' => 'Course edited successfully.',
         'news-created' => 'News added successfully',
         'news-deleted' => 'News deleted successfully',
-        'update-failed' => 'You entered nothing to update !'
+        'update-failed' => 'You entered nothing to update !',
+        'quiz-created-successfully' => 'quiz created successfully.'
     ],
     'charts' => [
         'statistics' => 'Statistics',

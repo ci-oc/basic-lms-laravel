@@ -61,14 +61,13 @@ class SecurityQuestionController extends Controller
     {
         $answers = SecurityQuestion::all()->pluck('answer')->toArray();
         $question_ids = SecurityQuestion::all()->pluck('id')->toArray();
-        $answer1 = $request->input('question' . $question_ids[0]);
-        $answer2 = $request->input('question' . $question_ids[1]);
-        $answer3 = $request->input('question' . $question_ids[2]);
-        if ($answer1 != $answers[0] && $answer2 != $answers[1] && $answer3 != $answers[2]) {
-            return redirect()->back()->with('failed-questions', '')->withInput();
-        } else {
-            return view('admin.index');
+        for ($i = 0; $i < count($answers); $i++) {
+            $answer = $request->input('question' . $question_ids[$i]);
+            if ($answer != $answers[$i]) {
+                return redirect()->back()->with('failed-questions', '')->withInput();
+            }
         }
+        return view('admin.index');
     }
 
     /**

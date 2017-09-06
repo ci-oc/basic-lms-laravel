@@ -30,10 +30,17 @@ class SecurityQuestionController extends Controller
     }
 
 
-    public function index2(){
+    public function index2()
+    {
         $security_Question = SecurityQuestion::all()->toArray();
-    return view('admin.security_questions.edit',compact('security_Question'));
+        return view('admin.security_questions.show', compact('security_Question'));
     }
+
+    public function index3()
+    {
+        return view('admin.security_questions.create');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +48,7 @@ class SecurityQuestionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -58,8 +65,8 @@ class SecurityQuestionController extends Controller
         $answer2 = $request->input('question' . $question_ids[1]);
         $answer3 = $request->input('question' . $question_ids[2]);
         if ($answer1 != $answers[0] && $answer2 != $answers[1] && $answer3 != $answers[2]) {
-             return redirect()->back()->with('failed-questions','')->withInput();
-        }else{
+            return redirect()->back()->with('failed-questions', '')->withInput();
+        } else {
             return view('admin.index');
         }
     }
@@ -81,9 +88,15 @@ class SecurityQuestionController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-      return "HELLO";
+        $question = SecurityQuestion::where('id', '=', $id)->get()->toArray();
+        return view('admin.security_questions.edit', compact('question'));
+    }
+
+    public function store_question(Request $request)
+    {
+        dd($request);
     }
 
     /**
@@ -95,7 +108,11 @@ class SecurityQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = SecurityQuestion::findOrFail($id);
+        $question->question_text = $request->input('question_text');
+        $question->answer = $request->input('answer');
+        $question->save();
+        return redirect()->back()->with('success-editing', '');
     }
 
     /**
@@ -106,9 +123,10 @@ class SecurityQuestionController extends Controller
      */
     public function destroy($id)
     {
+        echo $id;
         $question = SecurityQuestion::findOrFail($id);
         $question->delete();
-        return redirect('admin.security_questions.edit');
+        return redirect('admin.security_questions.show');
     }
 
 }

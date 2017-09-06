@@ -192,6 +192,7 @@ return [
         'success-saving' => 'User(s) created successfully.',
         'success-course' => 'Course created successfully.',
         'success-updating' => 'Course edited successfully.',
+        'success-editing-question' => 'question edited successfully',
         'news-created' => 'News added successfully',
         'news-deleted' => 'News deleted successfully',
         'update-failed' => 'You entered nothing to update !',

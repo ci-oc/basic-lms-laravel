@@ -1,26 +1,12 @@
 @extends('admin.layout.admin')
 @section('content')
-    <h2>Questions Table</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Question</th>
-            <th>answer</th>
-            <th>operations</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($security_Question as $question)
-            <tr>
-                <td>{{$question['question_text']}}</td>
-                <td>{{$question['answer']}}</td>
-                <td><a href="{{ route('securityQuestions.edit',[$question['id']]) }}"
-                       class="btn btn-xs btn-info">@lang('module.edit')</a>
-                    <a href="{{ route('securityQuestions.destroy',[$question['id']]) }}"
-                       class="btn btn-xs btn-danger">@lang('module.delete')</a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    {!! Form::open(['method' => 'PUT', 'route' => ['securityQuestions.update',$question[0]['id']], 'enctype' => 'multipart/form-data'])!!}
+    {{ csrf_field() }}
+    {!! Form::text('question_text', old('question_text'),['class' => 'form-control', 'placeholder' => $question[0]['question_text']]) !!}
+    <br>
+    {!! Form::text('answer', old('answer'), ['class' => 'form-control', 'placeholder' => $question[0]['answer']]) !!}
+    <br>
+    {!! Form::submit(trans('module.submit'), ['class' => 'btn btn-danger' ,'data-value' => 'shake', 'onclick' => 'shake()']) !!}
+    {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary']) }}
+    {!! Form::close() !!}
 @endsection

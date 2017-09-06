@@ -24,6 +24,7 @@ Route::get('sendMail', 'MailController@index'); // just for testing sendig mail 
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index2')->name('securityQuestions.index2');
+    Route::get('securityQuestions/index3')->uses('SecurityQuestionController@index3')->name('securityQuestions.index3');
     Route::resource('securityQuestions','SecurityQuestionController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('quizzes/chart/{id}')->uses('QuizController@chart')->name('quizzes.chart');

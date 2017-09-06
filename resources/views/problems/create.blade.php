@@ -20,7 +20,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('selected_quiz',Lang::get('module.problems.fields.selected_quiz'), ['class' => 'control-label']) !!}
+                    {!! Form::label('selected_quiz',trans('module.problems.fields.selected_quiz'), ['class' => 'control-label']) !!}
                     <select class="form-control" name="quiz_id">
                         @foreach($quizzes as $quiz)
                             <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
@@ -146,9 +146,9 @@
                 <div class="col-xs-12 form-group">
                     {!! Form::label('more_info_link',trans('module.problems.fields.more_info_link'), ['class' => 'control-label']) !!}
                     {!! Form::url('more_info_link', old('more_info_link'), ['class' => 'form-control ','placeholder' => 'Type an URL']) !!}
-                    @if($errors->has('output_format'))
+                    @if($errors->has('more_info_link'))
                         <p class="help-block alert-danger">
-                            {{ $errors->first('output_format') }}
+                            {{ $errors->first('more_info_link') }}
                         </p>
                     @endif
                 </div>
@@ -170,9 +170,14 @@
                     <input type="checkbox" name="coding_languages[]"
                            value="{{$lang->id}}"> {{ $lang->name }}<br>
                 @endforeach
+                @if($errors->has('coding_languages'))
+                    <p class="help-block alert-danger">
+                        {{ $errors->first('coding_languages') }}
+                    </p>
+                @endif
             </div>
             {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger']) !!}
-            {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary' ,'data-value' => 'shake']) }}
+            {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary']) }}
             {!! Form::close() !!}
         </div>
     </div>

@@ -53,8 +53,15 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->input('grade') == null || $request->input('grade') <= 0){
-            return \redirect()->back()->with('grade-failed','')->withInput();
+        $this->validate($request, [
+            'quiz_id' => 'required',
+            'grade' => 'required|numeric|min:0',
+            'question_text' => 'required',
+            'option*' => 'required',
+            'correct' => 'required',
+        ]);
+        if ($request->input('grade') == null || $request->input('grade') <= 0) {
+            return \redirect()->back()->with('grade-failed', '')->withInput();
         }
         $question = Question::create($request->all());
         $quiz = Quiz::find($request->input('quiz_id'));

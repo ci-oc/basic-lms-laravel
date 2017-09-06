@@ -204,6 +204,7 @@ class RemarkQuizJob implements ShouldQueue
                                 //COMPILATION DID NOT SUCCESS
                                 //REPLACING SCRIPT PATH WITH THE NAME " CODE " in order to hide its place in file structure.
                                 $err_reason = str_replace('storage/scripts/' . $test_id . DIRECTORY_SEPARATOR . $problem->id . DIRECTORY_SEPARATOR . $user_code_filename, ' Code ', $compilation_output['message']);
+                                $err_reason = str_replace('var/www/html/module', ' ', $err_reason);
                                 $compile_status = 'Compile Error';
                             }
                         }

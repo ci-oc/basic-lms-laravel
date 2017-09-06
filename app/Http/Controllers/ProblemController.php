@@ -52,10 +52,18 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
-
-        if ($request->input('grade') == null || $request->input('grade') <= 0) {
-            return \redirect()->back()->withInput()->with('grade-failed', '');
-        }
+        $this->validate($request, [
+            'question_text' => 'required',
+            'grade' => 'required|numeric|min:0',
+            'input_format' => 'required',
+            'output_format' => 'required',
+            'input_testcase.*' => 'required',
+            'output_testcase.*' => 'required',
+            'time_limit' => 'required|numeric|min:0|max:60',
+            'mem_limit' => 'required|numeric|min:0|max:30720',
+            'more_info_link' => 'nullable|active_url',
+            'coding_languages' => 'required'
+        ]);
         $coding_languages = $request->input('coding_languages');
         $question = Question::create($request->all());
         $question->coding_languages()->attach($coding_languages);
@@ -168,6 +176,10 @@ class ProblemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $question->coding_languages->delete();
+        $question->testcases->delete();
+        $question->delete();
+        return redirect()->route('problems.index');
     }
 }

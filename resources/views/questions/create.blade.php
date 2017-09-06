@@ -16,7 +16,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('quiz_id', Lang::get('module.quizzes.create-questions-title'), ['class' => 'control-label']) !!}
+                    {!! Form::label('quiz_id', trans('module.quizzes.create-questions-title'), ['class' => 'control-label']) !!}
                     <select class="form-control" name="quiz_id">
                         @foreach($quizzes as $quiz)
                             <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
@@ -31,19 +31,19 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('grade', Lang::get('module.questions.fields.grade'), ['class' => 'control-label']) !!}
+                    {!! Form::label('grade', trans('module.questions.fields.grade'), ['class' => 'control-label','required']) !!}
                     {!! Form::input('number','grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step' => '0.5']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('option2'))
+                    @if($errors->has('grade'))
                         <p class="help-block">
-                            {{ $errors->first('option2') }}
+                            {{ $errors->first('grade') }}
                         </p>
                     @endif
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('question_text', Lang::get('module.questions.fields.question-text'), ['class' => 'control-label']) !!}
+                    {!! Form::label('question_text', Lang::get('module.questions.fields.question-text'), ['class' => 'control-label','required']) !!}
                     {!! Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => '', 'style' => 'resize:none;']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('question_text'))

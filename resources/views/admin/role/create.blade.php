@@ -25,10 +25,27 @@
 
         <div class="form-group text-left">
             <h3>Permissions</h3>
-            @foreach($permissions as $permission)
-    		<input type="checkbox"   name="permission[]" value="{{$permission->id}}" > {{$permission->name}} <br>
-            @endforeach
-    	</div>
+            <div class="col-xs-12 form-group">
+                <div class="col-sm-4">
+                    <h3>@lang('module.roles.category_headers.security')</h3>
+                    @foreach($security_permissions as $permission)
+                        <input type="checkbox"   name="permission[]" value="{{$permission->id}}" > {{$permission->name}} <br>
+                    @endforeach
+                </div>
+                <div class="col-sm-4">
+                    <h3>@lang('module.roles.category_headers.hep')</h3>
+                    @foreach($hep_permissions as $permission)
+                        <input type="checkbox"   name="permission[]" value="{{$permission->id}}" > {{$permission->name}} <br>
+                    @endforeach
+                </div>
+                <div class="col-sm-4">
+                    <h3>@lang('module.roles.category_headers.lep')</h3>
+                    @foreach($lep_permissions as $permission)
+                        <input type="checkbox"   name="permission[]" value="{{$permission->id}}" > {{$permission->name}} <br>
+                    @endforeach
+                </div>
+            </div>
+
 
 
 

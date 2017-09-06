@@ -16,8 +16,12 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        $this->middleware('role:superuser|standard-user');
+        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:role-read', ['only' => 'index']);
+        $this->middleware('permission:role-create', ['only' => 'edit']);
+        $this->middleware('permission:role-delete', ['only' => 'destroy']);
     }
+
     public function index()
     {
         $roles = Role::all();
@@ -31,8 +35,11 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();
-        return view('admin.role.create', compact('permissions'));
+        $permissions = Permission::all()->groupBy('category');
+        $security_permissions = $permissions['security'];
+        $hep_permissions = $permissions['hep'];
+        $lep_permissions = $permissions['lep'];
+        return view('admin.role.create', compact('security_permissions', 'hep_permissions', 'lep_permissions'));
     }
 
     /**
@@ -73,9 +80,12 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        $permissions = Permission::all();
+        $permissions = Permission::all()->groupBy('category');
+        $security_permissions = $permissions['security'];
+        $hep_permissions = $permissions['hep'];
+        $lep_permissions = $permissions['lep'];
         $role_permissions = $role->perms()->pluck('id', 'id')->toArray();
-        return view('admin.role.edit', compact(['role', 'role_permissions', 'permissions']));
+        return view('admin.role.edit', compact(['role', 'role_permissions', 'security_permissions', 'hep_permissions', 'lep_permissions']));
     }
 
     /**

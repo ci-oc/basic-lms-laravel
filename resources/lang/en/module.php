@@ -24,6 +24,13 @@ return [
     'description' => 'Description',
     'submit_quiz' => 'Submit answers',
     'no_entries_in_table' => 'No entries in table',
+    'roles' => [
+        'category_headers' => [
+          'security' => 'Security',
+          'hep' => 'High Educational Privileges',
+          'lep' => 'Low Educational Privileges'
+        ],
+    ],
     'questions' => [
         'name' => 'Question',
         'title' => 'Assign Questions',

@@ -49,16 +49,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($all_news as $news)
+                        @if(count($all_news) > 0)
+                            @foreach($all_news as $news)
+                                <tr>
+                                    <td>{{$news->news}}</td>
+                                    <td>
+                                        {{ Form::open(['method' => 'DELETE', 'route' => ['news.destroy', $news->id]]) }}
+                                        {{ Form::submit(trans('module.delete'), ['class' => 'btn-xs btn-danger']) }}
+                                        {{ Form::close() }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <td>{{$news->news}}</td>
-                                <td>
-                                    {{ Form::open(['method' => 'DELETE', 'route' => ['news.destroy', $news->id]]) }}
-                                    {{ Form::submit(trans('module.delete'), ['class' => 'btn-xs btn-danger']) }}
-                                    {{ Form::close() }}
-                                </td>
+                                <td colspan="2">@lang('module.no_entries_in_table')</td>
                             </tr>
-                        @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

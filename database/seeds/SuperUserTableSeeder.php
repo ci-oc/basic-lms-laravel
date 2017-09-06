@@ -15,6 +15,7 @@ class SuperUserTableSeeder extends Seeder
 
         factory(App\User::class, 2)->create()->each(function ($u) {
             $role_id = Role::where('name', '=', 'superuser')->pluck('id')->first();
+
             $u->attachRole($role_id);
         });
     }

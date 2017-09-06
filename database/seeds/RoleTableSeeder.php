@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Role;
+use App\Permission;
 
 class RoleTableSeeder extends Seeder
 {
@@ -35,7 +36,11 @@ class RoleTableSeeder extends Seeder
             ],
         ];
         foreach ($roles as $key => $value) {
-            Role::create($value);
+            $role = Role::create($value);
+            if ($role->name == 'superuser') {
+                $permissions = Permission::where('category', '=', 'security')->get()->toArray();
+                $role->attachPermissions($permissions);
+            }
         }
     }
 }

@@ -101,87 +101,99 @@
                 <ul id="side-menu" class="nav">
 
                     <div class="clearfix"></div>
-                    <li class="{{ $request->segment(1) == 'dashboard' ? 'active' : '' }}"><a
-                                href="{{ route('home') }}"><i
-                                    class="fa fa-tachometer fa-fw">
-                                <div class="icon-bg bg-orange"></div>
-                            </i><span class="menu-title">@lang('module.bars.sidebar_dashboard')</span></a></li>
-                    @if(Auth::user()->can('add-announcement') or Auth::user()->can('view-announcement'))
-                    <li class="{{ $request->segment(1) == 'announcements' ? 'active' : '' }}"><a
-                                href="{{route('announcements.index')}}"><i
-                                    class="fa fa-bullhorn">
-                                <div class="icon-bg bg-green"></div>
-                            </i><span class="menu-title">@lang('module.bars.sidebar_announcements')</span></a>
-
-                    </li>
-                    @endif
-                    @if(Auth::user()->can('join-course') or Auth::user()->can('create-course') or Auth::user()->can('edit-course') or Auth::user()->can('drop-quiz'))
-                    <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
-                                href="{{ route('courses.index') }}"><i
-                                    class="fa fa-graduation-cap" aria-hidden="true">
-                                <div class="icon-bg bg-pink"></div>
-                            </i><span class="menu-title">Courses</span></a>
-
-                    </li>
-                    @endif
-                    @if(Auth::user()->can('solve-quiz') or Auth::user()->can('create-quiz') or Auth::user()->can('edit-quiz') or Auth::user()->can('delete-quiz'))
-                        <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
-                                    href="{{route('quizzes.index')}}"><i
-                                        class="fa fa-exclamation fa-fw">
+                    @if(Auth::user()->can('security-questions-read'))
+                        <li class="{{ $request->segment(1) == 'security_questions' ? 'active' : '' }}"><a
+                                    href="{{route('securityQuestions.index')}}"><i
+                                        class="fa fa-bullhorn">
                                     <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_security_questions')</span></a>
 
                         </li>
-                    @endif
-                    @if(Auth::user()->can('create-quiz'))
-                        <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
-                                    href="{{route('problems.index')}}"><i
-                                        class="fa fa-code fa-fw">
-                                    <div class="icon-bg bg-violet"></div>
-                                </i><span class="menu-title">@lang('module.bars.sidebar_problems')</span></a>
+                    @else
 
-                        </li>
-                        <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}"><a
-                                    href="{{route('questions.index')}}"><i
-                                        class="fa fa-sitemap fa-fw">
-                                    <div class="icon-bg bg-dark"></div>
-                                </i><span class="menu-title">@lang('module.bars.sidebar_questions')</span></a>
-
-                        </li>
-                    @endif
-                    @if(Auth::user()->can('add-students'))
-                        <li class="{{ $request->segment(1) == 'users' ? 'active' : '' }}"><a
-                                    href="{{route('users.create')}}"><i
-                                        class="fa fa-users fa-fw">
+                        <li class="{{ $request->segment(1) == 'dashboard' ? 'active' : '' }}"><a
+                                    href="{{ route('home') }}"><i
+                                        class="fa fa-tachometer fa-fw">
                                     <div class="icon-bg bg-orange"></div>
-                                </i><span class="menu-title">@lang('module.bars.sidebar_new_users')</span></a>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_dashboard')</span></a></li>
+                        @if(Auth::user()->can('add-announcement') or Auth::user()->can('view-announcement'))
+                            <li class="{{ $request->segment(1) == 'announcements' ? 'active' : '' }}"><a
+                                        href="{{route('announcements.index')}}"><i
+                                            class="fa fa-bullhorn">
+                                        <div class="icon-bg bg-green"></div>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_announcements')</span></a>
+
+                            </li>
+                        @endif
+                        @if(Auth::user()->can('join-course') or Auth::user()->can('create-course') or Auth::user()->can('edit-course') or Auth::user()->can('drop-quiz'))
+                            <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
+                                        href="{{ route('courses.index') }}"><i
+                                            class="fa fa-graduation-cap" aria-hidden="true">
+                                        <div class="icon-bg bg-pink"></div>
+                                    </i><span class="menu-title">Courses</span></a>
+
+                            </li>
+                        @endif
+                        @if(Auth::user()->can('solve-quiz') or Auth::user()->can('create-quiz') or Auth::user()->can('edit-quiz') or Auth::user()->can('delete-quiz'))
+                            <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
+                                        href="{{route('quizzes.index')}}"><i
+                                            class="fa fa-exclamation fa-fw">
+                                        <div class="icon-bg bg-green"></div>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
+
+                            </li>
+                        @endif
+                        @if(Auth::user()->can('create-quiz'))
+                            <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
+                                        href="{{route('problems.index')}}"><i
+                                            class="fa fa-code fa-fw">
+                                        <div class="icon-bg bg-violet"></div>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_problems')</span></a>
+
+                            </li>
+                            <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}"><a
+                                        href="{{route('questions.index')}}"><i
+                                            class="fa fa-sitemap fa-fw">
+                                        <div class="icon-bg bg-dark"></div>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_questions')</span></a>
+
+                            </li>
+                        @endif
+                        @if(Auth::user()->can('add-students'))
+                            <li class="{{ $request->segment(1) == 'users' ? 'active' : '' }}"><a
+                                        href="{{route('users.create')}}"><i
+                                            class="fa fa-users fa-fw">
+                                        <div class="icon-bg bg-orange"></div>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_new_users')</span></a>
+
+                            </li>
+                        @endif
+                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
+                                        class="fa fa-bar-chart-o fa-fw">
+                                    <div class="icon-bg bg-orange"></div>
+                                </i><span class="menu-title">Charts</span></a>
 
                         </li>
-                    @endif
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
-                                    class="fa fa-bar-chart-o fa-fw">
-                                <div class="icon-bg bg-orange"></div>
-                            </i><span class="menu-title">Charts</span></a>
+                        @if(Auth::user()->isStudent())
+                            <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
+                                        href="{{route('results.index')}}"><i
+                                            class="fa fa-th-list fa-fw">
+                                        <div class="icon-bg bg-blue"></div>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_results')</span></a>
 
-                    </li>
-                    @if(Auth::user()->isStudent())
-                        <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
-                                    href="{{route('results.index')}}"><i
-                                        class="fa fa-th-list fa-fw">
-                                    <div class="icon-bg bg-blue"></div>
-                                </i><span class="menu-title">@lang('module.bars.sidebar_results')</span></a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->can('join-course'))
+                            <li class="{{ $request->segment(1) == 'enroll' ? 'active' : '' }}"><a
+                                        href="{{ route('enroll.index') }}"><i
+                                            class="fa fa-plus" aria-hidden="true">
+                                        <div class="icon-bg bg-pink"></div>
+                                    </i><span class="menu-title">Register Course</span></a>
 
-                        </li>
-                    @endif
-                    @if(Auth::user()->can('join-course'))
-                        <li class="{{ $request->segment(1) == 'enroll' ? 'active' : '' }}"><a
-                                    href="{{ route('enroll.index') }}"><i
-                                        class="fa fa-plus" aria-hidden="true">
-                                    <div class="icon-bg bg-pink"></div>
-                                </i><span class="menu-title">Register Course</span></a>
+                            </li>
+                        @endif
 
-                        </li>
-                    @endif
+                                          @endif
                     <li class="{{ $request->segment(1) == 'submissions' ? 'active' : '' }}"><a
                                 href="{{ route('submissions.index') }}"><i
                                     class="fa fa-database fa-fw">
@@ -211,6 +223,7 @@
                                     class="fa fa-slack fa-fw">
                                 <div class="icon-bg bg-green"></div>
                             </i><span class="menu-title">Slack</span></a></li>
+
                 </ul>
             </div>
         </nav>

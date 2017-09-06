@@ -48,7 +48,7 @@ class SecurityQuestionController extends Controller
      */
     public function create()
     {
-
+      return "hello";
     }
 
     /**
@@ -95,7 +95,7 @@ class SecurityQuestionController extends Controller
 
     public function store_question(Request $request)
     {
-        dd($request);
+       return 'HELLO';
     }
 
     /**

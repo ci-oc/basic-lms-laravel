@@ -121,7 +121,8 @@ return [
         'sidebar_results' => 'Results',
         'sidebar_new_users' => 'Request New Users',
         'sidebar_submissions' => 'Submissions',
-        'sidebar_announcements' => 'Announcements'
+        'sidebar_announcements' => 'Announcements',
+        'sidebar_security_questions' => 'Security Questions'
     ],
     'problems' => [
         'problems-list' => 'Problems List',
@@ -276,5 +277,6 @@ return [
         'security-questions' => 'Security Questions',
         'caption' => 'Please answer the following questions to login as admin',
         'answer' => 'Your answer...',
+        'answer-note' => 'Please answer the following questions to access your privileges!'
     ]
 ];

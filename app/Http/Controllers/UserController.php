@@ -12,7 +12,8 @@ class UserController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:superuser|standard-user');
+        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:role-read', ['only' => 'index']);
     }
 
     /**

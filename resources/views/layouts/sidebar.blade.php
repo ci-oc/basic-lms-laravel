@@ -106,6 +106,7 @@
                                     class="fa fa-tachometer fa-fw">
                                 <div class="icon-bg bg-orange"></div>
                             </i><span class="menu-title">@lang('module.bars.sidebar_dashboard')</span></a></li>
+                    @if(Auth::user()->can('add-announcements') or Auth::user()->can('view-announcements'))
                     <li class="{{ $request->segment(1) == 'announcements' ? 'active' : '' }}"><a
                                 href="{{route('announcements.index')}}"><i
                                     class="fa fa-bullhorn">
@@ -113,6 +114,8 @@
                             </i><span class="menu-title">@lang('module.bars.sidebar_announcements')</span></a>
 
                     </li>
+                    @endif
+                    @if(Auth::user()->can('join-course') or Auth::user()->can('create-course') or Auth::user()->can('edit-course') or Auth::user()->can('drop-quiz'))
                     <li class="{{ $request->segment(1) == 'courses' ? 'active' : '' }}"><a
                                 href="{{ route('courses.index') }}"><i
                                     class="fa fa-graduation-cap" aria-hidden="true">
@@ -120,13 +123,16 @@
                             </i><span class="menu-title">Courses</span></a>
 
                     </li>
-                    <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
-                                href="{{route('quizzes.index')}}"><i
-                                    class="fa fa-exclamation fa-fw">
-                                <div class="icon-bg bg-green"></div>
-                            </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
+                    @endif
+                    @if(Auth::user()->can('solve-quiz') or Auth::user()->can('create-quiz') or Auth::user()->can('edit-quiz') or Auth::user()->can('delete-quiz'))
+                        <li class="{{ $request->segment(1) == 'quizzes' ? 'active' : '' }}"><a
+                                    href="{{route('quizzes.index')}}"><i
+                                        class="fa fa-exclamation fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">@lang('module.bars.sidebar_quizzes')</span></a>
 
-                    </li>
+                        </li>
+                    @endif
                     @if(Auth::user()->can('create-quiz'))
                         <li class="{{ $request->segment(1) == 'problems' ? 'active' : '' }}"><a
                                     href="{{route('problems.index')}}"><i

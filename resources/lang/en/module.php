@@ -177,7 +177,7 @@ return [
         'error-name-field' => 'please change students names column name in excel file to "name"',
         'error-email-field' => 'please change emails column name in excel file to "email"',
         'error-id-field' => 'please change IDs column name in excel file to "id"',
-        'error-access-code' => 'sorry this access code is reserved, please choose another one',
+        'error-access-code2' => 'sorry this access code is reserved, please choose another one',
         'error-course-title' => 'sorry this title is reserved, please choose another one',
         'error-grade-problem' => 'please enter grade greater than zero',
         'error-full-mark-problem' => 'please enter fullMark greater than zero',
@@ -185,8 +185,12 @@ return [
         'error-login' => 'These credentials do not match our records, please check your email or password and try again.',
         'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already.",
         'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!',
+<<<<<<< HEAD
         'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 5 minutes.',
         'error-questions-errors' => 'Sorry you entered some wrong answers try again!'
+=======
+        'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 1 minute.'
+>>>>>>> 51745101800bb53498b24c815d6dcd98c1c1336b
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',
@@ -196,7 +200,7 @@ return [
         'news-created' => 'News added successfully',
         'news-deleted' => 'News deleted successfully',
         'update-failed' => 'You entered nothing to update !',
-        'quiz-created-successfully' => 'quiz created successfully.'
+        'quiz-created-successfully' => 'Quiz created successfully.'
     ],
     'charts' => [
         'statistics' => 'Statistics',
@@ -213,7 +217,7 @@ return [
             'b' => 'Ignore changes in the amount of white space',
             'B' => 'Ignore changes where lines are all blank',
             'w' => 'Ignore all white space',
-            'SJ' => 'Sharp Judging',
+            'SJ' => 'Sharp Judging ( FullMark or nothing )',
         ],
         'quiz-options' => [
             'solve_many' => 'Students can solve this quiz more than once.',

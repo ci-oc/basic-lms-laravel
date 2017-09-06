@@ -8,11 +8,12 @@ use App\Mail\MailTrap;
 
 class MailController extends Controller
 {
-    public static function index($password){
+    public static function index($password,$to){
+
         if(Mail::send('student.mail', compact('password'), function($message)
         {
-            $message->to('mail@domain.net');
-            $message->subject('Welcome to Laravel');
+            $message->to('TEST@GMAIL.COM');
+            $message->subject('Welcome to FCIH-MODULE');
             $message->from('sender@domain.net');
         })) return true;
     }

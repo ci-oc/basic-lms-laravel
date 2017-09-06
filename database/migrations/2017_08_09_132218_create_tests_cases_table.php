@@ -16,7 +16,7 @@ class CreateTestsCasesTable extends Migration
         Schema::create('tests_cases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('question_id')->unsigned()->nullable();
-            $table->foreign('question_id', 'fk_257_question_question_id_tests_case')->references('id')->on('questions');
+            $table->foreign('question_id', 'fk_257_question_question_id_tests_case')->references('id')->on('questions')->onDelete('cascade');
             $table->text('input')->nullable();
             $table->text('output');
             $table->timestamps();

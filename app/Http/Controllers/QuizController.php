@@ -18,7 +18,7 @@ class QuizController extends Controller
     public function __construct()
     {
         $this->middleware('permission:create-quiz', ['only' => ['create']]);
-        $this->middleware('permission:edit-quiz', ['only' => ['edit','update']]);
+        $this->middleware('permission:edit-quiz', ['only' => ['edit', 'update']]);
         $this->middleware('permission:show-quiz-statistics', ['only' => ['chart']]);
         $this->middleware('permission:delete-quiz', ['only' => ['destroy']]);
     }
@@ -64,11 +64,11 @@ class QuizController extends Controller
         $start_date = explode('-', $start_date_temp);
         $end_date = explode('-', $end_date_temp);
         for ($i = 0; $i < count($start_date); $i++) {
-            if($end_date[$i] <= $start_date[$i]){
+            if ($end_date[$i] <= $start_date[$i]) {
                 $date_error_count += 1;
             }
         }
-        if($date_error_count == 3){ // data = data then check for time
+        if ($date_error_count == 3) { // data = data then check for time
             $start_time_explode = explode(' ', $request->input('start_date'));
             $end_time_explode = explode(' ', $request->input('end_date'));
             $start_time_temp = $start_time_explode[1];
@@ -76,19 +76,19 @@ class QuizController extends Controller
             $start_time = explode(':', $start_time_temp);
             $end_time = explode(':', $end_time_temp);
             for ($i = 0; $i < count($start_time); $i++) {
-                if($end_time[$i] <= $start_time[$i]){
+                if ($end_time[$i] <= $start_time[$i]) {
                     $time_error_count += 1;
                 }
             }
-            if((($end_time[2] - $start_time[2]) <= 5) && ($time_error_count !=3 )){
-                return redirect()->back()->with('failed-quiz-time-gap','')->withInput();
+            if ((($end_time[2] - $start_time[2]) <= 1) && ($time_error_count != 3)) {
+                return redirect()->back()->with('failed-quiz-time-gap', '')->withInput();
             }
         }
-        if($time_error_count == 3){
-            return redirect()->back()->with('failed-quiz-time','')->withInput();
-        }else{
+        if ($time_error_count == 3) {
+            return redirect()->back()->with('failed-quiz-time', '')->withInput();
+        } else {
             Quiz::create($request->all());
-            return redirect()->route('quizzes.index')->with('success-creation','');
+            return redirect()->route('quizzes.index')->with('success-creation', '');
         }
     }
 
@@ -161,8 +161,9 @@ class QuizController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'start_date' => 'date_format:Y-m-d H:i:s',
-            'end_date' => 'date_format:Y-m-d H:i:s',
+            'duration' => 'nullable|date_format:H:i:s',
+            'start_date' => 'date_format:Y-m-d H:i:s|after:now',
+            'end_date' => 'date_format:Y-m-d H:i:s|after:now',
         ]);
 
         if ($quiz = Quiz::findOrFail($id)) {

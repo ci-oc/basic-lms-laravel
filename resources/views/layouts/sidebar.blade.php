@@ -106,7 +106,7 @@
                                     class="fa fa-tachometer fa-fw">
                                 <div class="icon-bg bg-orange"></div>
                             </i><span class="menu-title">@lang('module.bars.sidebar_dashboard')</span></a></li>
-                    @if(Auth::user()->can('add-announcements') or Auth::user()->can('view-announcements'))
+                    @if(Auth::user()->can('add-announcement') or Auth::user()->can('view-announcement'))
                     <li class="{{ $request->segment(1) == 'announcements' ? 'active' : '' }}"><a
                                 href="{{route('announcements.index')}}"><i
                                     class="fa fa-bullhorn">
@@ -210,7 +210,7 @@
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Animation.html"><i
                                     class="fa fa-slack fa-fw">
                                 <div class="icon-bg bg-green"></div>
-                            </i><span class="menu-title">Animations</span></a></li>
+                            </i><span class="menu-title">Slack</span></a></li>
                 </ul>
             </div>
         </nav>

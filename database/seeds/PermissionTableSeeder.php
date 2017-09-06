@@ -160,6 +160,12 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Access to solve quiz for existing course.',
                 'category' => 'lep'
             ],
+            [
+                'name' => 'view-announcement',
+                'display_name' => 'View Announcement',
+                'description' => 'View Announcement',
+                'category' => 'lep'
+            ],
 
         ];
 

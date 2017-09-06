@@ -36,11 +36,11 @@
                                     <th style="width: 10%">Question #{{ $i }}</th>
                                     <th>{{ $result->question->question_text or '' }}</th>
                                 </tr>
-                                @if ($result->question->code_snippet != '')
+                                @if (trim($result->question->code_snippet) != '')
                                     <tr>
                                         <td>Code snippet</td>
                                         <td>
-                                            <div class="code_snippet">{!! $result->question->code_snippet !!}</div>
+                                            <pre><code class="">{{ $result->question->code_snippet }}</code></pre>
                                         </td>
                                     </tr>
                                 @endif

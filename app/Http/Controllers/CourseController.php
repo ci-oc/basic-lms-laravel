@@ -25,6 +25,7 @@ class CourseController extends Controller
 ];
     public function __construct()
     {
+        $this->middleware('permission:create-course|join-course',['only' => 'index']);
         $this->middleware('permission:create-course', ['only' => ['create', 'store']]);
         $this->middleware('permission:drop-course', ['only' => ['destroy']]);
     }

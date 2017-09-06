@@ -13,15 +13,17 @@ class SendEmailsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $password;
+    protected $to;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($password)
+    public function __construct($password, $to)
     {
         $this->password = $password;
+        $this->to = $to;
     }
 
     /**
@@ -31,6 +33,6 @@ class SendEmailsJob implements ShouldQueue
      */
     public function handle()
     {
-        MailController::index($this->password);
+        MailController::index($this->password, $this->to);
     }
 }

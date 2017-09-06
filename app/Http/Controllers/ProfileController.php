@@ -89,8 +89,7 @@ class ProfileController extends Controller
         if ($request->has('password')) {
             $this->validate($request, [
                 'old' => 'required|min:6',
-                'password' => 'required|min:6|confirmed',
-                'confirm_password   ' => 'required|min:6'
+                'password' => 'required|string|min:6|confirmed',
             ]);
             $hashedPassword = $user->password;
             if (Hash::check($request->old, $hashedPassword)) {  //if the old password is correct:

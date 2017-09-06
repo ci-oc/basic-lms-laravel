@@ -70,7 +70,7 @@ class DefaultUserController extends Controller
                 foreach ($data as $datum) {
                     $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                    // $this->dispatch((new SendEmailsJob($non_encrypted_password))->onQueue('emails'));
+                    $this->dispatch((new SendEmailsJob($non_encrypted_password,$datum['email']))->onQueue('emails'));
                     try {
                         $user = new User();
                         $user_id = $user->create([
@@ -147,6 +147,7 @@ class DefaultUserController extends Controller
             $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
             $password = Hash::make($non_encrypted_password); //Encrypting this password.
             $user = new User();
+            $this->dispatch((new SendEmailsJob($non_encrypted_password,$request->input('email')))->onQueue('emails'));
             $user_id = $user->create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),

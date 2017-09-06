@@ -134,7 +134,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-4"><input type="password"
                                                                                      id="password"
-                                                                                     name="confirm_password"
+                                                                                     name="password_confirmation"
                                                                                      placeholder="@lang('module.profiles.confirm_new_password')"
                                                                                      class="form-control"/></div>
                                                     </div>

@@ -66,6 +66,7 @@
             @foreach($announcement_data as $announcement)
                 <div class="announcement">
                     <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
+                        <p>{{ $announcement->course->title }}</p>
                         <p class="text-facebook">{{ $announcement->announcement }}</p>
                         <small>
                             <cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>

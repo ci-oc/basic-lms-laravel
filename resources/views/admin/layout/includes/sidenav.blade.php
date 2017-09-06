@@ -28,6 +28,10 @@
                     <li class="sub-menu"><a href="{{route('news.index')}}"><i class="fa fa-newspaper-o"
                                                                             aria-hidden="true"></i> Add News</a></li>
                 </ul>
+                <ul>
+                    <li class="sub-menu"><a href="{{route('securityQuestions.index2')}}"><i class="fa fa-shield"
+                                                                              aria-hidden="true"></i>Security Questions</a></li>
+                </ul>
             </li>
 
         </ul>

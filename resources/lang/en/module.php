@@ -10,6 +10,7 @@ return [
     'created_at' => 'Created At',
     'operations' => 'Operations',
     'save' => 'Save',
+    'submit' => 'Submit',
     'edit' => 'Edit',
     'view' => 'View',
     'stat' => 'Statistics',
@@ -177,7 +178,8 @@ return [
         'error-login' => 'These credentials do not match our records, please check your email or password and try again.',
         'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already.",
         'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!',
-        'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 5 minutes.'
+        'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 5 minutes.',
+        'error-questions-errors' => 'Sorry you entered some wrong answers try again!'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',
@@ -261,5 +263,10 @@ return [
         'no_announcements_yet' => 'No announcements yet',
         'success' => 'Announcement added successfully',
         'deleted' => 'Announcement deleted successfully'
+    ],
+    'admin' => [
+        'security-questions' => 'Security Questions',
+        'caption' => 'Please answer the following questions to login as admin',
+        'answer' => 'Your answer...',
     ]
 ];

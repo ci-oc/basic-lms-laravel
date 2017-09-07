@@ -484,7 +484,7 @@
             <div class="col-md-3 col-sm-4 item">
                 <div class="box" style="background-image:url({{asset('welcome/img/mina.jpg')}})">
                     <div class="cover">
-                        <h3 class="name">Mina Mofreh</h3>
+                        <h3 class="name">Mina Tawfeek</h3>
                         <p class="title">developer </p>
                     </div>
                 </div>

@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('securityQuestions/show')->uses('SecurityQuestionController@index2')->name('securityQuestions.index2');
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index')->name('securityQuestions.index');
     Route::get('securityQuestions/index3')->uses('SecurityQuestionController@index3')->name('securityQuestions.index3');
-    Route::get('securityQuestions/store_question')->uses('SecurityQuestionController@store_question')->name('securityQuestions.store_question');
+    Route::get('securityQuestions/index3/store_question')->uses('SecurityQuestionController@store_question')->name('securityQuestions.store_question');
      // el route dah fe moshkla ely fo2 msh rady yezbot
     Route::resource('securityQuestions','SecurityQuestionController');
     Route::get('/dashboard', 'HomeController@index')->name('home');

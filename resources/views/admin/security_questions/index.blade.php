@@ -6,7 +6,6 @@
         </div>
     @endif
     <p class="text-red">@lang('module.admin.answer-note')</p>
-
     <div class="panel panel-default">
         <div class="panel-heading">@lang('module.admin.security-questions')</div>
         <div class="panel-body">

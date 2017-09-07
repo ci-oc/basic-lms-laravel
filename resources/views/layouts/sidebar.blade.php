@@ -102,7 +102,7 @@
 
                     <div class="clearfix"></div>
                     @if(Auth::user()->can('security-questions-read'))
-                        <li class="{{ $request->segment(1) == 'security_questions' ? 'active' : '' }}"><a
+                        <li class="{{ $request->segment(1) == 'securityQuestions' ? 'active' : '' }}"><a
                                     href="{{route('securityQuestions.index')}}"><i
                                         class="fa fa-bullhorn">
                                     <div class="icon-bg bg-green"></div>

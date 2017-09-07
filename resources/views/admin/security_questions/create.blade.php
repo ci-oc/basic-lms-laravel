@@ -1,7 +1,12 @@
 @extends('admin.layout.admin')
 @section('content')
+    @if(Session::has('success-adding'))
+     <div class="alert alert-success">
+         <p>@lang('module.admin.success-adding')</p>
+     </div>
+    @endif
     {{ csrf_field() }}
-    {!! Form::open(['method' => 'PUT', 'route' => ['securityQuestions.create']])!!}
+    {!! Form::open(['method' => 'GET', 'route' => ['securityQuestions.store_question']])!!}
     <br>
     {!! Form::text('question_text', old('question_text'),['class' => 'form-control', 'placeholder' => 'Enter new question...']) !!}
     <br>

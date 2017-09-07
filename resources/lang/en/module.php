@@ -277,6 +277,8 @@ return [
         'security-questions' => 'Security Questions',
         'caption' => 'Please answer the following questions to login as admin',
         'answer' => 'Your answer...',
-        'answer-note' => 'Please answer the following questions to access your privileges!'
+        'answer-note' => 'Please answer the following questions to access your privileges!',
+        'success-deletion' => 'Question deleted successfully.',
+        'success-adding' => 'Question added successfully.'
     ]
 ];

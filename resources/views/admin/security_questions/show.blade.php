@@ -1,9 +1,9 @@
 @extends('admin.layout.admin')
 @section('content')
-    @if(Session::has('success-editing'))
-        <div class="alert alert-success">
-            <p>@lang('module.success.success-editing-question')</p>
-        </div>
+    @if(Session::has('success-deletion'))
+    <div class="alert alert-success">
+        <p>@lang('module.admin.success-deletion')</p>
+    </div>
     @endif
     <a class="btn btn-success" href="{{route('securityQuestions.index3')}}">Add Question</a>
     <h2>Questions Table</h2>
@@ -25,7 +25,6 @@
                     {!! Form::open(array(
                                     'style' => 'display: inline-block;',
                                     'method' => 'DELETE',
-                                    'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
                                     'route' => ['securityQuestions.destroy', $question['id']])) !!}
                     {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                     {!! Form::close() !!}

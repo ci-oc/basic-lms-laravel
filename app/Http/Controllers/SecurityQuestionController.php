@@ -48,7 +48,7 @@ class SecurityQuestionController extends Controller
      */
     public function create()
     {
-      return "hello";
+        return "hello";
     }
 
     /**
@@ -95,7 +95,9 @@ class SecurityQuestionController extends Controller
 
     public function store_question(Request $request)
     {
-       return 'HELLO';
+     $question = $request->all();
+     SecurityQuestion::create($question);
+     return redirect()->back()->with('success-adding','');
     }
 
     /**
@@ -111,7 +113,7 @@ class SecurityQuestionController extends Controller
         $question->question_text = $request->input('question_text');
         $question->answer = $request->input('answer');
         $question->save();
-        return redirect()->back()->with('success-editing', '');
+        return back()->with('success-editing', '');
     }
 
     /**
@@ -125,7 +127,7 @@ class SecurityQuestionController extends Controller
         echo $id;
         $question = SecurityQuestion::findOrFail($id);
         $question->delete();
-        return redirect('admin.security_questions.show');
+        return redirect()->back()->with('success-deletion', '');
     }
 
 }

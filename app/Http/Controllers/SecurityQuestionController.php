@@ -48,7 +48,7 @@ class SecurityQuestionController extends Controller
      */
     public function create()
     {
-        return "hello";
+
     }
 
     /**
@@ -67,7 +67,9 @@ class SecurityQuestionController extends Controller
                 return redirect()->back()->with('failed-questions', '')->withInput();
             }
         }
-        return view('admin.index');
+        $url = \App\Url::pluck('url')->first();
+        return redirect($url);
+        //return view('admin.index');
     }
 
     /**

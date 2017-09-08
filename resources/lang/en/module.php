@@ -279,6 +279,7 @@ return [
         'answer' => 'Your answer...',
         'answer-note' => 'Please answer the following questions to access your privileges!',
         'success-deletion' => 'Question deleted successfully.',
-        'success-adding' => 'Question added successfully.'
+        'success-adding' => 'Question added successfully.',
+        'error-deleting-question' => 'you cannot delete the last question'
     ]
 ];

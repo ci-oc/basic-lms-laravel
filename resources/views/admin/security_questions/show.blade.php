@@ -1,9 +1,9 @@
 @extends('admin.layout.admin')
 @section('content')
     @if(Session::has('success-deletion'))
-    <div class="alert alert-success">
-        <p>@lang('module.admin.success-deletion')</p>
-    </div>
+        <div class="alert alert-success">
+            <p>@lang('module.admin.success-deletion')</p>
+        </div>
     @endif
     <a class="btn btn-success" href="{{route('securityQuestions.index3')}}">Add Question</a>
     <h2>Questions Table</h2>
@@ -22,12 +22,16 @@
                 <td>{{$question['answer']}}</td>
                 <td><a href="{{ route('securityQuestions.edit',[$question['id']]) }}"
                        class="btn btn-xs btn-info">@lang('module.edit')</a>
-                    {!! Form::open(array(
-                                    'style' => 'display: inline-block;',
-                                    'method' => 'DELETE',
-                                    'route' => ['securityQuestions.destroy', $question['id']])) !!}
-                    {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                    {!! Form::close() !!}
+                    @if(count($security_Question)==1)
+                        <p style="color:red;">@lang('module.admin.error-deleting-question')</p>
+                    @else
+                        {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'route' => ['securityQuestions.destroy', $question['id']])) !!}
+                        {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                        {!! Form::close() !!}
+                    @endif
                 </td>
             </tr>
         @endforeach

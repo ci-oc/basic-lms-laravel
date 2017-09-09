@@ -68,12 +68,19 @@
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li>
-                        <form action="{{route('lang')}}" method="post">
+                        <form action="{{route('lang')}}" method="post" id="change-lang">
                             <select name="locale">
-                                <option onclick="this.form.submit()" value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English</option>
-                                <option onclick="this.form.submit()" value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic</option>
+                                <option onclick="event.preventDefault();
+                                                     document.getElementById('change-lang').submit();"
+                                        value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
+                                </option>
+                                <option onclick="event.preventDefault();
+                                                     document.getElementById('change-lang').submit();"
+                                        value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic
+                                </option>
                             </select>
                             {{ csrf_field() }}
+
                         </form>
                     </li>
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
@@ -116,7 +123,7 @@
                         <li class="{{ $request->segment(1) == 'securityQuestions' ? 'active' : '' }}"><a
                                     href="{{route('securityQuestions.index')}}"><i
                                         class="fa fa-bullhorn">
-                                <div class="icon-bg bg-green"></div>
+                                    <div class="icon-bg bg-green"></div>
                                 </i><span class="menu-title">@lang('module.bars.sidebar_security_questions')</span></a>
                         </li>
                     @else

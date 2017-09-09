@@ -197,6 +197,7 @@ return [
         'error-material-name' => 'Please enter material name',
         'error-questions-errors' => 'Sorry you entered some wrong answers, try again!',
         'error-saving-data' => 'There was an error saving your data, please try again.',
+        'error-empty-material' => 'No material is uploaded yet!'
 
     ],
     'success' => [

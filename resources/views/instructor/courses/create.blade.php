@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('material-name-error'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-material-name')</p>
+        </div>
+        @endif
     @if(Session::has('failed_instructors'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-create-user')</p>
@@ -46,7 +51,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('access-code', trans('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
-                    {!! Form::text('access_code', old('access_code'), ['required','class' => 'form-control ', 'placeholder' => '']) !!}
+                    {!! Form::text('access_code', old('access_code'), ['required','class' => 'form-control ','id' => 'access_code']) !!}
                     @if($errors->has('access_code'))
                         <p class="help-block alert-danger" data-value="shake">
                             {{ $errors->first('access_code') }}
@@ -118,13 +123,10 @@
 @endsection
 @section('javascript')
     <script>
-        function shake() {
-            $(document).ready(function () {
-                $.cookie('animations', 'bounce');
-                var ani = $(this).attr('data-value');
-                $("body").addClass("animated " + ani);
-                $.cookie('animations', ani);
+        $(document).ready(function(){
+            $('#access_code').bind("cut copy paste",function(e) {
+                e.preventDefault();
             });
-        }
+        });
     </script>
 @endsection

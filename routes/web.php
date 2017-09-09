@@ -67,27 +67,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('courses/download/storage/materials/{filename}', function($filename)
     {
-        // Check if file exists in app/storage/file folder
         $file_path = storage_path().DIRECTORY_SEPARATOR. 'app'. DIRECTORY_SEPARATOR. 'materials'. DIRECTORY_SEPARATOR .$filename;
-        //echo $file_path;
         if (file_exists($file_path))
         {
             $path = storage_path('app/materials/' . $filename);
-          echo $path;
             return response()->download($file_path);
-
-            // Send Download
-
-//            return Response::download($file_path, $filename, [
-//                'Content-Length: '. filesize($file_path)
-//            ]);
         }
         else
         {
-            // Error
-           //return redirect()->back()->with('file-not-exist','');
+           return redirect()->back()->with('file-not-exist','');
         }
-    })
-        ->where('filename', '[A-Za-z0-9\-\_\.]+');
+    })->where('filename', '[A-Za-z0-9\-\_\.]+');
 });
 

@@ -77,6 +77,9 @@ class CourseController extends Controller
         $course = Course::create($courses);
         $course->users()->attach($success_instructors);
         if ($request->hasFile('material')) {
+            if ($request->input('material-name') == null) {
+                return \redirect()->back()->with('material-name-error', '')->withInput();
+            }
             $material_file = $request->file('material');
             $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
             $path = Storage::put('materials', $material_file);

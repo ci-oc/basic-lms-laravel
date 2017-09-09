@@ -55,6 +55,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'course_title' => 'required',
             'title' => 'required',
@@ -95,7 +96,9 @@ class QuizController extends Controller
             }
             if ($time_error_count == 3) {
                 return redirect()->back()->with('failed-quiz-time', '')->withInput();
-            } else {
+            }
+
+            else {
                 Quiz::create([
                     'course_id' => decrypt($request->input('course_title')),
                     'title' => $request->input('title'),

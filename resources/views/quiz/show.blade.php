@@ -132,7 +132,7 @@
                                 <br>
                                 <br>
                                 {!! Form::label('user_code',trans('module.problems.code'), ['class' => 'control-label']) !!}
-                                {{ Form::textarea('user_code['.$problem->id .']', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;']) }}
+                                {{ Form::textarea('user_code['.$problem->id .']', old('user_code'), ['class' => 'form-control ','style' => 'resize:none;','id' => 'user_code']) }}
                             </div>
                             <div class="col-sm-4">
                                 <strong>{!! nl2br($problem->grade) !!} @lang('module.questions-options.fields.grade')</strong>
@@ -152,8 +152,16 @@
     </div>
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' , 'onmouseover' => 'assign_date()']) !!}
     {!! Form::close() !!}
+
 @endsection
 @section('javascript')
+    @if($quiz['duration'] == null)
+        <script>
+            $('#user_code').bind("cut copy paste",function(e) {
+                e.preventDefault();
+            });
+        </script>
+    @endif
     <script>
         //BEGIN THEME SETTING
         $('#theme-setting > a.btn-theme-setting').click(function () {

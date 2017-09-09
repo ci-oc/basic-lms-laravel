@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\RestrictAdministrationAccess;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -18,12 +19,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-<<<<<<< HEAD
-=======
         \App\Http\Middleware\LanguageSwitcher::class,
->>>>>>> ee7856418a2450c477e2cedb69101533c9dddfee
     ];
-
     /**
      * The application's route middleware groups.
      *
@@ -34,18 +31,16 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            //\Illuminate\Session\Middleware\AuthenticateSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-
         'api' => [
             'throttle:60,1',
             'bindings',
         ],
     ];
-
     /**
      * The application's route middleware.
      *
@@ -63,6 +58,6 @@ class Kernel extends HttpKernel
         'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
-        'correct_answers' => Ap
+        'correct_answers' => \App\Http\Middleware\RestrictAdministrationAccess::class
     ];
 }

@@ -99,7 +99,8 @@ class QuizController extends Controller
                 Quiz::create([
                     'course_id' => decrypt($request->input('course_title')),
                     'title' => $request->input('title'),
-                    'description' => $request->input('duration'),
+                    'description' => $request->input('description'),
+                    'duration' => $request->input('duration'),
                     'start_date' => $request->input('start_date'),
                     'end_date' => $request->input('end_date'),
                     'solve_many' => $request->input('solve_many'),

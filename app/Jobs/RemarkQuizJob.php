@@ -208,6 +208,9 @@ class RemarkQuizJob implements ShouldQueue
                                 $err_reason = str_replace('var/www/html/module', ' ', $err_reason);
                                 $compile_status = 'Compile Error';
                             }
+                        } else {
+                            $compile_status = 'Compile Error';
+                            $err_reason = $user_code['message'];
                         }
                     } catch (Exception $e) {
 
@@ -225,7 +228,7 @@ class RemarkQuizJob implements ShouldQueue
                     'compile_err_reason' => $err_reason,
                     'run_status' => $run_status,
                     'grade' => $problem_grade,
-                    'user_code_path' => $user_code_path
+                    'user_code_path' => $user_code_path,
                 ]);
                 $result += $problem_grade;
             }

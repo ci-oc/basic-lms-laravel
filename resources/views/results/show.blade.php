@@ -117,17 +117,22 @@
                                         </td>
                                     </tr>
                                 @endif
-                                <tr>
-                                    <td>Runtime</td>
-                                    <td>
-                                        {{ $result->time_consumed }}
-                                    </td>
-                                </tr>
+                                @if($result->compile_err_reason != "Content can't be empty.")
+                                    <tr>
+                                        <td>Runtime</td>
+                                        <td>
+                                            {{ $result->time_consumed }}
+                                        </td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <th>Code</th>
                                     <td>
-                                        <pre><code>{{ $result->user_code }}</code>
-                                        </pre>
+                                        @if($result->user_code != null)
+                                            <pre><code>{{ $result->user_code }}</code></pre>
+                                        @else
+                                            <p>@lang('module.results.fields.empty_code')</p>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>

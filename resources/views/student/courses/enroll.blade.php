@@ -52,7 +52,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="4">@lang('module.no_entries_in_table')</td>
+                        <td colspan="5">@lang('module.no_entries_in_table')</td>
                     </tr>
                 @endif
                 </tbody>

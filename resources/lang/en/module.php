@@ -116,6 +116,7 @@ return [
             'date' => 'Date',
             'result' => 'Score',
             'view-result' => 'View result',
+            'empty_code' => 'Empty Code'
         ],
     ],
     'bars' => [

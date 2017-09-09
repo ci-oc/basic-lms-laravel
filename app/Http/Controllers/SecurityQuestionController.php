@@ -67,6 +67,7 @@ class SecurityQuestionController extends Controller
                 return redirect()->back()->with('failed-questions', '')->withInput();
             }
         }
+        $request->session()->put('answered-correctly', 'true');
         $url = \App\Url::pluck('url')->first();
         return redirect($url);
         //return view('admin.index');

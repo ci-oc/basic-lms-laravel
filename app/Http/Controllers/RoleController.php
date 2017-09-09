@@ -16,6 +16,7 @@ class RoleController extends Controller
      */
     function __construct()
     {
+        $this->middleware('correct_answers');
         $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:role-read', ['only' => 'index']);
         $this->middleware('permission:role-create', ['only' => 'edit']);

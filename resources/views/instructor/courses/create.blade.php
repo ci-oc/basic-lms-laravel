@@ -23,7 +23,7 @@
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-access-code')</p>
         </div>
-        @endif
+    @endif
     @if(Session::has('error-course-title'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-course-title')</p>
@@ -84,8 +84,28 @@
                     @endif
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('material-name', Lang::get('module.courses.fields.material-name'), ['class' => 'control-label']) !!}
+                    {!! Form::text('material-name', old('access_code'), ['class' => 'form-control ', 'placeholder' => '']) !!}
+                    @if($errors->has('material-name'))
+                    <p class="help-block alert-danger" data-value="shake">
+                            {{ $errors->first('material-name') }}
 
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group">
+                {!! Form::label('course_material', trans('module.courses.fields.material'), ['class' => 'control-label']) !!}
+                {!! Form::file('material', null,['required','class' => 'close fileupload-exists']) !!}
+                @if($errors->has('file'))
+                    <p class="help-block alert-danger">
+                        {{ $errors->first('file') }}
+                    </p>
+                @endif
+            </div>
+        </div>
     </div>
     {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' ,'data-value' => 'shake', 'onclick' => 'shake()']) !!}
     {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary']) }}

@@ -20,10 +20,16 @@ class Course extends Model
         return $this->hasMany(Quiz::class, 'course_id');
     }
 
+    public function material()
+    {
+        return $this->hasMany(Material::class, 'course_id');
+    }
+
     public function announcements()
     {
         return $this->hasMany(Announcement::class, 'course_id');
     }
+
     public static function retrieveId($data)
     {
         $courses_id = array();

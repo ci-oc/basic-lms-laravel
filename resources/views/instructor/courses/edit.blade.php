@@ -10,6 +10,13 @@
             <p>@lang('module.success.update-failed')</p>
         </div>
     @endif
+    @if(Session::has('material-name-error'))
+    <div class="alert alert-danger">
+    <p>
+        @lang('module.errors.error-material-name')
+    </p>
+    </div>
+        @endif
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-12">
             <div class="row">
@@ -70,6 +77,27 @@
                                                 </p>
                                             @endif
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-xs-12 form-group">
+                                        {!! Form::label('material-name', Lang::get('module.courses.fields.material-name'), ['class' => 'control-label']) !!}
+                                        {!! Form::text('material-name', old('access_code'), ['class' => 'form-control ', 'placeholder' => '']) !!}
+                                        @if($errors->has('material-name'))
+                                            <p class="help-block alert-danger" data-value="shake">
+                                                {{ $errors->first('material-name') }}
+
+                                            </p>
+                                        @endif
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('course_material', trans('module.courses.fields.material-1'), ['class' => 'control-label']) !!}
+                                        {!! Form::file('material', null,['required','class' => 'close fileupload-exists']) !!}
+                                        @if($errors->has('file'))
+                                            <p class="help-block alert-danger">
+                                                {{ $errors->first('file') }}
+                                            </p>
+                                        @endif
                                     </div>
                                 </div>
                             <div class="panel-footer">

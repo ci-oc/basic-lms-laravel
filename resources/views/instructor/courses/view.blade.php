@@ -28,6 +28,29 @@
                                     <li style="font-weight: bold;">{{ $professor->name }}</li>
                                 @endforeach
                             </ul>
+                            <hr>
+                            <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.material'):</h5>
+
+
+                            <table class="table table-inverse">
+                                <thead>
+                                <tr>
+                                    <th>@lang('module.courses.fields.file-name')</th>
+                                    <th>@lang('module.courses.fields.upload-date')</th>
+                                    <th>@lang('module.courses.fields.file-action')</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($material_relation as $file)
+                                <tr>
+                                    <td>{{$file['material_name']}}</td>
+                                    <td>{{$file['created_at']}}</td>
+                                    <td><a href="download/{{$file['material_path']}}">@lang('module.courses.fields.file-download')</a></td>
+                                </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <hr>
                         </div>
                     </div>
                 </div>

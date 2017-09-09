@@ -69,6 +69,9 @@
                     <br>
                     {{ Form::checkbox('activate_plagiarism',1,null, ['class' => 'field','id' => 'activate_plagiarism']) }}
                     {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
+                    <br>
+                    {{ Form::checkbox('share_results',1,null, ['class' => 'field','id' => 'share_results']) }}
+                    {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
                 </div>
             </div>
             <div class="row">

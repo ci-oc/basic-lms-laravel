@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/language')->uses('LanguageController@index')->middleware('LanguageSwitcher')->name('lang');
+Route::post('/language')->uses('LanguageController@index')->middleware('lang')->name('lang');
 
 Auth::routes();
 Route::get('send', 'MailController@StudentView'); // just for testing mail view , will be deleted
@@ -65,17 +65,13 @@ Route::group(['middleware' => 'auth'], function () {
         return view('noscript');
     })->name('noScript');
 
-    Route::get('courses/download/storage/materials/{filename}', function($filename)
-    {
-        $file_path = storage_path().DIRECTORY_SEPARATOR. 'app'. DIRECTORY_SEPARATOR. 'materials'. DIRECTORY_SEPARATOR .$filename;
-        if (file_exists($file_path))
-        {
+    Route::get('courses/download/storage/materials/{filename}', function ($filename) {
+        $file_path = storage_path() . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'materials' . DIRECTORY_SEPARATOR . $filename;
+        if (file_exists($file_path)) {
             $path = storage_path('app/materials/' . $filename);
             return response()->download($file_path);
-        }
-        else
-        {
-           return redirect()->back()->with('file-not-exist','');
+        } else {
+            return redirect()->back()->with('file-not-exist', '');
         }
     })->where('filename', '[A-Za-z0-9\-\_\.]+');
 });

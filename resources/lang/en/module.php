@@ -230,7 +230,8 @@ return [
         ],
         'quiz-options' => [
             'solve_many' => 'Students can solve this quiz more than once.',
-            'activate_plagiarism' => 'Activate MOSS plagiarism detection.'
+            'activate_plagiarism' => 'Activate MOSS plagiarism detection.',
+            'share_results' => 'Share Results'
         ]
     ],
     'coding_languages' => [

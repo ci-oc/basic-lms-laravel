@@ -21,7 +21,7 @@ class CreateUserProblemTable extends Migration
             $table->foreign('problem_id', 'fk_256_problem_problem_id_problem')->references('id')->on('questions')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id', 'fk_256_user_problem_id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->text('user_code');
+            $table->text('user_code')->nullable();
             $table->text('user_code_path')->nullable();
             $table->string('time_consumed');
             $table->string('code_language');

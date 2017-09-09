@@ -68,19 +68,16 @@
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li>
-                        <form action="{{route('lang')}}" method="post" id="change-lang">
-                            <select name="locale">
-                                <option onclick="event.preventDefault();
-                                                     document.getElementById('change-lang').submit();"
-                                        value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
-                                </option>
-                                <option onclick="this.form.submit()"
-                                        value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic
-                                </option>
-                            </select>
-                            {{ csrf_field() }}
+                        {!! Form::open(['method' => 'POST', 'route' => ['lang'], 'enctype' => 'multipart/form-data'])!!}
+                        <select name="locale" onchange="this.form.submit()">
+                            <option value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
+                            </option>
+                            <option value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic
+                            </option>
+                        </select>
+                        {{ csrf_field() }}
 
-                        </form>
+                        {!! Form::close() !!}
                     </li>
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
                                     src="{{Auth::user()->avatar}}" alt="" class="img-responsive img-circle"/>&nbsp;<span

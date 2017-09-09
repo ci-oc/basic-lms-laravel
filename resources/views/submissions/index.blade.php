@@ -28,7 +28,7 @@
                 <tbody>
                 @if (count($submissions) > 0)
                     @foreach ($submissions as $result)
-                        <tr class="{{ $result->grade == -1 ? 'info' : ($result->grade >= ((9/10)*$result->quiz->full_mark) ? 'success' : (
+                        <tr class="{{ $result->processing_status == "PD" ? 'info' : ($result->grade >= ((9/10)*$result->quiz->full_mark) ? 'success' : (
                         $result->grade >= ((5/10)*$result->quiz->full_mark) ? 'warning' : 'danger')) }}">
                             <td>{{ $result->user->name }}</td>
                             <td>{{ $result->quiz->course->title }}</td>

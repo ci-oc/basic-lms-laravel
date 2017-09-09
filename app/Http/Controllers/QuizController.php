@@ -105,6 +105,7 @@ class QuizController extends Controller
                     'end_date' => $request->input('end_date'),
                     'solve_many' => $request->input('solve_many'),
                     'activate_plagiarism' => $request->input('activate_plagiarism'),
+                    'share_results' => $request->input('share_results'),
                 ]);
                 return redirect()->route('quizzes.index')->with('success-creation', '');
             }

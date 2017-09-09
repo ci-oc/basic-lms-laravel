@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Session;
 
 class LanguageController extends Controller
 {
+    /**
+     * LanguageController constructor.
+     */
+
     public function index()
     {
         if (!Session::has('locale')) {

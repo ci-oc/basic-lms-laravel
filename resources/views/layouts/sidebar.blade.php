@@ -66,17 +66,16 @@
                         @endif
                     </ul>
                 </div>
-                <ul class="nav navbar navbar-top-links navbar-right mbn" style="margin-right: 5px; margin-top: 5px;">
-                    <form action="language" method="post">
-                        <select name="locale">
-                            <option onclick="this.form.submit()" value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English</option>
-                            <option onclick="this.form.submit()" value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic</option>
-                        </select>
-                        {{ csrf_field() }}
-                    </form>
-                </ul>
-
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
+                    <li>
+                        <form action="{{route('lang')}}" method="post">
+                            <select name="locale">
+                                <option onclick="this.form.submit()" value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English</option>
+                                <option onclick="this.form.submit()" value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic</option>
+                            </select>
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
                                     src="{{Auth::user()->avatar}}" alt="" class="img-responsive img-circle"/>&nbsp;<span
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span

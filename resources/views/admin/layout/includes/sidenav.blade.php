@@ -6,7 +6,7 @@
             <li class="current"><a href="{{route('admin.index',$valid_url)}}"><i class="glyphicon glyphicon-home"></i>
                     Dashboard</a></li>
             <li class="submenu">
-                <a href="#">
+                <a href="">
                     <i class="fa fa-users"></i>User Management<span class="caret pull-right"></span>
                 </a>
                 <!-- Sub menu -->

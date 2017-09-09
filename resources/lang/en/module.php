@@ -278,8 +278,10 @@ return [
         'caption' => 'Please answer the following questions to login as admin',
         'answer' => 'Your answer...',
         'answer-note' => 'Please answer the following questions to access your privileges!',
+        'answer-note-1' => 'Please Go and answer the security questions to access your privileges!',
         'success-deletion' => 'Question deleted successfully.',
         'success-adding' => 'Question added successfully.',
-        'error-deleting-question' => 'you cannot delete the last question'
+        'error-deleting-question' => 'you cannot delete the last question',
+        'success-solving-questions' => 'You answered questions correctly. Redirect to administration panel!'
     ]
 ];

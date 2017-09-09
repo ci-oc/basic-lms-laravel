@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index')->name('securityQuestions.index');
     Route::get('securityQuestions/store')->uses('SecurityQuestionController@index3')->name('securityQuestions.index3');
     Route::get('securityQuestions/store/store_question')->uses('SecurityQuestionController@store_question')->name('securityQuestions.store_question');
-    Route::resource('securityQuestions','SecurityQuestionController');
+    Route::resource('securityQuestions', 'SecurityQuestionController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('quizzes/chart/{id}')->uses('QuizController@chart')->name('quizzes.chart');
     Route::get('quizzes/results/{id}')->uses('QuizController@results')->name('quizzes.results');
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('course/update')->uses('CourseController@update')->name('courses.update');
     Route::post('courses/importExcel')->uses('CourseController@importExcel')->name('courses.importExcel');
     Route::resource('user', 'UserController');
-    Route::resource('role','RoleController');
+    Route::resource('role', 'RoleController');
     Route::resource('submissions', 'SubmissionsController');
     Route::resource('results', 'ResultController');
     Route::resource('enroll', 'RegisterCourseController');
@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/{url}', function ($url) {
         $valid_url = \App\Url::pluck('url')->first();
         if ($valid_url == $url)
-            return view('admin.index',compact('valid_url'));
+            return view('admin.index', compact('valid_url'));
         else
             abort(404);
     })->middleware('role:superuser|standard-user')->name('admin.index');

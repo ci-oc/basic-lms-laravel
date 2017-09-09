@@ -17,10 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/language', array(
-   'Middleware' => 'LanguageSwithcer',
-    'uses' => 'LanguageController@index'
-));
+Route::post('/language')->uses('LanguageController@index')->middleware('LanguageSwitcher')->name('lang');
 
 Auth::routes();
 Route::get('send', 'MailController@StudentView'); // just for testing mail view , will be deleted
@@ -28,7 +25,7 @@ Route::get('sendi', 'MailController@instructorView'); // just for testing mail v
 Route::get('sendMail', 'MailController@index'); // just for testing sendig mail , will be deleted
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/downloadTemp','DefaultUserController@downloadTemp');
+    Route::get('/downloadTemp', 'DefaultUserController@downloadTemp');
     Route::get('securityQuestions/show')->uses('SecurityQuestionController@index2')->name('securityQuestions.index2');
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index')->name('securityQuestions.index');
     Route::get('securityQuestions/store')->uses('SecurityQuestionController@index3')->name('securityQuestions.index3');

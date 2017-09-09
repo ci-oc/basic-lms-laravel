@@ -27,9 +27,9 @@ return [
     'no_entries_in_table' => 'No entries in table',
     'roles' => [
         'category_headers' => [
-          'security' => 'Security',
-          'hep' => 'High Educational Privileges',
-          'lep' => 'Low Educational Privileges'
+            'security' => 'Security',
+            'hep' => 'High Educational Privileges',
+            'lep' => 'Low Educational Privileges'
         ],
     ],
     'questions' => [
@@ -103,7 +103,7 @@ return [
             'upload-date' => 'Uploaded-at',
             'file-action' => 'Action',
             'file-download' => 'Download',
-            'no_courses' => 'Sorry you don\'t have courses yet, please create course first.!'
+            'no_courses' => 'Sorry you don\'t have courses yet, please create course first.!',
         ],
     ],
     'results' => [

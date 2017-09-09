@@ -105,6 +105,7 @@ class RemarkQuizJob implements ShouldQueue
                 $sharp_judge = false;
                 $correct = 0;
                 $testcase_grade = 0;
+                $user_code = '';
                 $solved_problem = UsersProblemAnswer::updateOrCreate([
                     'user_id' => $user_id,
                     'quiz_id' => $test_id,

@@ -20,6 +20,7 @@ class CreateQuizzesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->time('duration')->nullable();
+            $table->tinyInteger('plagiarism_percentage')->nullable();
             $table->timestamp('start_date')->useCurrent();
             $table->timestamp('end_date')->useCurrent();
             $table->float('full_mark')->nullable();

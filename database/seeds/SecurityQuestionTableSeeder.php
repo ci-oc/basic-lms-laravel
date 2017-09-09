@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use App\SecurityQuestion;
 class SecurityQuestionTableSeeder extends Seeder
-
 {
     /**
      * Run the database seeds.
@@ -16,7 +15,7 @@ class SecurityQuestionTableSeeder extends Seeder
             [
                 'question_text' => 'What was the name of the hospital where you were born?',
                 'answer' => 'dummy1',
-                 ],
+            ],
             [
                 'question_text' => 'What school did you attend for sixth grade?',
                 'answer' => 'dummy2'
@@ -27,7 +26,7 @@ class SecurityQuestionTableSeeder extends Seeder
             ]
         ];
         foreach ($security_questions as $key => $value) {
-            \App\SecurityQuestion::create($value);
+            SecurityQuestion::create($value);
         }
     }
 }

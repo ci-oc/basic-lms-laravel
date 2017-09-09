@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Material;
 use App\UsersCourses;
 use Illuminate\Http\Request;
 use App\Course;
@@ -16,9 +15,6 @@ use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
-    /**
-     * CourseController constructor.
-     */
 
     public function __construct()
     {
@@ -88,7 +84,6 @@ class CourseController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
-
         $course = Course::create($courses);
         $course->users()->attach($success_instructors);
 

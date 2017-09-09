@@ -64,26 +64,41 @@ class ProblemController extends Controller
             'more_info_link' => 'nullable|active_url',
             'coding_languages' => 'required'
         ]);
-        $coding_languages = $request->input('coding_languages');
-        $question = Question::create($request->all());
-        $question->coding_languages()->attach($coding_languages);
-        $quiz = Quiz::find($request->input('quiz_id'));
-        $quiz_fullmark = $quiz->full_mark;
-        $question_grade = $request->input('grade');
-        $quiz_fullmark += $question_grade;
-        $quiz->update(['full_mark' => $quiz_fullmark]);
-        $input_test_cases = $request->input('input_testcase');
-        $output_test_cases = $request->input('output_testcase');
-        $judge_options = $request->input('judge_options');
-        $question->judge_options()->attach($judge_options);
-        for ($i = 0; $i < count($input_test_cases); $i++) {
-            TestsCase::create([
-                'question_id' => $question->id,
-                'input' => $input_test_cases[$i],
-                'output' => $output_test_cases[$i],
+        try {
+            $coding_languages = $request->input('coding_languages');
+            $question = Question::create([
+                'quiz_id' => decrypt($request->input('ID')),
+                'question_text' => $request->input('question_text'),
+                'code_snippet' => $request->input('code_snippet'),
+                'answer_explanation' => $request->input('answer_explanation'),
+                'more_info_link' => $request->input('more_info_link'),
+                'input_format' => $request->input('input_format'),
+                'output_format' => $request->input('output_format'),
+                'time_limit' => $request->input('time_limit'),
+                'mem_limit' => $request->input('mem_limit'),
+                'grade' => $request->input('grade'),
             ]);
+            $question->coding_languages()->attach($coding_languages);
+            $quiz = Quiz::find(decrypt($request->input('ID')));
+            $quiz_fullmark = $quiz->full_mark;
+            $question_grade = $request->input('grade');
+            $quiz_fullmark += $question_grade;
+            $quiz->update(['full_mark' => $quiz_fullmark]);
+            $input_test_cases = $request->input('input_testcase');
+            $output_test_cases = $request->input('output_testcase');
+            $judge_options = $request->input('judge_options');
+            $question->judge_options()->attach($judge_options);
+            for ($i = 0; $i < count($input_test_cases); $i++) {
+                TestsCase::create([
+                    'question_id' => $question->id,
+                    'input' => $input_test_cases[$i],
+                    'output' => $output_test_cases[$i],
+                ]);
+            }
+            return redirect()->route('problems.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));
         }
-        return redirect()->route('problems.index');
     }
 
     /**

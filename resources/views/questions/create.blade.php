@@ -1,9 +1,14 @@
 @extends('layouts.sidebar')
 @section('content')
     @if(Session::has('grade-failed'))
-   <div class="alert alert-danger">
-       <p>@lang('module.errors.grade-MCQ-failed')</p>
-   </div>
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.grade-MCQ-failed')</p>
+        </div>
+    @endif
+    @if(Session::has('failed'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('failed')}}</p>
+        </div>
     @endif
     <h3 class="page-title">@lang('module.questions.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['questions.store']]) !!}
@@ -19,7 +24,7 @@
                     {!! Form::label('quiz_id', trans('module.quizzes.create-questions-title'), ['class' => 'control-label']) !!}
                     <select class="form-control" name="quiz_id">
                         @foreach($quizzes as $quiz)
-                            <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
+                            <option value="{{encrypt($quiz->id)}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
                         @endforeach
                     </select>
                     @if($errors->has('quiz_id'))
@@ -43,7 +48,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('question_text', Lang::get('module.questions.fields.question-text'), ['class' => 'control-label','required']) !!}
+                    {!! Form::label('question_text', trans('module.questions.fields.question-text'), ['class' => 'control-label','required']) !!}
                     {!! Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => '', 'style' => 'resize:none;']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('question_text'))

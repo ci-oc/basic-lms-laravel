@@ -51,14 +51,21 @@ class RegisterCourseController extends Controller
      */
     public function store(Request $request)
     {
-        $course = Course::find($request->input('course_id'));
-        if ($request->input('access_code') == $course->access_code) {
-            $user = Auth::id();
-            UsersCourses::create(['user_id' => $user,
-                'course_id' => $request->input('course_id')]);
-            return redirect()->route('courses.index');
-        } else {
-            return redirect()->back()->with('invalid_access_code', '');
+        $this->validate($request, [
+            'course_id' => 'required',
+        ]);
+        try {
+            $course = Course::find(decrypt($request->input('course_id')));
+            if ($request->input('access_code') == $course->access_code) {
+                $user = Auth::id();
+                UsersCourses::create(['user_id' => $user,
+                    'course_id' => decrypt($request->input('course_id'))]);
+                return redirect()->route('courses.index');
+            } else {
+                return redirect()->back()->with('invalid_access_code', '');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));
         }
     }
 

@@ -10,6 +10,11 @@
             <p>@lang('module.errors.error-full-mark-problem')</p>
         </div>
     @endif
+    @if(Session::has('failed'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('failed')}}</p>
+        </div>
+    @endif
     <h3 class="page-title">@lang('module.problems.new_problem')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['problems.store']]) !!}
     {{ csrf_field() }}
@@ -20,23 +25,18 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('selected_quiz',trans('module.problems.fields.selected_quiz'), ['class' => 'control-label']) !!}
-                    <select class="form-control" name="quiz_id">
+                    {!! Form::label('ID',trans('module.problems.fields.selected_quiz'), ['class' => 'control-label']) !!}
+                    <select class="form-control" name="ID">
                         @foreach($quizzes as $quiz)
-                            <option value="{{$quiz->id}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
+                            <option value="{{encrypt($quiz->id)}}">{{$quiz->course->title}} - {{$quiz->title}}</option>
                         @endforeach
                     </select>
-                    @if($errors->has('problem_description'))
-                        <p class="help-block alert-danger">
-                            {{ $errors->first('problem_description') }}
-                        </p>
-                    @endif
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('question_text',Lang::get('module.problems.fields.problem_desc'), ['class' => 'control-label']) !!}
+                    {!! Form::label('question_text',trans('module.problems.fields.problem_desc'), ['class' => 'control-label']) !!}
                     {{ Form::textarea('question_text', old('question_text'), ['class' => 'form-control ', 'placeholder' => 'Type Problem Description','resize' => 'none']) }}
                     @if($errors->has('question_text'))
                         <p class="help-block alert-danger">
@@ -47,7 +47,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('grade',Lang::get('module.problems.fields.problem_grade'), ['class' => 'control-label']) !!}
+                    {!! Form::label('grade',trans('module.problems.fields.problem_grade'), ['class' => 'control-label']) !!}
                     {!! Form::number('grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '', 'step' => '0.5']) !!}
                     @if($errors->has('grade'))
                         <p class="help-block alert-danger">
@@ -58,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('input_format',Lang::get('module.problems.fields.input_format'), ['class' => 'control-label']) !!}
+                    {!! Form::label('input_format',trans('module.problems.fields.input_format'), ['class' => 'control-label']) !!}
                     {!! Form::text('input_format', old('input_format'), ['class' => 'form-control ', 'placeholder' => 'Type Input Format',]) !!}
                     @if($errors->has('input_format'))
                         <p class="help-block alert-danger">
@@ -80,16 +80,16 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('test_cases',Lang::get('module.problems.fields.test_cases'), ['class' => 'control-label']) !!}
+                    {!! Form::label('test_cases',trans('module.problems.fields.test_cases'), ['class' => 'control-label']) !!}
                     <table id="dataTable" class="table">
                         <tbody>
                         <tr>
                             <td>
-                                {!! Form::label('input_testcase',Lang::get('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
+                                {!! Form::label('input_testcase',trans('module.problems.fields.testCases.input_testcase'), ['class' => 'control-label']) !!}
                                 {!! Form::textarea('input_testcase[]',old('input_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
                             </td>
                             <td>
-                                {!! Form::label('output_testcase',Lang::get('module.problems.fields.testCases.output_testcase'), ['class' => 'control-label']) !!}
+                                {!! Form::label('output_testcase',trans('module.problems.fields.testCases.output_testcase'), ['class' => 'control-label']) !!}
                                 {!! Form::textarea('output_testcase[]',old('output_testcase[]'), ['class' => 'form-control','resize' => 'none','rows' => '4']) !!}
                             </td>
                         </tr>
@@ -138,6 +138,18 @@
                     @if($errors->has('output_format'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('output_format') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('answer_explanation', 'Answer explanation*', ['class' => 'control-label']) !!}
+                    {!! Form::textarea('answer_explanation', old('answer_explanation'), ['class' => 'form-control ', 'placeholder' => '','style' => 'resize:none;']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('answer_explanation'))
+                        <p class="help-block">
+                            {{ $errors->first('answer_explanation') }}
                         </p>
                     @endif
                 </div>

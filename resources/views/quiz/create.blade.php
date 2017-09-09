@@ -10,10 +10,16 @@
             <p>@lang('module.errors.error-quiz-duration')</p>
         </div>
     @endif
+    @if(Session::has('failed'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('failed')}}</p>
+        </div>
+    @endif
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet">
     <h3 class="page-title">@lang('module.quizzes.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' =>['quizzes.store']]) !!}
+    {{ csrf_field() }}
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.create')
@@ -22,14 +28,14 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('selected_course',trans('module.quizzes.course-title'), ['class' =>'control-label']) !!}
-                    <select class="form-control" name="course_id" required>
+                    <select class="form-control" name="course_title" required>
                         @foreach($courses as $course)
-                            <option value="{{$course->id}}">{{$course->title}}</option>
+                            <option value="{{encrypt($course->id)}}">{{$course->title}}</option>
                         @endforeach
                     </select>
-                    @if($errors->has('selected_course'))
+                    @if($errors->has('course_title'))
                         <p class="help-block alert-danger">
-                            {{ $errors->first('selected_course') }}
+                            {{ $errors->first('course_title') }}
                         </p>
                     @endif
                 </div>

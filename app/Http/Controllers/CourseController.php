@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\In;
-
 class CourseController extends Controller
 {
     /**
@@ -65,27 +64,32 @@ class CourseController extends Controller
             'title' => 'required|max:100|min:5|',
             'description' => 'required|min:5|',
         ]);
-        $courses = $request->all();
-        $instructors = explode(',', $request->input('assistant_professor'));
-        $user_id = Auth::id();
-        $failed_instructors = array();
-        $success_instructors = array();
-        $success_instructors[0] = $user_id;
-        if (!$instructors[0] == null) {
-            foreach ($instructors as $instructor) {
-                $user = User::where('email', '=', $instructor)->pluck('id');
-                if (count($user) > 0 && $user[0] != $user_id) {
-                    $success_instructors[] = $user[0];
-                } else {
-                    $failed_instructors[] = $instructor;
+        try {
+
+            $courses = $request->all();
+            $instructors = explode(',', $request->input('assistant_professor'));
+            $user_id = Auth::id();
+            $failed_instructors = array();
+            $success_instructors = array();
+            $success_instructors[0] = $user_id;
+            if (!$instructors[0] == null) {
+                foreach ($instructors as $instructor) {
+                    $user = User::where('email', '=', $instructor)->pluck('id');
+                    if (count($user) > 0 && $user[0] != $user_id) {
+                        $success_instructors[] = $user[0];
+                    } else {
+                        $failed_instructors[] = $instructor;
+                    }
                 }
             }
+            Course::create($courses)->users()->attach($success_instructors);
+            if ($failed_instructors == null)
+                return redirect()->route('courses.index')->with('success', '');
+            else
+                return redirect()->back()->with('failed_instructors', $failed_instructors);
+        } catch (\Exception $e){
+            return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
-        Course::create($courses)->users()->attach($success_instructors);
-        if ($failed_instructors == null)
-            return redirect()->route('courses.index')->with('success', '');
-        else
-            return redirect()->back()->with('failed_instructors', $failed_instructors);
 
     }
 

@@ -51,7 +51,7 @@ class SolveQuizController extends Controller
      */
     public function store(Request $request)
     {
-        $test_id = $request->input('quiz_id');
+        $test_id = decrypt($request->input('quiz_id'));
         $quiz = Quiz::findorFail($test_id);
         $test = UsersQuiz::where([
             ['user_id', '=', Auth::id()],
@@ -63,7 +63,7 @@ class SolveQuizController extends Controller
             $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
             return redirect()->route('results.index');
         } else {
-            return redirect()->route('results.index')->with('failed',trans('module.errors.error-duration-finished'));
+            return redirect()->route('results.index')->with('failed', trans('module.errors.error-duration-finished'));
         }
 
     }

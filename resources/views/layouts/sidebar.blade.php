@@ -1,4 +1,5 @@
 @inject('request', 'Illuminate\Http\Request')
+
         <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -193,7 +194,7 @@
                             </li>
                         @endif
 
-                                          @endif
+                    @endif
                     <li class="{{ $request->segment(1) == 'submissions' ? 'active' : '' }}"><a
                                 href="{{ route('submissions.index') }}"><i
                                     class="fa fa-database fa-fw">

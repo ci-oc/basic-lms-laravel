@@ -41,9 +41,9 @@
                                         onclick="enroll({{$course->id}})">@lang('module.courses.enroll-course')</button>
                                 <div class="form-group" id="register{{$course->id}}" style="display:none;">
                                     {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
-                                    {{ Form::hidden('course_id', $course->id, array('id' => 'course_id')) }}
+                                    {{ Form::hidden('course_id', encrypt($course->id), array('id' => 'course_id')) }}
                                     {!! Form::input('text','access_code', old('access_code'), ['class' => 'form-control','required', 'placeholder' => trans('module.courses.fields.access_code')]) !!}
-                                    {{ Form::submit(Lang::get('module.save'), ['class' => 'btn-xs btn btn-info']) }}
+                                    {{ Form::submit(trans('module.save'), ['class' => 'btn-xs btn btn-info']) }}
                                     {!! Form::close() !!}
                                 </div>
                             </td>

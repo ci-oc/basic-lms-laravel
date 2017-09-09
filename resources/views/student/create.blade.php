@@ -60,6 +60,7 @@
         </div>
         <div class="panel-body pan">
             {!! Form::open(['method' => 'POST', 'route' => ['users.store_single']])!!}
+            {{ csrf_field() }}
             <div class="form-body pal">
                 <div class="row">
                     <div class="col-md-6">
@@ -106,6 +107,7 @@
         </div>
         <div class="panel-body pan">
             {!! Form::open(['method' => 'POST', 'route' => ['users.store'],'files'=> true, 'enctype' => 'multipart/form-data'])!!}
+            {{ csrf_field() }}
             <div class="form-body pal">
                 <div class="row">
                     <div class="col-md-6">

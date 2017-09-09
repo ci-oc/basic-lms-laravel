@@ -96,7 +96,7 @@ return [
             'excel' => 'Excel Sheet :',
             'assistant_professor' => 'Assistant Professor(s)-Email ( Please separate by coma if they are many ) [Optional]',
             'assistant_professor_title' => 'Assistant Professor(s) [Including You]',
-            'no_courses' => 'Sorry you don\'t have courses yet, please create your courses firstly!'
+            'no_courses' => 'Sorry you don\'t have courses yet, please create course first.!'
         ],
     ],
     'results' => [
@@ -187,7 +187,8 @@ return [
         'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already.",
         'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!',
         'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 1 minutes.',
-        'error-questions-errors' => 'Sorry you entered some wrong answers try again!',
+        'error-questions-errors' => 'Sorry you entered some wrong answers, try again!',
+        'error-saving-data' => 'There was an error saving your data, please try again.'
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

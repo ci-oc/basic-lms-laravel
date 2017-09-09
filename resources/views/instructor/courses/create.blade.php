@@ -18,12 +18,16 @@
                 </tbody>
             </table>
         </div>
+    @elseif(Session::has('failed_to_save'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('failed_to_save')}}</p>
+        </div>
     @endif
     @if(Session::has('error-access-code'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-access-code')</p>
         </div>
-        @endif
+    @endif
     @if(Session::has('error-course-title'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-course-title')</p>
@@ -33,6 +37,7 @@
     </div>
     <h3 class="page-title">@lang('module.courses.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['courses.store'], 'enctype' => 'multipart/form-data'])!!}
+    {{ csrf_field() }}
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.create')
@@ -40,8 +45,8 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('access-code', Lang::get('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
-                    {!! Form::text('access_code', old('access_code'), ['class' => 'form-control ', 'placeholder' => '']) !!}
+                    {!! Form::label('access-code', trans('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
+                    {!! Form::text('access_code', old('access_code'), ['required','class' => 'form-control ', 'placeholder' => '']) !!}
                     @if($errors->has('access_code'))
                         <p class="help-block alert-danger" data-value="shake">
                             {{ $errors->first('access_code') }}
@@ -52,8 +57,8 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('course-title', Lang::get('module.courses.fields.course'), ['class' => 'control-label']) !!}
-                    {!! Form::text('title', old('title'), ['class' => 'form-control ', 'placeholder' => '']) !!}
+                    {!! Form::label('course-title', trans('module.courses.fields.course'), ['class' => 'control-label']) !!}
+                    {!! Form::text('title', old('title'), ['required','class' => 'form-control ', 'placeholder' => '']) !!}
                     @if($errors->has('title'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('title') }}
@@ -63,7 +68,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('assistant-professor', Lang::get('module.courses.fields.assistant_professor'), ['class' => 'control-label']) !!}
+                    {!! Form::label('assistant-professor', trans('module.courses.fields.assistant_professor'), ['class' => 'control-label']) !!}
                     {!! Form::text('assistant_professor', old('assistant_professor'), ['class' => 'form-control ', 'placeholder' => '']) !!}
                     @if($errors->has('assistant_professor'))
                         <p class="help-block alert-danger">
@@ -74,8 +79,8 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('desc', Lang::get('module.courses.fields.desc'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('description', old('description'), ['class' => 'form-control ', 'placeholder' => '','resize' => 'none']) !!}
+                    {!! Form::label('desc', trans('module.courses.fields.desc'), ['class' => 'control-label']) !!}
+                    {!! Form::textarea('description', old('description'), ['required','class' => 'form-control ', 'placeholder' => '','style' => 'resize:none;']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('description'))
                         <p class="help-block alert-danger">

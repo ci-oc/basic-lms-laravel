@@ -45,4 +45,6 @@ trait FileUploadTrait
         }
         return $content;
     }
+
+
 }

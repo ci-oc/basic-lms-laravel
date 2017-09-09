@@ -36,7 +36,8 @@ class AppServiceProvider extends ServiceProvider
                 $courses = $user['courses'];
                 $quizzes = array();
                 foreach ($courses as $course) {
-                    $announcements[] = $course->announcements;
+                    if (count($course->announcements) > 0)
+                        $announcements[] = $course->announcements;
                     if ($course['quizzes']->first() !== null)
                         foreach ($course['quizzes'] as $quiz)
                             $quizzes[] = $quiz;

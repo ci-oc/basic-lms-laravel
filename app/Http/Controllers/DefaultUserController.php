@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendEmailsJob;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +11,9 @@ use App\Http\Controllers\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\Http\Controllers\MailController;
+use function response;
 use function Sodium\compare;
+
 
 class DefaultUserController extends Controller
 {
@@ -159,4 +162,14 @@ class DefaultUserController extends Controller
         }
         return redirect('users/create')->with('data', $failed_to_create);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadTemp()
+    {
+        $file_path = storage_path('template/template.ods');
+        return Response()->download($file_path,'template');
+    }
+
 }

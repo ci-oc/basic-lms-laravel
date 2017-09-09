@@ -11,25 +11,14 @@ use Illuminate\Support\Facades\Redirect;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\In;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
-=======
->>>>>>> 3c5ff87dc6333f8c95d81d373133848d8d9953e5
 class CourseController extends Controller
 {
     /**
      * CourseController constructor.
      */
-    protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-    ];
 
     public function __construct()
     {
@@ -96,10 +85,9 @@ class CourseController extends Controller
                 return redirect()->route('courses.index')->with('success', '');
             else
                 return redirect()->back()->with('failed_instructors', $failed_instructors);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
-<<<<<<< HEAD
 
         $course = Course::create($courses);
         $course->users()->attach($success_instructors);
@@ -111,7 +99,7 @@ class CourseController extends Controller
             $course_id = $course->id;
             Material::create([
                 'course_id' => $course_id,
-                'material_path' => 'storage'. DIRECTORY_SEPARATOR. $path,
+                'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
                 'material_name' => $request->input('material-name')
             ]);
         }
@@ -119,8 +107,6 @@ class CourseController extends Controller
             return redirect()->route('courses.index')->with('success', '');
         else
             return redirect()->back()->with('failed_instructors', $failed_instructors);
-=======
->>>>>>> 3c5ff87dc6333f8c95d81d373133848d8d9953e5
 
     }
 
@@ -134,13 +120,12 @@ class CourseController extends Controller
     {
         $relation = UsersCourses::all()->load('user')->where('course_id', '=', $id);
         $assistant_professors = array();
-        $material_relation = Material::with('course')->where('course_id','=',$id)->get()->toArray();
-        //dd($materail_relation);
+        $material_relation = Material::with('course')->where('course_id', '=', $id)->get()->toArray();
         foreach ($relation as $relation_user) {
             if ($relation_user->user->college_id == null)
                 $assistant_professors[] = $relation_user->user;
         }
-        return view('instructor.courses.view', compact('id', 'assistant_professors','material_relation'));
+        return view('instructor.courses.view', compact('id', 'assistant_professors', 'material_relation'));
     }
 
     /**
@@ -189,8 +174,8 @@ class CourseController extends Controller
             $course->description = $request->input('description');
         }
         if ($request->hasFile('material')) {
-            if($request->input('material-name') == null){
-                return \redirect()->back()->with('material-name-error','')->withInput();
+            if ($request->input('material-name') == null) {
+                return \redirect()->back()->with('material-name-error', '')->withInput();
             }
             $material_file = $request->file('material');
             $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
@@ -198,7 +183,7 @@ class CourseController extends Controller
             $course_id = $course->id;
             Material::create([
                 'course_id' => $course_id,
-                'material_path' => 'storage'. DIRECTORY_SEPARATOR. $path,
+                'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
                 'material_name' => $request->input('material-name')
             ]);
         }

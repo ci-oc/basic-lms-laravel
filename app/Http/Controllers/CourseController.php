@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\UsersCourses;
 use Illuminate\Http\Request;
 use App\Course;
@@ -9,32 +7,26 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\In;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
-
+use App\Material;
 class CourseController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('permission:create-course|join-course', ['only' => 'index']);
         $this->middleware('permission:create-course', ['only' => ['create', 'store']]);
         $this->middleware('permission:drop-course', ['only' => ['destroy']]);
     }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
         $colors = ['#4CAF50', '#2196F3', '#ff9800', '#f44336', '#e7e7e7'];
         return view('instructor.courses.index', compact('colors'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +36,6 @@ class CourseController extends Controller
     {
         return view('instructor.courses.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -59,7 +50,6 @@ class CourseController extends Controller
             'description' => 'required|min:5|',
         ]);
         try {
-
             $courses = $request->all();
             $instructors = explode(',', $request->input('assistant_professor'));
             $user_id = Auth::id();
@@ -86,7 +76,6 @@ class CourseController extends Controller
         }
         $course = Course::create($courses);
         $course->users()->attach($success_instructors);
-
         if ($request->hasFile('material')) {
             $material_file = $request->file('material');
             $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
@@ -102,9 +91,7 @@ class CourseController extends Controller
             return redirect()->route('courses.index')->with('success', '');
         else
             return redirect()->back()->with('failed_instructors', $failed_instructors);
-
     }
-
     /**
      * Display the specified resource.
      *
@@ -122,7 +109,6 @@ class CourseController extends Controller
         }
         return view('instructor.courses.view', compact('id', 'assistant_professors', 'material_relation'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -133,7 +119,6 @@ class CourseController extends Controller
     {
         return view('instructor.courses.edit', compact('id'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -156,14 +141,12 @@ class CourseController extends Controller
             $course->title = $request->input('title');
         }
         if ($request->input('assistant_professor') != null) {
-
             foreach ($instructors as $instructor) {
                 $user = User::where('email', '=', $instructor)->pluck('id')->first();
                 if (!$course->users->contains($user))
                     $course->users()->attach($user);
                 // your code MR Andrew...
             }
-
         }
         if ($request->input('description') != null) {
             $course->description = $request->input('description');
@@ -188,7 +171,6 @@ class CourseController extends Controller
             return \redirect()->back()->with('update-success', '');
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *

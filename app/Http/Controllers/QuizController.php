@@ -18,6 +18,7 @@ class QuizController extends Controller
     public function __construct()
     {
         $this->middleware('permission:create-quiz', ['only' => ['create']]);
+        $this->middleware('permission:create-quiz|solve-quiz', ['only' => ['index']]);
         $this->middleware('permission:edit-quiz', ['only' => ['edit', 'update']]);
         $this->middleware('permission:show-quiz-statistics', ['only' => ['chart']]);
         $this->middleware('permission:delete-quiz', ['only' => ['destroy']]);

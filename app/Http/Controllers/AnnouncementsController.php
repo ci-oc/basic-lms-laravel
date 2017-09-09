@@ -6,8 +6,11 @@ use App\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\UsersCourses;
+use Illuminate\Support\Facades\Crypt;
+
 class AnnouncementsController extends Controller
 {
+
     /**
      * AnnouncementsController constructor.
      */
@@ -44,12 +47,20 @@ class AnnouncementsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = array();
-        $data['user_id'] = Auth::id();
-        $data['course_id'] = $request->input('course_id');
-        $data['announcement'] = $request->input('announcement');
-        Announcement::create($data);
-        return redirect()->back()->with('success','');
+        try {
+            $this->validate($request, [
+                'announcement' => 'required',
+                'ID' => 'required',
+            ]);
+            $data = array();
+            $data['user_id'] = Auth::id();
+            $data['course_id'] = decrypt($request->input('ID'));
+            $data['announcement'] = $request->input('announcement');
+            Announcement::create($data);
+            return redirect()->back()->with('success', '');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));
+        }
     }
 
     /**
@@ -95,6 +106,6 @@ class AnnouncementsController extends Controller
     public function destroy($id)
     {
         Announcement::destroy($id);
-        return redirect()->back()->with('delete','');
+        return redirect()->back()->with('delete', '');
     }
 }

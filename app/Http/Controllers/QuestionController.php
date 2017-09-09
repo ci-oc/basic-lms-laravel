@@ -60,27 +60,37 @@ class QuestionController extends Controller
             'option*' => 'required',
             'correct' => 'required',
         ]);
-        if ($request->input('grade') == null || $request->input('grade') <= 0) {
-            return \redirect()->back()->with('grade-failed', '')->withInput();
-        }
-        $question = Question::create($request->all());
-        $quiz = Quiz::find($request->input('quiz_id'));
-        $quiz_fullmark = $quiz->full_mark;
-        $question_grade = $request->input('grade');
-        $quiz_fullmark += $question_grade;
-        $quiz->update(['full_mark' => $quiz_fullmark]);
-        foreach ($request->input() as $key => $value) {
-            if (strpos($key, 'option') !== false && $value != '') {
-                $status = $request->input('correct') == $key ? 1 : 0;
-                QuestionsOption::create([
-                    'question_id' => $question->id,
-                    'option' => $value,
-                    'correct' => $status
-                ]);
+        try {
+            if ($request->input('grade') == null || $request->input('grade') <= 0) {
+                return \redirect()->back()->with('grade-failed', '')->withInput();
             }
+            $question = Question::create([
+                'quiz_id' => decrypt($request->input('quiz_id')),
+                'question_text' => $request->input('question_text'),
+                'code_snippet' => $request->input('code_snippet'),
+                'answer_explanation' => $request->input('answer_explanation'),
+                'more_info_link' => $request->input('more_info_link'),
+                'grade' => $request->input('grade'),
+            ]);
+            $quiz = Quiz::find(decrypt($request->input('quiz_id')));
+            $quiz_fullmark = $quiz->full_mark;
+            $question_grade = $request->input('grade');
+            $quiz_fullmark += $question_grade;
+            $quiz->update(['full_mark' => $quiz_fullmark]);
+            foreach ($request->input() as $key => $value) {
+                if (strpos($key, 'option') !== false && $value != '') {
+                    $status = $request->input('correct') == $key ? 1 : 0;
+                    QuestionsOption::create([
+                        'question_id' => $question->id,
+                        'option' => $value,
+                        'correct' => $status
+                    ]);
+                }
+            }
+            return redirect()->route('questions.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));
         }
-        return redirect()->route('questions.index');
-
     }
 
     /**

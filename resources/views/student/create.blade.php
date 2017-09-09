@@ -60,6 +60,7 @@
         </div>
         <div class="panel-body pan">
             {!! Form::open(['method' => 'POST', 'route' => ['users.store_single']])!!}
+            {{ csrf_field() }}
             <div class="form-body pal">
                 <div class="row">
                     <div class="col-md-6">
@@ -106,11 +107,14 @@
         </div>
         <div class="panel-body pan">
             {!! Form::open(['method' => 'POST', 'route' => ['users.store'],'files'=> true, 'enctype' => 'multipart/form-data'])!!}
+            {{ csrf_field() }}
             <div class="form-body pal">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('excel-sheet', trans('module.courses.fields.excel'), ['class' => 'control-label']) !!}
+                            <strong><a href="/downloadTemp" style="color: deepskyblue; cursor: pointer;">Click Here</a> to download the template</strong>
+                            <br><br>
                             {!! Form::file('file', null,['required','class' => 'close fileupload-exists']) !!}
                             @if($errors->has('file'))
                                 <p class="help-block alert-danger">

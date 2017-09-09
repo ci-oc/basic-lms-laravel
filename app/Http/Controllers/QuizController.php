@@ -55,40 +55,60 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        $time_error_count = 0;
-        $date_error_count = 0;
-        $start_date_explode = explode(' ', $request->input('start_date'));
-        $end_date_explode = explode(' ', $request->input('end_date'));
-        $start_date_temp = $start_date_explode[0];
-        $end_date_temp = $end_date_explode[0];
-        $start_date = explode('-', $start_date_temp);
-        $end_date = explode('-', $end_date_temp);
-        for ($i = 0; $i < count($start_date); $i++) {
-            if ($end_date[$i] <= $start_date[$i]) {
-                $date_error_count += 1;
-            }
-        }
-        if ($date_error_count == 3) { // data = data then check for time
-            $start_time_explode = explode(' ', $request->input('start_date'));
-            $end_time_explode = explode(' ', $request->input('end_date'));
-            $start_time_temp = $start_time_explode[1];
-            $end_time_temp = $end_time_explode[1];
-            $start_time = explode(':', $start_time_temp);
-            $end_time = explode(':', $end_time_temp);
-            for ($i = 0; $i < count($start_time); $i++) {
-                if ($end_time[$i] <= $start_time[$i]) {
-                    $time_error_count += 1;
+        $this->validate($request, [
+            'course_title' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'duration' => 'nullable|date_format:"H:i:s',
+            'start_date' => 'date_format:Y-m-d H:i:s|after:now',
+            'end_date' => 'date_format:Y-m-d H:i:s|after:now',
+        ]);
+        try {
+            $time_error_count = 0;
+            $date_error_count = 0;
+            $start_date_explode = explode(' ', $request->input('start_date'));
+            $end_date_explode = explode(' ', $request->input('end_date'));
+            $start_date_temp = $start_date_explode[0];
+            $end_date_temp = $end_date_explode[0];
+            $start_date = explode('-', $start_date_temp);
+            $end_date = explode('-', $end_date_temp);
+            for ($i = 0; $i < count($start_date); $i++) {
+                if ($end_date[$i] <= $start_date[$i]) {
+                    $date_error_count += 1;
                 }
             }
-            if ((($end_time[2] - $start_time[2]) <= 1) && ($time_error_count != 3)) {
-                return redirect()->back()->with('failed-quiz-time-gap', '')->withInput();
+            if ($date_error_count == 3) { // data = data then check for time
+                $start_time_explode = explode(' ', $request->input('start_date'));
+                $end_time_explode = explode(' ', $request->input('end_date'));
+                $start_time_temp = $start_time_explode[1];
+                $end_time_temp = $end_time_explode[1];
+                $start_time = explode(':', $start_time_temp);
+                $end_time = explode(':', $end_time_temp);
+                for ($i = 0; $i < count($start_time); $i++) {
+                    if ($end_time[$i] <= $start_time[$i]) {
+                        $time_error_count += 1;
+                    }
+                }
+                if ((($end_time[2] - $start_time[2]) <= 1) && ($time_error_count != 3)) {
+                    return redirect()->back()->with('failed-quiz-time-gap', '')->withInput();
+                }
             }
-        }
-        if ($time_error_count == 3) {
-            return redirect()->back()->with('failed-quiz-time', '')->withInput();
-        } else {
-            Quiz::create($request->all());
-            return redirect()->route('quizzes.index')->with('success-creation', '');
+            if ($time_error_count == 3) {
+                return redirect()->back()->with('failed-quiz-time', '')->withInput();
+            } else {
+                Quiz::create([
+                    'course_id' => decrypt($request->input('course_title')),
+                    'title' => $request->input('title'),
+                    'description' => $request->input('duration'),
+                    'start_date' => $request->input('start_date'),
+                    'end_date' => $request->input('end_date'),
+                    'solve_many' => $request->input('solve_many'),
+                    'activate_plagiarism' => $request->input('activate_plagiarism'),
+                ]);
+                return redirect()->route('quizzes.index')->with('success-creation', '');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));
         }
     }
 

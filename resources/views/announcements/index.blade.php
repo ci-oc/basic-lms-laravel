@@ -9,6 +9,10 @@
         <div class="alert alert-danger">
             <p>@lang('module.announcements.deleted')</p>
         </div>
+    @elseif(Session::has('failed'))
+        <div class="alert alert-danger">
+            <p>@lang('module.errors.error-saving-data')</p>
+        </div>
     @endif
     @if(Auth::user()->can('add-announcement'))
         <button class="btn btn-success" id="add"
@@ -29,14 +33,14 @@
                     {!! Form::label('selected_course',trans('module.quizzes.course-title'), ['class' =>'control-label']) !!}
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <select class="form-control" name="course_id" required>
+                            <select class="form-control" name="course_title" required>
                                 @foreach($courses as $course)
-                                    <option value="{{$course->id}}">{{$course->title}}</option>
+                                    <option value="{{encrypt($course->id)}}">{{$course->title}}</option>
                                 @endforeach
                             </select>
-                            @if($errors->has('selected_course'))
+                            @if($errors->has('course_title'))
                                 <p class="help-block alert-danger">
-                                    {{ $errors->first('selected_course') }}
+                                    {{ $errors->first('course_title') }}
                                 </p>
                             @endif
                         </div>
@@ -61,29 +65,31 @@
             </div>
         </div>
     </div>
-    @foreach($announcements as $announcement_data)
-        @if(count($announcement_data) > 0)
-            @foreach($announcement_data as $announcement)
-                <div class="announcement">
-                    <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
-                        <p>{{ $announcement->course->title }}</p>
-                        <p class="text-facebook">{{ $announcement->announcement }}</p>
-                        <small>
-                            <cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>
-                        </small>
-                    </blockquote>
-                    @if(Auth::id() == $announcement->user_id)
-                        {{ Form::open(['method' => 'DELETE', 'route' => ['announcements.destroy', $announcement->id]]) }}
-                        {{ Form::submit('DELETE', ['class' => 'btn btn-danger']) }}
-                        {{ Form::close() }}
-                    @endif
-                </div>
-                <hr>
-            @endforeach
-        @else
-            <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
-        @endif
-    @endforeach
+    @if(count($announcements) > 0)
+        @foreach($announcements as $announcement_data)
+            @if(count($announcement_data) > 0)
+                @foreach($announcement_data as $announcement)
+                    <div class="announcement">
+                        <blockquote style="border-left-color:#0D3059; background-color:gainsboro;">
+                            <p>{{ $announcement->course->title }}</p>
+                            <p class="text-facebook">{{ $announcement->announcement }}</p>
+                            <small>
+                                <cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>
+                            </small>
+                        </blockquote>
+                        @if(Auth::id() == $announcement->user_id)
+                            {{ Form::open(['method' => 'DELETE', 'route' => ['announcements.destroy', $announcement->id]]) }}
+                            {{ Form::submit('DELETE', ['class' => 'btn btn-danger']) }}
+                            {{ Form::close() }}
+                        @endif
+                    </div>
+                    <hr>
+                @endforeach
+            @endif
+        @endforeach
+    @else
+        <h1>{{trans('module.announcements.no_announcements_yet')}}</h1>
+    @endif
 @endsection
 
 @section('javascript')

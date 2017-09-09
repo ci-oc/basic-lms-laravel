@@ -96,6 +96,7 @@ return [
             'excel' => 'Excel Sheet :',
             'assistant_professor' => 'Assistant Professor(s)-Email ( Please separate by coma if they are many ) [Optional]',
             'assistant_professor_title' => 'Assistant Professor(s) [Including You]',
+<<<<<<< HEAD
             'no_courses' => 'Sorry you don\'t have courses yet, please create your courses firstly!',
             'material' => 'Course material',
             'material-1' => 'Upload more material',
@@ -104,6 +105,9 @@ return [
             'upload-date' => 'Uploaded-at',
             'file-action' => 'Action',
             'file-download' => 'Download'
+=======
+            'no_courses' => 'Sorry you don\'t have courses yet, please create course first.!'
+>>>>>>> 3c5ff87dc6333f8c95d81d373133848d8d9953e5
         ],
     ],
     'results' => [
@@ -196,6 +200,9 @@ return [
         'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 1 minutes.',
         'error-questions-errors' => 'Sorry you entered some wrong answers try again!',
         'error-material-name' => 'Please enter material name'
+        'error-questions-errors' => 'Sorry you entered some wrong answers, try again!',
+        'error-saving-data' => 'There was an error saving your data, please try again.'
+
     ],
     'success' => [
         'success-saving' => 'User(s) created successfully.',

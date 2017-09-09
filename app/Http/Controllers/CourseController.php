@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\UsersCourses;
 use Illuminate\Http\Request;
 use App\Course;
@@ -9,6 +11,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Material;
+
 class CourseController extends Controller
 {
     public function __construct()
@@ -17,6 +20,7 @@ class CourseController extends Controller
         $this->middleware('permission:create-course', ['only' => ['create', 'store']]);
         $this->middleware('permission:drop-course', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +31,7 @@ class CourseController extends Controller
         $colors = ['#4CAF50', '#2196F3', '#ff9800', '#f44336', '#e7e7e7'];
         return view('instructor.courses.index', compact('colors'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,6 +41,7 @@ class CourseController extends Controller
     {
         return view('instructor.courses.create');
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -92,6 +98,7 @@ class CourseController extends Controller
         else
             return redirect()->back()->with('failed_instructors', $failed_instructors);
     }
+
     /**
      * Display the specified resource.
      *
@@ -109,6 +116,7 @@ class CourseController extends Controller
         }
         return view('instructor.courses.view', compact('id', 'assistant_professors', 'material_relation'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -119,6 +127,7 @@ class CourseController extends Controller
     {
         return view('instructor.courses.edit', compact('id'));
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -171,6 +180,7 @@ class CourseController extends Controller
             return \redirect()->back()->with('update-success', '');
         }
     }
+
     /**
      * Remove the specified resource from storage.
      *

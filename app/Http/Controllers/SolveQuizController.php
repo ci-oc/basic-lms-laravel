@@ -51,19 +51,26 @@ class SolveQuizController extends Controller
      */
     public function store(Request $request)
     {
-        $test_id = decrypt($request->input('quiz_id'));
-        $quiz = Quiz::findorFail($test_id);
-        $test = UsersQuiz::where([
-            ['user_id', '=', Auth::id()],
-            ['quiz_id', '=', $test_id,]
-        ])->get()->first();
-        $duration = Quiz::calculateDuration($quiz->duration, $test->updated_at);
-        $duration_finished = Quiz::hasFinished($duration);
-        if (!$duration_finished) {
-            $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
-            return redirect()->route('results.index');
-        } else {
-            return redirect()->route('results.index')->with('failed', trans('module.errors.error-duration-finished'));
+        try {
+            $test_id = decrypt($request->input('quiz_id'));
+            $quiz = Quiz::findorFail($test_id);
+            $test = UsersQuiz::where([
+                ['user_id', '=', Auth::id()],
+                ['quiz_id', '=', $test_id,]
+            ])->get()->first();
+            $duration_finished = false;
+            if ($quiz->duration != null) {
+                $duration = Quiz::calculateDuration($quiz->duration, $test->updated_at);
+                $duration_finished = Quiz::hasFinished($duration);
+            }
+            if (!$duration_finished) {
+                $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
+                return redirect()->route('results.index');
+            } else {
+                return redirect()->route('results.index')->with('failed', trans('module.errors.error-duration-finished'));
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('quizzes.index');
         }
 
     }

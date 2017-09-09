@@ -74,8 +74,7 @@
                                                      document.getElementById('change-lang').submit();"
                                         value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
                                 </option>
-                                <option onclick="event.preventDefault();
-                                                     document.getElementById('change-lang').submit();"
+                                <option onclick="this.form.submit()"
                                         value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic
                                 </option>
                             </select>

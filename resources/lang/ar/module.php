@@ -89,13 +89,14 @@ return [
         'view-course' => 'عرض المادة',
         'enroll-course' => 'اشتراك',
         'fields' => [
+            'material' => 'ملفات المادة',
             'created_at' => 'أنشئ في',
             'course' => 'اسم المادة',
             'access_code' => 'الكود التعريفي',
             'desc' => 'الوصف',
             'excel' => 'ملف الإكسل: ',
             'assistant_professor' => 'البريدات الإلكترونية للأساتذة المساعدين (من فضلك افصل بينهم بفاصلة إذا كانوا أكثر من واحد) (اختياري)',
-            'assistant_professor_title' => 'الأساتذة المساعيدن (بما فيهم أنت)',
+            'assistant_professor_title' => 'الأساتذة المساعدين',
             'no_courses' => 'عفوا. ﻻ يوجد لديك مواد حتي هذه اللحظة, من فضلك قم بإنشاء مادة أولا.'
         ],
     ],
@@ -114,6 +115,8 @@ return [
     'bars' => [
         'top-bar-no-news' => 'لم يتم إضافة أخبار جديدة.',
         'top-bar-news' => 'الأخبار:',
+        'top-bar-profile' => 'الصفحة الشخصية',
+        'top-bar-logout' => 'الخروج',
         'sidebar_quizzes' => 'الإختبارات',
         'sidebar_dashboard' => 'لوحة القيادة',
         'sidebar_courses' => 'المواد الدراسية',
@@ -124,7 +127,8 @@ return [
         'sidebar_submissions' => 'الحلول',
         'sidebar_announcements' => 'الإعلانات',
         'sidebar_security_questions' => 'أسئلة الأمن',
-        'sidebar_profile' => 'الصفحة الشخصية'
+        'sidebar_profile' => 'الصفحة الشخصية',
+        'sidebar_register_course' => 'تسجيل المواد الدراسية'
     ],
     'problems' => [
         'problems-list' => 'قائمة المسائل',

@@ -95,8 +95,8 @@ return [
             'desc' => 'Description',
             'excel' => 'Excel Sheet :',
             'assistant_professor' => 'Assistant Professor(s)-Email ( Please separate by coma if they are many ) [Optional]',
-            'assistant_professor_title' => 'Assistant Professor(s) [Including You]',
-            'material' => 'Course material',
+            'assistant_professor_title' => 'Assistant Professor(s)',
+            'material' => 'Course Material',
             'material-1' => 'Upload more material',
             'material-name' => 'Material Name',
             'file-name' => 'Name',
@@ -122,6 +122,8 @@ return [
     'bars' => [
         'top-bar-no-news' => 'No News added yet.',
         'top-bar-news' => 'NEWS:' ,
+        'top-bar-profile' => 'My Profile',
+        'top-bar-logout' => 'Log Out',
         'sidebar_quizzes' => 'Quizzes',
         'sidebar_dashboard' => 'Dashboard',
         'sidebar_courses' => 'Courses',
@@ -132,7 +134,8 @@ return [
         'sidebar_submissions' => 'Submissions',
         'sidebar_announcements' => 'Announcements',
         'sidebar_security_questions' => 'Security Questions',
-        'sidebar_profile' => 'Profile'
+        'sidebar_profile' => 'Profile',
+        'sidebar_register_course' => 'Register Course',
     ],
     'problems' => [
         'problems-list' => 'Problems List',

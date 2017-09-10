@@ -96,7 +96,7 @@
     <script>
         $(document).ready(function () {
             $("button").click(function () {
-                $("#add-announcement").toggle(800);
+                $("#add-announcement").toggle(300);
             });
         });
     </script>

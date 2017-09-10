@@ -69,28 +69,27 @@
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li>
                         {!! Form::open(['method' => 'POST', 'route' => ['lang'], 'enctype' => 'multipart/form-data'])!!}
-                        <select name="locale" onchange="this.form.submit()">
+                        <select class="form-control" name="locale" onchange="this.form.submit()">
                             <option value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
                             </option>
-                            <option value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic
+                            <option value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}} >العربية
                             </option>
                         </select>
                         {{ csrf_field() }}
 
                         {!! Form::close() !!}
                     </li>
+
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
                                     src="{{Auth::user()->avatar}}" alt="" class="img-responsive img-circle"/>&nbsp;<span
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="{{ route('profile.index') }}"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a href="{{ route('profile.index') }}"><i class="fa fa-user" aria-hidden="true"></i>@lang('module.bars.top-bar-profile')</a></li>
                             <li class="divider"></li>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
-                                        class="fa fa-key"></i>Log Out
-                            </a>
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i>@lang('module.bars.top-bar-logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                   style="display: none;">
                                 {{ csrf_field() }}
@@ -201,7 +200,7 @@
                                         href="{{ route('enroll.index') }}"><i
                                             class="fa fa-plus" aria-hidden="true">
                                         <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">Register Course</span></a>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_register_course')</span></a>
 
                             </li>
                         @endif
@@ -268,7 +267,7 @@
                 <div id="tab-general">
                     <div id="sum_box" class="row mbl">
                         <!--Content-->
-                        <div class="container-fluid">
+                        <div class="container-fluid" dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
                             @yield('content')
                         </div>
                     </div>

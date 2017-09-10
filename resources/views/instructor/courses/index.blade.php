@@ -1,5 +1,6 @@
 @extends('layouts.sidebar')
 @section('css')
+    <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
     <style>
         .description {
             overflow: hidden;
@@ -10,8 +11,6 @@
     </style>
 @endsection
 @section('content')
-
-    <link href="{{ asset('css/instructor/instructor_homa_page_style.css') }}" rel="stylesheet">
     @if(Session::has('success'))
         <div class="alert alert-info">
             <p>@lang('module.success.success-course')</p>

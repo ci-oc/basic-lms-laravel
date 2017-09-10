@@ -6,7 +6,7 @@
  * Time: 7:15 PM
  */
 return [
-    'create' => 'إشاء',
+    'create' => 'إنشاء',
     'created_at' => 'أنشئ في',
     'operations' => 'عمليات',
     'save' => 'حفظ',
@@ -217,8 +217,9 @@ return [
             'SJ' => 'Sharp Judging ( FullMark or nothing )',
         ],
         'quiz-options' => [
-            'solve_many' => 'يستطيع الطلاب حل هذا الإختبار أكثر من مرة',
-            'activate_plagiarism' => 'تنشيط خاصية كشف الغش. '
+            'solve_many' => 'يستطيع الطلاب حل هذا الإختبار أكثر من مرة.',
+            'activate_plagiarism' => 'تنشيط خاصية كشف الغش. ',
+            'share_results' => 'مشاركة النتائج.'
         ]
     ],
     'coding_languages' => [

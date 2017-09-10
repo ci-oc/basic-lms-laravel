@@ -69,9 +69,15 @@
                     <br>
                     {{ Form::checkbox('activate_plagiarism',1,null, ['class' => 'field','id' => 'activate_plagiarism']) }}
                     {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
+                    <div class="js-hidden" id = "Percentage">
+                        {!! Form::label('Percentage' ,null, ['class' => 'control-label'])!!}
+                        <div class="range-slider">
+                            <input class="range-slider__range" type="range" value="100" min="0" max="100" name="plagiarism_percentage" id="plagiarism_percentage">
+                            <span class="range-slider__value">0</span>
+                        </div>
                     <br>
                     {{ Form::checkbox('share_results',1,null, ['class' => 'field','id' => 'share_results']) }}
-                    {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
+                    {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.share_results'), ['class' => 'control-label']) !!}
                 </div>
             </div>
             <div class="row">
@@ -132,7 +138,6 @@
 
 @endsection
 @section('javascript')
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">

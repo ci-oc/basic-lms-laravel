@@ -91,7 +91,7 @@
                                                 <div class="col-sm-9 controls">
                                                     <div class="row">
                                                         <div class="col-xs-9"><input type="text" name="cf_handle"
-                                                                                     placeholder="{{$user->cf_handle or 'Not available yet'}}"
+                                                                                     placeholder="{{$user->cf_handle or trans('module.placeholders.not-available')}}"
                                                                                      class="form-control"/></div>
                                                     </div>
                                                 </div>
@@ -103,7 +103,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-4"><input type="password" name="old"
                                                                                      id="password"
-                                                                                     placeholder="Current Password"
+                                                                                     placeholder="@lang('module.placeholders.current-password')"
                                                                                      class="form-control"/></div>
                                                     </div>
                                                     @if ($errors->has('old'))

@@ -121,6 +121,7 @@ return [
     ],
     'bars' => [
         'top-bar-no-news' => 'No News added yet.',
+        'top-bar-news' => 'NEWS:' ,
         'sidebar_quizzes' => 'Quizzes',
         'sidebar_dashboard' => 'Dashboard',
         'sidebar_courses' => 'Courses',
@@ -130,7 +131,8 @@ return [
         'sidebar_new_users' => 'Request New Users',
         'sidebar_submissions' => 'Submissions',
         'sidebar_announcements' => 'Announcements',
-        'sidebar_security_questions' => 'Security Questions'
+        'sidebar_security_questions' => 'Security Questions',
+        'sidebar_profile' => 'Profile'
     ],
     'problems' => [
         'problems-list' => 'Problems List',
@@ -171,6 +173,8 @@ return [
         'name' => 'Name',
         'email' => 'E-mail',
         'college-id' => 'College-id',
+        'current-password' => 'Current Password',
+        'not-available' => 'Not available yet.'
 
     ],
     'errors' => [

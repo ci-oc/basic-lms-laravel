@@ -54,16 +54,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('news', 'NewsController');
     Route::resource('announcements', 'AnnouncementsController');
     Route::post('questions/massDestroy')->uses('QuestionController@massDestroy')->name('questions.massDestroy');
+    Route::get('/script', function () {
+        return view('no_script');
+    })->name('noScript');
+
     Route::get('/{url}', function ($url) {
         $valid_url = \App\Url::pluck('url')->first();
         if ($valid_url == $url)
             return view('admin.index', compact('valid_url'));
         else
             abort(404);
-    })->middleware('role:superuser|standard-user')->name('admin.index');
-    Route::get('/noScript', function () {
-        return view('noscript');
-    })->name('noScript');
+    })->name('admin.index');
+
 
     Route::get('courses/download/storage/materials/{filename}', function ($filename) {
         $file_path = storage_path() . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'materials' . DIRECTORY_SEPARATOR . $filename;

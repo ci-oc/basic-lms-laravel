@@ -1,9 +1,9 @@
 @extends('layouts.sidebar')
 @section('content')
     @if(Session::has('failed-quiz-time-gap'))
-    <div class="alert alert-warning">
-        <p>@lang('module.errors.error-quiz-time-gap')</p>
-    </div>
+        <div class="alert alert-warning">
+            <p>@lang('module.errors.error-quiz-time-gap')</p>
+        </div>
     @endif
     @if(Session::has('failed-quiz-time'))
         <div class="alert alert-danger">
@@ -69,12 +69,6 @@
                     <br>
                     {{ Form::checkbox('activate_plagiarism',1,null, ['class' => 'field','id' => 'activate_plagiarism']) }}
                     {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
-                    <div class="js-hidden" id = "Percentage">
-                        {!! Form::label('Percentage' ,null, ['class' => 'control-label'])!!}
-                        <div class="range-slider">
-                            <input class="range-slider__range" type="range" value="100" min="0" max="100" name="plagiarism_percentage" id="plagiarism_percentage">
-                            <span class="range-slider__value">0</span>
-                        </div>
                     <br>
                     {{ Form::checkbox('share_results',1,null, ['class' => 'field','id' => 'share_results']) }}
                     {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.share_results'), ['class' => 'control-label']) !!}

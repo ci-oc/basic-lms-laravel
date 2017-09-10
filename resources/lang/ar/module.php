@@ -113,6 +113,7 @@ return [
     ],
     'bars' => [
         'top-bar-no-news' => 'لم يتم إضافة أخبار جديدة.',
+        'top-bar-news' => 'الأخبار:',
         'sidebar_quizzes' => 'الإختبارات',
         'sidebar_dashboard' => 'لوحة القيادة',
         'sidebar_courses' => 'المواد الدراسية',
@@ -122,7 +123,8 @@ return [
         'sidebar_new_users' => 'إضافة مستخدمين جدد',
         'sidebar_submissions' => 'الحلول',
         'sidebar_announcements' => 'الإعلانات',
-        'sidebar_security_questions' => 'أسئلة الأمن'
+        'sidebar_security_questions' => 'أسئلة الأمن',
+        'sidebar_profile' => 'الصفحة الشخصية'
     ],
     'problems' => [
         'problems-list' => 'قائمة المسائل',
@@ -163,6 +165,8 @@ return [
         'name' => 'الاسم',
         'email' => 'البريد الالكتروني',
         'college-id' => 'رقم تعريف الطالب',
+        'current-password' => 'كلمة المرور الحالية.',
+        'not-available' => 'ليست متاحة بعد.'
 
     ],
     'errors' => [

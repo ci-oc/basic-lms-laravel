@@ -50,7 +50,7 @@
                                                                        class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 <div class="news-update-box hidden-xs"><span
-                            class="text-uppercase mrm pull-left text-white">News:</span>
+                            class="text-uppercase mrm pull-left text-white">@lang('module.bars.top-bar-news')</span>
                     <ul id="news-update" class="ticker list-unstyled">
 
                         @if(count($all_news) > 0 )
@@ -143,7 +143,7 @@
                                         href="{{ route('courses.index') }}"><i
                                             class="fa fa-graduation-cap" aria-hidden="true">
                                         <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">Courses</span></a>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_courses')</span></a>
 
                             </li>
                         @endif
@@ -247,7 +247,7 @@
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
                     <div class="page-title">
-                        {{ ucfirst($request->segment(1)) }}
+                        {{ ucfirst(trans('module.bars.sidebar_' . $request->segment(1)))}}
                     </div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
@@ -257,7 +257,7 @@
                     <li class="hidden"><a href="#">{{ ucfirst($request->segment(1)) }}</a>&nbsp;&nbsp;<i
                                 class="fa fa-angle-right"></i>&nbsp;&nbsp;
                     </li>
-                    <li class="active">{{ ucfirst($request->segment(1)) }}</li>
+                    <li class="active"> {{ ucfirst(trans('module.bars.sidebar_' . $request->segment(1)))}}</li>
                 </ol>
                 <div class="clearfix">
                 </div>

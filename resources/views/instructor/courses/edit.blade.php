@@ -35,7 +35,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 form-group">
                                             {!! Form::label('access-code', Lang::get('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
-                                            {!! Form::text('access_code', old('access_code'),['class' => 'form-control ', 'placeholder' =>  $course->access_code]) !!}
+                                            {!! Form::text('access_code', $course->access_code,['class' => 'form-control ']) !!}
                                             @if($errors->has('access_code'))
                                                 <p class="help-block alert-danger" data-value="shake">
                                                     {{ $errors->first('access_code') }}
@@ -47,7 +47,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 form-group">
                                             {!! Form::label('course-title', Lang::get('module.courses.fields.course'), ['class' => 'control-label']) !!}
-                                            {!! Form::text('title', old('title'), ['class' => 'form-control ', 'placeholder' => $course->title]) !!}
+                                            {!! Form::text('title', $course->title, ['class' => 'form-control ']) !!}
                                             @if($errors->has('title'))
                                                 <p class="help-block alert-danger">
                                                     {{ $errors->first('title') }}
@@ -69,7 +69,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 form-group">
                                             {!! Form::label('desc', Lang::get('module.courses.fields.desc'), ['class' => 'control-label']) !!}
-                                            {!! Form::textarea('description', old('description'), ['class' => 'form-control ', 'placeholder' => $course->description,'resize' => 'none']) !!}
+                                            {!! Form::textarea('description', $course->description, ['class' => 'form-control ','resize' => 'none']) !!}
                                             <p class="help-block"></p>
                                             @if($errors->has('description'))
                                                 <p class="help-block alert-danger">

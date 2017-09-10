@@ -178,11 +178,7 @@ class CourseController extends Controller
                 'material_name' => $request->input('material-name')
             ]);
         }
-        if ($request->input('access_code') == null && $request->input('title') == null && $request->input('description') == null && $request->input('assistant_professor') == null && $request->hasFile('material') == null) {
-            return \redirect()->back()->with('update-fail', '');
-        } else if ($course->save()) {
             return \redirect()->back()->with('update-success', '');
-        }
     }
 
     /**

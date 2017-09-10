@@ -11,7 +11,7 @@
     <br>
     {!! Form::text('answer', $question[0]['answer'], ['class' => 'form-control', 'placeholder' => $question[0]['answer']]) !!}
     <br>
-    {!! Form::submit(trans('module.submit'), ['class' => 'btn btn-danger' ,'data-value' => 'shake', 'onclick' => 'shake()']) !!}
+    {!! Form::submit(trans('module.submit'), ['class' => 'btn btn-danger']) !!}
     {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary']) }}
     {!! Form::close() !!}
 @endsection

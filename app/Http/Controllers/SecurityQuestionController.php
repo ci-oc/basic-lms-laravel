@@ -14,8 +14,8 @@ class SecurityQuestionController extends Controller
     {
         $this->middleware('permission:security-questions-create', ['only' => 'create']);
         $this->middleware('permission:security-questions-edit', ['only' => 'edit']);
-        $this->middleware('permission:security-questions-delete', ['only' => 'delete']);
-        $this->middleware('permission:security-questions-read', ['only' => 'read']);
+        $this->middleware('permission:security-questions-delete', ['only' => 'destroy']);
+        $this->middleware('permission:security-questions-read', ['only' => 'index']);
     }
 
     /**
@@ -70,7 +70,6 @@ class SecurityQuestionController extends Controller
         $request->session()->put('answered-correctly', 'true');
         $url = \App\Url::pluck('url')->first();
         return redirect($url);
-        //return view('admin.index');
     }
 
     /**
@@ -98,9 +97,9 @@ class SecurityQuestionController extends Controller
 
     public function store_question(Request $request)
     {
-     $question = $request->all();
-     SecurityQuestion::create($question);
-     return redirect()->back()->with('success-adding','');
+        $question = $request->all();
+        SecurityQuestion::create($question);
+        return redirect()->back()->with('success-adding', '');
     }
 
     /**

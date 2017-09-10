@@ -1,7 +1,7 @@
 @extends('admin.layout.admin')
 @section('content')
-    <h3>Roles</h3>
-    <a class="btn btn-success" href="{{route('role.create')}}">Create Role</a>
+    <h3>@lang('administration.bars.sidebar_roles')</h3>
+    <a class="btn btn-success" href="{{route('role.create')}}">@lang('module.create') @lang('administration.role')</a>
     <br>
     <br>
     <table class="table table-bordered" id="datatable">
@@ -22,13 +22,13 @@
                 <td>
                     <div class="row"><!-- panel-footer -->
                         <div class="col-xs-3 text-left">
-                                <a class="btn btn-info btn-sm" href="{{route('role.edit',$role->id)}}">Edit</a>
+                                <a class="btn btn-info btn-sm" href="{{route('role.edit',$role->id)}}">@lang('module.edit')</a>
                         </div>
                         <div class="col-xs-4">
                                 <form action="{{route('role.destroy',$role->id)}}" method="POST">
                                     {{csrf_field()}}
                                     {{method_field('DELETE')}}
-                                    <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+                                    <input class="btn btn-sm btn-danger" type="submit" value="@lang('module.delete')">
                                 </form>
                         </div>
                     </div><!-- end panel-footer -->

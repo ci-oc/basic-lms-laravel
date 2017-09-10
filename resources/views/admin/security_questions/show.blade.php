@@ -5,7 +5,7 @@
             <p>@lang('module.admin.success-deletion')</p>
         </div>
     @endif
-    <a class="btn btn-success" href="{{route('securityQuestions.index3')}}">Add Question</a>
+    <a class="btn btn-success" href="{{route('securityQuestions.index3')}}">@lang('module.addnew')</a>
     <h2>Questions Table</h2>
     <table class="table table-bordered">
         <thead>
@@ -29,7 +29,7 @@
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'route' => ['securityQuestions.destroy', $question['id']])) !!}
-                        {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                        {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                         {!! Form::close() !!}
                     @endif
                 </td>

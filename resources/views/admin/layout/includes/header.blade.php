@@ -2,9 +2,23 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5">
+                <li>
+                    {!! Form::open(['method' => 'POST', 'route' => ['lang'], 'enctype' => 'multipart/form-data'])!!}
+                    <select name="locale" onchange="this.form.submit()">
+                        <option value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
+                        </option>
+                        <option value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}}>Arabic
+                        </option>
+                    </select>
+                    {{ csrf_field() }}
+
+                    {!! Form::close() !!}
+                </li>
+            </div>
+            <div class="col-md-5">
                 <!-- Logo -->
                 <div class="logo">
-                   <h1><a href="{{route('admin.index',$valid_url)}}">Administration</a></h1>
+                    <h1><a href="{{route('admin.index',$valid_url)}}">Administration</a></h1>
                 </div>
             </div>
 

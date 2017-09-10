@@ -1,6 +1,6 @@
 @extends('admin.layout.admin')
 @section('content')
-    <h3>Users</h3>
+    <h3>@lang('administration.bars.sidebar_users')</h3>
 
     <table class="table table-striped table-bordered" id="datatable">
         <thead>
@@ -23,7 +23,7 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                             data-target="#myModal-{{$user->id}}">
-                        Edit
+                        @lang('module.edit')
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal-{{$user->id}}" tabindex="-1" role="dialog"
@@ -33,7 +33,7 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">{{$user->name}}Role edit</h4>
+                                    <h4 class="modal-title" id="myModalLabel">{{$user->name}} @lang('module.edit')</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="{{route('user.update',$user->id)}}" method="post" role="form"
@@ -48,14 +48,12 @@
                                                 @endforeach
                                             </select>
                                         </div>
-
-                                        {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary"
-                                            onclick="$('#role-form-{{$user->id}}').submit()">Save changes
+                                            onclick="$('#role-form-{{$user->id}}').submit()">@lang('module.save')
                                     </button>
                                 </div>
                             </div>

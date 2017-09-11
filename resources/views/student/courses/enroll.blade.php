@@ -38,7 +38,7 @@
                             <td>{!! $course->created_at !!}</td>
                             <td>
                                 <button class="btn btn-xs btn-danger" id="enroll{{$course->id}}"
-                                        onclick="enroll({{$course->id}})">@lang('module.courses.enroll-course')</button>
+                                        onclick="enroll({{$course->id}})"><i class="fa fa-plus-circle" aria-hidden="true"></i> @lang('module.courses.enroll-course')</button>
                                 <div class="form-group" id="register{{$course->id}}" style="display:none;">
                                     {{ Form::open(['method' => 'POST', 'route' => 'enroll.store']) }}
                                     {{ Form::hidden('course_id', encrypt($course->id), array('id' => 'course_id')) }}
@@ -47,7 +47,7 @@
                                     {!! Form::close() !!}
                                 </div>
                                 <a href="{{ route('courses.show',[$course->id]) }}"
-                                   class="btn btn-xs btn-primary">@lang('module.view')</a>
+                                   class="btn btn-xs btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> @lang('module.view')</a>
                             </td>
 
                         </tr>

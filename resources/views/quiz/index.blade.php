@@ -31,6 +31,11 @@
             <p>@lang('module.errors.error-none-solved')</p>
         </div>
     @endif
+    @if(Session::has('cannot_modify'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('cannot_modify')}}</p>
+        </div>
+    @endif
     @if(Auth::user()->can('create-quiz'))
         <p>
             <a href="{{route('quizzes.create')}}"
@@ -80,7 +85,7 @@
                                 @endif
                                 @if(Auth::user()->can('show-quiz-statistics'))
                                     <a href="{{ route('quizzes.chart',[$quiz->id]) }}"
-                                       class="btn btn-xs btn-dark {{ $available ? '' : 'disabled'}}">@lang('module.stat')</a>
+                                       class="btn btn-xs btn-dark">@lang('module.stat')</a>
                                 @endif
                                 @if(Auth::user()->can('show-quiz-results'))
                                     <a href="{{ route('quizzes.results',[$quiz->id]) }}"

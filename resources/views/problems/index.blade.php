@@ -4,7 +4,7 @@
         <p>
             <a href="{{route('problems.create')}}"
                class="btn btn-success create_btn">
-                Add New
+                @lang('module.addnew')
             </a>
         </p>
     @endif

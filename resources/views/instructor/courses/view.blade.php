@@ -41,12 +41,12 @@
                             <p>@lang('module.errors.error-empty-material')</p>
                         </div>
                     @else
-                        <table class="table table-inverse">
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>@lang('module.courses.fields.file-name')</th>
-                                <th>@lang('module.courses.fields.upload-date')</th>
-                                <th>@lang('module.courses.fields.file-action')</th>
+                                <th>@lang('module.placeholders.name')</th>
+                                <th>@lang('module.created_at')</th>
+                                <th>@lang('module.operations')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@
                                     <td>{{$file['material_name']}}</td>
                                     <td>{{$file['created_at']}}</td>
                                     <td>
-                                        <a href="download/{{$file['material_path']}}">@lang('module.courses.fields.file-download')</a>
+                                        <a href="download/{{$file['material_path']}}" class="btn-xs btn-link">@lang('module.download')</a>
                                     </td>
                                 </tr>
                             @endforeach

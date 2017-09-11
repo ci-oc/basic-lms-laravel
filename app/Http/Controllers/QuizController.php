@@ -97,9 +97,7 @@ class QuizController extends Controller
             }
             if ($time_error_count == 3) {
                 return redirect()->back()->with('failed-quiz-time', '')->withInput();
-            }
-
-            else {
+            } else {
                 Quiz::create([
                     'course_id' => decrypt($request->input('course_title')),
                     'title' => $request->input('title'),
@@ -172,7 +170,9 @@ class QuizController extends Controller
     {
         //
         $quiz = Quiz::findorFail($id);
-        return view('quiz.edit', compact('quiz', 'id'));
+        if (!Quiz::isAvailable($quiz->start_date, $quiz->end_date))
+            return view('quiz.edit', compact('quiz', 'id'));
+        return redirect()->back()->with('cannot_modify',trans('module.errors.error-quiz-cannot-modify'));
     }
 
     /**

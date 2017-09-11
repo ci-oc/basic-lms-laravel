@@ -13,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ ucfirst($request->segment(1)) }}</title>
+    <title>{{ucfirst(trans('module.bars.sidebar_' . $request->segment(1))) }}</title>
     <!-- Styles -->
     @include('layouts.css')
     {{--Data tables CSS--}}
@@ -85,11 +85,15 @@
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
-                            <li><a href="{{ route('profile.index') }}"><i class="fa fa-user" aria-hidden="true"></i>@lang('module.bars.top-bar-profile')</a></li>
+                            <li><a href="{{ route('profile.index') }}"><i class="fa fa-user"
+                                                                          aria-hidden="true"></i>@lang('module.bars.top-bar-profile')
+                                </a></li>
                             <li class="divider"></li>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i>@lang('module.bars.top-bar-logout')</a>
+                                                     document.getElementById('logout-form').submit();"><i
+                                        class="fa fa-sign-out"
+                                        aria-hidden="true"></i>@lang('module.bars.top-bar-logout')</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                   style="display: none;">
                                 {{ csrf_field() }}
@@ -176,11 +180,12 @@
                                         href="{{route('users.create')}}"><i
                                             class="fa fa-users fa-fw">
                                         <div class="icon-bg bg-orange"></div>
-                                    </i><span class="menu-title">@lang('module.bars.sidebar_new_users')</span></a>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_users')</span></a>
 
                             </li>
                         @endif
-                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Charts.html"><i
+                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a
+                                    href="{{route('under_construction')}}"><i
                                         class="fa fa-bar-chart-o fa-fw">
                                     <div class="icon-bg bg-orange"></div>
                                 </i><span class="menu-title">Charts</span></a>
@@ -200,7 +205,7 @@
                                         href="{{ route('enroll.index') }}"><i
                                             class="fa fa-plus" aria-hidden="true">
                                         <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">@lang('module.bars.sidebar_register_course')</span></a>
+                                    </i><span class="menu-title">@lang('module.bars.sidebar_enroll')</span></a>
 
                             </li>
                         @endif
@@ -250,13 +255,14 @@
                     </div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
-                    <li><i class="fa fa-home"></i>&nbsp;<a href="{{ route('home') }}">Home</a>&nbsp;&nbsp;<i
+                    <li><i class="fa fa-home"></i>&nbsp;<a class="btn-xs btn-link"
+                                                           href="{{ route('home') }}">@lang('module.bars.home')</a>&nbsp;&nbsp;<i
                                 class="fa fa-angle-right"></i>&nbsp;&nbsp;
                     </li>
                     <li class="hidden"><a href="#">{{ ucfirst($request->segment(1)) }}</a>&nbsp;&nbsp;<i
                                 class="fa fa-angle-right"></i>&nbsp;&nbsp;
                     </li>
-                    <li class="active"> {{ ucfirst(trans('module.bars.sidebar_' . $request->segment(1)))}}</li>
+                    <li class="active"> {{ ucfirst(trans('module.bars.sidebar_' . $request->segment(1))) }}</li>
                 </ol>
                 <div class="clearfix">
                 </div>

@@ -57,7 +57,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/script', function () {
         return view('no_script');
     })->name('noScript');
-
+    Route::get('/construction', function () {
+        return view('under_construction');
+    })->name('under_construction');
     Route::get('/{url}', function ($url) {
         $valid_url = \App\Url::pluck('url')->first();
         if ($valid_url == $url)

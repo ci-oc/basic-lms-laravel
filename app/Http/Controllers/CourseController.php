@@ -72,7 +72,22 @@ class CourseController extends Controller
                     }
                 }
             }
-            Course::create($courses)->users()->attach($success_instructors);
+            $course = Course::create($courses);
+            $course->users()->attach($success_instructors);
+            if ($request->hasFile('material')) {
+                if ($request->input('material-name') == null) {
+                    return \redirect()->back()->with('material-name-error', '')->withInput();
+                }
+                $material_file = $request->file('material');
+                $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
+                $path = Storage::put('materials', $material_file);
+                $course_id = $course->id;
+                Material::create([
+                    'course_id' => $course->id,
+                    'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
+                    'material_name' => $request->input('material-name')
+                ]);
+            }
             if ($failed_instructors == null)
                 return redirect()->route('courses.index')->with('success', '');
             else
@@ -80,26 +95,7 @@ class CourseController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
-        $course = Course::create($courses);
-        $course->users()->attach($success_instructors);
-        if ($request->hasFile('material')) {
-            if ($request->input('material-name') == null) {
-                return \redirect()->back()->with('material-name-error', '')->withInput();
-            }
-            $material_file = $request->file('material');
-            $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
-            $path = Storage::put('materials', $material_file);
-            $course_id = $course->id;
-            Material::create([
-                'course_id' => $course_id,
-                'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
-                'material_name' => $request->input('material-name')
-            ]);
-        }
-        if ($failed_instructors == null)
-            return redirect()->route('courses.index')->with('success', '');
-        else
-            return redirect()->back()->with('failed_instructors', $failed_instructors);
+
     }
 
     /**
@@ -178,7 +174,7 @@ class CourseController extends Controller
                 'material_name' => $request->input('material-name')
             ]);
         }
-            return \redirect()->back()->with('update-success', '');
+        return \redirect()->back()->with('update-success', '');
     }
 
     /**

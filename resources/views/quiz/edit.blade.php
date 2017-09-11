@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            {!! Form::label('start_date',trans('module.quizzes.fields.start-date'), ['class' => 'control-label']) !!}
+            {!! Form::label('start_date',trans('module.quizzes.fields.start-date') . ' ' .'(' . trans('module.current'). ' ' .$quiz->start_date . ')', ['class' => 'control-label']) !!}
             <div class="row">
                 <div class="col-xs-12 form-group">
                     <div class='input-group date' id='datetimepicker3'>
@@ -79,7 +79,7 @@
                     @endif
                 </div>
             </div>
-            {!! Form::label('end_date',trans('module.quizzes.fields.end-date'), ['class' => 'control-label']) !!}
+            {!! Form::label('end_date',trans('module.quizzes.fields.end-date')  . ' ' .'(' . trans('module.current'). ' ' .$quiz->end_date . ')', ['class' => 'control-label']) !!}
             <div class="row">
                 <div class="col-xs-12 form-group">
                     <div class='input-group date' id='datetimepicker4'>

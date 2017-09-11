@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index')->name('securityQuestions.index');
     Route::get('securityQuestions/store')->uses('SecurityQuestionController@index3')->name('securityQuestions.index3');
     Route::get('securityQuestions/store/store_question')->uses('SecurityQuestionController@store_question')->name('securityQuestions.store_question');
+    Route::get('ojConfiguration','JudgeConstraintController@index')->name('Judge.index');
+    Route::get('ojConfiguration/edit','JudgeConstraintController@store')->name('Judge.store');
     Route::resource('securityQuestions', 'SecurityQuestionController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('quizzes/chart/{id}')->uses('QuizController@chart')->name('quizzes.chart');

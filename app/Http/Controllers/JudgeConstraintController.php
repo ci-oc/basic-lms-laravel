@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\JudgesConstraint;
 use Illuminate\Http\Request;
 
 class JudgeConstraintController extends Controller
@@ -13,7 +14,8 @@ class JudgeConstraintController extends Controller
      */
     public function index()
     {
-        //
+        $data = JudgesConstraint::all()->toArray();
+        return view('admin.online_judge_configuration.index',compact('data'));
     }
 
     /**
@@ -34,7 +36,20 @@ class JudgeConstraintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $max_memory_limit = $request->input('memory_limit');
+        $max_time_limit = $request->input('time_limit');
+        if($max_memory_limit <= 0 || $max_memory_limit > 5){
+            return redirect()->back()->with('error-memory-limit','');
+        }else if($max_time_limit <= 0 || $max_time_limit > 5){
+            return redirect()->back()->with('error-time-limit','');
+        }
+        $data = JudgesConstraint::firstOrNew(array('id' =>1));
+        //$existing_data = JudgesConstraint::where('id','=',1);
+        $data->max_mem_limit = $request->input('memory_limit');
+        $data->max_time_limit = $request->input('time_limit');
+        if($data->save()){
+            return redirect()->back()->with('data-success','');
+        }
     }
 
     /**

@@ -303,6 +303,12 @@ return [
         'success-deletion' => 'Question deleted successfully.',
         'success-adding' => 'Question added successfully.',
         'error-deleting-question' => 'you cannot delete the last question',
-        'success-solving-questions' => 'You answered questions correctly. Redirect to administration panel!'
+        'success-solving-questions' => 'You answered questions correctly. Redirect to administration panel!',
+        'online-judge-configuration' => 'Edit online judge constraints',
+        'memory_limit' => 'Memory limit (maximum value is : 125)',
+        'time_limit' => 'Time limit (maximum value is :  145)',
+        'memory-time-success' => 'Data edited successfully',
+        'error-memory-limit' => 'Please enter memory limit between (0,678)',
+        'error-time-limit' => 'Please enter time limit between (0,678)'
     ]
 ];

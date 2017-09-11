@@ -146,7 +146,7 @@ class ProblemController extends Controller
 
         ]);
 
-        if ($problem = Question::find($id)) {
+        if ($problem = Question::findorFail($id)) {
             $updates = $request->all();
             $problem->fill($updates)->save();
 

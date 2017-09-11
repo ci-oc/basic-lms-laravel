@@ -64,6 +64,7 @@ class QuizController extends Controller
             'duration' => 'nullable|date_format:"H:i:s',
             'start_date' => 'date_format:Y-m-d H:i:s|after:now',
             'end_date' => 'date_format:Y-m-d H:i:s|after:now',
+            'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
         try {
             $time_error_count = 0;
@@ -108,6 +109,7 @@ class QuizController extends Controller
                     'solve_many' => $request->input('solve_many'),
                     'activate_plagiarism' => $request->input('activate_plagiarism'),
                     'share_results' => $request->input('share_results'),
+                    'plagiarism_percentage' => $request->input('plagiarism_percentage')
                 ]);
                 return redirect()->route('quizzes.index')->with('success-creation', '');
             }
@@ -187,9 +189,10 @@ class QuizController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'duration' => 'nullable|date_format:H:i:s',
+            'duration' => 'nullable|date_format:"H:i:s',
             'start_date' => 'date_format:Y-m-d H:i:s|after:now',
             'end_date' => 'date_format:Y-m-d H:i:s|after:now',
+            'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
 
         if ($quiz = Quiz::findOrFail($id)) {

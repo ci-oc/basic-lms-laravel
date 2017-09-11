@@ -52,11 +52,11 @@ SESSION_DRIVER=file
 QUEUE_DRIVER=database
 ```
 
-###Sandbox
+### Sandbox
 
 - Please refer to this [README](https://github.com/andrewnagyeb/grader-library/blob/master/README.md) 
 
-###Run
+### Run
 In order to host it on local area network, run the following command:
 - **`ifconfig | grep inet`**
 then copy your IP. 
@@ -104,6 +104,8 @@ $this->call(SecurityURLSeeder::class);
 #$this->call(StudentsTableSeeder::class);
 $this->call(CodingLanguagesSeeder::class);  
 ```
+## Database Demo
+Link [Click here](https://drive.google.com/open?id=0B7tstgwobtR9SXhrTklmS1ZKUG8)
 ## Accounts
 ### Default credentials
 Please go to your DBMS and view users table. First two records are the superusers accounts, next 20 are instructors. the 20 after them are students. 

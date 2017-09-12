@@ -38,9 +38,9 @@ class JudgeConstraintController extends Controller
     {
         $max_memory_limit = $request->input('memory_limit');
         $max_time_limit = $request->input('time_limit');
-        if($max_memory_limit <= 0 || $max_memory_limit > 5){
+        if($max_memory_limit <= 0){
             return redirect()->back()->with('error-memory-limit','');
-        }else if($max_time_limit <= 0 || $max_time_limit > 5){
+        }else if($max_time_limit <= 0){
             return redirect()->back()->with('error-time-limit','');
         }
         $data = JudgesConstraint::firstOrNew(array('id' =>1));

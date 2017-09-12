@@ -305,10 +305,10 @@ return [
         'error-deleting-question' => 'you cannot delete the last question',
         'success-solving-questions' => 'You answered questions correctly. Redirect to administration panel!',
         'online-judge-configuration' => 'Edit online judge constraints',
-        'memory_limit' => 'Memory limit (maximum value is : 125)',
-        'time_limit' => 'Time limit (maximum value is :  145)',
+        'memory_limit' => 'Memory limit (minimum value is : 0)',
+        'time_limit' => 'Time limit (maximum value is :  0)',
         'memory-time-success' => 'Data edited successfully',
-        'error-memory-limit' => 'Please enter memory limit between (0,678)',
-        'error-time-limit' => 'Please enter time limit between (0,678)'
+        'error-memory-limit' => 'Please enter memory limit greater than zero',
+        'error-time-limit' => 'Please enter time limit greater than zero'
     ]
 ];

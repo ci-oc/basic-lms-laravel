@@ -26,11 +26,11 @@
             <div class="form-group row" style="margin-left:20%;">
                 <div class="col-xs-4">
                     <label for="memory_limit">@lang('module.admin.memory_limit')</label>
-                    {!! Form::number('memory_limit',$data[0]['max_mem_limit'], ['class' => 'form-control ', 'step' => '0.5','max' => '10','min'=>'0']) !!}
+                    {!! Form::number('memory_limit',$data[0]['max_mem_limit'], ['class' => 'form-control ', 'step' => '0.5','min'=>'0']) !!}
                 </div>
                 <div class="col-xs-4">
                     <label for="time_limit">@lang('module.admin.time_limit')</label>
-                    {!! Form::number('time_limit',$data[0]['max_time_limit'], ['class' => 'form-control ', 'step' => '0.5','max' => '10','min'=>'0']) !!}
+                    {!! Form::number('time_limit',$data[0]['max_time_limit'], ['class' => 'form-control ', 'step' => '0.5','min'=>'0']) !!}
                 </div>
             </div>
             <br>

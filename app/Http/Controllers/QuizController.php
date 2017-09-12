@@ -92,7 +92,7 @@ class QuizController extends Controller
                         $time_error_count += 1;
                     }
                 }
-                if ((($end_time[2] - $start_time[2]) <= 1) && ($time_error_count != 3)) {
+                if ((($end_time[2] - $start_time[2]) == 1) && ($time_error_count != 3)) {
                     return redirect()->back()->with('failed-quiz-time-gap', '')->withInput();
                 }
             }

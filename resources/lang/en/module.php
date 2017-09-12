@@ -156,8 +156,8 @@ return [
             'selected_quiz' => 'Select Quiz',
             'time_limit' => 'Time Limit (in seconds)',
             'mem_limit' => 'Memory Limit (in kiloBytes)',
-            'time_limit_note' => 'Note that maximum time limit is 60 seconds',
-            'mem_limit_note' => 'Note that maximum memory limit is 30 MB',
+            'time_limit_note' => 'Note that maximum time limit is :value seconds',
+            'mem_limit_note' => 'Note that maximum memory limit is :value MB',
             'testCases' => [
                 'input_testcase' => 'Input',
                 'output_testcase' => 'Output',

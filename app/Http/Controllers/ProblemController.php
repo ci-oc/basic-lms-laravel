@@ -204,6 +204,11 @@ class ProblemController extends Controller
     {
         try {
             $question = Question::findOrFail(decrypt($id));
+            $quiz = Quiz::find($question->quiz->id);
+            $quiz_fullmark = $quiz->full_mark;
+            $question_grade = $question->grade;
+            $quiz_fullmark -= $question_grade;
+            $quiz->update(['full_mark' => $quiz_fullmark]);
             $question->coding_languages()->delete();
             $question->testcases()->delete();
             $question->delete();

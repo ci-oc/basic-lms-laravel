@@ -110,7 +110,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('time_limit',trans('module.problems.fields.time_limit'), ['class' => 'control-label']) !!}
-                    <strong>@lang('module.problems.fields.time_limit_note')</strong>
+                    <strong>@lang('module.problems.fields.time_limit_note',['value' => $judge_constraints['max_time_limit']])</strong>
                     {!! Form::number('time_limit', old('time_limit'), ['class' => 'form-control ', 'placeholder' => '', 'min' => '0', 'max' => '60','step' => '0.01']) !!}
                     @if($errors->has('time_limit'))
                         <p class="help-block alert-danger">
@@ -122,7 +122,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('mem_limit',trans('module.problems.fields.mem_limit'), ['class' => 'control-label']) !!}
-                    <strong>@lang('module.problems.fields.mem_limit_note')</strong>
+                    <strong>@lang('module.problems.fields.mem_limit_note',['value' => $judge_constraints['max_mem_limit']])</strong>
                     {!! Form::number('mem_limit', old('grade'), ['class' => 'form-control ', 'placeholder' => '', 'min' => '0', 'max' => '30720']) !!}
                     @if($errors->has('mem_limit'))
                         <p class="help-block alert-danger">

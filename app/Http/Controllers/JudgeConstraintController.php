@@ -14,8 +14,7 @@ class JudgeConstraintController extends Controller
      */
     public function index()
     {
-        $data = JudgesConstraint::all()->toArray();
-        return view('admin.online_judge_configuration.index',compact('data'));
+        return view('admin.online_judge_configuration.index');
     }
 
     /**

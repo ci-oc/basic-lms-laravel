@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\JudgesConstraint;
 use App\News;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
 
             if (Auth::check()) {
+                $judge_constraints = JudgesConstraint::get()->first()->toArray();
                 $news = News::all();
                 $user = User::find(Auth::id())
                     ->load('courses.quizzes.questions.options',
@@ -56,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('problems', $problems);
                 $view->with('all_news', $news);
                 $view->with('announcements', $announcements);
+                $view->with('judge_constraints', $judge_constraints);
                 if (Auth::user()->isSuperuser()) {
                     $url = \App\Url::pluck('url')->first();
                     $view->with('valid_url', $url);

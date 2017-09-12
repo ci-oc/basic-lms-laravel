@@ -153,8 +153,8 @@ return [
             'selected_quiz' => 'اختر اختبار',
             'time_limit' => 'الحد الأقصي للوقت (بالثواني)',
             'mem_limit' => 'الحد الأقصي للذاكرة (بالكيلوبايت)',
-            'time_limit_note' => 'انتبه أن الحد الأقصي للوقت 60 ثانية',
-            'mem_limit_note' => 'انتبه أن الحد الأقصي للذاكرة 30 ميجابايت',
+            'time_limit_note' => 'انتبه أن الحد الأقصي للوقت :attribute ثانية',
+            'mem_limit_note' => 'انتبه أن الحد الأقصي للذاكرة :attribute ميجابايت',
             'testCases' => [
                 'input_testcase' => 'المدخل',
                 'output_testcase' => 'المخرج',

@@ -155,6 +155,11 @@ class QuestionController extends Controller
     {
         try {
             $question = Question::findOrFail(decrypt($id));
+            $quiz = Quiz::find($question->quiz->id);
+            $quiz_fullmark = $quiz->full_mark;
+            $question_grade = $question->grade;
+            $quiz_fullmark -= $question_grade;
+            $quiz->update(['full_mark' => $quiz_fullmark]);
             $question->delete();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-saving-data'));

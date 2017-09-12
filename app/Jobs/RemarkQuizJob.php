@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\JudgesConstraint;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -79,6 +80,9 @@ class RemarkQuizJob implements ShouldQueue
             }
         }
         if (array_key_exists('problems', $request)) {
+            $judge_constraints = $judge_constraints = JudgesConstraint::get()->first()->toArray();
+            $max_mem_limit = $judge_constraints['max_mem_limit'] * 1024;
+            $max_time_limit = $judge_constraints['max_time_limit'] * 1000;
             $problems = array();
             foreach ($request['problems'] as $key => $problem) {
                 $problems[] = Question::find($problem)->load('testcases', 'coding_languages');
@@ -154,7 +158,7 @@ class RemarkQuizJob implements ShouldQueue
                                     if ($testcase_correct_output['success'] == 1 && $testcase_input['success'] == 1) {
                                         $output_filename = $testcase_correct_output['detail']['filename'];
                                         $output_path = $storage_path . 'output' . DIRECTORY_SEPARATOR . $output_filename;
-                                        $run_output = $grader->run($user_code_filename, $testcase_input_filename, $problem->time_limit, $problem->mem_limit);
+                                        $run_output = $grader->run($user_code_filename, $testcase_input_filename, $problem->time_limit, $problem->mem_limit, $max_mem_limit, $max_time_limit);
                                         $run_output_status = $run_output['detail']['result'];
                                         if ($run_output_status == 'OK') {
                                             $run_status = $run_output_status;

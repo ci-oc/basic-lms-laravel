@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\codingLanguages;
 use App\JudgeOptions;
+use App\JudgesConstraint;
 use App\ProblemJudgeOptions;
 use App\TestsCase;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
+        $judge_constraints = JudgesConstraint::get()->first()->toArray();
         $this->validate($request, [
             'question_text' => 'required',
             'grade' => 'required|numeric|min:0',
@@ -59,8 +61,8 @@ class ProblemController extends Controller
             'output_format' => 'required',
             'input_testcase' => 'required|array|min:1',
             'output_testcase' => 'required|array|min:1',
-            'time_limit' => 'required|numeric|min:0|max:60',
-            'mem_limit' => 'required|numeric|min:0|max:30720',
+            'time_limit' => 'required|numeric|min:0|max:' . $judge_constraints['max_time_limit'],
+            'mem_limit' => 'required|numeric|min:0|max:' . $judge_constraints['max_mem_limit'],
             'more_info_link' => 'nullable|active_url',
             'coding_languages' => 'required'
         ]);
@@ -111,7 +113,7 @@ class ProblemController extends Controller
     {
         try {
             $problem = Question::findorFail(decrypt($id));
-            return view('problems.show',compact('problem'));
+            return view('problems.show', compact('problem'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }

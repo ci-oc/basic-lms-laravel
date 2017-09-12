@@ -120,14 +120,21 @@ class ProblemController extends Controller
      */
     public function edit($id)
     {
-        $problem = Question::find($id);
-        $judge_options = JudgeOptions::all();
-        $coding_languages = codingLanguages::all();
-        $problem_judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
-        $problem_coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
-        return view('problems.edit', compact('problem', 'id',
-            'judge_options', 'coding_languages',
-            'problem_judge_options', 'problem_coding_languages'));
+        try {
+            $problem = Question::find(decrypt($id));
+            if (!Quiz::isAvailable($problem->quiz->start_date, $problem->quiz->end_date)) {
+                $judge_options = JudgeOptions::all();
+                $coding_languages = codingLanguages::all();
+                $problem_judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
+                $problem_coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
+                return view('problems.edit', compact('problem', 'id',
+                    'judge_options', 'coding_languages',
+                    'problem_judge_options', 'problem_coding_languages'));
+            }
+            return redirect()->back()->with('error', trans('module.errors.error-problem-cannot-modify'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
     }
 
     /**
@@ -138,47 +145,51 @@ class ProblemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public
-    function update(Request $request, $id)
+    function update(Request $request, $question_id)
     {
         $this->validate($request, [
             'question_text' => 'required',
             'grade' => 'required|min:1|',
 
         ]);
+        try {
+            $id = decrypt($question_id);
+            if ($problem = Question::findorFail($id)) {
+                $updates = $request->all();
+                $problem->fill($updates)->save();
 
-        if ($problem = Question::findorFail($id)) {
-            $updates = $request->all();
-            $problem->fill($updates)->save();
-
-            //Updating testcases
-            $testcases = TestsCase::where('question_id', '=', $id)->get();
-            foreach ($testcases as $cases) {
-                $cases->delete();
+                //Updating testcases
+                $testcases = TestsCase::where('question_id', '=', $id)->get();
+                foreach ($testcases as $cases) {
+                    $cases->delete();
+                }
+                $input_test_cases = $request->input('input_testcase');
+                $output_test_cases = $request->input('output_testcase');
+                for ($i = 0; $i < count($input_test_cases); $i++) {
+                    TestsCase::create([
+                        'question_id' => $id,
+                        'input' => $input_test_cases[$i],
+                        'output' => $output_test_cases[$i],
+                    ]);
+                }
+                //Updating judge options
+                $judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
+                $request_judge_options = $request->input('judge_options');
+                $problem->judge_options()->detach($judge_options);
+                $problem->judge_options()->attach($request_judge_options);
+                //Updating coding languages
+                $coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
+                $request_coding_languages = $request->input('coding_languages');
+                $problem->coding_languages()->detach($coding_languages);
+                $problem->coding_languages()->attach($request_coding_languages);
+                $request->session()->flash('success', 'problem has been edited successfully');
+                return redirect()->back();
+            } else {
+                $request->session()->flash('failure', 'Error occurred while updating problem information');
+                return redirect()->back();
             }
-            $input_test_cases = $request->input('input_testcase');
-            $output_test_cases = $request->input('output_testcase');
-            for ($i = 0; $i < count($input_test_cases); $i++) {
-                TestsCase::create([
-                    'question_id' => $id,
-                    'input' => $input_test_cases[$i],
-                    'output' => $output_test_cases[$i],
-                ]);
-            }
-            //Updating judge options
-            $judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
-            $request_judge_options = $request->input('judge_options');
-            $problem->judge_options()->detach($judge_options);
-            $problem->judge_options()->attach($request_judge_options);
-            //Updating coding languages
-            $coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
-            $request_coding_languages = $request->input('coding_languages');
-            $problem->coding_languages()->detach($coding_languages);
-            $problem->coding_languages()->attach($request_coding_languages);
-            $request->session()->flash('success', 'problem has been edited successfully');
-            return redirect()->back();
-        } else {
-            $request->session()->flash('failure', 'Error occurred while updating problem information');
-            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-saving-data'));
         }
 
     }
@@ -191,10 +202,14 @@ class ProblemController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
-        $question->coding_languages->delete();
-        $question->testcases->delete();
-        $question->delete();
-        return redirect()->route('problems.index');
+        try {
+            $question = Question::findOrFail(decrypt($id));
+            $question->coding_languages()->delete();
+            $question->testcases()->delete();
+            $question->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-saving-data'));
+        }
     }
 }

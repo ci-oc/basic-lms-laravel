@@ -6,7 +6,11 @@
     @if (Session::has('failure'))
         <div class="alert alert-danger">{!! Session::get('failure') !!}</div>
     @endif
-    <h3 class="page-title">@lang('module.problems.edit_problem')</h3>
+    @if(Session::has('error-saving'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('error-saving')}}</p>
+        </div>
+    @endif
     {!! Form::open(['method' => 'PUT', 'route' => ['problems.update', $id]]) !!}
     <input type="hidden" name="id" value="{{$id}}">
     <div class="panel panel-default">
@@ -142,7 +146,8 @@
                 {!! Form::label('judge_options',trans('module.judge_options.title'), ['class' => 'control-label']) !!}
                 <br>
                 @foreach($judge_options as $option)
-                    <input type="checkbox" name="judge_options[]"  {{in_array($option->id,$problem_judge_options)?"checked":""}}
+                    <input type="checkbox" name="judge_options[]"
+                           {{in_array($option->id,$problem_judge_options)?"checked":""}}
                            value="{{$option->id}}"> @lang('module.judge_options.options.' . $option->description)
                     <br>
                 @endforeach
@@ -152,7 +157,8 @@
                 {!! Form::label('coding_languages',trans('module.coding_languages.title'), ['class' => 'control-label']) !!}
                 <br>
                 @foreach($coding_languages as $lang)
-                    <input type="checkbox" name="coding_languages[]" {{in_array($lang->id,$problem_coding_languages)?"checked":""}}
+                    <input type="checkbox" name="coding_languages[]"
+                           {{in_array($lang->id,$problem_coding_languages)?"checked":""}}
                            value="{{$lang->id}}"> {{ $lang->name }}<br>
                 @endforeach
             </div>

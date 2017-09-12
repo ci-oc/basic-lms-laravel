@@ -3,6 +3,16 @@
     <link rel="stylesheet" href="{{asset('css/instructor/show_course_style.css')}}">
 @endsection
 @section('content')
+    @if(Session::has('error_processing'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('error_processing')}}</p>
+        </div>
+    @endif
+    @if(Session::has('cannot_edit'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('cannot_edit')}}</p>
+        </div>
+    @endif
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ $course->title }}
@@ -55,23 +65,32 @@
                                     <td>{{$file['material_name']}}</td>
                                     <td>{{$file['created_at']}}</td>
                                     <td>
-                                        <a href="download/{{$file['material_path']}}" class="btn-xs btn-link">@lang('module.download')</a>
+                                        <a href="download/{{$file['material_path']}}"
+                                           class="btn-xs btn-link">@lang('module.download')</a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        <hr>
                     @endif
 
                 </div>
             </div>
         </div>
+        <?php $can_edit = false;?>
         @if(Auth::user()->can('edit-course'))
-            <div class="panel-footer">
-                <a href="{{ route('courses.edit',$course->id) }}"
-                   class="btn btn-info">@lang('module.edit')</a>
-            </div>
+            @foreach($course->users as $user)
+                @if($user->id == Auth::id())
+                    <?php $can_edit = true;?>
+                @endif
+            @endforeach
+            @if($can_edit)
+
+                <div class="panel-footer">
+                    <a href="{{ route('courses.edit',encrypt($course->id)) }}"
+                       class="btn btn-info">@lang('module.edit')</a>
+                </div>
+            @endif
         @endif
     </div>
 @endsection

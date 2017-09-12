@@ -1,6 +1,11 @@
 @extends('layouts.sidebar')
 
 @section('content')
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('error')}}</p>
+        </div>
+    @endif
     @if(Auth::user()->can('create-quiz'))
         <p>
             <a href="{{ route('questions.create') }}" class="btn btn-success">@lang('module.addnew')</a>
@@ -31,10 +36,10 @@
                             <td>{{ $question->quiz->title or '' }}</td>
                             <td>{!! $question->question_text !!}</td>
                             <td>
-                                <a href="{{ route('questions.show',[$question->id]) }}"
+                                <a href="{{ route('questions.show',[encrypt($question->id)]) }}"
                                    class="btn btn-xs btn-primary">@lang('module.view')</a>
                                 @if(Auth::user()->can('edit-quiz'))
-                                    <a href="{{ route('questions.edit',[$question->id]) }}"
+                                    <a href="{{ route('questions.edit',[encrypt($question->id)]) }}"
                                        class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
                                 @endif
                                 @if(!$available)
@@ -42,7 +47,7 @@
                                     'style' => 'display: inline-block;',
                                     'method' => 'DELETE',
                                     'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                    'route' => ['questions.destroy', $question->id])) !!}
+                                    'route' => ['questions.destroy', encrypt($question->id)])) !!}
                                     {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 @endif

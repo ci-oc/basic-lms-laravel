@@ -1,5 +1,10 @@
 @extends('layouts.sidebar')
 @section('content')
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('error')}}</p>
+        </div>
+    @endif
     @if(Auth::user()->can('create-quiz'))
         <p>
             <a href="{{route('problems.create')}}"
@@ -28,22 +33,22 @@
                 @if (count($problems) > 0)
                     @foreach ($problems as $problem)
                         <?php $available = strtotime($problem->quiz->start_date) < time() && time() < strtotime($problem->quiz->end_date) ? true : false ?>
-                        <tr data-entry-id="{{ $problem->id }}">
+                        <tr data-entry-id="{{ encrypt($problem->id) }}">
                             <td>{{ $problem->quiz->course->title }}</td>
-                            <td>{{ $problem->quiz->title or '' }}</td>
+                            <td>{{ $problem->quiz->title }}</td>
                             <td>{!! $problem->question_text !!}</td>
                             <td>
 
-                                <a href="{{ route('questions.show',[$problem->id]) }}"
+                                <a href="{{ route('problems.show',encrypt($problem->id)) }}"
                                    class="btn btn-xs btn-primary {{ $available ? 'disabled' : ''}}">@lang('module.view')</a>
-                                <a href="{{ route('problems.edit',[$problem->id]) }}"
+                                <a href="{{ route('problems.edit',encrypt($problem->id)) }}"
                                    class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
                                 @if(!$available)
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                        'route' => ['questions.destroy', $problem->id])) !!}
+                                        'route' => ['problems.destroy', encrypt($problem->id)])) !!}
                                     {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 @endif

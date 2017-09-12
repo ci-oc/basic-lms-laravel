@@ -186,6 +186,7 @@ return [
         'error-access-code' => 'Invalid Access Code',
         'error-quiz-made-before' => 'Solve many option is turned off for this quiz.',
         'error-quiz-cannot-modify' => 'Quiz cannot be modified if it is available.',
+        'error-problem-cannot-modify' => 'Problem cannot be modified if its quiz is available.',
         'error-quiz-not-available' => 'Quiz is not available at the moment',
         'error-none-solved' => 'There are no results for this quiz yet.',
         'error-0-courses' => 'You have to create a course first.',
@@ -204,9 +205,12 @@ return [
         'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!',
         'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 1 minutes.',
         'error-material-name' => 'Please enter material name',
-        'error-questions-errors' => 'Sorry you entered some wrong answers, try again!',
+        'error-questions-errors' => 'Sorry you entered some wrong answers, please try again!',
         'error-saving-data' => 'There was an error saving your data, please try again.',
-        'error-empty-material' => 'No material is uploaded yet!'
+        'error-empty-material' => 'No material is uploaded yet!',
+        'error-not-allowed-to-modify-course' => 'You are not allowed to modify this course.',
+        'error-not-allowed-to-modify-problem' => 'You are not allowed to modify this course.',
+        'error-processing' => 'There was an error while processing your request, please try again.'
 
     ],
     'success' => [

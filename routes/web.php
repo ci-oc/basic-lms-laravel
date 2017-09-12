@@ -65,7 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
         if ($valid_url == $url)
             return view('admin.index', compact('valid_url'));
         else
-            abort(404);
+            return redirect()->back();
     })->name('admin.index');
 
 

@@ -101,13 +101,17 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $relations = [
-            'quizzes' => \App\Quiz::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
+        try {
+            $relations = [
+                'quizzes' => \App\Quiz::get()->pluck('title', 'id')->prepend('Please select', ''),
+            ];
 
-        $question = Question::findOrFail($id);
+            $question = Question::findOrFail(decrypt($id));
 
-        return view('questions.show', compact('question') + $relations);
+            return view('questions.show', compact('question') + $relations);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-saving-data'));
+        }
     }
 
     /**
@@ -118,8 +122,12 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = Question::findOrFail($id);
-        return view('questions.edit', compact('question'));
+        try {
+            $question = Question::findOrFail(decrypt($id));
+            return view('questions.edit', compact('question'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
 
     }
 
@@ -132,7 +140,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail($id);
+        $question = Question::findOrFail(decrypt($id));
         $question->update($request->all());
         return redirect()->route('questions.index');
     }
@@ -145,8 +153,12 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
-        $question->delete();
+        try {
+            $question = Question::findOrFail(decrypt($id));
+            $question->delete();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-saving-data'));
+        }
 
         return redirect()->route('questions.index');
     }

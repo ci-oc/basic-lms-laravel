@@ -3,7 +3,7 @@
 @section('content')
     <h3 class="page-title">@lang('module.questions.title')</h3>
 
-    {!! Form::model($question, ['method' => 'PUT', 'route' => ['questions.update', $question->id]]) !!}
+    {!! Form::model($question, ['method' => 'PUT', 'route' => ['questions.update', encrypt($question->id)]]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -11,21 +11,6 @@
         </div>
 
         <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('quiz_id', Lang::get('module.quizzes.create-questions-title'), ['class' => 'control-label']) !!}
-                    <select class="form-control" name="quiz_id">
-                        @foreach($quizzes as $quiz)
-                            <option value="{{$quiz->id}}">{{$quiz->title}}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has('quiz_id'))
-                        <p class="help-block">
-                            {{ $errors->first('quiz_id') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('grade', Lang::get('module.questions.fields.grade'), ['class' => 'control-label']) !!}

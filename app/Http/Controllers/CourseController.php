@@ -19,6 +19,7 @@ class CourseController extends Controller
         $this->middleware('permission:create-course|join-course', ['only' => 'index']);
         $this->middleware('permission:create-course', ['only' => ['create', 'store']]);
         $this->middleware('permission:drop-course', ['only' => ['destroy']]);
+        $this->middleware('permission:edit-course', ['only' => ['edit']]);
     }
 
     /**
@@ -108,7 +109,7 @@ class CourseController extends Controller
     {
         $relation = UsersCourses::all()->load('user')->where('course_id', '=', $id);
         $assistant_professors = array();
-        $course = Course::where('id', '=', $id)->get()->first();
+        $course = Course::findorFail($id);
         $material_relation = Material::with('course')->where('course_id', '=', $id)->get()->toArray();
         foreach ($relation as $relation_user) {
             if ($relation_user->user->college_id == null)
@@ -125,7 +126,17 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        return view('instructor.courses.edit', compact('id'));
+        try {
+            $course = Course::findOrFail(decrypt($id));
+            foreach ($course->users as $user) {
+                if ($user->id == Auth::id())
+                    return view('instructor.courses.edit', compact('course'));
+            }
+            return redirect()->back()->with('cannot_edit', trans('module.errors.error-not-allowed-to-modify-course'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error_processing', trans('module.errors.error-processing'));
+        }
+
     }
 
     /**
@@ -140,41 +151,45 @@ class CourseController extends Controller
         $this->validate($request, [
             'title' => 'max:100',
         ]);
-        $course_id = Input::get('id');
-        $course = Course::findOrFail($course_id);
-        $instructors = explode(',', $request->input('assistant_professor'));
-        if ($request->input('access_code') != null) {
-            $course->access_code = $request->input('access_code');
-        }
-        if ($request->input('title') != null) {
-            $course->title = $request->input('title');
-        }
-        if ($request->input('assistant_professor') != null) {
-            foreach ($instructors as $instructor) {
-                $user = User::where('email', '=', $instructor)->pluck('id')->first();
-                if (!$course->users->contains($user))
-                    $course->users()->attach($user);
-                // your code MR Andrew...
+        try {
+            $course_id = decrypt(Input::get('id'));
+            $course = Course::findOrFail($course_id);
+            $instructors = explode(',', $request->input('assistant_professor'));
+            if ($request->input('access_code') != null) {
+                $course->access_code = $request->input('access_code');
             }
-        }
-        if ($request->input('description') != null) {
-            $course->description = $request->input('description');
-        }
-        if ($request->hasFile('material')) {
-            if ($request->input('material-name') == null) {
-                return \redirect()->back()->with('material-name-error', '')->withInput();
+            if ($request->input('title') != null) {
+                $course->title = $request->input('title');
             }
-            $material_file = $request->file('material');
-            $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
-            $path = Storage::put('materials', $material_file);
-            $course_id = $course->id;
-            Material::create([
-                'course_id' => $course_id,
-                'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
-                'material_name' => $request->input('material-name')
-            ]);
+            if ($request->input('assistant_professor') != null) {
+                foreach ($instructors as $instructor) {
+                    $user = User::where('email', '=', $instructor)->pluck('id')->first();
+                    if (!$course->users->contains($user))
+                        $course->users()->attach($user);
+                }
+            }
+            if ($request->input('description') != null) {
+                $course->description = $request->input('description');
+            }
+            if ($request->hasFile('material')) {
+                if ($request->input('material-name') == null) {
+                    return redirect()->back()->with('material-name-error', '')->withInput();
+                }
+                $material_file = $request->file('material');
+                $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
+                $path = Storage::put('materials', $material_file);
+                $course_id = $course->id;
+                Material::create([
+                    'course_id' => $course_id,
+                    'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
+                    'material_name' => $request->input('material-name')
+                ]);
+            }
+            $course->update();
+            return redirect()->back()->with('update-success', '');
+        } catch (\Exception $e){
+            return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
-        return \redirect()->back()->with('update-success', '');
     }
 
     /**

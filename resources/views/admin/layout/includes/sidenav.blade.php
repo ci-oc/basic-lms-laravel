@@ -33,7 +33,7 @@
                                                                               aria-hidden="true"></i> @lang('administration.bars.sidebar_security_questions')</a></li>
                 </ul>
                 <ul>
-                    <li class="sub-menu"><a href="{{route('securityQuestions.index2')}}"><i class="fa fa-cogs"
+                    <li class="sub-menu"><a href="{{route('Judge.index')}}"><i class="fa fa-cogs"
                                                                                             aria-hidden="true"></i> @lang('administration.bars.sidebar_judge_configuration')</a></li>
                 </ul>
             </li>

@@ -2,6 +2,14 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('css/instructor/show_course_style.css')}}">
 @endsection
+
+<?php $can_edit = false;?>
+@foreach($course->users as $user)
+    @if($user->id == Auth::id())
+        <?php $can_edit = true;?>
+    @endif
+@endforeach
+
 @section('content')
     @if(Session::has('error_processing'))
         <div class="alert alert-danger">
@@ -23,10 +31,12 @@
                     <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.course'):</h5>
                     {{$course->title}}
                     <hr>
-                    <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.access_code')
-                        :</h5>
-                    {{$course->access_code}}
-                    <hr>
+                    @if($can_edit)
+                        <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.access_code')
+                            :</h5>
+                        {{$course->access_code}}
+                        <hr>
+                    @endif
                     <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.desc'):</h5>
                     {{$course->description}}
                     <hr>
@@ -65,7 +75,9 @@
                                     <td>{{$file['material_name']}}</td>
                                     <td>{{$file['created_at']}}</td>
                                     <td>
-                                        <a href="download/{{$file['material_path']}}" class="btn-xs btn-link"><i class="fa fa-download" aria-hidden="true"></i> @lang('module.download')</a>
+                                        <a href="download/{{$file['material_path']}}" class="btn-xs btn-link"><i
+                                                    class="fa fa-download"
+                                                    aria-hidden="true"></i> @lang('module.download')</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,13 +88,9 @@
                 </div>
             </div>
         </div>
-        <?php $can_edit = false;?>
+
         @if(Auth::user()->can('edit-course'))
-            @foreach($course->users as $user)
-                @if($user->id == Auth::id())
-                    <?php $can_edit = true;?>
-                @endif
-            @endforeach
+
             @if($can_edit)
 
                 <div class="panel-footer">

@@ -106,15 +106,20 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $relation = UsersCourses::all()->load('user')->where('course_id', '=', $id);
-        $assistant_professors = array();
-        $course = Course::findorFail($id);
-        $material_relation = Material::with('course')->where('course_id', '=', $id)->get()->toArray();
-        foreach ($relation as $relation_user) {
-            if ($relation_user->user->college_id == null)
-                $assistant_professors[] = $relation_user->user;
+        try {
+            $relation = UsersCourses::all()->load('user')->where('course_id', '=', decrypt($id));
+            $assistant_professors = array();
+            $course = Course::findorFail(decrypt($id));
+            $material_relation = Material::with('course')->where('course_id', '=', $id)->get()->toArray();
+            foreach ($relation as $relation_user) {
+                if ($relation_user->user->college_id == null)
+                    $assistant_professors[] = $relation_user->user;
+            }
+
+            return view('instructor.courses.view', compact('course', 'assistant_professors', 'material_relation'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
-        return view('instructor.courses.view', compact('course', 'assistant_professors', 'material_relation'));
     }
 
     /**
@@ -149,17 +154,15 @@ class CourseController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'title' => 'max:100',
-            'material.*' => 'nullable'
+            'id' => 'required',
+            'title' => 'required|max:100|min:5|',
+            'description' => 'required|min:5|',
         ]);
         try {
             $course_id = decrypt(Input::get('id'));
             $course = Course::findOrFail($course_id);
             $failed_instructors = array();
             $instructors = explode(',', $request->input('assistant_professor'));
-            if ($request->input('access_code') != null) {
-                $course->access_code = $request->input('access_code');
-            }
             if ($request->input('title') != null) {
                 $course->title = $request->input('title');
             }
@@ -192,6 +195,7 @@ class CourseController extends Controller
                 ->with('update-success', '')
                 ->with('failed_instructors', $failed_instructors);
         } catch (\Exception $e) {
+            dd($e);
             return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
     }

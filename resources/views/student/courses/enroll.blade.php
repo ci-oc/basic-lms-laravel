@@ -46,7 +46,7 @@
                                     {{ Form::submit(trans('module.save'), ['class' => 'btn-xs btn btn-info']) }}
                                     {!! Form::close() !!}
                                 </div>
-                                <a href="{{ route('courses.show',[$course->id]) }}"
+                                <a href="{{ route('courses.show',[encrypt($course->id)]) }}"
                                    class="btn btn-xs btn-primary"><i class="fa fa-eye" aria-hidden="true"></i> @lang('module.view')</a>
                             </td>
 

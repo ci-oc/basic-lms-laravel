@@ -1,6 +1,11 @@
 @extends('layouts.sidebar')
 
 @section('content')
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('error')}}</p>
+        </div>
+    @endif
     <h3 class="page-title">@lang('module.questions.title')</h3>
 
     {!! Form::model($question, ['method' => 'PUT', 'route' => ['questions.update', encrypt($question->id)]]) !!}

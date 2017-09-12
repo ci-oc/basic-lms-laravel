@@ -33,14 +33,14 @@
                     {!! Form::label('selected_course',trans('module.quizzes.course-title'), ['class' =>'control-label']) !!}
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <select class="form-control" name="course_title" required>
+                            <select class="form-control" name="ID" required>
                                 @foreach($courses as $course)
                                     <option value="{{encrypt($course->id)}}">{{$course->title}}</option>
                                 @endforeach
                             </select>
-                            @if($errors->has('course_title'))
+                            @if($errors->has('ID'))
                                 <p class="help-block alert-danger">
-                                    {{ $errors->first('course_title') }}
+                                    {{ $errors->first('ID') }}
                                 </p>
                             @endif
                         </div>

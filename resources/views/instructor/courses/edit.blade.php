@@ -52,14 +52,11 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('access-code', Lang::get('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
-                    {!! Form::text('access_code', $course->access_code,['class' => 'form-control ']) !!}
-                    @if($errors->has('access_code'))
-                        <p class="help-block alert-danger" data-value="shake">
-                            {{ $errors->first('access_code') }}
+                    {!! Form::label('access-code', trans('module.courses.fields.access_code'), ['class' => 'control-label']) !!}
+                    <p class="help-block alert-info" data-value="shake">
+                        {{$course->access_code}}
 
-                        </p>
-                    @endif
+                    </p>
                 </div>
             </div>
             <div class="row">

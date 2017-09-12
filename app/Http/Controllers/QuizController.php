@@ -208,7 +208,7 @@ class QuizController extends Controller
                 $request->session()->flash('failure', 'Error occurred while updating quiz information');
                 return redirect()->back();
             }
-        } catch (\Exception $e) {
+        } catch (\Exception $e){
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
 

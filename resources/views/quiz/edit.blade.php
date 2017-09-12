@@ -2,6 +2,7 @@
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/quizzes/create.css')}}">
 @endsection
 @section('content')
     @if (Session::has('success'))
@@ -43,10 +44,32 @@
                     @endif
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {{ Form::checkbox('solve_many',null,null, ['class' => 'field','id' => 'solve_many']) }}
+                    {{ Form::checkbox('solve_many',1,$quiz->solve_many == 1 ? true : '', ['class' => 'field','id' => 'solve_many']) }}
                     {!! Form::label('solve_many',trans('module.judge_options.quiz-options.solve_many'), ['class' => 'control-label']) !!}
+                    <br>
+                    {{ Form::checkbox('share_results',1,$quiz->share_results == 1 ? true : '' , ['class' => 'field','id' => 'share_results'])  }}
+                    {!! Form::label('share_results',trans('module.judge_options.quiz-options.share_results'), ['class' => 'control-label'])!!}
+                    <br>
+                    {{ Form::checkbox('activate_plagiarism',1,$quiz->activate_plagiarism == 1 ? true : '',['class' => 'field','onchange' => 'active_percentage()' ,'id' => 'activate_plagiarism']) }}
+                    {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
+                    <br>
+                    <div id="Percentage">
+                        {!! Form::label('Percentage' ,null, ['class' => 'control-label'])!!}
+                        <div class="range-slider">
+                            <input class="range-slider__range" type="range" min="0" max="100" value="{{$quiz->plagiarism_percentage}}"
+                                   name="plagiarism_percentage" id="plagiarism_percentage">
+                            <span class="range-slider__value">{{$quiz->plagiarism_percentage}}</span>
+                        </div>
+
+                    </div>
+                    @if($errors->has('plagiarism_percentage'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('plagiarism_percentage') }}
+                        </p>
+                    @endif
                 </div>
             </div>
             <div class="row">
@@ -104,7 +127,6 @@
     </div>
 @endsection
 @section('javascript')
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
@@ -135,4 +157,5 @@
             });
         });
     </script>
+    <script src="{{asset('js/quiz/create.js')}}"></script>
 @endsection

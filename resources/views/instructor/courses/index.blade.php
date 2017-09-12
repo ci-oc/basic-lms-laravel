@@ -52,7 +52,7 @@
                                                 @endif
                                             </strong></li>
                                         <br>
-                                        <a href="{{ route('courses.show',[$course->id]) }}"
+                                        <a href="{{ route('courses.show',[encrypt($course->id)]) }}"
                                            class="btn btn-info">@lang('module.view')</a>
                                         @if(count($course->quizzes) > 0)
                                             @foreach ($course->quizzes as $quiz)

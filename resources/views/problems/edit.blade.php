@@ -83,6 +83,15 @@
                     </table>
                 </div>
             </div>
+            @if($errors->has('input_testcase') or $errors->has('output_testcase'))
+                <p class="help-block alert-danger">
+                    {{ $errors->first('input_testcase') }}
+                </p>
+                <br>
+                <p>
+                    {{ $errors->first('output_testcase') }}
+                </p>
+            @endif
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('testcase',trans('module.problems.fields.testCases.title'), ['class' => 'control-label']) !!}

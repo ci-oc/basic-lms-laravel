@@ -1,5 +1,9 @@
 function active_percentage() {
-    $("#Percentage").toggle();
+    var value = document.querySelector('[name="activate_plagiarism"]:checked')
+    if (value)
+        $("#Percentage").show();
+    else
+        $("#Percentage").hide();
 
 }
 

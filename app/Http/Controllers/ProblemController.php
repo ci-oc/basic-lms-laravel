@@ -109,7 +109,12 @@ class ProblemController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $problem = Question::findorFail(decrypt($id));
+            return view('problems.show',compact('problem'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
     }
 
     /**

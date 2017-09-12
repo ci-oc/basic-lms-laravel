@@ -122,6 +122,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
+
         try {
             $question = Question::findOrFail(decrypt($id));
             return view('questions.edit', compact('question'));
@@ -140,9 +141,20 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail(decrypt($id));
-        $question->update($request->all());
-        return redirect()->route('questions.index');
+        $this->validate($request, [
+            'quiz_id' => 'required',
+            'grade' => 'required|numeric|min:0',
+            'question_text' => 'required',
+            'option*' => 'required',
+            'correct' => 'required',
+        ]);
+        try {
+            $question = Question::findOrFail(decrypt($id));
+            $question->update($request->all());
+            return redirect()->route('questions.index');
+        } catch (\Exception $e){
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
     }
 
     /**

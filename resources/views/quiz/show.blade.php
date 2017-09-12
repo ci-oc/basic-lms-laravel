@@ -155,7 +155,7 @@
 
 @endsection
 @section('javascript')
-    @if($quiz['duration'] == null)
+    @if($quiz['duration'] != null)
         <script>
             $('#user_code').bind("cut copy paste",function(e) {
                 e.preventDefault();

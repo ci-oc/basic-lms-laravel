@@ -153,7 +153,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('answer_explanation', 'Answer explanation*', ['class' => 'control-label']) !!}
+                    {!! Form::label('answer_explanation', 'Answer explanation', ['class' => 'control-label']) !!}
                     {!! Form::textarea('answer_explanation', old('answer_explanation'), ['class' => 'form-control ', 'placeholder' => '','style' => 'resize:none;']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('answer_explanation'))

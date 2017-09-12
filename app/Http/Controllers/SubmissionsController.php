@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UsersQuiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubmissionsController extends Controller
 {
@@ -14,7 +15,13 @@ class SubmissionsController extends Controller
      */
     public function index()
     {
-        $submissions = UsersQuiz::all()->load('user','quiz');
+        $all_submissions = UsersQuiz::all()->load('user', 'quiz');
+        $courses_ids = Auth::user()->courses()->pluck('course_id')->toArray();
+        $submissions = array();
+        foreach ($all_submissions as $submission) {
+            if (in_array(intval($submission->quiz->course->id), $courses_ids))
+                $submissions[] = $submission;
+        }
         return view('submissions.index', compact('submissions'));
     }
 

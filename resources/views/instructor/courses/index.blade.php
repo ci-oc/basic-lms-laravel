@@ -39,7 +39,13 @@
                                 </div>
                                 <div class="pricingContent">
                                     <ul>
-                                        <li class="description"><strong>{{$course->description}}</strong></li>
+
+                                        <li class="description"><strong>@if(strlen($course->description) < 80)
+                                                    <br><br>{{$course->description}}
+                                                @else
+                                                    {{$course->description}}
+                                                @endif
+                                            </strong></li>
                                         <br>
                                         <a href="{{ route('courses.show',[$course->id]) }}"
                                            class="btn btn-info">@lang('module.view')</a>

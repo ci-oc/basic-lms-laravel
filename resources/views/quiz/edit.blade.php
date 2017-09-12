@@ -10,9 +10,11 @@
     @if (Session::has('failure'))
         <div class="alert alert-danger">{!! Session::get('failure') !!}</div>
     @endif
-
-    {!! Form::open(['method' => 'PUT', 'route' => ['quizzes.update', $id]])!!}
-    <input type="hidden" name="id" value="{{$id}}">
+    @if (Session::has('error'))
+        <div class="alert alert-danger">{!! Session::get('error') !!}</div>
+    @endif
+    {!! Form::open(['method' => 'PUT', 'route' => ['quizzes.update', encrypt($id)]])!!}
+    <input type="hidden" name="id" value="{{encrypt($id)}}">
     <h3 class="page-title">@lang('module.edit'): {{ $quiz->title }}</h3>
     <div class="panel panel-default">
         <div class="panel-heading">

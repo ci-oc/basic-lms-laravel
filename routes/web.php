@@ -30,8 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index')->name('securityQuestions.index');
     Route::get('securityQuestions/store')->uses('SecurityQuestionController@index3')->name('securityQuestions.index3');
     Route::get('securityQuestions/store/store_question')->uses('SecurityQuestionController@store_question')->name('securityQuestions.store_question');
-    Route::get('ojConfiguration','JudgeConstraintController@index')->name('Judge.index');
-    Route::get('ojConfiguration/edit','JudgeConstraintController@store')->name('Judge.store');
+    Route::get('ojConfiguration', 'JudgeConstraintController@index')->name('Judge.index');
+    Route::get('ojConfiguration/edit', 'JudgeConstraintController@store')->name('Judge.store');
     Route::resource('securityQuestions', 'SecurityQuestionController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('quizzes/chart/{id}')->uses('QuizController@chart')->name('quizzes.chart');
@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('profile', 'ProfileController');
     Route::post('profile/update_image')->uses('ProfileController@update_image')->name('profile.update_image');
     Route::post('profile/update')->uses('ProfileController@update')->name('profile.update');
+    Route::delete('courses/destroy/material/{id}')->uses('CourseController@destroy_material')->name('courses.destroy_material');
     Route::resource('courses', 'CourseController');
     Route::post('course/update')->uses('CourseController@update')->name('courses.update');
     Route::post('courses/importExcel')->uses('CourseController@importExcel')->name('courses.importExcel');
@@ -71,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('admin.index');
 
 
-    Route::get('courses/download/storage/materials/{filename}', function ($filename) {
+    Route::get('courses/download/materials/{filename}', function ($filename) {
         $file_path = storage_path() . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'materials' . DIRECTORY_SEPARATOR . $filename;
         if (file_exists($file_path)) {
             $path = storage_path('app/materials/' . $filename);

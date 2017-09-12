@@ -51,6 +51,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'access_code' => 'required|min:5|unique:courses',
             'title' => 'required|max:100|min:5|',
@@ -75,19 +76,17 @@ class CourseController extends Controller
             }
             $course = Course::create($courses);
             $course->users()->attach($success_instructors);
-            if ($request->hasFile('material')) {
-                if ($request->input('material-name') == null) {
-                    return \redirect()->back()->with('material-name-error', '')->withInput();
+            if (count($request->allFiles()) > 0) {
+
+                foreach (Input::file("material") as $material) {
+                    $path = Storage::put('materials', $material);
+                    $course_id = $course->id;
+                    Material::create([
+                        'course_id' => $course_id,
+                        'material_path' => $path,
+                        'material_name' => $material->getClientOriginalName(),
+                    ]);
                 }
-                $material_file = $request->file('material');
-                $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
-                $path = Storage::put('materials', $material_file);
-                $course_id = $course->id;
-                Material::create([
-                    'course_id' => $course->id,
-                    'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
-                    'material_name' => $request->input('material-name')
-                ]);
             }
             if ($failed_instructors == null)
                 return redirect()->route('courses.index')->with('success', '');
@@ -126,6 +125,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+
         try {
             $course = Course::findOrFail(decrypt($id));
             foreach ($course->users as $user) {
@@ -150,10 +150,12 @@ class CourseController extends Controller
     {
         $this->validate($request, [
             'title' => 'max:100',
+            'material.*' => 'nullable'
         ]);
         try {
             $course_id = decrypt(Input::get('id'));
             $course = Course::findOrFail($course_id);
+            $failed_instructors = array();
             $instructors = explode(',', $request->input('assistant_professor'));
             if ($request->input('access_code') != null) {
                 $course->access_code = $request->input('access_code');
@@ -164,30 +166,32 @@ class CourseController extends Controller
             if ($request->input('assistant_professor') != null) {
                 foreach ($instructors as $instructor) {
                     $user = User::where('email', '=', $instructor)->pluck('id')->first();
-                    if (!$course->users->contains($user))
+                    if (!$course->users->contains($user) && $user != null) {
                         $course->users()->attach($user);
+                    } else
+                        $failed_instructors[] = $instructor;
                 }
             }
             if ($request->input('description') != null) {
                 $course->description = $request->input('description');
             }
-            if ($request->hasFile('material')) {
-                if ($request->input('material-name') == null) {
-                    return redirect()->back()->with('material-name-error', '')->withInput();
+            if (count($request->allFiles()) > 0) {
+
+                foreach (Input::file("material") as $material) {
+                    $path = Storage::put('materials', $material);
+                    $course_id = $course->id;
+                    Material::create([
+                        'course_id' => $course_id,
+                        'material_path' => $path,
+                        'material_name' => $material->getClientOriginalName(),
+                    ]);
                 }
-                $material_file = $request->file('material');
-                $file_name = time() . '_' . Auth::id() . '.' . $material_file->clientExtension();
-                $path = Storage::put('materials', $material_file);
-                $course_id = $course->id;
-                Material::create([
-                    'course_id' => $course_id,
-                    'material_path' => 'storage' . DIRECTORY_SEPARATOR . $path,
-                    'material_name' => $request->input('material-name')
-                ]);
             }
             $course->update();
-            return redirect()->back()->with('update-success', '');
-        } catch (\Exception $e){
+            return redirect()->back()
+                ->with('update-success', '')
+                ->with('failed_instructors', $failed_instructors);
+        } catch (\Exception $e) {
             return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
     }
@@ -200,8 +204,26 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $course = Course::findOrFail($id);
-        $course->delete();
-        return Redirect::route('courses.index');
+        try {
+            $course = Course::findOrFail(decrypt($id));
+            $course->quizzes()->delete();
+            $course->delete();
+            return Redirect::route('courses.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
+    }
+
+    public function destroy_material($id)
+    {
+        try {
+            $storage_path = storage_path();
+            $material = Material::findorFail(decrypt($id));
+            unlink($storage_path . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . $material->material_path);
+            $material->delete();
+            return redirect()->back()->with('update-success', '');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
     }
 }

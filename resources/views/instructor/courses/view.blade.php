@@ -11,6 +11,11 @@
 @endforeach
 
 @section('content')
+    @if(Session::has('update-success'))
+        <div class="alert alert-success">
+            <p>@lang('module.success.success-updating')</p>
+        </div>
+    @endif
     @if(Session::has('error_processing'))
         <div class="alert alert-danger">
             <p>{{Session::get('error_processing')}}</p>
@@ -19,6 +24,11 @@
     @if(Session::has('cannot_edit'))
         <div class="alert alert-danger">
             <p>{{Session::get('cannot_edit')}}</p>
+        </div>
+    @endif
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{Session::get('error')}}</p>
         </div>
     @endif
     <div class="panel panel-default">
@@ -45,13 +55,15 @@
                     <hr>
                     <h5 style="color: #3C3C3C; font-size: 20px;">@lang('module.courses.fields.assistant_professor_title')</h5>
                     <ul>
+                        <br>
                         @foreach($assistant_professors as $professor)
-                            <li style="font-weight: bold;">
+                            <li style="font-weight: bold; color: #FFFAF0;">
                                 <div class="chip">
-                                    <img src="{{$professor->avatar}}" alt="ASSISTANT_PROFESSOR" width="96" height="96">
+                                    <img src="{{asset($professor->avatar)}}" alt="" width="96" height="96">
                                     {{ $professor->name }}
                                 </div>
                             </li>
+                            <br>
                         @endforeach
                     </ul>
                     <hr>
@@ -78,6 +90,13 @@
                                         <a href="download/{{$file['material_path']}}" class="btn-xs btn-link"><i
                                                     class="fa fa-download"
                                                     aria-hidden="true"></i> @lang('module.download')</a>
+                                        {{ Form::open(
+                                        ['style' => 'display:inline-block',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('" . trans("module.are_you_sure") . "');",
+                                        'route' => ['courses.destroy_material', encrypt($file['id'])]]) }}
+                                        {{ Form::submit(trans('module.delete'), ['class' => 'btn-xs btn-danger']) }}
+                                        {{ Form::close() }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -90,7 +109,6 @@
         </div>
 
         @if(Auth::user()->can('edit-course'))
-
             @if($can_edit)
 
                 <div class="panel-footer">

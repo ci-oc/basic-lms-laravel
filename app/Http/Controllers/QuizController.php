@@ -174,7 +174,7 @@ class QuizController extends Controller
         $quiz = Quiz::findorFail($id);
         if (!Quiz::isAvailable($quiz->start_date, $quiz->end_date))
             return view('quiz.edit', compact('quiz', 'id'));
-        return redirect()->back()->with('cannot_modify',trans('module.errors.error-quiz-cannot-modify'));
+        return redirect()->back()->with('cannot_modify', trans('module.errors.error-quiz-cannot-modify'));
     }
 
     /**
@@ -194,19 +194,22 @@ class QuizController extends Controller
             'end_date' => 'date_format:Y-m-d H:i:s|after:now',
             'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
-
-        if ($quiz = Quiz::findOrFail($id)) {
-            $updates = $request->all();
-            if ($quiz->fill($updates)->save()) {
-                $request->session()->flash('success', 'Quiz has been edited successfully');
-                return redirect()->back();
+        try {
+            if ($quiz = Quiz::findOrFail(decrypt($id))) {
+                $updates = $request->all();
+                if ($quiz->fill($updates)->save()) {
+                    $request->session()->flash('success', 'Quiz has been edited successfully');
+                    return redirect()->back();
+                } else {
+                    $request->session()->flash('failure', 'Error occurred while updating quiz information');
+                    return redirect()->back();
+                }
             } else {
                 $request->session()->flash('failure', 'Error occurred while updating quiz information');
                 return redirect()->back();
             }
-        } else {
-            $request->session()->flash('failure', 'Error occurred while updating quiz information');
-            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
 
     }

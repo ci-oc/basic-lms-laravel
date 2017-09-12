@@ -15,8 +15,8 @@ class CreateJudgesConstraintsTable extends Migration
     {
         Schema::create('judges_constraints', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('max_time_limit');
-            $table->integer('max_mem_limit');
+            $table->float('max_time_limit')->default(1);
+            $table->integer('max_mem_limit')->default(15360);
             $table->timestamps();
         });
     }

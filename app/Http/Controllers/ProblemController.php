@@ -57,8 +57,8 @@ class ProblemController extends Controller
             'grade' => 'required|numeric|min:0',
             'input_format' => 'required',
             'output_format' => 'required',
-            'input_testcase.*' => 'required',
-            'output_testcase.*' => 'required',
+            'input_testcase' => 'required|array|min:1',
+            'output_testcase' => 'required|array|min:1',
             'time_limit' => 'required|numeric|min:0|max:60',
             'mem_limit' => 'required|numeric|min:0|max:30720',
             'more_info_link' => 'nullable|active_url',
@@ -149,7 +149,15 @@ class ProblemController extends Controller
     {
         $this->validate($request, [
             'question_text' => 'required',
-            'grade' => 'required|min:1|',
+            'grade' => 'required|numeric|min:0',
+            'input_format' => 'required',
+            'output_format' => 'required',
+            'input_testcase' => 'required|array|min:1',
+            'output_testcase' => 'required|array|min:1',
+            'time_limit' => 'required|numeric|min:0|max:60',
+            'mem_limit' => 'required|numeric|min:0|max:30720',
+            'more_info_link' => 'nullable|active_url',
+            'coding_languages' => 'required'
 
         ]);
         try {
@@ -209,7 +217,6 @@ class ProblemController extends Controller
             $question_grade = $question->grade;
             $quiz_fullmark -= $question_grade;
             $quiz->update(['full_mark' => $quiz_fullmark]);
-            $question->coding_languages()->delete();
             $question->testcases()->delete();
             $question->delete();
             return redirect()->back();

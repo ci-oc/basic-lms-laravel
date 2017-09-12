@@ -69,7 +69,7 @@
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li>
                         {!! Form::open(['method' => 'POST', 'route' => ['lang'], 'enctype' => 'multipart/form-data'])!!}
-                        <select class="form-control" name="locale" onchange="this.form.submit()">
+                        <select name="locale" onchange="this.form.submit()">
                             <option value="en" {{ App::getLocale() == 'en' ? 'selected' : '' }}>English
                             </option>
                             <option value="ar" {{ App::getLocale() == 'ar' ? 'selected' : ''}} >العربية
@@ -80,7 +80,7 @@
                         {!! Form::close() !!}
                     </li>
                     <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img
-                                    src="{{Auth::user()->avatar}}" alt="" class="img-responsive img-circle"/>&nbsp;<span
+                                    src="{{asset(Auth::user()->avatar)}}" alt="" class="img-responsive img-circle"/>&nbsp;<span
                                     class="hidden-xs">{{ ucfirst(Auth::user()->name) }}</span>&nbsp;<span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">

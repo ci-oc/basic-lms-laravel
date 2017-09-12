@@ -22,6 +22,27 @@
             <p>{{Session::get('failed_to_save')}}</p>
         </div>
     @endif
+    @if(Session::has('failed_instructors'))
+        @if(Session::get('failed_instructors') != null)
+            <div class="alert alert-danger">
+                <p>@lang('module.errors.error-create-user')</p>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>@lang('module.placeholders.email')</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach(Session::get('failed_instructors') as $user)
+                        <tr>
+                            <td>{{ $user }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+    @endif
     {!! Form::open(['method' => 'POST', 'route' => ['courses.update'], 'enctype' => 'multipart/form-data'])!!}
     <h3 class="page-title">@lang('module.courses.view-course')</h3>
     <div class="panel panel-default">
@@ -65,7 +86,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('desc', Lang::get('module.courses.fields.desc'), ['class' => 'control-label']) !!}
+                    {!! Form::label('desc', trans('module.courses.fields.desc'), ['class' => 'control-label']) !!}
                     {!! Form::textarea('description', $course->description, ['class' => 'form-control ','resize' => 'none']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('description'))
@@ -75,21 +96,9 @@
                     @endif
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('material-name', Lang::get('module.courses.fields.material-name'), ['class' => 'control-label']) !!}
-                    {!! Form::text('material-name', old('access_code'), ['class' => 'form-control ', 'placeholder' => '']) !!}
-                    @if($errors->has('material-name'))
-                        <p class="help-block alert-danger" data-value="shake">
-                            {{ $errors->first('material-name') }}
-
-                        </p>
-                    @endif
-                </div>
-            </div>
             <div class="form-group">
                 {!! Form::label('course_material', trans('module.courses.fields.material-1'), ['class' => 'control-label']) !!}
-                {!! Form::file('material', null,['required','class' => 'close fileupload-exists']) !!}
+                {!! Form::file('material[]', ['multiple' => 'multiple' ,'class' => 'form-control']) !!}
                 @if($errors->has('file'))
                     <p class="help-block alert-danger">
                         {{ $errors->first('file') }}

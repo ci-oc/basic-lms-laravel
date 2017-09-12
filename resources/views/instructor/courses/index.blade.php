@@ -16,6 +16,11 @@
             <p>@lang('module.success.success-course')</p>
         </div>
     @endif
+    @if(Session::has('error'))
+        <div class="alert alert-info">
+            <p>{{ Session::get('error') }}</p>
+        </div>
+    @endif
     @if(Auth::user()->isInstructor())
 
         <a href="{{route('courses.create')}}" class="btn btn-success create_btn">
@@ -62,7 +67,9 @@
                                 </div>
                                 @if($auth->isInstructor())
                                     <div class="pricingTable-sign-up">
-                                        {{ Form::open(['method' => 'DELETE', 'route' => ['courses.destroy', $course->id]]) }}
+                                        {{ Form::open(['method' => 'DELETE',
+                                        'onsubmit' => "return confirm('" . trans("module.are_you_sure") . "');",
+                                        'route' => ['courses.destroy', encrypt($course->id)]]) }}
                                         {{ Form::submit('DROP', ['class' => 'btn btn-danger']) }}
                                         {{ Form::close() }}
                                     </div>

@@ -94,21 +94,9 @@
                     @endif
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('material-name', Lang::get('module.courses.fields.material-name'), ['class' => 'control-label']) !!}
-                    {!! Form::text('material-name', old('access_code'), ['class' => 'form-control ', 'placeholder' => '']) !!}
-                    @if($errors->has('material-name'))
-                    <p class="help-block alert-danger" data-value="shake">
-                            {{ $errors->first('material-name') }}
-
-                        </p>
-                    @endif
-                </div>
-            </div>
             <div class="form-group">
-                {!! Form::label('course_material', trans('module.courses.fields.material'), ['class' => 'control-label']) !!}
-                {!! Form::file('material', null,['required','class' => 'close fileupload-exists']) !!}
+                {!! Form::label('course_material', trans('module.courses.fields.material-1'), ['class' => 'control-label']) !!}
+                {!! Form::file('material[]', ['multiple' => 'multiple' ,'class' => 'form-control']) !!}
                 @if($errors->has('file'))
                     <p class="help-block alert-danger">
                         {{ $errors->first('file') }}

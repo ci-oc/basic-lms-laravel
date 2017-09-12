@@ -65,8 +65,6 @@
                                     <td>{{$file['material_name']}}</td>
                                     <td>{{$file['created_at']}}</td>
                                     <td>
-                                        <a href="download/{{$file['material_path']}}"
-                                           class="btn-xs btn-link">@lang('module.download')</a>
                                         <a href="download/{{$file['material_path']}}" class="btn-xs btn-link"><i class="fa fa-download" aria-hidden="true"></i> @lang('module.download')</a>
                                     </td>
                                 </tr>

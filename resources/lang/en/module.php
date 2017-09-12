@@ -157,7 +157,7 @@ return [
             'time_limit' => 'Time Limit (in seconds)',
             'mem_limit' => 'Memory Limit (in kiloBytes)',
             'time_limit_note' => 'Note that maximum time limit is :value seconds',
-            'mem_limit_note' => 'Note that maximum memory limit is :value MB',
+            'mem_limit_note' => 'Note that maximum memory limit is :value KB',
             'testCases' => [
                 'input_testcase' => 'Input',
                 'output_testcase' => 'Output',

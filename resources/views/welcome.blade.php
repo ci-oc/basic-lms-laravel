@@ -484,6 +484,10 @@
                     <div class="cover">
                         <h3 class="name">Andrew Nagyeb</h3>
                         <p class="title">Developer </p>
+                        <ul>
+                            <a href="https://github.com/andrewnagyeb"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
+                           </ul>
                     </div>
                 </div>
             </div>
@@ -492,6 +496,10 @@
                     <div class="cover">
                         <h3 class="name">Eyad Shokry</h3>
                         <p class="title">Developer </p>
+                        <ul>
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
+                           </ul>
                     </div>
                 </div>
             </div>
@@ -500,6 +508,10 @@
                     <div class="cover">
                         <h3 class="name">Mina Tawfeek</h3>
                         <p class="title">developer </p>
+                        <ul>
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
+                           </ul>
                     </div>
                 </div>
             </div>
@@ -508,6 +520,10 @@
                     <div class="cover">
                         <h3 class="name">Yassen Mehrez</h3>
                         <p class="title">developer </p>
+                        <ul style="line-width: 20px;">
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
+                            <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
+                           </ul>
                     </div>
                 </div>
             </div>

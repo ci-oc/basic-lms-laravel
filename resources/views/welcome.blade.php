@@ -345,6 +345,7 @@
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control" name="password" required>
                         </div>
+
                     </div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
@@ -401,13 +402,26 @@
                             @if (Auth::check())
                                 <a style="color:#0EBCF3;" href="{{ url('/dashboard') }}">Dashboard</a>
                             @else
-                                <button onclick="$('#myModsal').modal({'backdrop': 'static'});" style="color:#0EBCF3; background-color:inherit; border:none;" type="button"
+                                <button onclick="$('#myModsal').modal({'backdrop': 'static'});"
+                                        style="color:#0EBCF3; background-color:inherit; border:none;" type="button"
                                         data-toggle="modal" data-target="#myModal">Login
                                 </button>
                             @endif
                         @endif
                     </li>
-                    </ul>
+                    <li>
+                        @if ($errors->has('email'))
+                            <span style="font-family: 'Droid Sans Mono Dotted';color:#802420; margin-left: 10%;">
+                              <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $errors->first('email') }}!</strong>
+                            </span>
+                        @endif
+                        @if ($errors->has('password'))
+                            <span class="alert alert-danger">
+                              <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

@@ -19,7 +19,7 @@ class SubmissionsController extends Controller
         $courses_ids = Auth::user()->courses()->pluck('course_id')->toArray();
         $submissions = array();
         foreach ($all_submissions as $submission) {
-            if (in_array(intval($submission->quiz->course->id), $courses_ids))
+            if (in_array(intval($submission->quiz->course->id), $courses_ids) && $submission->quiz->share_results == 1)
                 $submissions[] = $submission;
         }
         return view('submissions.index', compact('submissions'));

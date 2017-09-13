@@ -178,7 +178,10 @@ return [
         'new-users' => 'إضافة مستخدم واحد',
         'new-users-excel' => 'إضافة مستخدمين عن طريق ملف إكسل',
         'registered-users' => 'المستخدمون المسجلون',
-        'instructors' => 'المدرس/المدرسين'
+        'instructors' => 'المدرس/المدرسين',
+        'password' => 'كلمة السر',
+        'confirm-password' => 'تأكيد كلمة السر',
+        'register' => 'تسجيل'
     ],
     'placeholders' => [
         'name' => 'الاسم',

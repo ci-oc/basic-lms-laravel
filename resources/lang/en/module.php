@@ -181,7 +181,10 @@ return [
         'new-users' => 'Single User Registration',
         'new-users-excel' => 'Excel Sheet Registration',
         'registered-users' => 'Registered Users',
-        'instructors' => 'Instructor(s)'
+        'instructors' => 'Instructor(s)',
+        'password' => 'Password',
+        'confirm-password' => 'Confirm Password',
+        'register' => 'Register'
     ],
     'placeholders' => [
         'name' => 'Name',

@@ -113,7 +113,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('excel-sheet', trans('module.courses.fields.excel'), ['class' => 'control-label']) !!}
-                            <strong><a href="/downloadTemp" style="color: deepskyblue; cursor: pointer;">Click Here</a> to download the template</strong>
+                            <strong><a href="/downloadTemp" style="color: deepskyblue; cursor: pointer;">@lang('module.click.name') , @lang('module.click.fields.download-temp')</a></strong>
                             <br><br>
                             {!! Form::file('file', null,['required','class' => 'close fileupload-exists']) !!}
                             @if($errors->has('file'))

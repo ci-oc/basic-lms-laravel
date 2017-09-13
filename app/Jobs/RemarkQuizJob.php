@@ -129,10 +129,13 @@ class RemarkQuizJob implements ShouldQueue
                     try {
                         $storage_path = storage_path() . DIRECTORY_SEPARATOR;
                         $grader = new Grader($storage_path);
+                        if ($solved_problem['user_code_path'] != null) {
+                            unlink($solved_problem['user_code_path']);
+                        }
                         $user_code = $grader->saveScript($lang, $request['user_code'][$problem->id], null, $test_id, $problem->id);
                         if ($user_code['success'] == 1) {
                             $user_code_filename = $user_code['detail']['filename'];
-                            $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $test_id . DIRECTORY_SEPARATOR . $problem->id . $user_code_filename;
+                            $user_code_path = $storage_path . 'scripts' . DIRECTORY_SEPARATOR . $test_id . DIRECTORY_SEPARATOR . $problem->id . DIRECTORY_SEPARATOR . $user_code_filename;
                             $compilation_output = $grader->compile($user_code_filename, $test_id, $problem->id);
                             $compilation_status = $compilation_output['detail']['reason'];
                             $time_consumed = $compilation_output['detail']['time'] . $compilation_output['detail']['time_unit'];
@@ -203,6 +206,13 @@ class RemarkQuizJob implements ShouldQueue
                                                 $run_status = 'Bad Policy';
                                             break;
                                         }
+                                        try {
+                                            unlink($testcase_input_path);
+                                            unlink($output_path);
+                                            unlink($code_output_path);
+                                        } catch (\Exception $e) {
+
+                                        }
                                     }
                                 }
                             } else {
@@ -235,6 +245,11 @@ class RemarkQuizJob implements ShouldQueue
                     'user_code_path' => $user_code_path,
                 ]);
                 $result += $problem_grade;
+                try {
+                    unlink($storage_path . 'compiled' . DIRECTORY_SEPARATOR . $user_code_filename);
+                } catch (\Exception $e) {
+
+                }
             }
         }
         $test->update(['grade' => $result,

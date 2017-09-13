@@ -59,15 +59,20 @@ class SolveQuizController extends Controller
                 ['quiz_id', '=', $test_id,]
             ])->get()->first();
             $duration_finished = false;
+            $time_finished = false;
             if ($quiz->duration != null) {
                 $duration = Quiz::calculateDuration($quiz->duration, $test->updated_at);
                 $duration_finished = Quiz::hasFinished($duration);
+            } else {
+                $time_finished = Quiz::hasFinished($quiz->end_date);
             }
-            if (!$duration_finished) {
+            if (!$duration_finished && !$time_finished) {
+
                 $this->dispatch((new RemarkQuizJob($request->all(), $test, $test_id, Auth::id()))->onQueue('remark'));
                 return redirect()->route('results.index');
             } else {
-                return redirect()->route('results.index')->with('failed', trans('module.errors.error-duration-finished'));
+                $test->update(['processing_status' => 'OK']);
+                return redirect()->route('results.index')->with('failed', trans('module.errors.error-time-finished'));
             }
         } catch (\Exception $e) {
             return redirect()->route('quizzes.index');

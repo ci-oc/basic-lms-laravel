@@ -217,10 +217,9 @@
                             </i><span class="menu-title">@lang('module.bars.sidebar_submissions')</span></a>
 
                     </li>
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Pages.html"><i
-                                    class="fa fa-file-o fa-fw">
-                                <div class="icon-bg bg-yellow"></div>
-                            </i><span class="menu-title">Pages</span></a>
+                    <li class="{{ $request->segment(1) == 'plagiarism' ? 'active' : '' }}"><a href="{{route('plagiarism')}}"><i
+                                    class="fa fa-files-o" aria-hidden="true"></i><span
+                                    class="menu-title">@lang('module.bars.sidebar_plagiarism')</span></a>
 
                     </li>
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Extras.html"><i

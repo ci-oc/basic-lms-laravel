@@ -21,6 +21,7 @@ class QuizController extends Controller
         $this->middleware('permission:create-quiz|solve-quiz', ['only' => ['index']]);
         $this->middleware('permission:edit-quiz', ['only' => ['edit', 'update']]);
         $this->middleware('permission:show-quiz-statistics', ['only' => ['chart']]);
+        $this->middleware('permission:show-quiz-results', ['only' => ['results']]);
         $this->middleware('permission:delete-quiz', ['only' => ['destroy']]);
     }
 
@@ -64,6 +65,10 @@ class QuizController extends Controller
             'duration' => 'nullable|date_format:"H:i:s',
             'start_date' => 'date_format:Y-m-d H:i:s|after:now',
             'end_date' => 'date_format:Y-m-d H:i:s|after:now',
+            'solve_many' => 'numeric|min:0|max:1',
+            'activate_plagiarism' => 'numeric|min:0|max:1',
+            'share_results' => 'numeric|min:0|max:1',
+            'share_plagiarism' => 'numeric|min:0|max:1',
             'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
         try {
@@ -109,7 +114,8 @@ class QuizController extends Controller
                     'solve_many' => $request->input('solve_many'),
                     'activate_plagiarism' => $request->input('activate_plagiarism'),
                     'share_results' => $request->input('share_results'),
-                    'plagiarism_percentage' => $request->input('plagiarism_percentage')
+                    'plagiarism_percentage' => $request->input('plagiarism_percentage'),
+                    'share_plagiarism' => $request->input('share_plagiarism')
                 ]);
                 return redirect()->route('quizzes.index')->with('success-creation', '');
             }
@@ -124,42 +130,50 @@ class QuizController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($quiz_id)
     {
-        $quiz = Quiz::findorFail($id)->load('questions');
-        if (!Quiz::hasFinished($quiz->end_date) && Quiz::isAvailable($quiz->start_date, $quiz->end_date)) {
-            $all_type_questions[] = $quiz->questions;
-            $quiz_questions = Question::separateQuestionTypes($all_type_questions, 'MCQ');
-            $quiz_problems = Question::separateQuestionTypes($all_type_questions, 'JUDGE');
-            $solve_many = $quiz->solve_many;
-            $grade = UsersQuiz::where([['user_id', '=', Auth::id()],
-                ['quiz_id', '=', $id]])->pluck('grade')->toArray();
-            if ($grade == null || $solve_many) {
-                if (count($quiz->questions) > 0) {
-                    $result = 0;
-                    $solved_quiz = UsersQuiz::updateOrCreate([
-                        'user_id' => Auth::id(),
-                        'quiz_id' => $id,
-                    ], [
-                        'user_id' => Auth::id(),
-                        'quiz_id' => $id,
-                        'grade' => $result,
-                        'processing_status' => 'PD',
-                        'updated_at' => Carbon::now()
-                    ]);
-                    $return_duration = null;
-                    if ($quiz->duration != null) {
-                        $duration = Quiz::calculateDuration($quiz->duration, $solved_quiz->updated_at);
-                        $duration_modified = explode(' ', $duration);
-                        $return_duration = $duration_modified[0] . 'T' . $duration_modified[1];
-                    }
-                    return view('quiz.show', compact('id', 'solve_many', 'quiz_questions', 'quiz_problems', 'quiz', 'return_duration'));
-                } else
-                    return redirect()->back()->with('0_questions', '');
+        try {
+            $id = decrypt($quiz_id);
+            $quiz = Quiz::findorFail($id)->load('questions');
+            if (!Quiz::hasFinished($quiz->end_date) && Quiz::isAvailable($quiz->start_date, $quiz->end_date)) {
+                $all_type_questions[] = $quiz->questions;
+                $quiz_questions = Question::separateQuestionTypes($all_type_questions, 'MCQ');
+                $quiz_problems = Question::separateQuestionTypes($all_type_questions, 'JUDGE');
+                $solve_many = $quiz->solve_many;
+                $grade = UsersQuiz::where([['user_id', '=', Auth::id()],
+                    ['quiz_id', '=', $id]])->pluck('grade')->toArray();
+                if ($grade == null || $solve_many) {
+                    if (count($quiz->questions) > 0) {
+                        $result = 0;
+                        $possible_result = UsersQuiz::where([['user_id', '=', Auth::id()], ['quiz_id', '=', $id]])->pluck('grade')->first();
+                        if ($possible_result != null)
+                            $result = $possible_result;
+                        $solved_quiz = UsersQuiz::updateOrCreate([
+                            'user_id' => Auth::id(),
+                            'quiz_id' => $id,
+                        ], [
+                            'user_id' => Auth::id(),
+                            'quiz_id' => $id,
+                            'grade' => $result,
+                            'processing_status' => 'PD',
+                            'updated_at' => Carbon::now()
+                        ]);
+                        $return_duration = null;
+                        if ($quiz->duration != null) {
+                            $duration = Quiz::calculateDuration($quiz->duration, $solved_quiz->updated_at);
+                            $duration_modified = explode(' ', $duration);
+                            $return_duration = $duration_modified[0] . 'T' . $duration_modified[1];
+                        }
+                        return view('quiz.show', compact('id', 'solve_many', 'quiz_questions', 'quiz_problems', 'quiz', 'return_duration'));
+                    } else
+                        return redirect()->back()->with('0_questions', '');
+                }
+                return redirect()->back()->with('done_already', '');
             }
-            return redirect()->back()->with('done_already', '');
+            return redirect()->back()->with('not_available', '');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
-        return redirect()->back()->with('not_available', '');
     }
 
     /**
@@ -168,13 +182,17 @@ class QuizController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($quiz_id)
     {
-        //
-        $quiz = Quiz::findorFail($id);
-        if (!Quiz::isAvailable($quiz->start_date, $quiz->end_date))
-            return view('quiz.edit', compact('quiz', 'id'));
-        return redirect()->back()->with('cannot_modify', trans('module.errors.error-quiz-cannot-modify'));
+        try {
+            $id = decrypt($quiz_id);
+            $quiz = Quiz::findorFail($id);
+            if (!Quiz::isAvailable($quiz->start_date, $quiz->end_date))
+                return view('quiz.edit', compact('quiz', 'id'));
+            return redirect()->back()->with('cannot_modify', trans('module.errors.error-quiz-cannot-modify'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
     }
 
     /**
@@ -192,6 +210,10 @@ class QuizController extends Controller
             'duration' => 'nullable|date_format:"H:i:s',
             'start_date' => 'date_format:Y-m-d H:i:s|after:now',
             'end_date' => 'date_format:Y-m-d H:i:s|after:now',
+            'solve_many' => 'numeric|min:0|max:1',
+            'activate_plagiarism' => 'numeric|min:0|max:1',
+            'share_results' => 'numeric|min:0|max:1',
+            'share_plagiarism' => 'numeric|min:0|max:1',
             'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
         try {
@@ -208,7 +230,7 @@ class QuizController extends Controller
                 $request->session()->flash('failure', 'Error occurred while updating quiz information');
                 return redirect()->back();
             }
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
 
@@ -222,55 +244,69 @@ class QuizController extends Controller
      */
     public function destroy($id)
     {
-        $quiz = Quiz::findOrFail($id);
-        $quiz->delete();
-        return redirect()->back();
+        try {
+            $quiz = Quiz::findOrFail(decrypt($id));
+            $quiz->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
+
     }
 
-    public function chart($id)
+    public function chart($quiz_id)
     {
-        $solved_quiz = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', $id)->get();
-        if ($solved_quiz->first() != null) {
-            $chart_data[] = ['Name', 'Grade'];
-            $full_mark_count = 0;
-            $failed_count = 0;
-            foreach ($solved_quiz as $quiz) {
-                $chart_data[] = [$quiz->user->name, $quiz->grade];
-                //for count of full mark
-                if ($quiz->grade == $quiz->quiz->full_mark)
-                    $full_mark_count++;
+        try {
+            $id = decrypt($quiz_id);
+            $solved_quiz = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', $id)->get();
+            if ($solved_quiz->first() != null) {
+                $chart_data[] = ['Name', 'Grade'];
+                $full_mark_count = 0;
+                $failed_count = 0;
+                foreach ($solved_quiz as $quiz) {
+                    $chart_data[] = [$quiz->user->name, $quiz->grade];
+                    //for count of full mark
+                    if ($quiz->grade == $quiz->quiz->full_mark)
+                        $full_mark_count++;
 
-                //for count of failed
-                if ($quiz->grade < (($quiz->quiz->full_mark) / 2))
-                    $failed_count++;
-            }
-            $problems = Question::where([['quiz_id', '=', $id],
-                ['input_format', '!=', null]])->get();
-            $problem_return = new Question();
-            $Percentage = 100;
-            foreach ($problems as $problem) {
-                $sum_of_students_grades = UsersProblemAnswer::where('problem_id', '=', $problem->id)->sum('grade');
-                $count_of_students = UsersProblemAnswer::where('problem_id', '=', $problem->id)->count();
-                $Grade = (($sum_of_students_grades) / ($problem->grade * $count_of_students)) * 100;
-                if ($Grade <= $Percentage) {
-                    $Percentage = $Grade;
-                    $problem_return = $problem;
+                    //for count of failed
+                    if ($quiz->grade < (($quiz->quiz->full_mark) / 2))
+                        $failed_count++;
                 }
-            }
-            return view('quiz.chart')
-                ->with('chart_data', json_encode($chart_data))
-                ->with('minimum_problem', $problem_return)
-                ->with('minimum_problem_percentage', $Percentage)
-                ->with('full_mark_count', $full_mark_count)
-                ->with('failed_count', $failed_count);
-        } else
-            return redirect()->back()->with('none-solved', '');
+                $problems = Question::where([['quiz_id', '=', $id],
+                    ['input_format', '!=', null]])->get();
+                $problem_return = new Question();
+                $Percentage = 100;
+                foreach ($problems as $problem) {
+                    $sum_of_students_grades = UsersProblemAnswer::where('problem_id', '=', $problem->id)->sum('grade');
+                    $count_of_students = UsersProblemAnswer::where('problem_id', '=', $problem->id)->count();
+                    $Grade = (($sum_of_students_grades) / ($problem->grade * $count_of_students)) * 100;
+                    if ($Grade <= $Percentage) {
+                        $Percentage = $Grade;
+                        $problem_return = $problem;
+                    }
+                }
+                return view('quiz.chart')
+                    ->with('chart_data', json_encode($chart_data))
+                    ->with('minimum_problem', $problem_return)
+                    ->with('minimum_problem_percentage', $Percentage)
+                    ->with('full_mark_count', $full_mark_count)
+                    ->with('failed_count', $failed_count);
+            } else
+                return redirect()->back()->with('none-solved', '');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
     }
 
     public function results($id)
     {
-        $submissions = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', $id)->get();
-        return view('quiz.submissions.index', compact('submissions'));
+        try {
+            $submissions = UsersQuiz::with('user', 'quiz')->where('quiz_id', '=', decrypt($id))->get();
+            return view('quiz.submissions.index', compact('submissions'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
+        }
 
     }
 }

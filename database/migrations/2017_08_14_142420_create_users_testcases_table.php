@@ -16,7 +16,7 @@ class CreateUsersTestcasesTable extends Migration
         Schema::create('user_testcase', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quiz_id')->unsigned()->nullable();
-            $table->foreign('quiz_id', 'fk_256_solve_quiz_id_testcase')->references('id')->on('quizzes');
+            $table->foreign('quiz_id', 'fk_256_solve_quiz_id_testcase')->references('id')->on('quizzes')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id', 'fk_256_user_user_id_testcase')->references('id')->on('users')->onDelete('cascade');
             $table->integer('problem_id')->unsigned()->nullable();

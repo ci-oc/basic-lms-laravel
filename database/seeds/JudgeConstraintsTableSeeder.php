@@ -15,8 +15,8 @@ class JudgeConstraintsTableSeeder extends Seeder
         $judge_constraints = [
             [
 
-                'max_time_limit' => 1,
-                'max_mem_limit' => 15360
+                'max_time_limit' => 60,
+                'max_mem_limit' => 30720
             ],
         ];
         foreach ($judge_constraints as $key => $value) {

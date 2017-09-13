@@ -20,6 +20,13 @@ return [
     'delete' => 'حذف',
     'change' => 'تحديث',
     'reset' => 'إعادة ضبط',
+    'click' => [
+        'name' => 'اضغظ هنا',
+        'fields' => [
+            'download-link' => 'لتحميل الملف',
+            'download-temp' => 'لتحميل ملف مطابق للمواصفات.'
+        ]
+    ],
     'list' => 'القائمة',
     'download' => 'تحميل',
     'back_to_list' => 'العودة للقائمة',
@@ -69,6 +76,8 @@ return [
         'caution' => 'من فضلك لاحظ أنه عند انتهاء الوقت الموجود علي يسار الصفحة لن يتم احتساب أية إجابات.',
         'quizzes-list' => 'قائمة الإختبارات',
         'solve' => 'حل',
+        'percentage' => 'النسبة المئوية',
+        'show-for-more-than' => 'إظهار النسبة الأكبر من',
         'fields' => [
             'done' => 'تم',
             'full-mark' => "الدرجة الكبري",
@@ -115,7 +124,7 @@ return [
         ],
     ],
     'bars' => [
-        'home' => 'الرئيسية' ,
+        'home' => 'الرئيسية',
         'top-bar-no-news' => 'لم يتم إضافة أخبار جديدة.',
         'top-bar-news' => 'الأخبار:',
         'top-bar-profile' => 'الصفحة الشخصية',
@@ -133,6 +142,7 @@ return [
         'sidebar_profile' => 'الصفحة الشخصية',
         'sidebar_enroll' => 'تسجيل المواد الدراسية',
         'sidebar_construction' => 'قيد البناء',
+        'sidebar_plagiarism' => 'تشابه الحلول',
     ],
     'problems' => [
         'problems-list' => 'قائمة المسائل',
@@ -142,6 +152,7 @@ return [
         'lang' => 'اللغة',
         'code' => 'الكود',
         'solving_percentage' => 'النسبة المئوية للحل',
+        'lines_matched' => 'عدد السطور المتشابهة',
         'fields' => [
             'problem_desc' => 'وصف المسألة',
             'problem_grade' => 'درجة المسألة',
@@ -167,7 +178,10 @@ return [
         'new-users' => 'إضافة مستخدم واحد',
         'new-users-excel' => 'إضافة مستخدمين عن طريق ملف إكسل',
         'registered-users' => 'المستخدمون المسجلون',
-        'instructors' => 'المدرس/المدرسين'
+        'instructors' => 'المدرس/المدرسين',
+        'password' => 'كلمة السر',
+        'confirm-password' => 'تأكيد كلمة السر',
+        'register' => 'تسجيل'
     ],
     'placeholders' => [
         'name' => 'الاسم',
@@ -198,7 +212,7 @@ return [
         'error-full-mark-problem' => 'من فضلك أدخل درجة نهائية أكبر من الصفر.',
         'grade-MCQ-failed' => 'من فضلك أدخل درجة أكبر من الصفر.',
         'error-login' => 'هذه البيانات ﻻ تتوافق مع قاعدة بياناتنا, من فضلك تأكد من البريد الإلكتروني وكلمة المرور وأعد المحاولة.',
-        'error-duration-finished' => "عفوا, لن يتم تقديم إجاباتك لأن وقت الإختبار قد انتهي.",
+        'error-time-finished' => "عفوا, لن يتم تقديم إجاباتك لأن وقت الإختبار/مدة الاختبار قد انتهى/انتهت.",
         'error-quiz-duration' => 'عفوا, تاريخ بدئ الإختبار مساو لتاريخ انتهاءه. من فضلك غير تاريخ الإنتهاء.',
         'error-quiz-time-gap' => 'عفوا, الوقت بين تاريخ بدئ الإختبار وتاريخ انتهائه يجب أن تكون أكبر من دقيقة واحدة.',
         'error-questions-errors' => 'عفوا, لقد قمت بإدخال بعض الإجابات الخاطئة. من فضلك أعد المحاولة.',
@@ -221,7 +235,7 @@ return [
         'statistics' => 'الإحصائيات',
         'got_full_mark' => 'عدد الطلاب الحاصلين علي الدرجة النهائية.',
         'not_passed' => 'عدد الطلاب الراسبين (أقل من 50%)',
-        'least_solved' => 'المسألة الأقل حلا.',
+        'least_solved' => 'المسألة الأقل حلاً.',
     ],
     'judge_options' => [
         'title' => 'اختيارات التصحيح المستخدمة في تطبيق حالات الإختبار علي الحلول.',
@@ -237,7 +251,8 @@ return [
         'quiz-options' => [
             'solve_many' => 'يستطيع الطلاب حل هذا الإختبار أكثر من مرة.',
             'activate_plagiarism' => 'تنشيط خاصية كشف الغش. ',
-            'share_results' => 'مشاركة النتائج.'
+            'share_results' => 'مشاركة النتائج.',
+            'share_plagiarism' => 'مشاركة نتائج تشابه الحلول'
         ]
     ],
     'coding_languages' => [
@@ -259,6 +274,7 @@ return [
         'active' => 'نشط',
         'code_forces_handle' => 'اسم المستخدم بموقع CodeForces',
         'code_forces_rating' => 'التقييم بموقع CodeForces',
+        'account_settings' => 'إعدادات الحساب'
     ],
     'submissions' => [
         'title' => 'الحلول',

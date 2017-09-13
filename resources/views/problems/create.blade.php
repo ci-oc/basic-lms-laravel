@@ -95,6 +95,11 @@
                         </tr>
                         </tbody>
                     </table>
+                    @if($errors->has('output_testcase.*'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('output_testcase.*') }}
+                        </p>
+                    @endif
                 </div>
             </div>
             @if($errors->has('input_testcase') or $errors->has('output_testcase'))
@@ -116,6 +121,7 @@
                            onclick="deleteRow(this)"/>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('time_limit',trans('module.problems.fields.time_limit'), ['class' => 'control-label']) !!}
@@ -144,9 +150,9 @@
                 <div class="col-xs-12 form-group">
                     {!! Form::label('code_snippet',trans('module.problems.fields.code_snippet'), ['class' => 'control-label']) !!}
                     {!! Form::textarea('code_snippet', old('code_snippet'), ['class' => 'form-control ','resize' => 'none','rows' => '6']) !!}
-                    @if($errors->has('output_format'))
+                    @if($errors->has('code_snippet'))
                         <p class="help-block alert-danger">
-                            {{ $errors->first('output_format') }}
+                            {{ $errors->first('code_snippet') }}
                         </p>
                     @endif
                 </div>

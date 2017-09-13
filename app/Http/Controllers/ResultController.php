@@ -61,24 +61,28 @@ class ResultController extends Controller
      */
     public function show($id)
     {
-        $quiz_result = UsersQuiz::findorFail($id)->load('user', 'quiz');
-        if ($quiz_result->user->id == Auth::id() or Auth::user()->can('show-quiz-results')) {
-            if ($quiz_result->grade != -1) {
-                $questions_results = UsersAnswer::where([
-                    ['user_id', '=', $quiz_result->user->id],
-                    ['quiz_id', '=', $quiz_result->quiz_id]
-                ])->get();
-                $problems_results = UsersProblemAnswer::where([
-                    ['user_id', '=', $quiz_result->user->id],
-                    ['quiz_id', '=', $quiz_result->quiz_id]
-                ])->get();
-                $problems_results->load('solvedTestCases');
-                return view('results.show', compact('quiz_result', 'questions_results', 'problems_results'));
+        try {
+            $quiz_result = UsersQuiz::findorFail(decrypt($id))->load('user', 'quiz');
+            if ($quiz_result->user->id == Auth::id() or Auth::user()->can('show-quiz-results')) {
+                if ($quiz_result->grade != -1) {
+                    $questions_results = UsersAnswer::where([
+                        ['user_id', '=', $quiz_result->user->id],
+                        ['quiz_id', '=', $quiz_result->quiz_id]
+                    ])->get();
+                    $problems_results = UsersProblemAnswer::where([
+                        ['user_id', '=', $quiz_result->user->id],
+                        ['quiz_id', '=', $quiz_result->quiz_id]
+                    ])->get();
+                    $problems_results->load('solvedTestCases');
+                    return view('results.show', compact('quiz_result', 'questions_results', 'problems_results'));
+                } else {
+                    return redirect()->back()->with('pending', '');
+                }
             } else {
-                return redirect()->back()->with('pending', '');
+                abort(404);
             }
-        } else {
-            abort(404);
+        } catch (\Exception $e){
+            return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
     }
 

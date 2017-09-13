@@ -81,6 +81,11 @@
                         @endforeach
                         </tbody>
                     </table>
+                    @if($errors->has('output_testcase.*'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('output_testcase.*') }}
+                        </p>
+                    @endif
                 </div>
             </div>
             @if($errors->has('input_testcase') or $errors->has('output_testcase'))

@@ -55,12 +55,14 @@ class ProblemController extends Controller
     {
         $judge_constraints = JudgesConstraint::get()->first()->toArray();
         $this->validate($request, [
+            'ID' => 'required',
             'question_text' => 'required',
             'grade' => 'required|numeric|min:0',
             'input_format' => 'required',
             'output_format' => 'required',
             'input_testcase' => 'required|array|min:1',
             'output_testcase' => 'required|array|min:1',
+            'output_testcase.*' => 'required',
             'time_limit' => 'required|numeric|min:0|max:' . $judge_constraints['max_time_limit'],
             'mem_limit' => 'required|numeric|min:0|max:' . $judge_constraints['max_mem_limit'],
             'more_info_link' => 'nullable|active_url',
@@ -154,6 +156,7 @@ class ProblemController extends Controller
     public
     function update(Request $request, $question_id)
     {
+        $judge_constraints = JudgesConstraint::get()->first()->toArray();
         $this->validate($request, [
             'question_text' => 'required',
             'grade' => 'required|numeric|min:0',
@@ -161,8 +164,9 @@ class ProblemController extends Controller
             'output_format' => 'required',
             'input_testcase' => 'required|array|min:1',
             'output_testcase' => 'required|array|min:1',
-            'time_limit' => 'required|numeric|min:0|max:60',
-            'mem_limit' => 'required|numeric|min:0|max:30720',
+            'output_testcase.*' => 'required',
+            'time_limit' => 'required|numeric|min:0|max:' . $judge_constraints['max_time_limit'],
+            'mem_limit' => 'required|numeric|min:0|max:' . $judge_constraints['max_mem_limit'],
             'more_info_link' => 'nullable|active_url',
             'coding_languages' => 'required'
 

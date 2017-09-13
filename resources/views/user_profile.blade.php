@@ -75,16 +75,16 @@
                                 </div>
                                 <div class="col-md-9">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#tab-edit" data-toggle="tab">Edit Profile</a>
+                                        <li class="active"><a href="#tab-edit" data-toggle="tab">@lang('module.edit') @lang('module.bars.sidebar_profile')</a>
                                         @if($user_status != null)
-                                            <li><a href="#tab-messages" data-toggle="tab">CodeForces Problems</a></li>
+                                            <li><a href="#tab-messages" data-toggle="tab">CodeForces @lang('module.bars.sidebar_problems')</a></li>
                                         @endif
                                     </ul>
                                     <div id="generalTabContent" class="tab-content">
                                         <div id="tab-edit" class="tab-pane fade in active">
                                             {!! Form::open(['method' => 'POST', 'route' => ['profile.update'] ,'enctype' => 'multipart/form-data' , 'class' => 'form-horizontal']) !!}
                                             {{ csrf_field() }}
-                                            <h3>Account Setting</h3>
+                                            <h3>@lang('module.profiles.account_settings')</h3>
 
                                             <div class="form-group"><label
                                                         class="col-sm-3 control-label">@lang('module.profiles.code_forces_handle')</label>

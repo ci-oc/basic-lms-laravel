@@ -10,6 +10,11 @@
             <p>{{ Session::get('failed') }}</p>
         </div>
     @endif
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{ Session::get('error') }}</p>
+        </div>
+    @endif
     <h3 class="page-title">@lang('module.results.title')</h3>
 
     @include('stat_cols')
@@ -41,7 +46,7 @@
                             <td>{{$result->quiz->full_mark}}</td>
                             <td>{{ $result->processing_status == "PD" ? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
                             <td>
-                                <a href="{{ route('results.show',[$result->id]) }}"
+                                <a href="{{ route('results.show',[encrypt($result->id)]) }}"
                                    class="btn btn-xs btn-primary {{ $result->processing_status == "PD" ? 'disabled' : '' }}">@lang('module.view')</a>
                             </td>
                         </tr>

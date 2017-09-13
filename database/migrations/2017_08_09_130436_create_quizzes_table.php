@@ -27,6 +27,8 @@ class CreateQuizzesTable extends Migration
             $table->tinyInteger('solve_many')->nullable()->default(0);
             $table->tinyInteger('activate_plagiarism')->nullable()->default(0);
             $table->tinyInteger('share_results')->nullable()->default(0);
+            $table->tinyInteger('share_plagiarism')->nullable()->default(0);
+            $table->tinyInteger('checked_for_plagiarism')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

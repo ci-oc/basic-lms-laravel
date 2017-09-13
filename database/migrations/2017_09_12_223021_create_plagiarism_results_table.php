@@ -16,7 +16,7 @@ class CreatePlagiarismResultsTable extends Migration
         Schema::create('plagiarism_results', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_quiz_id')->unsigned()->nullable();
-            $table->foreign('user_quiz_id', 'fk_256_user_quiz_id_quiz')->references('id')->on('user_quiz')->onDelete('cascade');
+            $table->foreign('user_quiz_id', 'fk_256_user_quiz_id_quiz')->references('id')->on('quizzes')->onDelete('cascade');
             $table->integer('user_problem_id')->unsigned()->nullable();
             $table->foreign('user_problem_id', 'fk_256_user_problem_id_problem')->references('id')->on('user_problem')->onDelete('cascade');
             $table->integer('user_1_id')->unsigned()->nullable();

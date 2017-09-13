@@ -7,7 +7,6 @@
             </div>
         </div>
     @endif
-    @include('stat_cols')
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('module.list')
@@ -16,31 +15,34 @@
             <table class="table table-bordered table-striped datatable dataTable" id="datatable">
                 <thead>
                 <tr>
-                    <th>@lang('module.placeholders.name')</th>
                     <th>@lang('module.courses.relation-title')</th>
                     <th>@lang('module.quizzes.create-questions-title')</th>
-                    <th>@lang('module.results.fields.date')</th>
-                    <th>@lang('module.quizzes.fields.full-mark')</th>
-                    <th>@lang('module.results.table-result')</th>
+                    <th>@lang('module.placeholders.name')</th>
+                    <th>@lang('module.quizzes.percentage')</th>
+                    <th>@lang('module.placeholders.name')</th>
+                    <th>@lang('module.quizzes.percentage')</th>
+                    <th>@lang('module.problems.lines_matched')</th>
+                    <th>@lang('module.quizzes.show-for-more-than')</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                @if (count($submissions) > 0)
-                    @foreach ($submissions as $result)
-                        <tr class="{{ $result->processing_status == "PD" ? 'info' : ($result->grade >= ((9/10)*$result->quiz->full_mark) ? 'success' : (
-                        $result->grade >= ((5/10)*$result->quiz->full_mark) ? 'warning' : 'danger')) }}">
-                            <td>{{ $result->user->name }}</td>
+                @if (count($plagiarism_results) > 0)
+                    @foreach ($plagiarism_results as $result)
+                        <tr>
                             <td>{{ $result->quiz->course->title }}</td>
                             <td>{{ $result->quiz->title }}</td>
-                            <td>{{ $result->created_at or '' }}</td>
-                            <td>{{$result->quiz->full_mark}}</td>
-                            <td>{{ $result->processing_status == "PD"? trans('module.submissions.stat.cols.pending') : $result->grade }}</td>
+                            <td>{{ $result->user_1->name }}</td>
+                            <td>{{$result->plagiarism_percentage_1}}%</td>
+                            <td>{{ $result->user_2->name }}</td>
+                            <td>{{$result->plagiarism_percentage_1}}%</td>
+                            <td>{{$result->lines_matched}}</td>
+                            <td>{{$result->quiz->plagiarism_percentage}}%</td>
                         </tr>
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="6">@lang('module.no_entries_in_table')</td>
+                        <td colspan="8">@lang('module.no_entries_in_table')</td>
                     </tr>
                 @endif
                 </tbody>

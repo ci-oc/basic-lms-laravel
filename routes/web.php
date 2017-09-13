@@ -25,6 +25,7 @@ Route::get('sendi', 'MailController@instructorView'); // just for testing mail v
 Route::get('sendMail', 'MailController@index'); // just for testing sendig mail , will be deleted
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/plagiarism')->uses('PlagiarismController@index')->name('plagiarism');
     Route::get('/downloadTemp', 'DefaultUserController@downloadTemp');
     Route::get('securityQuestions/show')->uses('SecurityQuestionController@index2')->name('securityQuestions.index2');
     Route::get('securityQuestions/edit')->uses('SecurityQuestionController@index')->name('securityQuestions.index');

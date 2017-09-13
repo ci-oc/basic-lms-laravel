@@ -23,7 +23,11 @@ trait FileUploadTrait
                     $data[] = ['id' => $value->id, 'name' => $value->name, 'email' => $value->email];
                 }
             }
+            try {
+                unlink($path = storage_path() . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'users_excel_sheets' . DIRECTORY_SEPARATOR . $file);
+            } catch (\Exception $e) {
 
+            }
             return $data;
         } catch (Exception $e) {
             return 0;

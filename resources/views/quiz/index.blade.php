@@ -76,19 +76,19 @@
                             <td>{{ $quiz->created_at }}</td>
                             <td>
                                 @if(Auth::user()->can('solve-quiz'))
-                                    <a href="{{ route('quizzes.show',[$quiz->id]) }}"
+                                    <a href="{{ route('quizzes.show',[encrypt($quiz->id)]) }}"
                                        class="btn btn-xs btn-primary {{ $available ? '' : 'disabled'}}">@lang('module.quizzes.solve')</a>
                                 @endif
                                 @if(Auth::user()->can('edit-quiz'))
-                                    <a href="{{ route('quizzes.edit',[$quiz->id]) }}"
+                                    <a href="{{ route('quizzes.edit',[encrypt($quiz->id)]) }}"
                                        class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
                                 @endif
                                 @if(Auth::user()->can('show-quiz-statistics'))
-                                    <a href="{{ route('quizzes.chart',[$quiz->id]) }}"
+                                    <a href="{{ route('quizzes.chart',[encrypt($quiz->id)]) }}"
                                        class="btn btn-xs btn-dark">@lang('module.stat')</a>
                                 @endif
                                 @if(Auth::user()->can('show-quiz-results'))
-                                    <a href="{{ route('quizzes.results',[$quiz->id]) }}"
+                                    <a href="{{ route('quizzes.results',[encrypt($quiz->id)]) }}"
                                        class="btn btn-xs btn-warning">@lang('module.submissions.title')</a>
                                 @endif
                                 @if(Auth::user()->can('delete-quiz'))
@@ -96,7 +96,7 @@
                                             'style' => 'display: inline-block;',
                                             'method' => 'DELETE',
                                             'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
-                                            'route' => ['quizzes.destroy', $quiz->id])) !!}
+                                            'route' => ['quizzes.destroy', encrypt($quiz->id)])) !!}
                                     {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 @endif

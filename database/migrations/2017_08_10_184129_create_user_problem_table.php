@@ -16,7 +16,7 @@ class CreateUserProblemTable extends Migration
         Schema::create('user_problem', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quiz_id')->unsigned()->nullable();
-            $table->foreign('quiz_id', 'fk_256_solve_quiz_id_problem')->references('id')->on('quizzes');
+            $table->foreign('quiz_id', 'fk_256_solve_quiz_id_problem')->references('id')->on('quizzes')->onDelete('cascade');
             $table->integer('problem_id')->unsigned()->nullable();
             $table->foreign('problem_id', 'fk_256_problem_problem_id_problem')->references('id')->on('questions')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();

@@ -21,6 +21,13 @@ return [
     'change' => 'Update',
     'reset' => 'Reset',
     'list' => 'List',
+    'click' => [
+        'name' => 'Click here',
+        'fields' => [
+            'download-link' => 'to download file',
+            'download-temp' => 'to download template'
+        ]
+    ],
     'download' => 'Download',
     'back_to_list' => 'Back to list',
     'are_you_sure' => 'Are you sure?',
@@ -69,6 +76,8 @@ return [
         'caution' => 'Please note that after the time on the left finishes no answers will be accepted when you submit.',
         'quizzes-list' => 'Quizzes List',
         'solve' => 'Solve',
+        'percentage' => 'Percentage',
+        'show-for-more-than' => 'Showing for more than',
         'fields' => [
             'done' => 'DONE',
             'full-mark' => "Full Mark",
@@ -118,7 +127,7 @@ return [
         ],
     ],
     'bars' => [
-        'home' => 'Home' ,
+        'home' => 'Home',
         'top-bar-no-news' => 'No News added yet.',
         'top-bar-news' => 'NEWS:',
         'top-bar-profile' => 'My Profile',
@@ -136,6 +145,7 @@ return [
         'sidebar_profile' => 'Profile',
         'sidebar_enroll' => 'Register Course',
         'sidebar_construction' => 'Under Construction',
+        'sidebar_plagiarism' => 'Plagiarism',
     ],
     'problems' => [
         'problems-list' => 'Problems List',
@@ -145,6 +155,7 @@ return [
         'lang' => 'Language',
         'code' => 'Code',
         'solving_percentage' => 'Solving Percentage',
+        'lines_matched' => 'Lines Matched',
         'fields' => [
             'problem_desc' => 'Problem Description',
             'problem_grade' => 'Problem Grade',
@@ -201,7 +212,7 @@ return [
         'error-full-mark-problem' => 'please enter fullMark greater than zero',
         'grade-MCQ-failed' => 'please enter grade greater than zero',
         'error-login' => 'These credentials do not match our records, please check your email or password and try again.',
-        'error-duration-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz duration was finished already.",
+        'error-time-finished' => "Sorry your answer(s) wasn't/weren't submitted because quiz timeduration was finished already.",
         'error-quiz-duration' => 'Sorry quiz start time is equal to quiz end time, please change end time!',
         'error-quiz-time-gap' => 'Sorry the gap between start time and end time must be at least more than 1 minutes.',
         'error-material-name' => 'Please enter material name',
@@ -243,7 +254,8 @@ return [
         'quiz-options' => [
             'solve_many' => 'Students can solve this quiz more than once.',
             'activate_plagiarism' => 'Activate MOSS plagiarism detection.',
-            'share_results' => 'Share Results'
+            'share_results' => 'Share Results',
+            'share_plagiarism' => 'Share Plagiarism Results'
         ]
     ],
     'coding_languages' => [
@@ -265,6 +277,7 @@ return [
         'active' => 'Active',
         'code_forces_handle' => 'CodeForces Handle',
         'code_forces_rating' => 'CodeForces Rating',
+        'account_settings' => 'Account Settings'
     ],
     'submissions' => [
         'title' => 'Submissions',

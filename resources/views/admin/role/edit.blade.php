@@ -29,29 +29,51 @@
                     <h3>@lang('module.roles.category_headers.security')</h3>
                     @foreach($security_permissions as $permission)
                         <input type="checkbox"
-                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]"
+                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]" class="1"
                                value="{{$permission->id}}"> {{$permission->name}} <br>
                     @endforeach
+                    <br><input type="checkbox" onclick="checkAll(this , 1)"> Select all security permissions
                 </div>
                 <div class="col-sm-4">
                     <h3>@lang('module.roles.category_headers.hep')</h3>
                     @foreach($hep_permissions as $permission)
                         <input type="checkbox"
-                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]"
+                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]" class="2"
                                value="{{$permission->id}}"> {{$permission->name}} <br>
                     @endforeach
+                    <br><input type="checkbox" onclick="checkAll(this , 2)"> Select all High educational privileges
                 </div>
                 <div class="col-sm-4">
                     <h3>@lang('module.roles.category_headers.lep')</h3>
                     @foreach($lep_permissions as $permission)
                         <input type="checkbox"
-                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]"
+                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]" class="3"
                                value="{{$permission->id}}"> {{$permission->name}} <br>
                     @endforeach
+                    <br><input type="checkbox" onclick="checkAll(this , 3)"> Select all Low educational privileges
                 </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <script>
+        function checkAll(ele, classnum) {
+            var checkboxes = document.getElementsByClassName(classnum);
+            if (ele.checked) {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].type == 'checkbox') {
+                        checkboxes[i].checked = true;
+                    }
+                }
+            } else {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    console.log(i)
+                    if (checkboxes[i].type == 'checkbox') {
+                        checkboxes[i].checked = false;
+                    }
+                }
+            }
+        }
+    </script>
 @endsection
 

@@ -21,11 +21,6 @@
                     {!! Form::label('grade', Lang::get('module.questions.fields.grade'), ['class' => 'control-label']) !!}
                     {!! Form::input('number','grade', old('grade'), ['class' => 'form-control ', 'placeholder' => '','step']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('option2'))
-                        <p class="help-block">
-                            {{ $errors->first('option2') }}
-                        </p>
-                    @endif
                 </div>
             </div>
             <div class="row">
@@ -54,7 +49,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('answer_explanation', 'Answer explanation*', ['class' => 'control-label']) !!}
+                    {!! Form::label('answer_explanation', trans('module.questions.fields.answer-explanation'), ['class' => 'control-label']) !!}
                     {!! Form::textarea('answer_explanation', old('answer_explanation'), ['class' => 'form-control ', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('answer_explanation'))
@@ -66,7 +61,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('more_info_link', 'More info link', ['class' => 'control-label']) !!}
+                    {!! Form::label('more_info_link', trans('module.questions.fields.more-info-link'), ['class' => 'control-label']) !!}
                     {!! Form::text('more_info_link', old('more_info_link'), ['class' => 'form-control', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('more_info_link'))

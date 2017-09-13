@@ -51,6 +51,7 @@ return [
             'question-text' => 'نص السؤال',
             'code-snippet' => 'الكود المقتبس',
             'answer-explanation' => 'تفسير الإجابة',
+            'correct' => 'الإجابة الصحيحة',
             'more-info-link' => 'معلومات إضافية',
             'input-format' => 'نمط المدخل',
             'output-format' => 'نمط المخرج',
@@ -219,7 +220,8 @@ return [
         'error-questions-errors' => 'عفوا, لقد قمت بإدخال بعض الإجابات الخاطئة. من فضلك أعد المحاولة.',
         'error-not-allowed-to-modify-course' => 'عفواً ، غير مسموح لك بتعديل هذه المادة الدراسية',
         'error-not-allowed-to-modify-problem' => 'عفواً ، غير مسموح لك بتعديل هذه المسألة',
-        'error-processing' => 'عفواً ، لقد واجهنا مشكلة فى تنفيذ طلبك ، من فضلك حاول مجدداً'
+        'error-processing' => 'عفواً ، لقد واجهنا مشكلة فى تنفيذ طلبك ، من فضلك حاول مجدداً',
+        'error-create-quiz' => 'يجب ان تقوم بعمل أختبار أولاً'
 
     ],
     'success' => [
@@ -241,14 +243,14 @@ return [
     'judge_options' => [
         'title' => 'اختيارات التصحيح المستخدمة في تطبيق حالات الإختبار علي الحلول.',
         'options' => [
-            'i' => 'إهمال اختلاف حالة الحروف.',
-            'E' => 'Ignore changes due to tab expansion',
-            'Z' => 'Ignore white space at line end',
-            'b' => 'Ignore changes in the amount of white space',
-            'B' => 'Ignore changes where lines are all blank',
-            'w' => 'Ignore all white space',
-            'SJ' => 'Sharp Judging ( FullMark or nothing )',
-        ],
+            'i' => 'تجاهل اختلاف حالة الحروف',
+            'E' => 'tap تجاهل الفراغات البيضاء باستخدام زر ',
+            'Z' => 'تجاهل المسافات البيضاء في آخر السطور',
+            'b' => 'تجاهل اختلاف كمية المسافات البيضاء',
+            'B' => 'تجاهل السطور الفارغة',
+            'w' => 'تجاهل جميع الفراغات',
+            'SJ' => 'تصحيح صارم (الدرجة النهائية أو لا شيء)',
+        ], 'SJ' => 'Sharp Judging ( FullMark or nothing )',
         'quiz-options' => [
             'solve_many' => 'يستطيع الطلاب حل هذا الإختبار أكثر من مرة.',
             'activate_plagiarism' => 'تنشيط خاصية كشف الغش. ',

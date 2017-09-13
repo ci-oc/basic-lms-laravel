@@ -52,6 +52,7 @@ return [
             'code-snippet' => 'Code snippet',
             'answer-explanation' => 'Answer explanation',
             'more-info-link' => 'More info link',
+            'correct' => 'Correct',
             'input-format' => 'Input Format',
             'output-format' => 'Output Format',
             'grade' => 'Grade',
@@ -225,7 +226,8 @@ return [
         'error-empty-material' => 'No material is uploaded yet!',
         'error-not-allowed-to-modify-course' => 'You are not allowed to modify this course.',
         'error-not-allowed-to-modify-problem' => 'You are not allowed to modify this course.',
-        'error-processing' => 'There was an error while processing your request, please try again.'
+        'error-processing' => 'There was an error while processing your request, please try again.',
+        'error-create-quiz' => 'You must create quiz first.'
 
     ],
     'success' => [

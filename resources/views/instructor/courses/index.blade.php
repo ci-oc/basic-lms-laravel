@@ -64,7 +64,7 @@
                                                 {{ Form::open(['method' => 'DELETE',
                                                 'onsubmit' => "return confirm('" . trans("module.are_you_sure") . "');",
                                                 'route' => ['courses.destroy', encrypt($course->id)]]) }}
-                                                {{ Form::submit('DROP', ['class' => 'btn btn-danger']) }}
+                                                {{ Form::submit(trans('module.delete'), ['class' => 'btn btn-danger']) }}
                                                 {{ Form::close() }}
                                             </div>
                                         @endif

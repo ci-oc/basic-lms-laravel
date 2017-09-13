@@ -148,7 +148,7 @@
                 <div class="col-xs-12 form-group">
                     {!! Form::label('more_info_link',trans('module.problems.fields.more_info_link'), ['class' => 'control-label']) !!}
                     <span><strong>(@lang('module.not_required'))</strong></span>
-                    {!! Form::url('more_info_link', $problem->more_info_link, ['class' => 'form-control ','placeholder' => 'Type an URL']) !!}
+                    {!! Form::url('more_info_link', $problem->more_info_link, ['class' => 'form-control ']) !!}
                     @if($errors->has('more_info_link'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('more_info_link') }}
@@ -156,7 +156,7 @@
                     @endif
                 </div>
             </div>
-            <div class="form-group text-left">
+            <div class="form-group">
                 {!! Form::label('judge_options',trans('module.judge_options.title'), ['class' => 'control-label']) !!}
                 <br>
                 @foreach($judge_options as $option)
@@ -167,7 +167,7 @@
                 @endforeach
             </div>
             <hr>
-            <div class="form-group text-left">
+            <div class="form-group">
                 {!! Form::label('coding_languages',trans('module.coding_languages.title'), ['class' => 'control-label']) !!}
                 <br>
                 @foreach($coding_languages as $lang)

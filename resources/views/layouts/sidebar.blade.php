@@ -183,13 +183,7 @@
 
                             </li>
                         @endif
-                        <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a
-                                    href="{{route('under_construction')}}"><i
-                                        class="fa fa-bar-chart-o fa-fw">
-                                    <div class="icon-bg bg-orange"></div>
-                                </i><span class="menu-title">Charts</span></a>
 
-                        </li>
                         @if(Auth::user()->isStudent())
                             <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}"><a
                                         href="{{route('results.index')}}"><i
@@ -220,6 +214,13 @@
                     <li class="{{ $request->segment(1) == 'plagiarism' ? 'active' : '' }}"><a href="{{route('plagiarism')}}"><i
                                     class="fa fa-files-o" aria-hidden="true"></i><span
                                     class="menu-title">@lang('module.bars.sidebar_plagiarism')</span></a>
+
+                    </li>
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a
+                                href="{{route('under_construction')}}"><i
+                                    class="fa fa-bar-chart-o fa-fw">
+                                <div class="icon-bg bg-orange"></div>
+                            </i><span class="menu-title">Charts</span></a>
 
                     </li>
                     <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Extras.html"><i

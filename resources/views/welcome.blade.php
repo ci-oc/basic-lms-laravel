@@ -412,7 +412,8 @@
                     <li>
                         @if ($errors->has('email'))
                             <span style="font-family: 'Droid Sans Mono Dotted';color:#802420; margin-left: 10%;">
-                              <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $errors->first('email') }}!</strong>
+                              <strong><i class="fa fa-exclamation-triangle"
+                                         aria-hidden="true"></i> {{ $errors->first('email') }}!</strong>
                             </span>
                         @endif
                         @if ($errors->has('password'))
@@ -429,12 +430,11 @@
 <div class="team-clean">
     <div class="container">
         <div class="intro">
-            <h2 class="text-center" id="features" style="font-family:'Mallanna';">OUR FEATURES</h2></div>
+            <h2 class="text-center" id="features" style="font-family:'Mallanna';">FEATURES</h2></div>
         <div class="row people">
             <div class="col-md-4 col-sm-6 item"><img class="img-circle" src="{{asset('welcome/img/7627.jpg')}}">
                 <h3 class="name">Responsive Designes</h3>
-                <p class="description">Responsive Designs for any devices like large computers, laptops, ipads, and
-                    mobile phones. </p>
+                <p class="description">Web Application has the same view for all devices.</p>
             </div>
             <div class="col-md-4 col-sm-6 item"><img class="img-circle"
                                                      src="{{asset('welcome/img/school and education 03.jpg')}}">
@@ -445,28 +445,27 @@
             <div class="col-md-4 col-sm-6 item"><img class="img-circle"
                                                      src="{{asset('welcome/img/97350-OKYIEE-393.jpg')}}">
                 <h3 class="name">Creating &amp; Sloving Quizzes</h3>
-                <p class="description">The System provides a way for making and solving Quizzes with two types of
-                    Questions (MCQ questions &amp; Coding Problems). </p>
+                <p class="description">Create online quizzes for students with a certain duration, start date and due
+                    date.</p>
             </div>
             <div class="col-md-12">
                 <hr>
             </div>
             <div class="col-md-4 col-sm-6 item"><img class="img-circle" src="{{asset('welcome/img/images.jpg')}}">
-                <h3 class="name">Automatic Marking</h3>
-                <p class="description">Professors just provide us with an excel sheet contains student's name &amp; id,
-                    then every student will get his grades automatically. </p>
+                <h3 class="name">Online Judge</h3>
+                <p class="description">System provides online judge feature for quizzes which runs C/C++ and
+                    sandboxing.</p>
             </div>
             <div class="col-md-4 col-sm-6 item"><img class="img-circle"
                                                      src="{{asset('welcome/img/chart_diagram_analytics_business_flat_icon-512.png')}}">
                 <h3 class="name">Statistics and Charts </h3>
-                <p class="description">The System provides Statistics for students, Courses, and Faculty. It can
-                    generate useful defferent statistics </p>
+                <p class="description">Statistics for your course including hardest question, how many got the full mark
+                    and a lot more.</p>
             </div>
             <div class="col-md-4 col-sm-6 item"><img class="img-circle"
                                                      src="{{asset('welcome/img/feedback-1311638_960_720.png')}}">
                 <h3 class="name">Get your Feedback! </h3>
-                <p class="description">Our System will till you about your weak points according to your mistakes in
-                    your Quizzes. (Coming Soon ..)</p>
+                <p class="description">UNDER CONSTRUCTION</p>
             </div>
         </div>
     </div>
@@ -474,20 +473,41 @@
 <div class="team-grid" id="team">
     <div class="container">
         <div class="intro">
-            <h2 class="text-center">Founders</h2>
-            <p class="text-center">We are all your mates in FCI-H. This Project was made under supervision of Professor.
-                Ghada Khoriba and Professor. Insaf Huessain</p>
+            <div class="form group">
+                <h2 class="text-center">Founders</h2>
+                <strong class="text-center">This Project was developed under supervision of</strong>
+                <hr>
+                <ul>
+                    <li>
+                        Professor/ Insaf Huessain
+                    </li>
+                    <li>
+                        Assistant Professor/ Ghada Khoriba.
+                    </li>
+
+                    <li>
+                        Assistant Lecturer/ Ahmed Farrag
+                    </li>
+                    <li>
+                        Teaching Assistant/ Wael Eid
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="row people">
             <div class="col-md-3 col-sm-4 item">
-                <div class="box" style="background-image:url({{asset('welcome/img/andrew.jpg')}})">
+                <div class="box"
+                     style="background-image:url({{asset('welcome/img/andrew.jpeg')}}); background-position: center bottom">
                     <div class="cover">
                         <h3 class="name">Andrew Nagyeb</h3>
                         <p class="title">Developer </p>
                         <ul>
-                            <a href="https://github.com/andrewnagyeb"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
-                            <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
-                           </ul>
+                            <a href="https://github.com/andrewnagyeb"><i style="font-size: 35px;" class="fa fa-github"
+                                                                         aria-hidden="true"></i></a>--
+                            <a href="https://eg.linkedin.com/in/anagyeb"><i style="font-size: 35px;"
+                                                                            class="fa fa-linkedin"
+                                                                            aria-hidden="true"></i></a>--
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -497,9 +517,10 @@
                         <h3 class="name">Eyad Shokry</h3>
                         <p class="title">Developer </p>
                         <ul>
-                            <a href="#"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
-                            <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
-                           </ul>
+                            <a href="https://github.com/EyadMShokry"><i style="font-size: 35px;" class="fa fa-github"
+                                                                        aria-hidden="true"></i></a>--
+                            <a href="https://www.linkedin.com/in/eyad-shokry-2289bb124/"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -509,9 +530,10 @@
                         <h3 class="name">Mina Tawfeek</h3>
                         <p class="title">developer </p>
                         <ul>
-                            <a href="#"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
+                            <a href="https://github.com/MinaMofreh"><i style="font-size: 35px;" class="fa fa-github"
+                                                                       aria-hidden="true"></i></a>--
                             <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
-                           </ul>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -521,9 +543,10 @@
                         <h3 class="name">Yassen Mehrez</h3>
                         <p class="title">developer </p>
                         <ul style="line-width: 20px;">
-                            <a href="#"><i style="font-size: 35px;" class="fa fa-github" aria-hidden="true"></i></a>--
+                            <a href="https://github.com/YassenHatem"><i style="font-size: 35px;" class="fa fa-github"
+                                                                        aria-hidden="true"></i></a>--
                             <a href="#"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
-                           </ul>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -536,7 +559,6 @@
         <div class="row">
             <div class="col-sm-6">
                 <h5>FCI-H Learning Management System© 2017</h5></div>
-            <div class="col-sm-6 social-icons"><a href="#"><i class="fa fa-github"></i></a></div>
         </div>
     </div>
 </footer>

@@ -110,12 +110,11 @@ class CourseController extends Controller
             $relation = UsersCourses::all()->load('user')->where('course_id', '=', decrypt($id));
             $assistant_professors = array();
             $course = Course::findorFail(decrypt($id));
-            $material_relation = Material::with('course')->where('course_id', '=', $id)->get()->toArray();
+            $material_relation = Material::with('course')->where('course_id', '=', decrypt($id))->get()->toArray();
             foreach ($relation as $relation_user) {
                 if ($relation_user->user->college_id == null)
                     $assistant_professors[] = $relation_user->user;
             }
-
             return view('instructor.courses.view', compact('course', 'assistant_professors', 'material_relation'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));

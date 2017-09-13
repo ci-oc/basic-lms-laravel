@@ -90,13 +90,15 @@
                                         <a href="download/{{$file['material_path']}}" class="btn-xs btn-link"><i
                                                     class="fa fa-download"
                                                     aria-hidden="true"></i> @lang('module.download')</a>
-                                        {{ Form::open(
-                                        ['style' => 'display:inline-block',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('" . trans("module.are_you_sure") . "');",
-                                        'route' => ['courses.destroy_material', encrypt($file['id'])]]) }}
-                                        {{ Form::submit(trans('module.delete'), ['class' => 'btn-xs btn-danger']) }}
-                                        {{ Form::close() }}
+                                        @if(Auth::user()->can('create-course') && $can_edit)
+                                            {{ Form::open(
+                                            ['style' => 'display:inline-block',
+                                            'method' => 'DELETE',
+                                            'onsubmit' => "return confirm('" . trans("module.are_you_sure") . "');",
+                                            'route' => ['courses.destroy_material', encrypt($file['id'])]]) }}
+                                            {{ Form::submit(trans('module.delete'), ['class' => 'btn-xs btn-danger']) }}
+                                            {{ Form::close() }}
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

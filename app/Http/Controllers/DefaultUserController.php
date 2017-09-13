@@ -56,24 +56,26 @@ class DefaultUserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:xls,xlsx,odf',
+            'file' => 'required|mimes:xls,xlsx,ods',
         ]);
         $role = Role::where('name', '=', 'student')->pluck('id')->first(); //student
         if ($request->hasFile('file')) {
             $data = $this->saveFiles($request);
-            if ($data !== 0) {
+            if ($data != null) {
                 $failed_to_create = array();
-                if ($data[0]['name'] == null) {
-                    return redirect('users/create')->with('name_field_failed', '');
-                } else if ($data[0]['email'] == null) {
-                    return redirect('users/create')->with('email_field_failed', '');
-                } else if ($data[0]['id'] == null) {
-                    return redirect('users/create')->with('id_field_failed', '');
+                foreach ($data as $datum) {
+                    if (!array_key_exists('name', $datum) or $datum['name'] == null) {
+                        return redirect('users/create')->with('name_field_failed', '');
+                    } else if (!array_key_exists('email', $datum) or $datum['email'] == null) {
+                        return redirect('users/create')->with('email_field_failed', '');
+                    } else if (!array_key_exists('id', $datum) or $datum['email'] == null) {
+                        return redirect('users/create')->with('id_field_failed', '');
+                    }
                 }
                 foreach ($data as $datum) {
                     $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
                     $password = Hash::make($non_encrypted_password); //Encrypting this password.
-                    $this->dispatch((new SendEmailsJob($non_encrypted_password,$datum['email']))->onQueue('emails'));
+                    $this->dispatch((new SendEmailsJob($non_encrypted_password, $datum['email']))->onQueue('emails'));
                     try {
                         $user = new User();
                         $user_id = $user->create([
@@ -150,7 +152,7 @@ class DefaultUserController extends Controller
             $non_encrypted_password = str_random(10);  //Random-auto-generating password of 10 digits.
             $password = Hash::make($non_encrypted_password); //Encrypting this password.
             $user = new User();
-            $this->dispatch((new SendEmailsJob($non_encrypted_password,$request->input('email')))->onQueue('emails'));
+            $this->dispatch((new SendEmailsJob($non_encrypted_password, $request->input('email')))->onQueue('emails'));
             $user_id = $user->create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
@@ -169,7 +171,7 @@ class DefaultUserController extends Controller
     public function downloadTemp()
     {
         $file_path = storage_path('template/template.ods');
-        return Response()->download($file_path,'template');
+        return Response()->download($file_path, 'template');
     }
 
 }

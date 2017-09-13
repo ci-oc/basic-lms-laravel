@@ -10,6 +10,7 @@ use App\TestsCase;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Quiz;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
@@ -40,9 +41,14 @@ class ProblemController extends Controller
      */
     public function create()
     {
-        $judge_options = JudgeOptions::all();
-        $coding_languages = codingLanguages::all();
-        return view('problems.create', compact('judge_options', 'coding_languages'));
+        $courses = Auth::user()->courses()->pluck('course_id')->toArray();
+        $quizzes = Quiz::whereIn('course_id', $courses)->get();
+        if (count($quizzes) > 0) {
+            $judge_options = JudgeOptions::all();
+            $coding_languages = codingLanguages::all();
+            return view('problems.create', compact('judge_options', 'coding_languages'));
+        } else
+            return redirect()->back()->with('error', trans('module.errors.error-create-quiz'));
     }
 
     /**

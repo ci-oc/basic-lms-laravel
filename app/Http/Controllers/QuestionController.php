@@ -35,14 +35,20 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $correct_options = [
-            'option1' => 'Option #1',
-            'option2' => 'Option #2',
-            'option3' => 'Option #3',
-            'option4' => 'Option #4',
-            'option5' => 'Option #5'
-        ];
-        return view('questions.create', compact('correct_options'));
+        $courses = Auth::user()->courses()->pluck('course_id')->toArray();
+        $quizzes = Quiz::whereIn('course_id', $courses)->get();
+        if (count($quizzes) > 0) {
+            $correct_options = [
+                'option1' => 'Option #1',
+                'option2' => 'Option #2',
+                'option3' => 'Option #3',
+                'option4' => 'Option #4',
+                'option5' => 'Option #5'
+            ];
+            return view('questions.create', compact('correct_options'));
+        } else
+            return redirect()->back()->with('error', trans('module.errors.error-create-quiz'));
+
     }
 
     /**
@@ -57,7 +63,8 @@ class QuestionController extends Controller
             'quiz_id' => 'required',
             'grade' => 'required|numeric|min:0',
             'question_text' => 'required',
-            'option*' => 'required',
+            'option1' => 'required',
+            'option2' => 'required',
             'correct' => 'required',
         ]);
         try {
@@ -142,17 +149,14 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'quiz_id' => 'required',
             'grade' => 'required|numeric|min:0',
             'question_text' => 'required',
-            'option*' => 'required',
-            'correct' => 'required',
         ]);
         try {
             $question = Question::findOrFail(decrypt($id));
             $question->update($request->all());
             return redirect()->route('questions.index');
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
     }

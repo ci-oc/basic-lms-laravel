@@ -48,7 +48,7 @@
                                     'method' => 'DELETE',
                                     'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
                                     'route' => ['questions.destroy', encrypt($question->id)])) !!}
-                                    {!! Form::submit(trans('Delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                 @endif
                             </td>

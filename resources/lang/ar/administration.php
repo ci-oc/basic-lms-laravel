@@ -7,7 +7,11 @@
  */
 
 return [
+    'name_of_role' => "اسم الوظيفة",
+    'display_name' => "الأسم المرئى",
+    'description' => "الوصف",
     'role' => 'وظيفة.',
+    'permissions' => 'الصلاحيات',
     'bars' => [
         'sidebar_user_management' => 'إدارة المستخدمين',
         'sidebar_users' => '.المستخدمين',

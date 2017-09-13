@@ -21,6 +21,7 @@ return [
     'change' => 'Update',
     'reset' => 'Reset',
     'list' => 'List',
+    'select_all' => "Select All",
     'click' => [
         'name' => 'Click here',
         'fields' => [
@@ -36,7 +37,7 @@ return [
     'no_entries_in_table' => 'No entries in table',
     'roles' => [
         'category_headers' => [
-            'security' => 'Security',
+            'security' => 'Security Privileges',
             'hep' => 'High Educational Privileges',
             'lep' => 'Low Educational Privileges'
         ],

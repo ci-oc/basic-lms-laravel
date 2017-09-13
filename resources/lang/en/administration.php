@@ -8,7 +8,11 @@
  */
 
 return [
+    'name_of_role' => "Role Name",
+    'display_name' => "Display Name",
+    'description' => "Description",
     'role' => 'Role.',
+    'permissions' => 'Permissions',
     'bars' => [
         'sidebar_user_management' => 'User Management.',
         'sidebar_users' => 'Users.',

@@ -20,6 +20,7 @@ return [
     'delete' => 'حذف',
     'change' => 'تحديث',
     'reset' => 'إعادة ضبط',
+    'select_all' => "أختر جميع",
     'click' => [
         'name' => 'اضغظ هنا',
         'fields' => [
@@ -36,7 +37,7 @@ return [
     'no_entries_in_table' => 'ﻻ يوجد عناصر في الجدول',
     'roles' => [
         'category_headers' => [
-            'security' => 'الأمن',
+            'security' => 'صلاحيات الأمن',
             'hep' => 'صلاحيات تعليمية عالية',
             'lep' => 'صلاحيلات تعليمية منخفضة'
         ],

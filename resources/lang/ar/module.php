@@ -314,6 +314,14 @@ return [
         'answer' => 'الإجابة...',
         'answer-note' => 'من فضلك أجب علي هذه الأسئلة لتصل إلي صلاحياتك!',
         'success-deletion' => 'تم حذف السؤال بنجاح.',
-        'success-adding' => 'تم إضافة السؤال بنجاح.'
+        'success-adding' => 'تم إضافة السؤال بنجاح.',
+        'error-deleting-question' => 'لا يمكنك مسح السؤال الاخير',
+        'success-solving-questions' => 'تم إجابة الأسئلة بشكل صحيح. أضغظ للذهاب الى صفحة الإداة.',
+        'online-judge-configuration' => 'Online Judge ضبط الـ',
+        'memory_limit' => 'الحد الأقصى لمساحة الذاكرة ',
+        'time_limit' => 'الحد الأقصى لوقت المعالجة',
+        'memory-time-success' => 'تم التعديل بنجاح',
+        'error-memory-limit' => 'من فضلك أدخل Memory Limit أكبر من صفر',
+        'error-time-limit' => 'من فضلك أدخل Time Limit أكبر من صفر'
     ]
 ];

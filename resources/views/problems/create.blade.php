@@ -95,6 +95,11 @@
                         </tr>
                         </tbody>
                     </table>
+                    @if($errors->has('input_testcase.*'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('input_testcase.*') }}
+                        </p>
+                    @endif
                     @if($errors->has('output_testcase.*'))
                         <p class="help-block alert-danger">
                             {{ $errors->first('output_testcase.*') }}

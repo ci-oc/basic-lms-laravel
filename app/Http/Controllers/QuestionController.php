@@ -65,6 +65,9 @@ class QuestionController extends Controller
             'question_text' => 'required',
             'option1' => 'required',
             'option2' => 'required',
+            'option3' => 'required',
+            'option4' => 'required',
+            'option5' => 'required',
             'correct' => 'required',
         ]);
         try {

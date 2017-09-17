@@ -71,10 +71,14 @@ class remark extends Command
                                 if ($lang == 'cpp')
                                     $moss_lang = 'cc';
                                 $moss->setLanguage($moss_lang);
+                                var_dump($lang);
+                                var_dump($moss_lang);
                                 $codes_paths = storage_path() . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR . $quiz->id . DIRECTORY_SEPARATOR . $problem->id . DIRECTORY_SEPARATOR;
+                                var_dump($codes_paths);
                                 $moss->addByWildcard($codes_paths . '*.' . $lang);
                                 $url = (string)$moss->send();
                                 $url_user = $url;
+                                echo $url;
                                 $curl_user = curl_init(trim($url_user));
                                 curl_setopt($curl_user, CURLOPT_RETURNTRANSFER, $url_user);
                                 curl_setopt($curl_user, CURLOPT_FOLLOWLOCATION, true);

@@ -70,12 +70,12 @@
                                         name="questions[{{ $i }}]"
                                         value="{{ $question->id }}">
                                 @foreach($question->options as $option)
-                                    <br>
                                     <input
                                             type="radio"
                                             name="answers[{{ $question->id }}]"
                                             value="{{ $option->id }}">
                                     {{ $option->option }}
+                                    <br>
                                 @endforeach
                             </div>
                             <div class="col-sm-4">

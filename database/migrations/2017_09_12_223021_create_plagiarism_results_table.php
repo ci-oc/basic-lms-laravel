@@ -18,7 +18,7 @@ class CreatePlagiarismResultsTable extends Migration
             $table->integer('user_quiz_id')->unsigned()->nullable();
             $table->foreign('user_quiz_id', 'fk_256_user_quiz_id_quiz')->references('id')->on('quizzes')->onDelete('cascade');
             $table->integer('user_problem_id')->unsigned()->nullable();
-            $table->foreign('user_problem_id', 'fk_256_user_problem_id_problem')->references('id')->on('user_problem')->onDelete('cascade');
+            $table->foreign('user_problem_id', 'fk_256_user_problem_id_problem')->references('id')->on('questions')->onDelete('cascade');
             $table->integer('user_1_id')->unsigned()->nullable();
             $table->foreign('user_1_id', 'fk_256_user_user1_id_testcase')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('plagiarism_percentage_1', 5, 2)->nullable();

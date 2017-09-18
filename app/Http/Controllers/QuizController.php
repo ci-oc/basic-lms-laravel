@@ -69,6 +69,7 @@ class QuizController extends Controller
             'activate_plagiarism' => 'numeric|min:0|max:1',
             'share_results' => 'numeric|min:0|max:1',
             'share_plagiarism' => 'numeric|min:0|max:1',
+            'results_details_w_respect_t_time' => 'numeric|min:0|max:1',
             'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
         try {
@@ -115,7 +116,8 @@ class QuizController extends Controller
                     'activate_plagiarism' => $request->input('activate_plagiarism'),
                     'share_results' => $request->input('share_results'),
                     'plagiarism_percentage' => $request->input('plagiarism_percentage'),
-                    'share_plagiarism' => $request->input('share_plagiarism')
+                    'share_plagiarism' => $request->input('share_plagiarism'),
+                    'results_details_w_respect_t_time' => $request->input('results_details_w_respect_t_time'),
                 ]);
                 return redirect()->route('quizzes.index')->with('success-creation', '');
             }
@@ -214,6 +216,7 @@ class QuizController extends Controller
             'activate_plagiarism' => 'numeric|min:0|max:1',
             'share_results' => 'numeric|min:0|max:1',
             'share_plagiarism' => 'numeric|min:0|max:1',
+            'results_details_w_respect_t_time' => 'numeric|min:0|max:1',
             'plagiarism_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
         try {

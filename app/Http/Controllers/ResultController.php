@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\PlagiarismResult;
 use App\UsersAnswer;
 use App\UsersProblemAnswer;
 use App\UsersQuiz;
-use App\UsersTestCaseAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Quiz;
 class ResultController extends Controller
 {
     /**
@@ -64,24 +64,32 @@ class ResultController extends Controller
         try {
             $quiz_result = UsersQuiz::findorFail(decrypt($id))->load('user', 'quiz');
             if ($quiz_result->user->id == Auth::id() or Auth::user()->can('show-quiz-results')) {
-                if ($quiz_result->grade != -1) {
-                    $questions_results = UsersAnswer::where([
-                        ['user_id', '=', $quiz_result->user->id],
-                        ['quiz_id', '=', $quiz_result->quiz_id]
-                    ])->get();
-                    $problems_results = UsersProblemAnswer::where([
-                        ['user_id', '=', $quiz_result->user->id],
-                        ['quiz_id', '=', $quiz_result->quiz_id]
-                    ])->get();
-                    $problems_results->load('solvedTestCases');
-                    return view('results.show', compact('quiz_result', 'questions_results', 'problems_results'));
-                } else {
-                    return redirect()->back()->with('pending', '');
+                $can_view = false;
+                if ($quiz_result->quiz->results_details_w_respect_t_time) {
+                    $can_view = !Quiz::hasFinished($quiz_result->quiz->end_date);
                 }
+                if (!$can_view) {
+                    if ($quiz_result->processing_status == "OK") {
+                        $questions_results = UsersAnswer::where([
+                            ['user_id', '=', $quiz_result->user->id],
+                            ['quiz_id', '=', $quiz_result->quiz_id]
+                        ])->get();
+                        $problems_results = UsersProblemAnswer::where([
+                            ['user_id', '=', $quiz_result->user->id],
+                            ['quiz_id', '=', $quiz_result->quiz_id]
+                        ])->get();
+                        $problems_results->load('solvedTestCases');
+                        $plagiarism_data = PlagiarismResult::where('user_1_id', '=', Auth::id())->orWhere('user_2_id', '=', Auth::id())->get();
+                        return view('results.show', compact('quiz_result', 'questions_results', 'problems_results', 'plagiarism_data'));
+                    } else {
+                        return redirect()->back()->with('pending', '');
+                    }
+                } else
+                    return redirect()->back()->with('error',trans('module.errors.error-cannot-vew-result'));
             } else {
                 abort(404);
             }
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }
     }

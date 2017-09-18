@@ -8,7 +8,7 @@
     @if(Auth::user()->can('create-quiz'))
         <p>
             <a href="{{route('problems.create')}}"
-               class="btn btn-success create_btn">
+               class="btn btn-success create_btn {{ count($quizzes) > 0 ? '' : 'disabled' }}">
                 @lang('module.addnew')
             </a>
         </p>
@@ -32,7 +32,7 @@
                 <tbody>
                 @if (count($problems) > 0)
                     @foreach ($problems as $problem)
-                        <?php $available = strtotime($problem->quiz->start_date) < time() && time() < strtotime($problem->quiz->end_date) ? true : false ?>
+                        {{ $available = QuizHelper::isAvailable($problem->quiz->start_date, $problem->quiz->end_date)}}
                         <tr data-entry-id="{{ encrypt($problem->id) }}">
                             <td>{{ $problem->quiz->course->title }}</td>
                             <td>{{ $problem->quiz->title }}</td>
@@ -40,7 +40,7 @@
                             <td>
 
                                 <a href="{{ route('problems.show',encrypt($problem->id)) }}"
-                                   class="btn btn-xs btn-primary {{ $available ? 'disabled' : ''}}">@lang('module.view')</a>
+                                   class="btn btn-xs btn-primary">@lang('module.view')</a>
                                 <a href="{{ route('problems.edit',encrypt($problem->id)) }}"
                                    class="btn btn-xs btn-info {{ $available ? 'disabled' : ''}}">@lang('module.edit')</a>
                                 @if(!$available)

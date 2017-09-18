@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <th>@lang('module.questions.fields.code-snippet')</th>
-                            <td><pre>{!! $problem->code_snippet or trans('module.problems.no_code')!!}</pre></td>
+                            <td><pre>{{ $problem->code_snippet or trans('module.results.fields.empty_code')}}</pre></td>
                         </tr>
                         <tr>
                             <th>@lang('module.questions.fields.more-info-link')</th>

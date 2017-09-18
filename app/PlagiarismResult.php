@@ -12,6 +12,10 @@ class PlagiarismResult extends Model
     {
         return $this->belongsTo('App\Quiz', 'user_quiz_id');
     }
+    public function problem()
+    {
+        return $this->belongsTo('App\Question', 'user_problem_id');
+    }
     public function user_1()
     {
         return $this->belongsTo('App\User',  'user_1_id');

@@ -83,6 +83,14 @@
                         </p>
                     @endif
                     <br>
+                    {{ Form::checkbox('results_details_w_respect_t_time',1,null, ['class' => 'field','id' => 'results_details_w_respect_t_time']) }}
+                    {!! Form::label('results_details_w_respect_t_time',trans('module.judge_options.quiz-options.results_details_w_respect_t_time'), ['class' => 'control-label']) !!}
+                    @if($errors->has('results_details_w_respect_t_time'))
+                        <p class="help-block alert-danger">
+                            {{ $errors->first('results_details_w_respect_t_time') }}
+                        </p>
+                    @endif
+                    <br>
                     {{ Form::checkbox('activate_plagiarism',1,null, ['class' => 'field','onchange' => 'active_percentage()' ,'id' => 'activate_plagiarism']) }}
                     {!! Form::label('activate_plagiarism',trans('module.judge_options.quiz-options.activate_plagiarism'), ['class' => 'control-label']) !!}
                     @if($errors->has('activate_plagiarism'))

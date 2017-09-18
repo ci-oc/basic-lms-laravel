@@ -193,6 +193,61 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Plagiarism</td>
+                                    <td>
+                                        @if($quiz_result->quiz->checked_for_plagiarism)
+                                            @if(count($plagiarism_data) > 0)
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>@lang('module.quizzes.percentage')</th>
+                                                        <th>@lang('module.placeholders.name')</th>
+                                                        <th>@lang('module.quizzes.percentage')</th>
+                                                        <th>@lang('module.problems.lines_matched')</th>
+                                                        <th>@lang('module.quizzes.show-for-more-than')</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @if (count($plagiarism_data) > 0)
+                                                        @foreach ($plagiarism_data as $result)
+                                                            <tr>
+                                                                <td>@if($result->user_1->id == Auth::id())
+                                                                        {{$result->plagiarism_percentage_1}}% <strong>(@lang('module.you'))</strong>
+                                                                        @else
+                                                                        {{$result->plagiarism_percentage_2}}% <strong>(@lang('module.you'))</strong>
+                                                                    @endif
+                                                                </td>
+                                                                <td>@if($result->user_1->id == Auth::id())
+                                                                        {{ $result->user_2->name }}
+                                                                    @else
+                                                                        {{ $result->user_1->name }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>@if($result->user_1->id == Auth::id())
+                                                                        {{$result->plagiarism_percentage_2}}%
+                                                                    @else
+                                                                        {{$result->plagiarism_percentage_1}}%
+                                                                    @endif</td>
+                                                                <td>{{$result->lines_matched}}</td>
+                                                                <td>{{$result->quiz->plagiarism_percentage}}%</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @else
+                                                        <tr>
+                                                            <td colspan="6">@lang('module.no_entries_in_table')</td>
+                                                        </tr>
+                                                    @endif
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                @lang('module.results.fields.no-code-matches')
+                                            @endif
+                                        @else
+                                            @lang('module.submissions.stat.cols.pending')
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Answer Explanation</td>
                                     <td>
                                         {!! $result->problem->answer_explanation or 'No Explanation' !!}

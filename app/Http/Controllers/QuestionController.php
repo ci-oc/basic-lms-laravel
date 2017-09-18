@@ -135,7 +135,11 @@ class QuestionController extends Controller
 
         try {
             $question = Question::findOrFail(decrypt($id));
-            return view('questions.edit', compact('question'));
+            $quiz = $question->quiz;
+            if(Quiz::hasFinished($quiz->end_date)){
+                return view('questions.edit', compact('question'));
+            } else
+                return redirect()->back()->with('error', trans('module.errors.error-problem-cannot-modify'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }

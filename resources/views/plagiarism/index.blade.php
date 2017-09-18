@@ -17,6 +17,7 @@
                 <tr>
                     <th>@lang('module.courses.relation-title')</th>
                     <th>@lang('module.quizzes.create-questions-title')</th>
+                    <th>@lang('module.problems.problem-name')</th>
                     <th>@lang('module.placeholders.name')</th>
                     <th>@lang('module.quizzes.percentage')</th>
                     <th>@lang('module.placeholders.name')</th>
@@ -32,6 +33,7 @@
                         <tr>
                             <td>{{ $result->quiz->course->title }}</td>
                             <td>{{ $result->quiz->title }}</td>
+                            <td>{{ $result->problem->question_text }}</td>
                             <td>{{ $result->user_1->name }}</td>
                             <td>{{$result->plagiarism_percentage_1}}%</td>
                             <td>{{ $result->user_2->name }}</td>
@@ -42,7 +44,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="8">@lang('module.no_entries_in_table')</td>
+                        <td colspan="9">@lang('module.no_entries_in_table')</td>
                     </tr>
                 @endif
                 </tbody>

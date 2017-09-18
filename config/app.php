@@ -232,6 +232,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervation\Image\Facades\Image::class,
+        'QuizHelper' => App\Quiz::class,
     ],
 
 ];

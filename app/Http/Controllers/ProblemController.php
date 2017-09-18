@@ -231,14 +231,17 @@ class ProblemController extends Controller
     {
         try {
             $question = Question::findOrFail(decrypt($id));
-            $quiz = Quiz::find($question->quiz->id);
-            $quiz_fullmark = $quiz->full_mark;
-            $question_grade = $question->grade;
-            $quiz_fullmark -= $question_grade;
-            $quiz->update(['full_mark' => $quiz_fullmark]);
-            $question->testcases()->delete();
-            $question->delete();
-            return redirect()->back();
+            $quiz = $question->quiz;
+            if (Quiz::hasFinished($quiz->end_date)) {
+                $quiz_fullmark = $quiz->full_mark;
+                $question_grade = $question->grade;
+                $quiz_fullmark -= $question_grade;
+                $quiz->update(['full_mark' => $quiz_fullmark]);
+                $question->testcases()->delete();
+                $question->delete();
+                return redirect()->back();
+            } else
+                return redirect()->back()->with('error', trans('module.errors.error-problem-cannot-modify'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-saving-data'));
         }

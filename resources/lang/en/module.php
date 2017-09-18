@@ -14,6 +14,7 @@ return [
     'submit' => 'Submit',
     'edit' => 'Edit',
     'view' => 'View',
+    'you' => "You",
     'stat' => 'Statistics',
     'update' => 'Update',
     'addnew' => 'Add New',
@@ -125,7 +126,8 @@ return [
             'date' => 'Date',
             'result' => 'Score',
             'view-result' => 'View result',
-            'empty_code' => 'Empty Code'
+            'empty_code' => 'Empty Code',
+            'no-code-matches' => 'No matches were found for your code.'
         ],
     ],
     'bars' => [
@@ -151,6 +153,7 @@ return [
     ],
     'problems' => [
         'problems-list' => 'Problems List',
+        'problem-name' => 'Problem Name',
         'new_problem' => 'New Problem',
         'example-input' => 'Example Input',
         'example-output' => 'Example Output',
@@ -202,7 +205,7 @@ return [
         'error-access-code' => 'Invalid Access Code',
         'error-quiz-made-before' => 'Solve many option is turned off for this quiz.',
         'error-quiz-cannot-modify' => 'Quiz cannot be modified if it is available.',
-        'error-problem-cannot-modify' => 'Problem cannot be modified if its quiz is available.',
+        'error-problem-cannot-modify' => 'Question cannot be modified if its quiz is available.',
         'error-quiz-not-available' => 'Quiz is not available at the moment',
         'error-none-solved' => 'There are no results for this quiz yet.',
         'error-0-courses' => 'You have to create a course first.',
@@ -227,7 +230,8 @@ return [
         'error-not-allowed-to-modify-course' => 'You are not allowed to modify this course.',
         'error-not-allowed-to-modify-problem' => 'You are not allowed to modify this course.',
         'error-processing' => 'There was an error while processing your request, please try again.',
-        'error-create-quiz' => 'You must create quiz first.'
+        'error-create-quiz' => 'You must create quiz first.',
+        'error-cannot-vew-result' => 'You cannot view result details at the moment.'
 
     ],
     'success' => [
@@ -261,7 +265,8 @@ return [
             'solve_many' => 'Students can solve this quiz more than once.',
             'activate_plagiarism' => 'Activate MOSS plagiarism detection.',
             'share_results' => 'Share Results',
-            'share_plagiarism' => 'Share Plagiarism Results'
+            'share_plagiarism' => 'Share Plagiarism Results',
+            'results_details_w_respect_t_time' => "Show results with respect to quiz's date",
         ]
     ],
     'coding_languages' => [

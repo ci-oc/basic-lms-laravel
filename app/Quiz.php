@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Quiz extends Model
 {
-    protected $fillable = ['course_id', 'title', 'description', 'duration', 'start_date', 'end_date', 'full_mark', 'solve_many', 'activate_plagiarism','share_results','plagiarism_percentage','share_plagiarism','checked_for_plagiarism'];
+    protected $fillable = ['course_id', 'title', 'description', 'duration', 'start_date', 'end_date', 'full_mark', 'solve_many', 'activate_plagiarism','share_results','plagiarism_percentage','share_plagiarism','checked_for_plagiarism','results_details_w_respect_t_time'];
 
     public function course()
     {

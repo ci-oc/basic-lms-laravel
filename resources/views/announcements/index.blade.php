@@ -74,7 +74,7 @@
                             <p>{{ $announcement->course->title }}</p>
                             <p class="text-facebook">{{ $announcement->announcement }}</p>
                             <small>
-                                <cite>{{  Auth::id() == $announcement->user_id ? 'You'  : $announcement->user->name}}</cite>
+                                <cite>{{  Auth::id() == $announcement->user_id ? trans('module.you')  : $announcement->user->name}}</cite>
                             </small>
                         </blockquote>
                         @if(Auth::id() == $announcement->user_id)

@@ -8,7 +8,8 @@
     @endif
     @if(Auth::user()->can('create-quiz'))
         <p>
-            <a href="{{ route('questions.create') }}" class="btn btn-success">@lang('module.addnew')</a>
+            <a href="{{ route('questions.create') }}"
+               class="btn btn-success {{ count($quizzes) > 0 ? '' : 'disabled' }}">@lang('module.addnew')</a>
         </p>
     @endif
     <div class="panel panel-default">
@@ -30,7 +31,7 @@
                 <tbody>
                 @if (count($questions) > 0)
                     @foreach ($questions as $question)
-                        <?php $available = strtotime($question->quiz->start_date) < time() && time() < strtotime($question->quiz->end_date) ? true : false ?>
+                        {{ $available = QuizHelper::isAvailable($question->quiz->start_date, $question->quiz->end_date)}}
                         <tr data-entry-id="{{ $question->id }}">
                             <td>{{ $question->quiz->course->title }}</td>
                             <td>{{ $question->quiz->title or '' }}</td>
@@ -46,6 +47,7 @@
                                     {!! Form::open(array(
                                     'style' => 'display: inline-block;',
                                     'method' => 'DELETE',
+                                    'class' => $available ? 'disabled' : '',
                                     'onsubmit' => "return confirm('".trans("module.are_you_sure")."');",
                                     'route' => ['questions.destroy', encrypt($question->id)])) !!}
                                     {!! Form::submit(trans('module.delete'), array('class' => 'btn btn-xs btn-danger')) !!}

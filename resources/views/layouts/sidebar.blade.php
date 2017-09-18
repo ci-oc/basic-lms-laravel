@@ -1,5 +1,4 @@
 @inject('request', 'Illuminate\Http\Request')
-
         <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -35,7 +34,7 @@
 <body>
 <div>
     <!--BEGIN BACK TO TOP-->
-    <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+    <a id="totop" href="#" dir=""><i class="fa fa-angle-up"></i></a>
     <!--END BACK TO TOP-->
     <!--BEGIN TOPBAR-->
     <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -211,7 +210,8 @@
                             </i><span class="menu-title">@lang('module.bars.sidebar_submissions')</span></a>
 
                     </li>
-                    <li class="{{ $request->segment(1) == 'plagiarism' ? 'active' : '' }}"><a href="{{route('plagiarism')}}"><i
+                    <li class="{{ $request->segment(1) == 'plagiarism' ? 'active' : '' }}"><a
+                                href="{{route('plagiarism')}}"><i
                                     class="fa fa-files-o" aria-hidden="true"></i><span
                                     class="menu-title">@lang('module.bars.sidebar_plagiarism')</span></a>
 

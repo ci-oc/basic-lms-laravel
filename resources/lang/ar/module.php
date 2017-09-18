@@ -16,6 +16,7 @@ return [
     'view' => 'عرض',
     'stat' => 'إحصائيات',
     'update' => 'تحديث',
+    'you' => 'أنت',
     'addnew' => 'إضافة جديد',
     'delete' => 'حذف',
     'change' => 'تحديث',
@@ -123,6 +124,8 @@ return [
             'date' => 'التاريخ',
             'result' => 'النتيجة',
             'view-result' => 'عرض النتيجة',
+            'empty_code' => 'لم يتم تسليم كوود',
+            'no-code-matches' => 'لم يتم العثور على أية مطابقات للكود الخاص بك'
         ],
     ],
     'bars' => [
@@ -148,6 +151,7 @@ return [
     ],
     'problems' => [
         'problems-list' => 'قائمة المسائل',
+        'problem-name' => 'أسم المسألة',
         'new_problem' => 'مسألة جديدة',
         'example-input' => 'مثال للمدخل',
         'example-output' => 'مثال للمخرج',
@@ -199,7 +203,7 @@ return [
         'error-access-code' => 'كود تعريفي غير صالح',
         'error-quiz-made-before' => 'اختيار الحل أكثر من مرة غير متاح لهذا الإختبار',
         'error-quiz-cannot-modify' => '.لا يمكن تعديل الإختبار إن كان مُتاح',
-        'error-problem-cannot-modify' => '.لا يمكن تعديل الإختبار إن كان مُتاح',
+        'error-problem-cannot-modify' => '.لا يمكن تعديل السؤال إن كان الأختبار الخاص به مُتاح',
         'error-quiz-not-available' => 'الإختبار غير متاح حاليا.',
         'error-none-solved' => 'ﻻ توجد نتائج لهذا الإختبار حتي الآن.',
         'error-0-courses' => 'عليك `إنشاء مادة أولا.',
@@ -221,7 +225,8 @@ return [
         'error-not-allowed-to-modify-course' => 'عفواً ، غير مسموح لك بتعديل هذه المادة الدراسية',
         'error-not-allowed-to-modify-problem' => 'عفواً ، غير مسموح لك بتعديل هذه المسألة',
         'error-processing' => 'عفواً ، لقد واجهنا مشكلة فى تنفيذ طلبك ، من فضلك حاول مجدداً',
-        'error-create-quiz' => 'يجب ان تقوم بعمل أختبار أولاً'
+        'error-create-quiz' => 'يجب ان تقوم بعمل أختبار أولاً',
+        'error-cannot-vew-result' => 'لا يمكنك إظهار تفاصيل النتيجة فى الوفت الحالى'
 
     ],
     'success' => [
@@ -255,7 +260,8 @@ return [
             'solve_many' => 'يستطيع الطلاب حل هذا الإختبار أكثر من مرة.',
             'activate_plagiarism' => 'تنشيط خاصية كشف الغش. ',
             'share_results' => 'مشاركة النتائج.',
-            'share_plagiarism' => 'مشاركة نتائج تشابه الحلول'
+            'share_plagiarism' => 'مشاركة نتائج تشابه الحلول',
+            'results_details_w_respect_t_time'=> 'إظهار تفاصيل النتائج مع مراعاة وقت انتهاء الأختبار'
         ]
     ],
     'coding_languages' => [

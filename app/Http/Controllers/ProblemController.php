@@ -182,35 +182,39 @@ class ProblemController extends Controller
         try {
             $id = decrypt($question_id);
             if ($problem = Question::findorFail($id)) {
-                $updates = $request->all();
-                $problem->fill($updates)->save();
+                if (!Quiz::isAvailable($problem->quiz->start_date, $problem->quiz->end_date)) {
+                    $updates = $request->all();
+                    $problem->fill($updates)->save();
 
-                //Updating testcases
-                $testcases = TestsCase::where('question_id', '=', $id)->get();
-                foreach ($testcases as $cases) {
-                    $cases->delete();
+                    //Updating testcases
+                    $testcases = TestsCase::where('question_id', '=', $id)->get();
+                    foreach ($testcases as $cases) {
+                        $cases->delete();
+                    }
+                    $input_test_cases = $request->input('input_testcase');
+                    $output_test_cases = $request->input('output_testcase');
+                    for ($i = 0; $i < count($input_test_cases); $i++) {
+                        TestsCase::create([
+                            'question_id' => $id,
+                            'input' => $input_test_cases[$i],
+                            'output' => $output_test_cases[$i],
+                        ]);
+                    }
+                    //Updating judge options
+                    $judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
+                    $request_judge_options = $request->input('judge_options');
+                    $problem->judge_options()->detach($judge_options);
+                    $problem->judge_options()->attach($request_judge_options);
+                    //Updating coding languages
+                    $coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
+                    $request_coding_languages = $request->input('coding_languages');
+                    $problem->coding_languages()->detach($coding_languages);
+                    $problem->coding_languages()->attach($request_coding_languages);
+                    $request->session()->flash('success', 'problem has been edited successfully');
+                    return redirect()->route('problems.index');
+                } else {
+                    return redirect()->route('problems.index')->with('error', trans('module.errors.error-problem-cannot-modify'));
                 }
-                $input_test_cases = $request->input('input_testcase');
-                $output_test_cases = $request->input('output_testcase');
-                for ($i = 0; $i < count($input_test_cases); $i++) {
-                    TestsCase::create([
-                        'question_id' => $id,
-                        'input' => $input_test_cases[$i],
-                        'output' => $output_test_cases[$i],
-                    ]);
-                }
-                //Updating judge options
-                $judge_options = $problem->judge_options()->pluck('judge_id')->toArray();
-                $request_judge_options = $request->input('judge_options');
-                $problem->judge_options()->detach($judge_options);
-                $problem->judge_options()->attach($request_judge_options);
-                //Updating coding languages
-                $coding_languages = $problem->coding_languages()->pluck('language_id')->toArray();
-                $request_coding_languages = $request->input('coding_languages');
-                $problem->coding_languages()->detach($coding_languages);
-                $problem->coding_languages()->attach($request_coding_languages);
-                $request->session()->flash('success', 'problem has been edited successfully');
-                return redirect()->back();
             } else {
                 $request->session()->flash('failure', 'Error occurred while updating problem information');
                 return redirect()->back();

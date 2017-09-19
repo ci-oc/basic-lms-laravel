@@ -14,8 +14,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <style>
-    body{
-        background-image:url('welcome/img/DD-Starry-Night-Sky-Scene-64536-Preview.jpg');
+    body {
+        background-image: url({{asset('welcome/img/DD-Starry-Night-Sky-Scene-64536-Preview.jpg')}});
     }
 </style>
 <body>

@@ -482,7 +482,7 @@
                         Professor/ Insaf Huessain
                     </li>
                     <li>
-                        Assistant Professor/ Ghada Khoriba.
+                        <a href="http://www.fcih.net/ghada/" target="_blank">Assistant Professor/ Ghada Khoriba.</a>
                     </li>
 
                     <li>

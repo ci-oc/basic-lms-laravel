@@ -57,7 +57,7 @@
                 <tr>
                     <th>@lang('module.problems.fields.code_snippet')</th>
                     <td>
-                        <pre><code>{{$minimum_problem->code_snippet}}</code></pre>
+                        <pre><code>{{$minimum_problem->code_snippet or trans('module.results.fields.empty_code')}}</code></pre>
                     </td>
                 </tr>
                 <tr>

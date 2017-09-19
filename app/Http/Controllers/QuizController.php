@@ -221,18 +221,22 @@ class QuizController extends Controller
         ]);
         try {
             if ($quiz = Quiz::findOrFail(decrypt($id))) {
-                $updates = $request->all();
-                if ($quiz->fill($updates)->save()) {
-                    $request->session()->flash('success', 'Quiz has been edited successfully');
-                    return redirect()->back();
+                if (!Quiz::isAvailable($quiz->start_date, $quiz->end_date)) {
+                    $updates = $request->all();
+                    $updates['checked_for_plagiarism'] = 0;
+                    if ($quiz->fill($updates)->save()) {
+                        $request->session()->flash('success', trans('module.success.success-editing-quiz'));
+                        return redirect()->route('quizzes.index');
+                    } else {
+                        $request->session()->flash('failure', trans('module.errors.error-processing'));
+                        return redirect()->back();
+                    }
                 } else {
                     $request->session()->flash('failure', 'Error occurred while updating quiz information');
                     return redirect()->back();
                 }
-            } else {
-                $request->session()->flash('failure', 'Error occurred while updating quiz information');
-                return redirect()->back();
-            }
+            } else
+                return redirect()->route('quizzes.index')->with('cannot_modify', trans('module.errors.error-quiz-cannot-modify'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }

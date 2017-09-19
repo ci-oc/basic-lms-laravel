@@ -35,11 +35,11 @@
                             <td>{{ $result->quiz->title }}</td>
                             <td>{{ $result->problem->question_text }}</td>
                             <td>{{ $result->user_1->name }}</td>
-                            <td>{{$result->plagiarism_percentage_1}}%</td>
+                            <td><em>{{$result->plagiarism_percentage_1}}%</em></td>
                             <td>{{ $result->user_2->name }}</td>
-                            <td>{{$result->plagiarism_percentage_1}}%</td>
+                            <td><em>{{$result->plagiarism_percentage_1}}%</em></td>
                             <td>{{$result->lines_matched}}</td>
-                            <td>{{$result->quiz->plagiarism_percentage}}%</td>
+                            <td><em>{{$result->quiz->plagiarism_percentage}}%</em></td>
                         </tr>
                     @endforeach
                 @else

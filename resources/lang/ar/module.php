@@ -21,6 +21,7 @@ return [
     'delete' => 'حذف',
     'change' => 'تحديث',
     'reset' => 'إعادة ضبط',
+    'not_required' => 'أختيارى',
     'select_all' => "أختر جميع",
     'click' => [
         'name' => 'اضغظ هنا',
@@ -182,7 +183,7 @@ return [
     ],
     'users' => [
         'new-users' => 'إضافة مستخدم واحد',
-        'new-users-excel' => 'إضافة مستخدمين عن طريق ملف إكسل',
+        'new-users-excel' => 'إضافة عدة مستخدمين عن طريق ملف إكسل',
         'registered-users' => 'المستخدمون المسجلون',
         'instructors' => 'المدرس/المدرسين',
         'password' => 'كلمة السر',
@@ -234,6 +235,7 @@ return [
         'success-course' => 'تم إنشاء المادة بنجاح.',
         'success-updating' => 'تم تعديل المادة بنجاح.',
         'success-editing-question' => 'تم تعديل السؤال بنجاح.',
+        'success-editing-quiz' => 'تم تعديل الأختبار بنجاح',
         'news-created' => 'تم إضافة الخبر بنجاح.',
         'news-deleted' => 'تم حذف الخبر بنجاح.',
         'update-failed' => 'أنت لم تدخل شيء لتحديثه!',

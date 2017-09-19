@@ -136,7 +136,7 @@ class QuestionController extends Controller
         try {
             $question = Question::findOrFail(decrypt($id));
             $quiz = $question->quiz;
-            if(Quiz::hasFinished($quiz->end_date)){
+            if (!Quiz::isAvailable($quiz->start_date, $quiz->end_date)) {
                 return view('questions.edit', compact('question'));
             } else
                 return redirect()->back()->with('error', trans('module.errors.error-problem-cannot-modify'));
@@ -160,9 +160,14 @@ class QuestionController extends Controller
             'question_text' => 'required',
         ]);
         try {
+
             $question = Question::findOrFail(decrypt($id));
-            $question->update($request->all());
-            return redirect()->route('questions.index');
+            if (!Quiz::isAvailable($question->quiz->start_date, $question->quiz->end_date)) {
+                $question->update($request->all());
+                return redirect()->route('questions.index');
+            } else {
+                return redirect()->route('questions.index')->with('error', trans('module.errors.error-problem-cannot-modify'));
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('module.errors.error-processing'));
         }

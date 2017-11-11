@@ -16,7 +16,7 @@ class CourseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:create-course|join-course', ['only' => 'index']);
+        $this->middleware('permission:create-course|join-course', ['only' => ['index']]);
         $this->middleware('permission:create-course', ['only' => ['create', 'store']]);
         $this->middleware('permission:drop-course', ['only' => ['destroy']]);
         $this->middleware('permission:edit-course', ['only' => ['edit']]);
@@ -56,6 +56,7 @@ class CourseController extends Controller
             'access_code' => 'required|min:5|unique:courses',
             'title' => 'required|max:100|min:5|',
             'description' => 'required|min:5|',
+            'material.*' => 'max:2048'
         ]);
         try {
             $courses = $request->all();
@@ -194,7 +195,6 @@ class CourseController extends Controller
                 ->with('update-success', '')
                 ->with('failed_instructors', $failed_instructors);
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->back()->with('failed_to_save', trans('module.errors.error-saving-data'));
         }
     }

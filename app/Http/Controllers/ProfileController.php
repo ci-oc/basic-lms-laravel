@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     /**
+     * ProfileController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:edit-profile', ['only' => ['update', 'update_image']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -123,9 +131,13 @@ class ProfileController extends Controller
         $avatar = $request->file('avatar');
         $file_name = time() . '_' . Auth::id() . '.' . $avatar->getClientOriginalExtension();
         Image::make($avatar)->resize(250, 250)->save(public_path('/images/avatar/' . $file_name));
+        try {
+            if ($user->avatar != '/images/avatar/default_avatar.png')
+                unlink(public_path($user->avatar));
+        } catch (\Exception $e) {
+        }
         $user->avatar = 'images/avatar/' . $file_name;
         $user->save();
-
         return back();
 
     }

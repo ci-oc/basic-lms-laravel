@@ -149,6 +149,12 @@ class PermissionTableSeeder extends Seeder
             ],
             //LOW EDUCATIONAL PRIVILEGES
             [
+                'name' => 'view-course',
+                'display_name' => 'View Courses List',
+                'description' => 'View Courses List',
+                'category' => 'lep'
+            ],
+            [
                 'name' => 'join-course',
                 'display_name' => 'Join Course',
                 'description' => 'Access to join existing course.',
@@ -166,6 +172,14 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'View Announcement',
                 'category' => 'lep'
             ],
+            //other
+            [
+                'name' => 'edit-profile',
+                'display_name' => 'Edit Profile',
+                'description' => 'Edit Profile',
+                'category' => 'other'
+            ],
+
 
         ];
 

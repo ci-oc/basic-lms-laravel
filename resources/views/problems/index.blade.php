@@ -22,7 +22,6 @@
         <div class="panel-heading">
             @lang('module.problems.problems-list')
         </div>
-
         <div class="panel-body">
             <table class="table table-bordered table-striped" id="{{ count($problems) > 0 ? 'datatable' : '' }}">
                 <thead>
@@ -33,7 +32,6 @@
                     <th>@lang('module.operations')</th>
                 </tr>
                 </thead>
-
                 <tbody>
                 @if (count($problems) > 0)
                     @foreach ($problems as $problem)

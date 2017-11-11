@@ -108,6 +108,8 @@
             {!! Form::submit(trans('module.save'), ['class' => 'btn btn-danger' ,'data-value' => 'shake', 'onclick' => 'shake()']) !!}
             {{ Form::reset(trans('module.reset'), ['class' => 'btn btn-primary']) }}
             {!! Form::close() !!}
+            <a href="{{ route('courses.show',[encrypt($course->id)]) }}"
+               class="btn btn-info">@lang('module.view')</a>
         </div>
     </div>
 @endsection

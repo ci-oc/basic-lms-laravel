@@ -15,7 +15,8 @@ class RegisterCourseController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:student');
+        $this->middleware('permission:create-course|join-course|view-course', ['only' => 'index']);
+        $this->middleware('permission:join-course', ['only' => 'store']);
     }
 
     /**

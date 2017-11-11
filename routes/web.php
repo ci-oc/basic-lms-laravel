@@ -20,10 +20,6 @@ Route::get('/', function () {
 Route::post('/language')->uses('LanguageController@index')->middleware('lang')->name('lang');
 
 Auth::routes();
-Route::get('send', 'MailController@StudentView'); // just for testing mail view , will be deleted
-Route::get('sendi', 'MailController@instructorView'); // just for testing mail view , will be deleted
-Route::get('sendMail', 'MailController@index'); // just for testing sendig mail , will be deleted
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/plagiarism')->uses('PlagiarismController@index')->name('plagiarism');
     Route::get('/downloadTemp', 'DefaultUserController@downloadTemp');

@@ -40,7 +40,8 @@ class RoleController extends Controller
         $security_permissions = $permissions['security'];
         $hep_permissions = $permissions['hep'];
         $lep_permissions = $permissions['lep'];
-        return view('admin.role.create', compact('security_permissions', 'hep_permissions', 'lep_permissions'));
+        $other_permissions = $permissions['other'];
+        return view('admin.role.create', compact('security_permissions', 'hep_permissions', 'lep_permissions', 'other_permissions'));
     }
 
     /**
@@ -85,8 +86,9 @@ class RoleController extends Controller
         $security_permissions = $permissions['security'];
         $hep_permissions = $permissions['hep'];
         $lep_permissions = $permissions['lep'];
+        $other_permissions = $permissions['other'];
         $role_permissions = $role->perms()->pluck('id', 'id')->toArray();
-        return view('admin.role.edit', compact(['role', 'role_permissions', 'security_permissions', 'hep_permissions', 'lep_permissions']));
+        return view('admin.role.edit', compact(['role', 'role_permissions', 'security_permissions', 'hep_permissions', 'lep_permissions', 'other_permissions']));
     }
 
     /**

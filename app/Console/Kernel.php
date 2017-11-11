@@ -14,17 +14,19 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\remark::class,
+        \App\Console\Commands\ResetGuest::class,
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('remark')->hourly();
+        $schedule->command('reset_guest')->hourly();
+        $schedule->command('remark')->hourly();
     }
 
     /**

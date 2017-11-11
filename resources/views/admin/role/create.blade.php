@@ -21,7 +21,7 @@
         <div class="form-group text-left">
             <h3>@lang('administration.permissions')</h3>
             <div class="col-xs-12 form-group">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>@lang('module.roles.category_headers.security')</h3>
                     @foreach($security_permissions as $permission)
                         <input type="checkbox" class="1" name="permission[]" value="{{$permission->id}}"> {{$permission->name}}
@@ -30,7 +30,7 @@
                     <br><input type="checkbox"
                                onclick="checkAll(this , 1)"> @lang('module.select_all') @lang('module.roles.category_headers.security')
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>@lang('module.roles.category_headers.hep')</h3>
                     @foreach($hep_permissions as $permission)
                         <input type="checkbox" class="2" name="permission[]" value="{{$permission->id}}"> {{$permission->name}}
@@ -39,7 +39,7 @@
                     <br><input type="checkbox"
                                onclick="checkAll(this , 2)"> @lang('module.select_all') @lang('module.roles.category_headers.hep')
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>@lang('module.roles.category_headers.lep')</h3>
                     @foreach($lep_permissions as $permission)
                         <input type="checkbox" class="3" name="permission[]" value="{{$permission->id}}"> {{$permission->name}}
@@ -47,6 +47,15 @@
                     @endforeach
                     <br><input type="checkbox"
                                onclick="checkAll(this , 3)"> @lang('module.select_all') @lang('module.roles.category_headers.lep')
+                </div>
+                <div class="col-sm-3">
+                    <h3>@lang('module.roles.category_headers.other')</h3>
+                    @foreach($other_permissions as $permission)
+                        <input type="checkbox" class="4" name="permission[]" value="{{$permission->id}}"> {{$permission->name}}
+                        <br>
+                    @endforeach
+                    <br><input type="checkbox"
+                               onclick="checkAll(this , 4)"> @lang('module.select_all') @lang('module.roles.category_headers.other')
                 </div>
             </div>
         </div>

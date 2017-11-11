@@ -4,7 +4,7 @@
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-material-name')</p>
         </div>
-        @endif
+    @endif
     @if(Session::has('failed_instructors'))
         <div class="alert alert-danger">
             <p>@lang('module.errors.error-create-user')</p>
@@ -97,9 +97,9 @@
             <div class="form-group">
                 {!! Form::label('course_material', trans('module.courses.fields.material-1'), ['class' => 'control-label']) !!}
                 {!! Form::file('material[]', ['multiple' => 'multiple' ,'class' => 'form-control']) !!}
-                @if($errors->has('file'))
+                @if($errors->has('material.*'))
                     <p class="help-block alert-danger">
-                        {{ $errors->first('file') }}
+                        {{ $errors->first('material.*') }}
                     </p>
                 @endif
             </div>
@@ -111,8 +111,8 @@
 @endsection
 @section('javascript')
     <script>
-        $(document).ready(function(){
-            $('#access_code').bind("cut copy paste",function(e) {
+        $(document).ready(function () {
+            $('#access_code').bind("cut copy paste", function (e) {
                 e.preventDefault();
             });
         });

@@ -14,7 +14,7 @@ use App\PlagiarismResult;
 
 class remark extends Command
 {
-    /**
+    /**how to create command laravel task scheduling
      * The name and signature of the console command.
      *
      * @var string

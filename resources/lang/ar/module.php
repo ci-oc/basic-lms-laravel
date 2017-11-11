@@ -6,6 +6,7 @@
  * Time: 7:15 PM
  */
 return [
+    'copyright' => '2017 &copy;  جميع الحقوق محفوظة ',
     'create' => 'إنشاء',
     'created_at' => 'أنشئ في',
     'operations' => 'عمليات',
@@ -41,8 +42,15 @@ return [
         'category_headers' => [
             'security' => 'صلاحيات الأمن',
             'hep' => 'صلاحيات تعليمية عالية',
-            'lep' => 'صلاحيلات تعليمية منخفضة'
+            'lep' => 'صلاحيلات تعليمية منخفضة',
+            'other' => 'صلاخيات آخرى'
         ],
+    ],
+    'index' => [
+        'student_count' => 'عدد الطلبة المسجلين',
+        'quiz_count' => 'عدد الأختبارات',
+        'professor_count' => 'عدد الاساتذة المسجلين',
+        'submission_count' => 'عدد الحلول'
     ],
     'questions' => [
         'name' => 'السؤال',

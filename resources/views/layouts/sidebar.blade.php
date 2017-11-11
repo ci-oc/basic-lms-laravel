@@ -45,7 +45,7 @@
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
                 <a id="logo" href="{{route('home')}}" class="navbar-brand"><span class="fa fa-rocket"></span><span
-                            class="logo-text">FCI-H Module</span><span style="display: none"
+                            class="logo-text">FCI-H LMS</span><span style="display: none"
                                                                        class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 <div class="news-update-box hidden-xs"><span
@@ -53,7 +53,7 @@
                     <ul id="news-update" class="ticker list-unstyled">
 
                         @if(count($all_news) > 0 )
-                            <marquee direction="left" scrollamount="5" behavior="scroll" onmouseover="this.stop()"
+                            <marquee direction="right" scrollamount="5" behavior="scroll" onmouseover="this.stop()"
                                      onmouseout="this.start()">
                                 @foreach($all_news as $news)
                                     <a href="" class="hvr-float">{{$news->news}}</a> <<i class="fa fa-newspaper-o"
@@ -192,7 +192,7 @@
 
                             </li>
                         @endif
-                        @if(Auth::user()->can('join-course'))
+                        @if(Auth::user()->can('view-course'))
                             <li class="{{ $request->segment(1) == 'enroll' ? 'active' : '' }}"><a
                                         href="{{ route('enroll.index') }}"><i
                                             class="fa fa-plus" aria-hidden="true">
@@ -223,19 +223,22 @@
                             </i><span class="menu-title">Charts</span></a>
 
                     </li>
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Extras.html"><i
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a
+                                href="{{route('under_construction')}}"><i
                                     class="fa fa-gift fa-fw">
                                 <div class="icon-bg bg-grey"></div>
                             </i><span class="menu-title">Extras</span></a>
 
                     </li>
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Email.html"><i
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a
+                                href="{{route('under_construction')}}"><i
                                     class="fa fa-envelope-o">
                                 <div class="icon-bg bg-primary"></div>
                             </i><span class="menu-title">Email</span></a>
 
                     </li>
-                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a href="Animation.html"><i
+                    <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}"><a
+                                href="{{route('under_construction')}}"><i
                                     class="fa fa-slack fa-fw">
                                 <div class="icon-bg bg-green"></div>
                             </i><span class="menu-title">Slack</span></a></li>
@@ -281,8 +284,26 @@
             <!--END CONTENT-->
             <!--BEGIN FOOTER-->
             <div id="footer">
-                <div class="copyright">
-                    <a href="#">2017 © FCI-H Module</a></div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-sm-8">
+                            <div class="copyright">
+                                <a href="#">@lang('module.copyright')</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="https://www.youtube.com/user/FCIHOCW" target="_blank">
+                                <i style="font-size: large" class="icon fa fa-youtube fa-5x" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/edu/school?id=12171" target="_blank">
+                                <i style="font-size: large" class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="http://fcih.helwan.edu.eg/index.php" target="_blank">
+                                <i style="font-size: large" class="fa fa-globe" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--END FOOTER-->
         </div>

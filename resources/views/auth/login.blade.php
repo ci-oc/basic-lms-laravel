@@ -66,8 +66,16 @@
                     </form>
                 </div>
             </div>
+            <form class="form-horizontal" id="guest" method="POST" action="{{ route('login') }}">
+                {{ csrf_field() }}
+                <input id="email" type="hidden" class="form-control" name="email"
+                       value="guest@guest.x"
+                       required>
+                <input id="password" type="hidden" class="form-control" name="password"
+                       value="secret" required>
+                <button class="btn-link" type="submit">Login as guest</button>
+            </form>
         </div>
-    </div>
-    <div class="row">
+
     </div>
 @endsection

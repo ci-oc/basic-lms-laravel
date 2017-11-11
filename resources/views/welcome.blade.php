@@ -336,14 +336,14 @@
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
-                                   required autofocus>
+                                   autofocus>
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="col-md-4 control-label">Password</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" class="form-control" name="password">
                         </div>
 
                     </div>
@@ -368,6 +368,18 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>
+            <hr>
+            <div class="text-center form-group">
+                <form class="form-horizontal" id="guest" method="POST" action="{{ route('login') }}">
+                    {{ csrf_field() }}
+                    <input id="email" type="hidden" class="form-control" name="email"
+                           value="guest@guest.x"
+                           required>
+                    <input id="password" type="hidden" class="form-control" name="password"
+                           value="secret" required>
+                    <button class="btn-link" type="submit">Login as guest</button>
+                </form>
+            </div>
             <!--------------end login form-------------->
         </div>
 
@@ -519,7 +531,9 @@
                         <ul>
                             <a href="https://github.com/EyadMShokry"><i style="font-size: 35px;" class="fa fa-github"
                                                                         aria-hidden="true"></i></a>--
-                            <a href="https://www.linkedin.com/in/eyad-shokry-2289bb124/"><i style="font-size: 35px;" class="fa fa-linkedin" aria-hidden="true"></i></a>--
+                            <a href="https://www.linkedin.com/in/eyad-shokry-2289bb124/"><i style="font-size: 35px;"
+                                                                                            class="fa fa-linkedin"
+                                                                                            aria-hidden="true"></i></a>--
                         </ul>
                     </div>
                 </div>

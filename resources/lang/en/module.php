@@ -6,6 +6,7 @@
  * Time: 7:15 PM
  */
 return [
+    'copyright' => '2017 &copy; FCI - Helwan University (FCIH-LMS)',
     'create' => 'Create',
     'created_at' => 'Created At',
     'operations' => 'Operations',
@@ -41,8 +42,15 @@ return [
         'category_headers' => [
             'security' => 'Security Privileges',
             'hep' => 'High Educational Privileges',
-            'lep' => 'Low Educational Privileges'
+            'lep' => 'Low Educational Privileges',
+            'other' => 'Other Privileges'
         ],
+    ],
+    'index' => [
+        'student_count' => '# Students Enrolled',
+        'quiz_count' => '# Quizzes',
+        'professor_count' => '# Professors Enrolled',
+        'submission_count' => '# Submissions'
     ],
     'questions' => [
         'name' => 'Question',

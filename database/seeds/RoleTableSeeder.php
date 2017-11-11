@@ -34,6 +34,11 @@ class RoleTableSeeder extends Seeder
                 'display_name' => 'Student',
                 'description' => 'Student'
             ],
+            [
+                'name' => 'guest',
+                'display_name' => 'Guest',
+                'description' => 'Guest account to view features.'
+            ],
         ];
         foreach ($roles as $key => $value) {
             $role = Role::create($value);

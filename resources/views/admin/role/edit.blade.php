@@ -36,7 +36,7 @@
                     <br><input type="checkbox"
                                onclick="checkAll(this , 1)"> @lang('module.select_all') @lang('module.roles.category_headers.security')
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>@lang('module.roles.category_headers.hep')</h3>
                     @foreach($hep_permissions as $permission)
                         <input type="checkbox"
@@ -47,7 +47,7 @@
                     <br><input type="checkbox"
                                onclick="checkAll(this , 2)"> @lang('module.select_all') @lang('module.roles.category_headers.hep')
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>@lang('module.roles.category_headers.lep')</h3>
                     @foreach($lep_permissions as $permission)
                         <input type="checkbox"
@@ -58,10 +58,21 @@
                     <br><input type="checkbox"
                                onclick="checkAll(this , 3)"> @lang('module.select_all') @lang('module.roles.category_headers.lep')
                 </div>
+                <div class="col-sm-3">
+                    <h3>@lang('module.roles.category_headers.other')</h3>
+                    @foreach($other_permissions as $permission)
+                        <input type="checkbox"
+                               {{in_array($permission->id,$role_permissions)?"checked":""}}   name="permission[]"
+                               class="4"
+                               value="{{$permission->id}}"> {{$permission->name}} <br>
+                    @endforeach
+                    <br><input type="checkbox"
+                               onclick="checkAll(this , 4)"> @lang('module.select_all') @lang('module.roles.category_headers.other')
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
-    <script src="{{asset('js/admin/select_all.js')}}"></script>
+<script src="{{asset('js/admin/select_all.js')}}"></script>
 

@@ -69,11 +69,12 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('admin.index');
 
 
-    Route::get('courses/download/materials/{filename}', function ($filename) {
-        $file_path = storage_path() . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'materials' . DIRECTORY_SEPARATOR . $filename;
+    Route::get('courses/download/materials/{filename}/{filedec}', function ($filename, $file_dec) {
+        $material_path = 'materials' . DIRECTORY_SEPARATOR . $filename;
+        $file_path = storage_path() . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . $material_path;
         if (file_exists($file_path)) {
             $path = storage_path('app/materials/' . $filename);
-            return response()->download($file_path);
+            return response()->download($file_path, $file_dec);
         } else {
             return redirect()->back()->with('file-not-exist', '');
         }

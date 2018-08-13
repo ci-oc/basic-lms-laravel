@@ -72,7 +72,7 @@ To activate plagiarism detection using *MOSS* run:
 - **`php artisan remark`** 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within FCI-H-LMS, please send an e-mail to fcih-lms@fcih.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within FCI-H-LMS, please post an issue. All security vulnerabilities will be addressd.
 ## Issues
 In case of receiving this error
 - BadMethodCallException, Please run this two commands

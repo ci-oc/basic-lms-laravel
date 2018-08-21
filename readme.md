@@ -113,8 +113,8 @@ $this->call(CodingLanguagesSeeder::class);
 ```
 ## Database Demo
 Link [Click here](https://drive.google.com/open?id=0B7tstgwobtR9eW9pNUluenpYcU0)
-## Accounts
-### Default credentials
+### Accounts
+#### Default credentials
 Please go to your DBMS and view users table. First two records are the superusers accounts, next 20 are instructors. the 20 after them are students. 
 - Default password: "secret" (without quotes)   
 

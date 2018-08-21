@@ -9,6 +9,8 @@
 - [Assignment Module](#assignment-module)
 - [Submission Track Module](#submission-track-module)
 
+The BasicLMS currently supports only *English* and *Arabic* languages.
+
 It was originally developed to fill the gaps in modern LMS. This project was developed under supervision of:
 - Professor/ [Ghada Ahmed.](http://www.fcih.net/ghada/resume) 
 - Professor/ [Insaf Huessien](https://eg.linkedin.com/in/ensaf-hussein-7b257492) 

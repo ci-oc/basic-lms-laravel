@@ -2,7 +2,14 @@
 
 ## About FCI-H-LMS
 
-**FCI-H-LMS** is a web application that was developed to fill the gaps in modern LMS. This project was developed under supervision of:
+**FCI-H-LMS** is a web application that mainly consists of:
+
+- Quiz Module (Online Judge, MCQ Questions)
+- Plagiarism Module
+- Assignment Module
+- Submission Track Module
+
+It was originally developed to fill the gaps in modern LMS. This project was developed under supervision of:
 - Professor/ [Ghada Ahmed.](http://www.fcih.net/ghada/resume) 
 - Professor/ [Insaf Huessien](https://eg.linkedin.com/in/ensaf-hussein-7b257492) 
 ## APIs

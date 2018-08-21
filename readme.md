@@ -2,12 +2,17 @@
 
 ## About FCI-H-LMS
 
-**FCI-H-LMS** is a web application that mainly consists of:
+**FCI-H-LMS** is a web application that mainly consists of the following modules:
 
-- [Quiz Module (Online Judge, MCQ Questions)](#quiz-module)
-- [Plagiarism Module](#plagiarism-module)
-- [Assignment Module](#assignment-module)
-- [Submission Track Module](#submission-track-module)
+- [Courses](#courses)
+- [Quiz (Online Judge, MCQ Questions)](#quiz-module)
+- [Plagiarism](#plagiarism-module)
+- [Assignment](#assignment-module)
+- [Submission Tracking](#submission-track-module)
+- [Registration](#registration)
+- [Announcements](#announcements)
+- [User Profile](#user-profile)
+
 
 The BasicLMS currently supports only *English* and *Arabic* languages.
 
@@ -26,13 +31,30 @@ We would like to extend our thanks to the following APIs and their developers.
 
 # Modules Explanation
 
-## Quiz Module
+## Administration Panel
 
-## Plagiarism Module
+### Users' Actions Tracking
 
-## Assignment Module
+### News Updating
 
-## Submission Track Module
+### Adding/Assigning Roles
+
+
+## Courses 
+
+## Quiz
+
+## Plagiarism
+
+## Assignment
+
+## Submission Tracking
+
+## Registration
+
+## Announcements
+
+## User Profile
 
 ## Installation ( Make sure you run it on *nix operating system)
 ### Requirements

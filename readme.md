@@ -1,13 +1,13 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<h1 align="center">Basic Learning Management System (BasicLMS)</h1>
 
 ## About FCI-H-LMS
 
 **FCI-H-LMS** is a web application that mainly consists of:
 
-- Quiz Module (Online Judge, MCQ Questions)
-- Plagiarism Module
-- Assignment Module
-- Submission Track Module
+- [Quiz Module (Online Judge, MCQ Questions)](#quiz-module)
+- [Plagiarism Module](#plagiarism-module)
+- [Assignment Module](#assignment-module)
+- [Submission Track Module](#submission-track-module)
 
 It was originally developed to fill the gaps in modern LMS. This project was developed under supervision of:
 - Professor/ [Ghada Ahmed.](http://www.fcih.net/ghada/resume) 
@@ -22,6 +22,15 @@ We would like to extend our thanks to the following APIs and their developers.
 - **[Time and Date](https://www.timeanddate.com/)**
 - **[MOSS](https://github.com/Phhere/MOSS-PHP)**
 
+# Modules Explanation
+
+## Quiz Module
+
+## Plagiarism Module
+
+## Assignment Module
+
+## Submission Track Module
 
 ## Installation ( Make sure you run it on *nix operating system)
 ### Requirements

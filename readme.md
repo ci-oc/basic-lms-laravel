@@ -117,9 +117,7 @@ If you discover a security vulnerability within FCI-H-LMS, please post an issue.
 In case of receiving this error
 - BadMethodCallException, Please run this two commands
 `php artisan config:cache`, `php artisan config:clear`
-## License
 
-MIT Creative Common License [MIT license](http://opensource.org/licenses/MIT).
 ## Database Seeding
 In order to seed database with accounts. Please run the following command:
 - `php artisan migrate -- seed`

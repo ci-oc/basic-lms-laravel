@@ -1,8 +1,8 @@
 <h1 align="center">Basic Learning Management System (BasicLMS)</h1>
 
-## About FCI-H-LMS
+## About BasicLMS
 
-**FCI-H-LMS** is a web application that mainly consists of the following modules:
+**BasicLMS** is a web application that mainly consists of the following modules:
 
 - [Courses](#courses)
 - [Quiz (Online Judge, MCQ Questions)](#quiz-module)
@@ -112,7 +112,7 @@ To activate plagiarism detection using *MOSS* run:
 - **`php artisan remark`** 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within FCI-H-LMS, please post an issue. All security vulnerabilities will be addressd.
+If you discover a security vulnerability within BasicLMS, please post an issue. All security vulnerabilities will be addressd.
 ## Issues
 In case of receiving this error
 - BadMethodCallException, Please run this two commands

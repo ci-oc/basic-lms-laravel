@@ -43,7 +43,7 @@ class AnnouncementsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,8 +59,12 @@ class AnnouncementsController extends Controller
             $data['course_id'] = $course_id;
             $data['announcement'] = $request->input('announcement');
             Announcement::create($data);
-            $users = Course::find($course_id)->users()->get();
-            Notification::send($users, new AnnouncementsNotifications($users->pluck('id')));
+            $course = Course::find($course_id);
+            $details = [
+                'notifier' => Auth::user()->name,
+                'course' => $course->title
+            ];
+            Notification::send($course->users()->get(), new AnnouncementsNotifications($details));
             return redirect()->back()->with('success', '');
         } catch (\Exception $e) {
             return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));
@@ -70,7 +74,7 @@ class AnnouncementsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,7 +85,7 @@ class AnnouncementsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,8 +96,8 @@ class AnnouncementsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +108,7 @@ class AnnouncementsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

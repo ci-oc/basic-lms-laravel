@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Announcement;
+use App\Course;
 use Illuminate\Http\Request;
+use Notification;
 use Illuminate\Support\Facades\Auth;
-use App\UsersCourses;
-use Illuminate\Support\Facades\Crypt;
+use App\Notifications\AnnouncementsNotifications;
+
 
 class AnnouncementsController extends Controller
 {
-
     /**
      * AnnouncementsController constructor.
      */
@@ -52,11 +53,14 @@ class AnnouncementsController extends Controller
                 'announcement' => 'required',
                 'ID' => 'required',
             ]);
+            $course_id = decrypt($request->input('ID'));
             $data = array();
             $data['user_id'] = Auth::id();
-            $data['course_id'] = decrypt($request->input('ID'));
+            $data['course_id'] = $course_id;
             $data['announcement'] = $request->input('announcement');
             Announcement::create($data);
+            $users = Course::find($course_id)->users()->get();
+            Notification::send($users, new AnnouncementsNotifications($users->pluck('id')));
             return redirect()->back()->with('success', '');
         } catch (\Exception $e) {
             return redirect()->back()->with('failed', trans('module.errors.error-saving-data'));

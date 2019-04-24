@@ -66,6 +66,8 @@
                     </ul>
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
+                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{count(Auth::user()->unreadNotifications)}}</span></a>
+
                     <li>
                         {!! Form::open(['method' => 'POST', 'route' => ['lang'], 'enctype' => 'multipart/form-data'])!!}
                         <select name="locale" onchange="this.form.submit()">

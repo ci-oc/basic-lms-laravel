@@ -72,9 +72,6 @@
 
                     <div class="panel-body">
                         You are logged in!
-                        @foreach($auth->unreadNotifications as $notification)
-                            Message: {{ $notification['data']['message']}}<br>
-                        @endforeach
                     </div>
                 </div>
             </div>

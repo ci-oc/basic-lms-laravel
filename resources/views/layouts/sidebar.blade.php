@@ -46,7 +46,7 @@
                             class="icon-bar"></span><span class="icon-bar"></span></button>
                 <a id="logo" href="{{route('home')}}" class="navbar-brand"><span class="fa fa-rocket"></span><span
                             class="logo-text">FCI-H LMS</span><span style="display: none"
-                                                                       class="logo-text-icon">µ</span></a></div>
+                                                                    class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 <div class="news-update-box hidden-xs"><span
                             class="text-uppercase mrm pull-left text-white">@lang('module.bars.top-bar-news')</span>
@@ -66,8 +66,29 @@
                     </ul>
                 </div>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
-                    <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{count(Auth::user()->unreadNotifications)}}</span></a>
+                    <li class="dropdown"><a data-hover="dropdown" href="#" class="class-btn dropdown-toggle"><i
+                                    class="fa fa-bell fa-fw"></i><span
+                                    class="badge badge-green">{{count(Auth::user()->unreadNotifications)}}</span></a>
+                        <ul class="dropdown-menu dropdown-user pull-right">
+                            <li>
+                                <br>
+                                @foreach($auth->unreadNotifications as $notification)
+                                    <div class="panel visit db mbm">
+                                        <div class="panel-body">
+                                            <p class="description">{{
+                                                trans('notification.announcement.message',
+                                                ["notifier" => $notification['data']['notifier'],
+                                                'course' => $notification['data']['course']])
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                            <li class="divider"></li>
+                                @endforeach
 
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         {!! Form::open(['method' => 'POST', 'route' => ['lang'], 'enctype' => 'multipart/form-data'])!!}
                         <select name="locale" onchange="this.form.submit()">
@@ -91,9 +112,10 @@
                             <li class="divider"></li>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
-                                        class="fa fa-sign-out"
-                                        aria-hidden="true"></i>@lang('module.bars.top-bar-logout')</a>
+                                                     document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                @lang('module.bars.top-bar-logout')
+                            </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                   style="display: none;">
                                 {{ csrf_field() }}

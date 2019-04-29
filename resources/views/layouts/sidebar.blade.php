@@ -68,7 +68,7 @@
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="class-btn dropdown-toggle"><i
                                     class="fa fa-bell fa-fw"></i><span
-                                    class="badge badge-green">{{count(Auth::user()->unreadNotifications)}}</span></a>
+                                    class="badge badge-green">{{count(Auth::user()->unreadNotifications) <= 0 ? "" : count(Auth::user()->unreadNotifications)}}</span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li>
                                 <br>
@@ -84,8 +84,8 @@
                                         </div>
                                     </div>
                             <li class="divider"></li>
+                                {{ $notification->markAsRead() }}
                                 @endforeach
-
                             </li>
                         </ul>
                     </li>

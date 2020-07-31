@@ -10,7 +10,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/andrewnagyeb/grader-library"
+      "url": "https://github.com/andrewnaguib/grader-library"
     }
   ],
   "require": {

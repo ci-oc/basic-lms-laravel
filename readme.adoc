@@ -1,0 +1,183 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+endif::[]
+
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 6
+:toc-title:
+
+[.text-center]
+= Basic Learning Management System (BasicLMS)
+
+
+
+**BasicLMS** is a web application that mainly consists of the following modules:
+
+toc::[]
+
+== About BasicLMS
+
+The BasicLMS is a pure educational Learning Management System. It does not serve all purposes of an LMS. However, it provides a proof of concept of what could be implemeneted and integrated. _Works on Unix-like operatng systems._
+
+== APIs
+
+We would like to extend our thanks to the following APIs and their developers.
+
+* https://github.com/Zizaco/entrust[Zizcao/Entrust]
+* https://github.com/yusufsyaifudin/grader-library[yusufsyaifudin/grader-library]
+    ** Forked and optimized https://github.com/andrewnaguib/grader-library[andrewnaguib/grader-library]
+* https://www.timeanddate.com/[Time and Date]
+* https://github.com/Phhere/MOSS-PHP[MOSS]
+
+== Modules Explanation
+
+== Administration Panel
+
+=== Users' Actions Tracking
+    
+=== News Updating
+
+=== Adding/Assigning Roles
+
+
+== Courses 
+
+== Quiz
+
+== Plagiarism
+
+== Assignment
+
+== Submission Tracking
+
+== Registration
+
+== Announcements
+
+== User Profile
+
+== Installation 
+
+=== Requirements
+
+- C/C++ Dependencies and Compilers
+- Perl Dependencies
+- Composer: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx[Check Composer Official Website]
+
+=== Guide  
+
+In your terminal, 
+
+- Clone: ```git clone https://github.com/ci-oc/basic-lms-laravel.git```
+- Navigate: ```cd basic-lms-laravel```
+- Update your depencencies as they are specified in `composer.json`: ```composer update```
+- Composer re-reads the `composer.json` file to build up the list of files to autoload: ```composer dump-autoload```
+- Application Key: ```php artisan key:generate```
+- Create a cache file for faster configuration loading: ```php artisan config:cache```
+- Flush the application cache: ```php artisan config:clear```
+
+==== Database Configuration
+
+- ```cat .env.example >> .env```
+- ```vim .env```
+
+Then configure your database credentials in the following part:
+
+``` 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=DATABASE_NAME
+DB_USERNAME=MYSQL_USERNAME # default is root 
+DB_PASSWORD=MYSQL_PASSWORD
+
+```
+
+Also make sure you have the following configuration in your **.env** file.
+
+```
+BROADCAST_DRIVER=log
+CACHE_DRIVER=array
+SESSION_DRIVER=file
+QUEUE_DRIVER=database
+```
+
+===== Database Seeding
+
+In order to seed database with accounts. Please run the following command:
+- `php artisan migrate -- seed`
+
+If you want to disable seeding for specific table. Please open the following file.
+- `vim PATH/TO/module/database/seeds/DatabaseSeeder.php`
+
+And then you can comment by `#` any of the following seeders.
+
+[TIP]
+But note that you can only comment/uncomment instructors and/or students seeders, because superuser accounts are only created through seeding.
+
+Example:
+
+```php
+$this->call(PermissionTableSeeder::class);
+$this->call(JudgeOptionsSeeder::class);
+$this->call(RoleTableSeeder::class);
+$this->call(SuperUserTableSeeder::class);
+$this->call(SecurityURLSeeder::class);
+# $this->call(InstructorsTableSeeder::class);
+# $this->call(StudentsTableSeeder::class);
+$this->call(CodingLanguagesSeeder::class);  
+```
+
+===== Database Demo
+
+https://drive.google.com/open?id=0B7tstgwobtR9eW9pNUluenpYcU0[Click here]
+
+=== Accounts
+===== Default credentials
+
+Please go to your DBMS and view users table. First two records are the superusers accounts, next 20 are instructors, the 20 after them are students. 
+
+- Default password: "secret" (without quotes).
+
+=== Sandbox
+
+- Please refer to this https://github.com/andrewnagyeb/grader-library/blob/master/README.md[README]
+
+=== Run
+
+In order to host it on local area network, run the following command:
+
+- ```ifconfig | grep inet```
+
+then replace `[IP]` with your IP. 
+
+- ```php artisan serve --host=[IP] --port=8000```
+
+To host it on local machine:
+
+- ```php artisan serve```
+
+And run the following command in order to run Online Judge Queue and Mails Queue (with priority to judge queue first)
+
+- ```php artisan queue:listen --queue=remark,emails```
+
+To activate plagiarism detection using *MOSS* run:
+
+- ```php artisan remark```
+
+== Security Vulnerabilities
+
+If you discover a security vulnerability within BasicLMS, please post an issue. All security vulnerabilities will be addressd.
+
+== Known Issues
+
+In case of receiving the following exception `BadMethodCallException`. Please run this two commands:
+
+- `php artisan config:cache` 
+- `php artisan config:clear`

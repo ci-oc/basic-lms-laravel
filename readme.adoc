@@ -15,7 +15,9 @@ endif::[]
 [.text-center]
 = Basic Learning Management System (BasicLMS)
 
-
+++++
+<img src="https://imgur.com/fiIHcrH.gif" width="2000" />
+++++
 
 **BasicLMS** is a web application that mainly consists of the following modules:
 
@@ -23,7 +25,7 @@ toc::[]
 
 == About BasicLMS
 
-The BasicLMS is a pure educational Learning Management System. It does not serve all purposes of an LMS. However, it provides a proof of concept of what could be implemeneted and integrated. _Works on Unix-like operatng systems._
+The BasicLMS is a pure educational Learning Management System. It does not serve all purposes of an LMS. However, it provides a proof of concept of what could be implemeneted and integrated. _Works on Unix-like operating systems._
 
 == APIs
 
@@ -78,7 +80,6 @@ In your terminal,
 - Navigate: ```cd basic-lms-laravel```
 - Update your depencencies as they are specified in `composer.json`: ```composer update```
 - Composer re-reads the `composer.json` file to build up the list of files to autoload: ```composer dump-autoload```
-- Application Key: ```php artisan key:generate```
 - Create a cache file for faster configuration loading: ```php artisan config:cache```
 - Flush the application cache: ```php artisan config:clear```
 
@@ -111,10 +112,10 @@ QUEUE_DRIVER=database
 ===== Database Seeding
 
 In order to seed database with accounts. Please run the following command:
-- `php artisan migrate -- seed`
+- `php artisan migrate --seed`
 
 If you want to disable seeding for specific table. Please open the following file.
-- `vim PATH/TO/module/database/seeds/DatabaseSeeder.php`
+- `vim PATH/TO/basic-lms-laravel/database/seeds/DatabaseSeeder.php`
 
 And then you can comment by `#` any of the following seeders.
 
@@ -137,6 +138,13 @@ $this->call(CodingLanguagesSeeder::class);
 ===== Database Demo
 
 https://drive.google.com/open?id=0B7tstgwobtR9eW9pNUluenpYcU0[Click here]
+
+
+=== Generate Application Key
+
+```bash
+php artisan key:generate
+```
 
 === Accounts
 ===== Default credentials

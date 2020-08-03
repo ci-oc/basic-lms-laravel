@@ -41,12 +41,44 @@ We would like to extend our thanks to the following APIs and their developers.
 
 == Administration Panel
 
+When you sign in using the superuser account (see <<database-configuration>>) , you will see a clickable note that forwards you to security questions web page. 
+
+image::https://i.imgur.com/Kb12gMs.png[]
+
+After you click it, the following three **security** questions will appear: 
+
+image::https://i.imgur.com/L7nyoNv.png[]
+
+[TIP]
+The answers are: dummy1, dummy2, and dummy3. They are editable through the panel.
+
+
 === Users' Actions Tracking
     
 === News Updating
 
 === Adding/Assigning Roles
 
+=== Assigning Permissions to Roles 
+
+Follow the beneath steps:
+
+1. Navigate to "User Management"
+2. Click "Roles"
+3. "Edit" any of the shown roles to modify/add their permissions
+
+image::https://i.imgur.com/3XMsmfF.png[]
+
+We recommend:
+
+1. All "Security Privileges" for the "superuser" role.
+2. All "High Educational Privileges" for the "instructor" role along with "edit-profile" from "Other Privileges".
+3. All "Low Education Privileges" for the "student" role along with "edit-profile" from "Other Privileges".
+4. "view-course", "view-announcement", and "edit-profile" for the "guest" role.
+
+However, you can design your own role/permission combination. 
+
+image::https://i.imgur.com/NU9ynao.png[] 
 
 == Courses 
 
@@ -83,6 +115,7 @@ In your terminal,
 - Create a cache file for faster configuration loading: ```php artisan config:cache```
 - Flush the application cache: ```php artisan config:clear```
 
+[#database-configuration]
 ==== Database Configuration
 
 - ```cat .env.example >> .env```
